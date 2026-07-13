@@ -8,26 +8,12 @@
 %%   Fig 5  top-k/screening + compute scaling law
 %%   Tab 1  benchmark suite (Methods)
 %% [done] Combine old Figs 1+2, add heatmap -> Fig 1. Main text shows the
-%%        anytime-AUC row (strongest claim: TL > baseline in 126/126 cells); the
-%%        final-regret row's message (variants close the endpoint gap) is carried
-%%        by one sentence of text, per the NCS plan. Full 3x3 grid (final-regret
-%%        + anytime-AUC + marginals) kept as Supplementary Fig., suppfig:family_split
-%% [done] Grid-experiment text integrated: Results subsection sec:res-grid
-%%        (~250 w), Methods protocol sec:meth-grid, Discussion paragraph,
-%%        SI note suppnote:family_split (robustness + curation TODO stubs)
-%% [done] Combine old Figs 6,7,8 -> old 6 (calibration) merged with old 5 (portfolio)
-%%        as Fig 4, and old 7+8 (top-k + scaling) form Fig 5, so each composite
-%%        stays within one page and maps one-to-one onto the Results sections
 %% [done] plain/standard MFGP renamed "baseline MFGP" (matches heatmap panel titles)
 %% [done] remaining "Appendix" cross-refs changed to Supplementary (they were broken)
 %% [todo] Verify grid-protocol numbers in Methods sec:meth-grid against the
 %%        analysis scripts (RF config, knob calibration, budget, binning)
 %% [todo] Checking terminology
 %% [todo] On next figure re-export: letter composite blocks (a/b/c) uniquely and
-%%        drop the baked-in per-block letters so panel lettering follows Nature style;
-%%        also rename regret_trajectory.pdf legend entries to paper terminology
-%%        (DNGOGradient/DNGOJoint/TwoStageJoint -> Stop-Gradient / End-to-End /
-%%        Pretrain-then-Joint etc.) and recolour so families match the other figures
 
 
 \documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Nature Portfolio (npj Computational Materials), two-column journal layout
