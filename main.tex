@@ -23,11 +23,16 @@
 %% [todo] Verify grid-protocol numbers in Methods sec:meth-grid against the
 %%        analysis scripts (RF config, knob calibration, budget, binning)
 %% [todo] Checking terminology
-%% [todo] On next figure re-export: letter composite blocks (a/b/c) uniquely and
-%%        drop the baked-in per-block letters so panel lettering follows Nature style;
-%%        also rename regret_trajectory.pdf legend entries to paper terminology
-%%        (DNGOGradient/DNGOJoint/TwoStageJoint -> Stop-Gradient / End-to-End /
-%%        Pretrain-then-Joint etc.) and recolour so families match the other figures
+%% [done] Figures re-exported (2026-07-13) with unique Nature-style panel letters:
+%%        Fig 1 = a (LaTeX overlay on overview) + b--k (final regret) + l--n
+%%        (fig1_anytime_row.pdf, replaces the old trim/clip crop); Fig 2 = a--i;
+%%        Fig 4 = a--d + e--m; Fig 5 = a,b + c; SI full grid = a--i.
+%%        trajectory legend now uses paper terminology; code-name mapping verified
+%%        in the experiment repo: TwoStageJoint = Pretrain-then-Joint,
+%%        DNGOJoint = Stop-Gradient (no_grad on LF path), DNGOGradient = End-to-End.
+%%        Known pre-existing issue (see Downloads/REPORT.md): several figures are
+%%        drawn 4-5x wider than print width, so body fonts land at 2-4pt in print;
+%%        fixing requires figsize reduction (layout change, needs approval).
 
 
 \documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Nature Portfolio (npj Computational Materials), two-column journal layout
@@ -135,18 +140,18 @@ improving sample efficiency in autonomous discovery under constrained experiment
 
 \begin{figure*}[tp]
 \centering
-%% Display item 1 of 6 — composite of three blocks: (top) closed-loop overview;
-%% (middle, a--j) final regret on the nine benchmarks; (bottom) family-split
-%% anytime-advantage maps from the controlled grid. The bottom block shows only
-%% the anytime-AUC row (middle third) of fig1c_family_split_grid.pdf via
-%% trim/clip (rows are exact thirds of the page); the complete grid
-%% (final-regret row and marginal profiles) is Supplementary
-%% Fig.~\ref{suppfig:family_split}.
+%% Display item 1 of 6 — composite: (a) closed-loop overview; (b--k) final
+%% regret on the nine benchmarks; (l--n) family-split anytime-AUC advantage row
+%% (standalone export of the grid's middle row; the complete grid with
+%% final-regret and marginal rows is Supplementary Fig.~\ref{suppfig:family_split}).
+%% Panel letters are baked into the PDFs (unique across the composite); the
+%% overview PNG carries no letter, so "a" is overlaid in LaTeX below.
+\makebox[0.9\textwidth][l]{\textsf{\textbf{a}}}\\[1pt]
 \includegraphics[width=0.9\textwidth]{paper_figures/fig1_overview.png}\\[4pt]
 \includegraphics[width=\textwidth]{paper_figures/final_regret.pdf}\\[4pt]
-\includegraphics[width=\textwidth,trim={0 314pt 0 314pt},clip]{paper_figures/fig1c_family_split_grid.pdf}
+\includegraphics[width=\textwidth]{paper_figures/fig1_anytime_row.pdf}
 \caption{Overview of the surrogate comparison and headline results.
-\textbf{Top:} in a self-driving laboratory, a shared candidate pool
+\textbf{a,} in a self-driving laboratory, a shared candidate pool
 $\mathcal{X}_{\mathrm{cand}}$ is queried through an abundant, cheap low-fidelity (LF)
 simulation (cost $\rho \ll 1$) and a scarce, expensive high-fidelity (HF) experiment
 (cost $1$). With the same selection rule, the same mix of cheap and expensive
@@ -155,20 +160,20 @@ varied: a four-member Gaussian-process family (the baseline MFGP, NARGP, a deep-
 GP, and a sparse variational GP) against eleven TL models, in which a network trained on
 the cheap LF data, $g^{(L)}$, is corrected by a second network, $g^{(H)}$, trained on
 the accurate HF data.
-\textbf{Middle (a--j):} final regret at the designated budget (mean $\pm$ s.e.\ over 20
+\textbf{b--k,} final regret at the designated budget (mean $\pm$ s.e.\ over 20
 seeds), surrogates sorted within each panel (lower is better); Gaussian-process family
 in salmon, TL surrogates in blue. The Gaussian-process family attains the lowest regret
-on the smooth, low-dimensional Branin functions (\textbf{a},\textbf{b}) but the highest
-on the molecular-descriptor benchmarks (\textbf{e}--\textbf{h}); on the
-low-discrimination Matbench-gap task (\textbf{i}) the baseline MFGP is competitive.
-Panel \textbf{j} reports the average rank of all fifteen surrogates across the nine
+on the smooth, low-dimensional Branin functions (\textbf{b},\textbf{c}) but the highest
+on the molecular-descriptor benchmarks (\textbf{f}--\textbf{i}); on the
+low-discrimination Matbench-gap task (\textbf{j}) the baseline MFGP is competitive.
+Panel \textbf{k} reports the average rank of all fifteen surrogates across the nine
 benchmarks.
-\textbf{Bottom:} family-split anytime-advantage maps from the controlled
+\textbf{l--n,} family-split anytime-advantage maps from the controlled
 fidelity-quality grid (Methods). Mean anytime advantage (area under the regret--budget
 curve) in bins of the global LF--HF $R^2$ (horizontal) and the top-10 optimum agreement
-between fidelities (vertical), comparing TL against the baseline MFGP (left), TL
-against the MFGP variants (centre), and the MFGP variants against the baseline MFGP
-(right); red favours the first-named family and asterisks mark significant bins. The TL
+between fidelities (vertical), comparing TL against the baseline MFGP (\textbf{l}), TL
+against the MFGP variants (\textbf{m}), and the MFGP variants against the baseline MFGP
+(\textbf{n}); red favours the first-named family and asterisks mark significant bins. The TL
 advantage over the baseline is positive in every cell, grows as the top-10 agreement
 falls, and is nearly flat in $R^2$; the complete grid, with the final-regret maps and
 marginal profiles, is Supplementary Fig.~\ref{suppfig:family_split}.}
@@ -179,7 +184,7 @@ Most MFBO methods remains rooted in Gaussian process (GP) surrogates whose stren
  in the high-dimensional and heterogeneous search spaces characteristic of molecular and material discovery.  GP surrogates scale poorly \citep{williams2006gaussian},as LF data accumulate while kernel-based similarity assumptions can struggle to capture nonlinear, biased or location-dependent relationships between LF and HF signals\citep{snoek2015scalable, seeger2004gaussian}. \citep{perdikaris2017nonlinear,
 williams2006gaussian}. This limitation is particular important in SDLs, where LF sources are often imperfect experimental proxies: they may be strongly informative only in restricted regions of the design space, misleading near the optimum or weakly correlated with the final HF objective.
 
-Here we test an alternative hypothesis: in high-dimensional multi-fidelity discovery, optimisation performance is governed less by uncertainty calibration or global LF-HF corelation than by the surrogate's capability to learn useful representations of the design landscape. When LF and HF signals share structure, such representations support cross-fidelity transfer; when LF information is weak or biased, they can still improve optimization by providing a more expressive model of high-dimensional molecular and materials descriptors than fixed-kernel Gaussian processes. This reframes multi-fidelity optimisation as a representation-learning problem, in which the central challenge is to identify which structures in inexpensive data remain informative for expensive high-fidelity decisions.
+Here we test an alternative hypothesis: in high-dimensional multi-fidelity discovery, optimisation performance is governed less by uncertainty calibration or global LF-HF corelation than by the surrogate's capability to learn useful representations of the design landscape. When LF and HF signals share structure, such representations support cross-fidelity transfer; when LF information is weak or biased, they can still improve optimization by providing a more expressive model of high-dimensional molecular and materials descriptors than fixed-kernel GPs. This reframes multi-fidelity optimisation as a representation-learning problem, in which the central challenge is to identify which structures in inexpensive data remain informative for expensive high-fidelity decisions.
 
 Transfer-learning deep surrogates provide a natural mechanism for this reframing. By learning representations
 from abundant LF data and adapting them to sparse HF observations through targeted correction~\citep{yosinski2014transferable}, these models can capture cross-fidelity structure while retraining the expressive capacity needed for complex molecular and materials descriptor spaces
@@ -196,7 +201,7 @@ deep-kernel GP (DKL)~\citep{wilson2016deep}, and sparse variational MFGP\citep{t
 The architecture differ only in how information is transferred between these stages, allowing transfer mechanism to be isolated from model capacity. We evaluated all methods under a shared closed-loop optimization protocol and used matched-acquisition control to seperate surrogate effects from acquisition-policy effects.
 (Fig.~\ref{fig:overview}). 
 
-Our results show that Gaussian processes remain highly effective when their inductive bias matches the objective, but that transfer-learning surrogates are more effective on most molecular and materials benchmarks considered here. The advantage is explained primarily by the quality of the transfer-learned predictive mean and by preservation of the near-optimal region, rather than by calibrated uncertainty or global LF–HF correlation alone. Transfer-learning surrogates also provide more favourable computational scaling under repeated model updates, a regime typical of self-driving laboratory workflows with abundant low-fidelity data.These findings suggest that surrogate design for multi-fidelity Bayesian optimization should place greater emphasis on scalable learned representations that can transfer information across fidelities while adapting to biased, local or weak low-fidelity signals.
+Our results show that GPs remain highly effective when their inductive bias matches the objective, but that transfer-learning surrogates are more effective on most molecular and materials benchmarks considered here. The advantage is explained primarily by the quality of the transfer-learned predictive mean and by preservation of the near-optimal region, rather than by calibrated uncertainty or global LF–HF correlation alone. Transfer-learning surrogates also provide more favourable computational scaling under repeated model updates, a regime typical of self-driving laboratory workflows with abundant low-fidelity data.These findings suggest that surrogate design for multi-fidelity Bayesian optimization should place greater emphasis on scalable learned representations that can transfer information across fidelities while adapting to biased, local or weak low-fidelity signals.
 
 %The significance of this reframing reaches beyond a single model comparison. Treating the
 %model as something that learns and carries a representation from cheap LF data to accurate HF data
@@ -214,70 +219,68 @@ Our results show that Gaussian processes remain highly effective when their indu
 
 \section{Results}\label{sec:results}
 
-We evaluated fifteen surrogates under a shared fixed protocol
-(Methods; Table~\ref{tab:benchmarks}). Performance was measured as simple regret on high-fidelity
+We evaluated fifteen surrogates on nine benchmarks
+(Table~\ref{tab:benchmarks}) under a shared fixed protocol (Methods). Performance was measured as simple regret on high-fidelity
 evaluations as a function of cumulative cost, averaged over twenty random seeds.
 
 \subsection{Gaussian processes perform best on smooth, low-dimensional
 objectives}\label{sec:res-branin}
 
 The baseline MFGP (the standard autoregressive multi-fidelity GP; Methods) achieved the lowest final regret amongst all fifteen surrogates on both
-Branin scenarios, indicating that Gaussian processes models remain the highly effective when
-their inductive bias matches the objective structure. On Branin-Fav and Branin-Unfav the MFGP reached
+Branin scenarios, indicating that GP models remain highly effective when
+their inductive bias matches the objective structure. On Branin-Fav and Branin-Unfav (the favourable and unfavourable fidelity scenarios; Methods) the MFGP reached
  mean final regrets of $0.07$ and $0.05$, respectively, ranking first in
-both case, whereas the best transfer-learning surrogate reached final regrets of $0.43$ and $1.24$
+both cases, whereas the best transfer-learning surrogate reached final regrets of $0.43$ and $1.24$
 (Fig.~\ref{fig:final_regret}). This observation is consistent with the Mat\'{e}rn-5/2 kernel providing a strong smoothness prior for an analytically smooth, two-dimensional objective,
 allowing the GP posterior to model the surface accurately from relatively few observations.
-The advantage was specific to the Branin family and did not extend across all synthetic benchmarks. On the four-dimensional Park functions, simple regret rapidly approached zero for most methods after only a small number of high-fidelity evaluations (Fig.~\ref{fig:final_regret}c,d), making these benchmarks weakly
+The advantage was specific to the Branin family and did not extend across all synthetic benchmarks. On the four-dimensional Park functions, simple regret rapidly approached zero for most methods after only a small number of high-fidelity evaluations (Fig.~\ref{fig:final_regret}d,e), making these benchmarks weakly
  discriminative  at the budget considered. Several transfer-learning surrogates had already reached zero regret on Park-Fav whereas the MFGP had not, placing it
-in the lower half of the ranking on both Park scenarios. Therefore, the Gaussian-process advantage on
+in the lower half of the ranking on both Park scenarios. Therefore, the GP advantage on
 synthetic objectives was confined to the smooth, two-dimensional Branin
 functions, rather than synthetic benchmarks in general.
-These result suggest that Gaussian processes are highly competitive  when
+These results suggest that GPs are highly competitive when
 the kernel prior is well matched to the structure of the objective, but that this advantage is problem-dependent rather than universal.
 
 \subsection{Transfer-learning surrogates outperform on molecular and materials
 benchmarks}\label{sec:res-chem}
 
 On the molecular-descriptor benchmarks the ranking changed markedly. Whereas the baseline MFGP performed the best on the Branin functions it ranked at the bottom on covalent organic frameworks (COFs), solvation free energy (FreeSolv),
-polarizability, and organic photovoltaics (HOPV15). The other three Gaussian-process variants including nonlinear autoregressive GP, 
+polarizability, and organic photovoltaics (HOPV15). The other three GP variants including nonlinear autoregressive GP, 
 deep-kernel-learning GP, and sparse variational MFGP showed similar 
 high-regret behavior on these benmarks (Fig.~\ref{fig:final_regret}, salmon bars). On COFs the best-performing surrogate,
 End-to-End Joint Training, reached a final regret of $0.41$ compared with  $6.55$ for the MFGP
-and $4.9$--$6.0$ for the other Gaussian-process variants. The corresponding values were $0.28$ versus
+and $4.9$--$6.0$ for the other GP variants. The corresponding values were $0.28$ versus
 $0.80$ on FreeSolv, $0.06$ versus $0.17$ on polarizability and $1.89$ versus $3.09$ on HOPV15. Thus substituting the baseline autoregressive MFGP with
 nonlinear cross-fidelity coupling, jointly learned kernels, or  sparse
 variational approximation did not remove the performance gap, suggesting that the limitation lies in the
-Gaussian-process modeling assumptions in these compressed descriptor spaces, rather than in a  single baseline implementation.
+GP modeling assumptions in these compressed descriptor spaces, rather than in a  single baseline implementation.
 
 Two mechanisms explain this reversal. First, the Mat\'{e}rn-5/2 kernel imposes a
 single global notion of smoothness, whereas the PCA-compressed molecular descriptor space
-can be non-stationary and the low-fidelity-high-fidelity discrepancy may vary strongly across input space, particularly near the optimum. In this setting, a stationary kernel Gaussian process can misrank promising candidates, while a deep neural surrogate can learn task-adapted representations from the larger
+can be non-stationary and the low-fidelity-high-fidelity discrepancy may vary strongly across input space, particularly near the optimum. In this setting, a stationary-kernel GP can misrank promising candidates, while a deep neural surrogate can learn task-adapted representations from the larger
 low-fidelity dataset and model a smoother residual between fidelities. Second, the performance gap
 appears was already visible at the first high-fidelity evaluation rather than emerging only after additional HF data were collected
 (Fig.~\ref{fig:regret_trajectory}). This suggests that the bottleneck is representational (kernel
-misspecification) rather than simply a consequence of HF data scarcity.  The conventional pattern where Gaussian processes perform best early and deep
+misspecification) rather than simply a consequence of HF data scarcity.  The conventional pattern where GPs perform best early and deep
 surrogates improve only later was therefore not observed. The HOPV15 result further clarifies the source of the advantage. Because thelow-fidelity signal is almost uninformative for this task
 ($R^2 = 0.02$), the improvement cannot be attributed to successful low-to-high-fidelity transfer. Instead, it indicates that the neural surrogate provides
-a better function approximator for the molecular descriptors than a stationary Gaussian
-process. Across the empirical benchmarks, the advantage of deep surrogate therefore has two complementary sources, an improved representation learning, which remains beneficial even when the low-fidelity proxy is weak and
+a better function approximator for the molecular descriptors than a stationary GP. Across the empirical benchmarks, the advantage of deep surrogate therefore has two complementary sources, an improved representation learning, which remains beneficial even when the low-fidelity proxy is weak and
 transfer from  abundant low-fidelity data which becomes useful when the low fidelity signal is informative as in
 COFs, FreeSolv, polarizability.
 
 Performance also depended on transfer mechanism. Knowledge Distillation and
-End-to-End Joint Training achieved the lowest average rank across nine benchmarks amongst all fifteen surrogates (Fig.~\ref{fig:final_regret}j). However, performance varied significantly across the eleven transfer-learning
+End-to-End Joint Training achieved the lowest average rank across nine benchmarks amongst all fifteen surrogates (Fig.~\ref{fig:final_regret}k). However, performance varied significantly across the eleven transfer-learning
 architectures, indicating that the gains depended not merely on using transfer learning but on how transfer was implemented. In this benchmark suite, knowledge distillation and joint training are the most dependable
 default choises.
 
 Matbench-gap provides an important boundary case. In this inorganic
 band gap benchmark, optimized toward a photovoltaic target of $1.4$~eV, the MFGP was competitive, ranking second amongst all fifteen surrogates with a final regret of $0.29$ versus  $0.23$ for  the best deep
-surrogate (Fig.~\ref{fig:final_regret}i). This does not contradict  to the
+surrogate (Fig.~\ref{fig:final_regret}j). This does not contradict  to the
 advantage of the learned surrogates on harder molecular-descriptor benchmarks; rather, it reflects the limited discrimination of this task. The full regrets range
 across the MFGP and the eleven transfer-learning surrogates was only $0.27$ 
 compared with $6.1$ on COFs, and the MFGP lay within $0.8$ standard errors of the best method. Thus,
 surrogate choice had little practical effect on this benchmark. Two features explain the weak discrimination on Matbench-gap.
-First, it had the smallest evaluation budget in the suite with only ten high-fidelity queries, a regime where the cubic scaling of Gaussian
-process inference is negligible and the GP prior can be especially influential. Second,  a near-optimal set was comparatively dense: $3.6\%$ of the $3{,}347$-compound
+First, it had the smallest evaluation budget in the suite with only ten high-fidelity queries, a regime where the cubic scaling of GP inference is negligible and the GP prior can be especially influential. Second,  a near-optimal set was comparatively dense: $3.6\%$ of the $3{,}347$-compound
 pool lay within $0.2$~eV of the target, whereas only $2$ of $608$ COFs within $1\%$ of
 the optimum. Surrogate choice was therefore most consequential on the hard,
 sharply-peaked molecular-descriptor benchmarks and less important on dense, small-budget tasks,
@@ -288,11 +291,11 @@ consistent with the difficulty analysis below.
 \includegraphics[width=\textwidth]{paper_figures/regret_trajectory.pdf}
 \caption{Regret trajectories as a function of cumulative budget (mean $\pm$ s.e.\ over 20
 seeds); Gaussian-process family in solid lines, transfer-learning surrogates in dashed
-lines, and each panel titled by its benchmark. On the Branin family the baseline MFGP
-leads throughout; on the chemistry benchmarks (COFs, FreeSolv, polarizability) the
-Gaussian-process family remains in a high-regret regime while transfer-learning
-surrogates continue to improve as the budget grows. Insets report the LF/HF top-$k$
-overlap of each benchmark.}
+lines, one panel per benchmark. On the Branin family (\textbf{a},\textbf{b}) the
+baseline MFGP leads throughout; on the chemistry benchmarks COFs, FreeSolv, and
+polarizability (\textbf{e}--\textbf{g}) the Gaussian-process family remains in a
+high-regret regime while transfer-learning surrogates continue to improve as the
+budget grows. Insets report the LF/HF top-$k$ overlap of each benchmark.}
 \label{fig:regret_trajectory}
 \end{figure*}
 
@@ -305,16 +308,16 @@ transfer learning wins. To separate them, we constructed a controlled grid on th
 polarizability substrate in which curated low-fidelity sources vary the global LF--HF
 $R^2$ and the top-10 optimum agreement, the overlap between the low- and high-fidelity
 top-10 candidate sets, independently, giving $126$ conditions of ten seeds each under
-the standard optimization protocol; the Gaussian-process family was split into the
+the standard optimization protocol; the GP family was split into the
 baseline MFGP and its variants, and the three families were compared pairwise on final
 regret and on anytime performance, the area under the regret--budget curve (Methods).
-The anytime-advantage maps are shown in Fig.~\ref{fig:family_heatmap} (bottom) and the
+The anytime-advantage maps are shown in Fig.~\ref{fig:family_heatmap}l--n and the
 complete grid in Supplementary Fig.~\ref{suppfig:family_split}.
 
 Three observations emerge. First, transfer learning dominates the baseline MFGP across
 the entire plane: its anytime advantage is positive in $126$ of $126$ cells
 (significant in $97\%$), and no cell shows a significant final-regret reversal. Second,
-the Gaussian-process representative matters: against the best MFGP variant the
+the GP representative matters: against the best MFGP variant the
 final-regret gap closes, with a median advantage near zero, but the anytime advantage
 persists and remains significant in $83\%$ of cells. Third, the advantage is organized
 along the agreement axis rather than the correlation axis: at fixed $R^2$ it grows
@@ -328,7 +331,7 @@ the best candidates.
 \subsection{The advantage stems from the surrogate, not the acquisition
 policy}\label{sec:res-acquisition}
 
-Because the Gaussian-process and deep surrogates used structurally different acquisition
+Because the GP and deep surrogates used structurally different acquisition
 rules by default protocol, we matched the acquisition policy across both model families to test whether
 the observed advantage of deep surrogates could be explained by this asymmetry. In the default setting, MFGP used an uncertainty-driven expected-improvement (EI) acqusition whereas deep surrogates used a greedy policy (Methods). We therefore compared matched acquisiiton settings by running the MFGP under a greedy policy
 and the deep surrogate under an uncertainty-driven policy using its own BLR predictive
@@ -363,8 +366,8 @@ greedy exploitation of the transfer-learned mean.}
 Whether calibrated surrogate uncertainty improves Bayesian optimization depends on both the acquisition rule and the structure of the benchmark. To test this systematically, We
 replaced the greedy policy with a representative portfolio of five
 uncertainty-driven acquisitions spanning the common acquisition classes~\citep{shahriari2015taking}: expected improvement~\citep{jones1998efficient} and
-probability of improvement~\citep{kushner1964new} which areimprovement-based; the
-Gaussian-process lower confidence bound~\citep{srinivas2012information} which is optimistic-based;
+probability of improvement~\citep{kushner1964new} which are improvement-based; the
+GP lower confidence bound~\citep{srinivas2012information} which is optimistic-based;
 max-value entropy search~\citep{wang2017max} which is information-theoretic; and Thompson
 sampling~\citep{russo2018tutorial} which is sampling-based. Each acquisition used the BLR
 predictive standard deviation from the deep surrogate, while keeping the surrogate architecture, fidelity schedule, high-fidelity evaluation protocol and random seeds
@@ -383,22 +386,22 @@ surrogates, and on polarizability most
 uncertainty-driven acquisitions improved over greedy selection. The acquisition family mattered more than the presence
 of uncertainty only. Thompson sampling was the most robust uncertainty-driven rule,
 outperforming greedy selection on the largest fraction of surrogates on average, whereas the
-improvement-based rules (expected improvement and probability of improvement) were the least reliable (Fig.~\ref{fig:portfolio}, top panel a).
+improvement-based rules (expected improvement and probability of improvement) were the least reliable (Fig.~\ref{fig:portfolio}a).
 Greedy exploitation therefore remained the  most robust single default,
 whereas uncertainty-driven exploration showed benchmark-dependent benefits, motivating evaluation across an acquisition-function
 portfolio rather than reliance on a single rule.
 
 \begin{figure*}[tp]
 \centering
-%% Display item 4 of 6 — composite: (top, a--d) acquisition portfolio;
-%% (bottom, a--i) calibration versus regret. Both blocks belong to this section's
-%% uncertainty story. Block-internal panel letters are baked into the PDFs, so
-%% in-text references name the block ("top"/"bottom") alongside the letter.
+%% Display item 4 of 6 — composite: (a--d) acquisition portfolio;
+%% (e--m) calibration versus regret. Both blocks belong to this section's
+%% uncertainty story; panel letters are baked into the PDFs and unique across
+%% the composite.
 \includegraphics[width=0.88\textwidth]{paper_figures/acquisition_portfolio.pdf}\\[6pt]
 \includegraphics[width=\textwidth]{paper_figures/A1_calibration_vs_regret.pdf}
 \caption{The value of uncertainty-driven exploration is case-dependent, and calibration
 does not predict optimization performance.
-\textbf{Top (a--d):} a five-member acquisition portfolio spanning the standard taxonomy
+\textbf{a--d,} a five-member acquisition portfolio spanning the standard taxonomy
 (expected improvement and probability of improvement; the Gaussian-process lower
 confidence bound; max-value entropy search; Thompson sampling), each using the deep
 surrogate's Bayesian last-layer standard deviation, compared against the greedy policy
@@ -410,13 +413,13 @@ over the eleven surrogates; error bars, s.e.\ across surrogates) on the three
 high-correlation chemistry benchmarks (LF--HF rank correlation $\ge 0.94$): every
 uncertainty acquisition is worse than greedy on COFs, whereas Thompson sampling beats
 greedy on FreeSolv and polarizability.
-\textbf{Bottom (a--i):} each point is one of the fifteen surrogates (Gaussian-process
+\textbf{e--m,} calibration versus regret: each point is one of the fifteen surrogates (Gaussian-process
 family in warm colours, transfer-learning surrogates in cool colours; legend); axes are
 the low-fidelity expected calibration error and the final BO regret, one panel per
 benchmark. The Pearson correlation is negative on every benchmark (from $-0.88$ on COFs
 to $-0.08$ on HOPV15), so the best-calibrated surrogates (the Gaussian-process family)
 are, if anything, the worst optimizers on the molecular-descriptor benchmarks. The two
-Park benchmarks (bottom \textbf{c},\textbf{d}) saturate to $\approx 0$ regret by the
+Park benchmarks (\textbf{g},\textbf{h}) saturate to $\approx 0$ regret by the
 full budget (Park-Fav additionally exhausts its $256$-point candidate pool), so both
 are evaluated at the early decision budget $B=10$, consistent with the regret figures
 (Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory}).}
@@ -424,9 +427,9 @@ are evaluated at the early decision budget $B=10$, consistent with the regret fi
 \end{figure*}
 
 Consistent with uncertainty acting as a secondary benchmark-dependent factor, calibration quality was a poor predictor of optimization performance. The
-best-calibrated surrogates including the Gaussian-process family, were the weakest  optimizers on
+best-calibrated surrogates, including the GP family, were the weakest optimizers on
 the molecular-descriptor benchmarks. Accordingly, across all fifteen surrogates the correlation between expected calibration error and  final regret was negative on every benchmark (ranging from
-$-0.88$ on COFs to $-0.08$ on HOPV15; Fig.~\ref{fig:calibration}, bottom). This negative assotiation shows that better-calibrated uncertainty
+$-0.88$ on COFs to $-0.08$ on HOPV15; Fig.~\ref{fig:calibration}e--m). This negative assotiation shows that better-calibrated uncertainty
 therefore did not translate into better optimization. The bounded $\tanh$ activation used throughout was likewise
 justified by optimization rather than calibration. 
 In a
@@ -458,19 +461,19 @@ low-discrimination Matbench-gap task.
 
 \begin{figure*}[tp]
 \centering
-%% Display item 5 of 6 — composite: (top, a,b) top-k overlap and LF-only screening
-%% regret; (bottom) compute scaling law. Together: when a learned surrogate is
-%% needed, and what it costs.
+%% Display item 5 of 6 — composite: (a,b) top-k overlap and LF-only screening
+%% regret; (c) compute scaling law. Together: when a learned surrogate is
+%% needed, and what it costs. Panel letters baked into the PDFs.
 \includegraphics[width=0.92\textwidth]{paper_figures/B2_topk_overlap_and_screening.pdf}\\[6pt]
 \includegraphics[width=0.85\textwidth]{paper_figures/compute_scaling_law.pdf}
 \caption{When a surrogate is needed, and what it costs.
-\textbf{Top (a,b):} task difficulty and the need for a surrogate. Top-$k$ overlap
+\textbf{a},\textbf{b,} task difficulty and the need for a surrogate. Top-$k$ overlap
 between the low- and high-fidelity rankings (\textbf{a}) and the resulting LF-only
 screening regret (\textbf{b}) for each benchmark. High global correlation does not
 guarantee top-$k$ agreement, so a learned surrogate is required precisely where a
 low-fidelity screen fails (Regime~B), while in Regime~A the screen is already
 near-optimal.
-\textbf{Bottom:} computational scaling law across the nine benchmarks. Each point is
+\textbf{c,} computational scaling law across the nine benchmarks. Each point is
 the median surrogate-fit compute (hardware-independent FLOPs) of one surrogate on one
 benchmark at one budget fraction, placed at the training-set size $N$ (high- plus
 low-fidelity points) it was fitted on; salmon, Gaussian-process family; blue,
@@ -495,18 +498,18 @@ optimization loop. This measure provides a hardware-independent
 comparison of the scaling behaviors of the two model families. The
 eleven transfer-learning surrogates exhibited linear scaling with the number of observations with a measured
 fit-FLOP exponent of $k = 1.0$ for cost versus training-set size. This reflects the use of fixed-architecture
-neural network training. By contrast, the exact Gaussian process models, MFGP and NARGP showed cubic scaling
+neural network training. By contrast, the exact GP models, MFGP and NARGP, showed cubic scaling
 ($k = 3.0$), consistent with exact GP inference and marginal-likelihood optimization. 
 The sparse variational and deep-kernel GPs occupied in intermediate computational regime (Fig.~\ref{fig:scaling_law}). The difference in scaling produced a clear crossover in computational cost. The fitted cost curves intersected at $N \approx 66$; below this point, the
-Gaussian processes were cheaper to fit whereas above it  the transfer-learning surrogates became more efficient. Because the fitted scaling exponents differed by about $1.5$ between the model families, the computational gap widened with increasing data, 
+GPs were cheaper to fit whereas above it  the transfer-learning surrogates became more efficient. Because the fitted scaling exponents differed by about $1.5$ between the model families, the computational gap widened with increasing data, 
 reaching approximately $5$ times at $N = 200$ and $10$ times at $N = 300$.
 Integrated over the optimization loop, sparse variational
-and deep-kernel Gaussian processes were the most expensive methods on every benchmark. 
-The exact Gaussian processes including MFGP, and NARGP became increasingly expensive as the evaluation
+and deep-kernel GPs were the most expensive methods on every benchmark. 
+The exact GPs, MFGP and NARGP, became increasingly expensive as the evaluation
 budget grew (Supplementary Note~\ref{suppnote:computational_cost}, Supplementary
 Fig.~\ref{suppfig:computing_time}). The sparse variational GP required up to
 approximately $45$-fold more  FLOPs than the fastest deep surrogate including $5.0$ versus against $0.11$ TFLOPs on FreeSolv. 
- The corresponding maximum gaps were approximately $25$-fold for deep-kernel GP, and  $11$-fold for the exact MFGP. On the smallest pools and budgets such as HOPV15, Park-Unfav the cubic cost of exact Gaussian processes remained negligible, thus the separation between model families increased as the number of observations grew. Thereby, under the fixed optimization protocol, 
+ The corresponding maximum gaps were approximately $25$-fold for deep-kernel GP, and  $11$-fold for the exact MFGP. On the smallest pools and budgets such as HOPV15, Park-Unfav the cubic cost of exact GPs remained negligible, thus the separation between model families increased as the number of observations grew. Thereby, under the fixed optimization protocol, 
  transfer-learning surrogates provided both lower regret on most molecular and material benchmarks and more favourable computational scaling. This advantage is particularly relevant to the SDL settings, where
 abundant low-fidelity data and repeated surrogate updates can make model retraining cost an important component of the closed-loop workflows.
 
@@ -517,7 +520,7 @@ transfer learning deep surrogate to be the better engine for molecular and mater
 discovery: within our protocol the choice of surrogate, more than the acquisition rule or
 the fidelity schedule, governs multi-fidelity Bayesian optimization performance in
 high-dimensional molecular and materials spaces.
-Across nine benchmarks, the baseline MFGP, like the broader Gaussian-process family, was
+Across nine benchmarks, the baseline MFGP, like the broader GP family, was
 either the best surrogate (smooth, low-dimensional Branin) or the worst (the
 high-dimensional molecular-descriptor benchmarks), a polarization that held under a
 matched greedy acquisition policy; the single exception, a low-discrimination band-gap
@@ -526,7 +529,7 @@ choice ceases to matter. The practical implication for self-driving laboratories
 direct: on descriptor-based molecular and materials pools, a transfer-learning deep
 surrogate is a more reliable default than the baseline MFGP, and on large-pool,
 high-evaluation tasks it delivers this accuracy at up to roughly $45\times$ fewer floating-point
-operations than the most expensive Gaussian process, reducing the number of expensive high-fidelity experiments needed to identify
+operations than the most expensive GP, reducing the number of expensive high-fidelity experiments needed to identify
 promising candidates.
 
 The most counter-intuitive result concerns uncertainty-driven exploration, whose value we
@@ -543,7 +546,7 @@ greedy policy on every surrogate, while the improvement-based rules won least of
 Calibration quality, measured by expected calibration error, did not predict
 optimization performance: across all fifteen surrogates its correlation with regret was
 negative on every benchmark (from $-0.88$ on COFs to $-0.08$ on HOPV15), so the
-best-calibrated surrogates (the Gaussian-process family) were if anything the worst
+best-calibrated surrogates (the GP family) were if anything the worst
 optimizers on the molecular-descriptor tasks. We interpret this through the strong-transfer regime
 that often characterizes SDL pipelines: when an abundant low-fidelity signal already orders
 candidates well, a high-quality posterior mean is on average more valuable than
@@ -565,7 +568,7 @@ laboratories operate.
 
 The controlled fidelity-quality grid adds a methodological caution and sharpens this
 claim. The apparent size of the transfer-learning advantage depends on which member
-represents the Gaussian-process family: against the baseline MFGP alone, transfer
+represents the GP family: against the baseline MFGP alone, transfer
 learning wins everywhere, whereas against the stronger variants the final-regret gap
 largely closes and what survives is faster anytime convergence and robustness
 precisely where the low-fidelity source misorders the best candidates. Comparisons of
@@ -591,14 +594,14 @@ were deliberately excluded to keep the comparison fair. Our evaluation is also r
 optimizing over fixed candidate pools that emulate the closed loop rather than driving a live
 autonomous platform, so the surrogate ranking we report remains to be confirmed in
 deployment. Finally, the comparison is against
-the baseline MFGP and three other Gaussian-process variants rather than the entire space
-of Gaussian-process methods, so our claims are scoped to this widely used family under a
+the baseline MFGP and three other GP variants rather than the entire space
+of GP methods, so our claims are scoped to this widely used family under a
 pool-based, two-fidelity protocol.
 
 Taken together, these results establish transfer-learning deep surrogates as the surrogate
 of choice for molecular and materials multi-fidelity optimization, and yield a concrete
 recipe for the engine at the core of a self-driving laboratory: default to a transfer-learning deep surrogate on descriptor-based
-molecular and materials pools, reserve Gaussian processes for the smooth, low-dimensional
+molecular and materials pools, reserve GPs for the smooth, low-dimensional
 design spaces where their inductive bias is an asset, and invest first in the quality of the
 transferred mean, treating uncertainty-driven exploration as a case-dependent refinement
 that, where used, is best supplied by a sampling-based acquisition. Because this guidance
@@ -642,7 +645,7 @@ Z &= \frac{\hat{y} - \mu(x) - \xi}{\sigma(x)},
 \end{equation}
 where $\hat{y}$ is the incumbent value, $\xi = 0.01$~\citep{snoek2012practical}, and $\Phi$, $\phi$ denote the
 standard normal CDF and PDF respectively. And the acquisition function was maximized by enumeration over the pool. For the
-Gaussian-process baselines, query locations at both fidelity levels were selected using the cross-fidelity posterior evaluated at the
+GP baselines, query locations at both fidelity levels were selected using the cross-fidelity posterior evaluated at the
 high-fidelity level, which provides a calibrated predictive standard deviation in closed
 form. For the deep surrogates, the main results used a greedy configuration: low-fidelity EI was computed with a constant predictive
 standard deviation, so that the EI ordering reduces to greedy
@@ -660,7 +663,7 @@ targets negated.
 
 \subsection{Surrogate models}\label{sec:meth-surrogates}
 
-Our Gaussian-process baseline covered  standard, nonlinear, learned-feature, and
+Our GP baseline covered standard, nonlinear, learned-feature, and
 sparse-variational regimes of multi-fidelity GP modeling. The baseline MFGP was implemented using the
 \texttt{SingleTaskMultiFidelityGP} in \texttt{BoTorch}~\citep{balandat2020botorch}, corresponding to an
 autoregressive Kennedy--O'Hagan formulation with a Mat\'{e}rn-5/2 kernel and fidelity
@@ -796,7 +799,7 @@ from warm-starting. Inputs and targets were standardized using statistics pooled
 fidelities, and descriptor standardization and principal component analysis were applied
 once to the fixed candidate pool. Each benchmark-surrogate pair was evaluated for $20$ random seeds.
 Reported values are means over seeds with uncertainty as the standard error of the mean. Common and
-model-specific hyperparameters,  Gaussian-process configuration, the
+model-specific hyperparameters, GP configuration, the
 Bayesian-linear-regression derivation, synthetic function definitions, and
 ablation studies (including activation, uncertainty placement, acquisition variants, promotion, and
 adaptive scheduling) are provided in the Supplementary Information.
@@ -1113,7 +1116,7 @@ split repeated in a shared legend below the panels.}
 \suppnote{Family-split advantage maps: complete grid and robustness}{suppnote:family_split}
 
 Supplementary Fig.~\ref{suppfig:family_split} reports the complete family-split
-advantage grid underlying the bottom block of Fig.~\ref{fig:family_heatmap}
+advantage grid underlying panels l--n of Fig.~\ref{fig:family_heatmap}
 (protocol in Methods, Section ``Controlled fidelity-quality grid''): the
 final-regret advantage maps, the anytime-AUC advantage maps (the row reproduced in
 the main text), and the marginal advantage profiles obtained by averaging over the
@@ -1141,9 +1144,10 @@ and the structure along the agreement axis.
 \caption{Family-split advantage maps: the complete grid. Columns compare transfer
 learning (TL) against the baseline MFGP (left), TL against the MFGP variants (NARGP,
 deep-kernel, and sparse variational; centre), and the MFGP variants against the
-baseline MFGP (right). Rows show the final-regret advantage (top), the anytime-AUC
-advantage (middle; the row reproduced in Fig.~\ref{fig:family_heatmap}, bottom), and
-the marginal advantage profiles averaged over $R^2$ (bottom; mean $\pm$ s.e.). Within each
+baseline MFGP (right). Rows show the final-regret advantage (\textbf{a}--\textbf{c}),
+the anytime-AUC advantage (\textbf{d}--\textbf{f}; the row reproduced as
+Fig.~\ref{fig:family_heatmap}l--n), and the marginal advantage profiles averaged over
+$R^2$ (\textbf{g}--\textbf{i}; mean $\pm$ s.e.). Within each
 map, bins are indexed by the global LF--HF $R^2$ (horizontal) and the top-10 optimum
 agreement between fidelities (vertical); red favours the first-named family and
 asterisks mark significant bins.}
