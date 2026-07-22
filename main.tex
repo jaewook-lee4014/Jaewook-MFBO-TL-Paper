@@ -420,7 +420,7 @@ are evaluated at the early decision budget $B=10$, consistent with the regret fi
 \label{fig:portfolio}\label{fig:calibration}
 \end{figure*}
 
-Calibration quality was a poor predictor of optimization performance: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from −0.88 on COFs to −0.08 on HOPV15 (Fig. 4e–m). If anything, the best-calibrated surrogates — including the entire GP family — were the weakest optimizers on the molecular-descriptor benchmarks, showing that better-calibrated uncertainty did not translate into better optimization. This is consistent with uncertainty acting as a secondary, benchmark-dependent factor rather than a primary driver of performance.
+Calibration quality was a poor predictor of optimization performance: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from $-0.88$ on COFs to $-0.08$ on HOPV15 (Fig.~\ref{fig:calibration}e--m). If anything, the best-calibrated surrogates, including the entire GP family, were the weakest optimizers on the molecular-descriptor benchmarks, showing that better-calibrated uncertainty did not translate into better optimization. This is consistent with uncertainty acting as a secondary, benchmark-dependent factor rather than a primary driver of performance.
 In a
 matched $\tanh$-versus-ReLU ablation on the molecular-descriptor benchmarks, calibration error was nearly identical for the two activations ($0.30$
 versus
