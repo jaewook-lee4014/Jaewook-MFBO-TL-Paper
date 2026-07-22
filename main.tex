@@ -20,31 +20,8 @@
 %%        stays within one page and maps one-to-one onto the Results sections
 %% [done] plain/standard MFGP renamed "baseline MFGP" (matches heatmap panel titles)
 %% [done] remaining "Appendix" cross-refs changed to Supplementary (they were broken)
-%% [todo] Verify grid-protocol numbers in Methods sec:meth-grid against the
-%%        analysis scripts (RF config, knob calibration, budget, binning)
-%% [done] Terminology unified (2026-07-13). Canonical choices:
-%%        "transfer-learning surrogate(s)" (was: deep / deep neural / neural /
-%%        transfer-learning deep surrogate); "baseline MFGP" (was: the MFGP,
-%%        exact MFGP, baseline autoregressive MFGP); "MFGP variants" (was: GP
-%%        variants); "deep-kernel GP", "sparse variational MFGP" (was: ...GP);
-%%        "acquisition policy" (was: rule/strategy) with individual members
-%%        called "acquisitions"; "greedy policy" (was: greedy selection /
-%%        exploitation / configuration); "uncertainty-driven" (was: -guided);
-%%        "BLR" (was: Bayesian last-layer); "LF--HF" en-dash; -ization spelling
-%%        (was: -isation) with British behaviour/favourable/colour; "among"
-%%        (was: amongst). Abstract + Fig 1 keep plain-language "selection rule"
-%%        (glossed as acquisition policy in the Fig 1 caption).
-%% [done] Figures re-exported (2026-07-13) with unique Nature-style panel letters:
-%%        Fig 1 = a (LaTeX overlay on overview) + b--k (final regret) + l--n
-%%        (fig1_anytime_row.pdf, replaces the old trim/clip crop); Fig 2 = a--i;
-%%        Fig 4 = a--d + e--m; Fig 5 = a,b + c; SI full grid = a--i.
-%%        trajectory legend now uses paper terminology; code-name mapping verified
-%%        in the experiment repo: TwoStageJoint = Pretrain-then-Joint,
-%%        DNGOJoint = Stop-Gradient (no_grad on LF path), DNGOGradient = End-to-End.
-%%        Known pre-existing issue (see Downloads/REPORT.md): several figures are
-%%        drawn 4-5x wider than print width, so body fonts land at 2-4pt in print;
-%%        fixing requires figsize reduction (layout change, needs approval).
-
+%% [todo] Verify grid-protocol numbers in Methods sec:meth-grid against the       analysis scripts (RF config, knob calibration, budget, binning)
+%% [done] Terminology unified
 
 \documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Nature Portfolio (npj Computational Materials), two-column journal layout
 
@@ -104,33 +81,7 @@ Optimization}
 
 \affil{\orgdiv{Department of Engineering}, \orgname{King's College London},
 \orgaddress{\city{London}, \postcode{WC2R 2LS}, \country{United Kingdom}}}
-\abstract{\unboldmath Self-driving laboratories speed up the discovery of molecules and
-materials by running experiments in a closed loop, and the algorithm that drives it is
-increasingly a multi-fidelity one: multi-fidelity Bayesian optimization (MFBO) weighs many
-cheap, approximate evaluations against a few expensive, accurate ones. At its core is a
-predictive model, or surrogate, and which surrogate to use is still unsettled. The default is
-a Gaussian process, which is well-founded but slows sharply as data accumulate and, more
-fundamentally, assumes a smooth, regular landscape, exactly the assumption that the complex
-spaces of molecules and materials tend to break. Transfer learning offers a different starting
-point suited to this regime of plentiful cheap data and scarce expensive data: it learns a
-representation from the cheap data and adapts it to the expensive task. Yet it has mostly been
-used to predict properties rather than to drive the optimization loop, and so has never been
-tested head-to-head as the engine of MFBO. Here we run that test with the surrogate isolated,
-comparing eleven transfer-learning surrogates against four Gaussian-process methods, each
-given the same selection rule, the same balance of cheap and expensive evaluations, and the
-same size, across nine tasks from simple test functions to real chemistry and materials
-problems. The outcome is sharply regime-dependent, just as the smoothness assumption predicts:
-Gaussian processes are best on the smooth, low-dimensional functions but worst on the hard
-molecular and materials problems, where the transfer-learning surrogates reach substantially
-better solutions while using far less computation. Because every model shared the same
-selection rule, this advantage comes from the surrogate itself rather than from how candidates
-are chosen, and it holds against all four Gaussian-process methods. Uncertainty-driven
-exploration, contrary to common practice, does not reliably help: it improves some problems
-and worsens others, simple greedy selection is the most robust default, and a model's
-calibrated confidence does not predict how well it optimizes. Transfer learning is therefore
-the surrogate of choice for molecular and materials MFBO, with uncertainty best treated as a
-case-by-case refinement rather than a default, giving practical guidance on when a learned
-surrogate is needed and which one to choose.}
+\abstract{\unboldmath Self-driving laboratories increasingly rely on multi-fidelity Bayesian optimization (MFBO) to balance cheap, approximate evaluations against scarce, expensive ones, with a predictive surrogate at its core. Gaussian processes (GPs) are the default choice, but they scale poorly as data accumulate and assume a smooth landscape that molecular and materials search spaces routinely violate. Transfer learning offers an alternative suited to this regime: it learns a representation from abundant cheap data and adapts it to sparse expensive data. Despite its use in property prediction, transfer learning has not been tested as the engine of a closed-loop optimization. Here we benchmark eleven transfer-learning surrogates against four GP methods under an identical selection rule, fidelity budget, and model size, across nine tasks spanning synthetic functions to real chemistry and materials problems. GPs win on smooth, low-dimensional functions but perform worst on molecular and materials problems, where transfer-learning surrogates reach substantially better solutions using far less computation. Because acquisition policy is held fixed across surrogates, this advantage is attributable to the surrogate itself. Uncertainty-driven exploration is not reliably beneficial, and calibration does not predict optimization performance, so greedy exploitation of the transfer-learned mean is the more robust default. Transfer learning is therefore the surrogate of choice for molecular and materials MFBO.}
 
 \keywords{Multi-fidelity Bayesian optimization, Transfer learning, Deep surrogate models,
 Self-driving laboratories, Materials and molecular discovery, Gaussian processes}
@@ -432,12 +383,7 @@ are evaluated at the early decision budget $B=10$, consistent with the regret fi
 \label{fig:portfolio}\label{fig:calibration}
 \end{figure*}
 
-Consistent with uncertainty acting as a secondary benchmark-dependent factor, calibration quality was a poor predictor of optimization performance. The
-best-calibrated surrogates, including the GP family, were the weakest optimizers on
-the molecular-descriptor benchmarks. Accordingly, across all fifteen surrogates the correlation between expected calibration error and  final regret was negative on every benchmark (ranging from
-$-0.88$ on COFs to $-0.08$ on HOPV15; Fig.~\ref{fig:calibration}e--m). This negative association shows that better-calibrated uncertainty
-did not translate into better optimization. The bounded $\tanh$ activation used throughout was likewise
-justified by optimization rather than calibration. 
+Calibration quality was a poor predictor of optimization performance: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from −0.88 on COFs to −0.08 on HOPV15 (Fig. 4e–m). If anything, the best-calibrated surrogates — including the entire GP family — were the weakest optimizers on the molecular-descriptor benchmarks, showing that better-calibrated uncertainty did not translate into better optimization. This is consistent with uncertainty acting as a secondary, benchmark-dependent factor rather than a primary driver of performance.
 In a
 matched $\tanh$-versus-ReLU ablation on the molecular-descriptor benchmarks, calibration error was nearly identical for the two activations ($0.30$
 versus
@@ -501,7 +447,7 @@ Note~\ref{suppnote:computational_cost}).}
 
 We quantified the computational cost of each surrogate in floating-point operations (FLOPs). FLOPs were counted for one surrogate fit and one pool-wide prediction and accumulated over the
 optimization loop. This measure provides a hardware-independent
-comparison of the scaling behaviours of the two model families. The
+comparison of the scaling behaviours of the two model families. We report FLOPs rather than wall-clock time because it isolates algorithmic scaling from implementation and hardware effects; it does not capture memory footprint, which is particularly relevant for the sparse variational MFGP's inducing-point overhead, or engineering factors such as parallelization and library-level optimization that affect wall-clock cost in deployment.  The
 eleven transfer-learning surrogates exhibited linear scaling with the number of observations with a measured
 fit-FLOP exponent of $k = 1.0$ for cost versus training-set size. This reflects the use of fixed-architecture
 neural network training. By contrast, the exact GPs, the baseline MFGP and NARGP, showed cubic scaling
