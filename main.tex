@@ -59,6 +59,10 @@
 %%        Sec 2.5 calibration paragraph restructured to lead with the correlation
 %%        range, FLOPs-vs-wall-clock justification sentence added in Methods.
 %%        Overleaf had collapsed this notes block; restored from local history.
+%% [done] Review-feedback text (2026-07-22): tanh transition sentence restored
+%%        after the Sec 2.5 rewrite; RF-vs-direct-perturbation rationale and
+%%        synthetic-bias caveat added in sec:meth-grid; Discussion grid-scope
+%%        clause extended to match.
 
 \documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Nature Portfolio (npj Computational Materials), two-column journal layout
 
@@ -421,7 +425,8 @@ are evaluated at the early decision budget $B=10$, consistent with the regret fi
 \end{figure*}
 
 Calibration quality was a poor predictor of optimization performance: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from $-0.88$ on COFs to $-0.08$ on HOPV15 (Fig.~\ref{fig:calibration}e--m). If anything, the best-calibrated surrogates, including the entire GP family, were the weakest optimizers on the molecular-descriptor benchmarks, showing that better-calibrated uncertainty did not translate into better optimization. This is consistent with uncertainty acting as a secondary, benchmark-dependent factor rather than a primary driver of performance.
-In a
+The bounded $\tanh$ activation used throughout was likewise justified by
+optimization rather than calibration. In a
 matched $\tanh$-versus-ReLU ablation on the molecular-descriptor benchmarks, calibration error was nearly identical for the two activations ($0.30$
 versus
 $0.30$), whereas  $\tanh$ achieved lower regret ($0.39$ versus $0.58$). Across the full benchmark suite,
@@ -567,7 +572,8 @@ organized along the optimum-agreement axis and is nearly flat in $R^2$, a decisi
 map indexed by global correlation alone cannot separate the conditions in which a
 learned surrogate is essential from those in which it is dispensable. The scope of
 this evidence is deliberately narrow, a mechanism experiment with curated
-LF sources on a single substrate; the benchmark suite, not the grid,
+LF sources on a single substrate, whose synthetic degradations need not mirror
+real experimental or simulation biases; the benchmark suite, not the grid,
 carries the generalization claim.
 
 Several limitations bound these conclusions and motivate future work. Our protocol is
@@ -753,7 +759,14 @@ derived from out-of-fold random-forest predictions of the HF objective and
 perturbed by two knobs: a bulk knob that degrades the global LF--HF $R^2$, and a
 gentle-demotion knob that selectively demotes top-ranked candidates, lowering the
 top-10 optimum agreement (the overlap between the LF and HF top-10
-candidate sets) while leaving the bulk of the ranking intact. Calibrating the two
+candidate sets) while leaving the bulk of the ranking intact. Random-forest
+predictions were chosen as the base, rather than direct perturbations of the
+ground-truth values, because the errors of a learned predictor carry the smooth,
+descriptor-correlated structure of a realistic LF proxy, whereas perturbing the
+ground truth directly would inject noise with an arbitrary, unstructured form.
+These synthetic degradations nevertheless need not reproduce the structure of
+real experimental or simulation biases, which bounds how far the grid's
+conclusions generalize beyond the polarizability substrate. Calibrating the two
 knobs produced $126$ conditions covering $R^2 \approx 0.1$--$0.9$ and agreement
 $0$--$1$, each run for ten seeds under the pool-based optimization loop of
 Section~\ref{sec:meth-loop}, with the budget, cost ratio, and initial-design rule of
