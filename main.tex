@@ -53,8 +53,11 @@
 %%        out); captions/abstract/headings deliberately keep full forms
 %%        (self-contained). British 2nd pass: analysed, modelled/modelling,
 %%        pseudo-labelling, towards (-ization kept per Oxford/Nature house style).
-%% [todo] Figure legends may still spell "Pseudo-Labeling" (US); if so, re-export
-%%        from the experiment repo with "Pseudo-Labelling" to match the text.
+%% [done] Figure re-export from the experiment repo (2026-07-24): Fig 3 legend
+%%        renamed to TL/MFGP x greedy/EI (was DNN . greedy / DNN . UQ-EI (BLR-std)
+%%        / MFGP . UQ-EI; "DNN" was undefined in the text); "Pseudo-Labelling"
+%%        (UK) in final_regret, regret_trajectory, A1_calibration_vs_regret,
+%%        computing_time. Data verified bit-identical, only label strings changed.
 %% [note] 2026-07-22 Overleaf sync (Chris's review edits) merged: abstract rewrite,
 %%        Sec 2.5 calibration paragraph restructured to lead with the correlation
 %%        range, FLOPs-vs-wall-clock justification sentence added in Methods.
@@ -229,7 +232,9 @@ Branin scenarios, indicating that GP models remain highly effective when
 their inductive bias matches the objective structure. On Branin-Fav and Branin-Unfav (the favourable and unfavourable fidelity scenarios; Methods) the baseline MFGP reached
  mean final regrets of $0.07$ and $0.05$, respectively, ranking first in
 both cases, whereas the best transfer-learning surrogate reached final regrets of $0.43$ and $1.24$
-(Fig.~\ref{fig:final_regret}). This observation is consistent with the Mat\'{e}rn-5/2 kernel providing a strong smoothness prior for an analytically smooth, two-dimensional objective,
+(Fig.~\ref{fig:final_regret}; paired Wilcoxon $p = 1.0\times10^{-3}$ and
+$1.3\times10^{-4}$, matched-pairs rank-biserial $r = -0.79$ and $-1.00$, where $r > 0$
+favours transfer learning; Methods). This observation is consistent with the Mat\'{e}rn-5/2 kernel providing a strong smoothness prior for an analytically smooth, two-dimensional objective,
 allowing the GP posterior to model the surface accurately from relatively few observations.
 The advantage was specific to the Branin family and did not extend across all synthetic benchmarks. On the four-dimensional Park functions, simple regret rapidly approached zero for most methods after only a small number of HF evaluations (Fig.~\ref{fig:final_regret}d,e), making these benchmarks weakly
  discriminative  at the budget considered. Several transfer-learning surrogates had already reached zero regret on Park-Fav whereas the baseline MFGP had not, placing it
@@ -348,8 +353,8 @@ evaluations were allocated between exploitation and exploration. We therefore ex
 \centering
 \includegraphics[width=0.92\textwidth]{paper_figures/A6_acquisition_matrix.pdf}
 \caption{Surrogate $\times$ acquisition comparison. Regret (mean $\pm$ s.e.) at the budget
-shown in each panel title, for the Gaussian-process and transfer-learning surrogates under
-uncertainty-driven (expected improvement, EI) and greedy acquisition policies. The two Park functions
+shown in each panel title, for the multi-fidelity Gaussian-process (MFGP) and transfer-learning
+(TL) surrogates under uncertainty-driven (expected improvement, EI) and greedy acquisition policies. The two Park functions
 (\textbf{c},\textbf{d}) are solved by every condition at the full budget, so following
 Fig.~\ref{fig:final_regret} they are evaluated at the earlier budget $B=10$, before every
 condition saturates. On the chemistry benchmarks the two baseline MFGP bars are nearly equal,
