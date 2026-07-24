@@ -252,8 +252,12 @@ polarizability, and organic photovoltaics (HOPV15). The three MFGP variants (NAR
 variational MFGP) showed similar
 high-regret behaviour on these benchmarks (Fig.~\ref{fig:final_regret}, salmon bars). On COFs the best-performing surrogate,
 End-to-End Joint Training, reached a final regret of $0.41$ compared with $6.55$ for the baseline MFGP
-and $4.9$--$6.0$ for the MFGP variants. The corresponding values were $0.28$ versus
-$0.80$ on FreeSolv, $0.06$ versus $0.17$ on polarizability and $1.89$ versus $3.09$ on HOPV15. Thus substituting the baseline MFGP with
+($r = 0.97$, $p = 2.1\times10^{-4}$) and $4.9$--$6.0$ for the MFGP variants. The
+corresponding values were $0.28$ versus $0.80$ on FreeSolv ($r = 1.00$,
+$p = 1.9\times10^{-6}$), $0.06$ versus $0.17$ on polarizability ($r = 1.00$,
+$p = 6.3\times10^{-4}$) and $1.89$ versus $3.09$ on HOPV15 ($r = 0.61$, $p = 0.020$);
+effect sizes for all nine benchmarks are given in Supplementary
+Table~\ref{supptab:effect_sizes}. Thus substituting the baseline MFGP with
 nonlinear cross-fidelity coupling, jointly learned kernels, or  sparse
 variational approximation did not remove the performance gap, suggesting that the limitation lies in the
 GP modelling assumptions in these compressed descriptor spaces, rather than in a  single baseline implementation.
@@ -278,7 +282,7 @@ default choices.
 
 Matbench-gap provides an important boundary case. In this inorganic
 band gap benchmark, optimized towards a photovoltaic target of $1.4$~eV, the baseline MFGP was competitive, ranking second among all fifteen surrogates with a final regret of $0.29$ versus  $0.23$ for the best transfer-learning
-surrogate (Fig.~\ref{fig:final_regret}j). This does not contradict the
+surrogate ($r = 0.19$, $p = 0.47$; Fig.~\ref{fig:final_regret}j). This does not contradict the
 advantage of the learned surrogates on harder molecular-descriptor benchmarks; rather, it reflects the limited discrimination of this task. The full regret range
 across the baseline MFGP and the eleven transfer-learning surrogates was only $0.27$
 compared with $6.1$ on COFs, and the baseline MFGP lay within $0.8$ standard errors of the best method. Thus,
@@ -315,14 +319,18 @@ the standard optimization protocol; the GP family was split into the
 baseline MFGP and its variants, and the three families were compared pairwise on final
 regret and on anytime performance, the area under the regret--budget curve (Methods).
 The anytime-advantage maps are shown in Fig.~\ref{fig:family_heatmap}l--n and the
-complete grid in Supplementary Fig.~\ref{suppfig:family_split}.
+complete grid in Supplementary Fig.~\ref{suppfig:family_split}; per-cell effect-size
+distributions are summarized in Supplementary Table~\ref{supptab:grid_effect_sizes}.
 
 Three observations emerge. First, transfer learning dominates the baseline MFGP across
 the entire plane: its anytime advantage is positive in $126$ of $126$ cells
-(significant in $97\%$), and no cell shows a significant final-regret reversal. Second,
+(significant in $97\%$; median per-cell rank-biserial $r = 1.00$, interquartile range
+$1.00$--$1.00$, that is, in the typical cell every seed favours transfer learning),
+and no cell shows a significant final-regret reversal. Second,
 the GP representative matters: against the best MFGP variant the
 final-regret gap closes, with a median advantage near zero, but the anytime advantage
-persists and remains significant in $83\%$ of cells. Third, the advantage is organized
+persists and remains significant in $83\%$ of cells (median per-cell $r = 1.00$,
+interquartile range $0.91$--$1.00$). Third, the advantage is organized
 along the agreement axis rather than the correlation axis: at fixed $R^2$ it grows
 steeply as the top-10 agreement falls, whereas at fixed agreement it is nearly flat
 across the $R^2$ range (marginal profiles in Supplementary
@@ -754,10 +762,15 @@ results~\citep{sabanza2025best}.
 
 \subsection{Controlled fidelity-quality grid}\label{sec:meth-grid}
 
-%% TODO(authors): verify every protocol number in this subsection against the
-%% grid-analysis scripts before submission (random-forest configuration, knob
-%% definitions and their calibration, grid coverage, budget and cost ratio used
-%% for the grid runs, and the binning of the displayed maps).
+%% NOTE (2026-07-24 effect-size pass): verified against the grid data
+%% (mlip_elastic/grid_manifest.csv + results_grid_polariz/cells): 126 cells,
+%% 10 seeds each, R^2 0.10-0.91, top-10 agreement 0.00-1.00; the family
+%% membership below was corrected to the models actually run on the grid
+%% (TL = Progressive / Knowledge Distillation / Pseudo-Labelling; variants =
+%% deep-kernel + sparse variational, no NARGP).
+%% TODO(authors): still to verify: random-forest configuration, knob
+%% definitions and their calibration, budget and cost ratio used for the grid
+%% runs, and the binning of the displayed maps.
 To vary the two properties of LF quality independently, we constructed a
 grid of curated LF sources on the polarizability substrate. Each source was
 derived from out-of-fold random-forest predictions of the HF objective and
@@ -778,8 +791,10 @@ Section~\ref{sec:meth-loop}, with the budget, cost ratio, and initial-design rul
 the polarizability benchmark (Table~\ref{tab:benchmarks}) and seeds shared across all
 surrogates within a condition.
 
-Three families were compared pairwise: the eleven transfer-learning surrogates, the
-baseline MFGP, and the MFGP variants (NARGP, deep-kernel, and sparse variational).
+Three families were compared pairwise: the transfer-learning family, represented in
+the grid by Progressive, Knowledge Distillation, and Pseudo-Labelling; the baseline
+MFGP; and the MFGP variants, represented by the deep-kernel and sparse variational
+models (NARGP was not run on the grid).
 Family performance in a cell is that of its best member in that cell
 (best-of-family), and the advantage of one family over another is the mean difference
 of the metric (second-named minus first-named family; both metrics are
@@ -787,7 +802,10 @@ lower-is-better, so positive values favour the first-named family). Two metrics 
 scored: final regret at the budget, and anytime performance, defined as the area
 under the simple-regret-versus-budget curve, which rewards fast convergence rather
 than only the endpoint. Cell-level significance was assessed with paired Wilcoxon
-tests over the shared seeds; in the displayed maps the conditions are binned by
+tests over the shared seeds, reported together with the matched-pairs rank-biserial
+correlation $r$ as the effect size (Methods, ``Implementation and reproducibility'';
+per-comparison distributions in Supplementary Table~\ref{supptab:grid_effect_sizes});
+in the displayed maps the conditions are binned by
 ($R^2$, agreement), a bin is marked with an asterisk when the majority of its
 conditions reach $p<0.05$, and colour scales are shared within each row of the grid.
 Because best-of-family selection can favour the family with more members, the
@@ -802,7 +820,14 @@ clipping were not used. Models were retrained de novo at every optimization iter
 from warm-starting. Inputs and targets were standardized using statistics pooled across
 fidelities, and descriptor standardization and PCA were applied
 once to the fixed candidate pool. Each benchmark-surrogate pair was evaluated for $20$ random seeds.
-Reported values are means over seeds with uncertainty as the standard error of the mean. Common and
+Reported values are means over seeds with uncertainty as the standard error of the mean.
+Paired comparisons between surrogates use two-sided Wilcoxon signed-rank tests across
+matched seeds, with zero differences discarded; as the matched effect size we report
+the rank-biserial correlation $r = (W_{+} - W_{-})/(W_{+} + W_{-})$, where $W_{+}$ and
+$W_{-}$ are the signed-rank sums of the nonzero paired differences favouring each
+side. $r$ ranges from $-1$ to $1$; $r > 0$ favours the first-named side (the
+transfer-learning side unless stated otherwise) and $|r| = 1$ means every decided seed
+favours the same side. Common and
 model-specific hyperparameters, GP configuration, the
 BLR derivation, synthetic function definitions, and
 ablation studies (including activation, uncertainty placement, acquisition variants, promotion, and
@@ -1128,8 +1153,8 @@ largest at low top-10 optimum agreement and nearly flat across the $R^2$ range; 
 final-regret maps additionally show that the MFGP variants close most of the baseline
 MFGP's endpoint gap, whereas the anytime gap persists.
 
-Because best-of-family scoring can favour the family with more members (eleven
-transfer-learning surrogates against one baseline and three variants), the analysis was
+Because best-of-family scoring can favour the family with more members (three
+transfer-learning surrogates against one baseline and two variants), the analysis was
 repeated with the unselected family mean; this preserved the ordering of the families
 and the structure along the agreement axis.
 %% TODO(authors): insert here, from the grid-analysis outputs:
@@ -1145,8 +1170,8 @@ and the structure along the agreement axis.
 \centering
 \includegraphics[width=0.9\textwidth]{paper_figures/fig1c_family_split_grid.pdf}
 \caption{Family-split advantage maps: the complete grid. Columns compare transfer
-learning (TL) against the baseline MFGP (left), TL against the MFGP variants (NARGP,
-deep-kernel, and sparse variational; centre), and the MFGP variants against the
+learning (TL) against the baseline MFGP (left), TL against the MFGP variants
+(deep-kernel and sparse variational; centre), and the MFGP variants against the
 baseline MFGP (right). Rows show the final-regret advantage (\textbf{a}--\textbf{c}),
 the anytime-AUC advantage (\textbf{d}--\textbf{f}; the row reproduced as
 Fig.~\ref{fig:family_heatmap}l--n), and the marginal advantage profiles averaged over
@@ -1157,5 +1182,71 @@ asterisks mark significant bins.}
 \label{suppfig:family_split}
 \end{figure*}
 
+\suppnote{Effect sizes for the paired surrogate comparisons}{suppnote:effect_sizes}
+
+Supplementary Table~\ref{supptab:effect_sizes} reports, for each of the nine
+benchmarks, the paired comparison between the best transfer-learning surrogate
+(chosen by mean final regret) and the baseline MFGP over the twenty matched seeds:
+the matched-pairs rank-biserial correlation $r$ (Methods), the seed-level
+wins/ties/losses, and the two-sided Wilcoxon $p$-value. Supplementary
+Table~\ref{supptab:grid_effect_sizes} summarizes the distribution of the per-cell
+$r$ over the $126$ cells of the controlled fidelity-quality grid for the three
+pairwise family comparisons, on both metrics. On the anytime metric the typical
+cell is unanimous: the median per-cell $r$ is $1.00$ against both GP families. On
+final regret a large fraction of cells tie exactly (both sides reach regret $0$);
+these ties are reported separately.
+
+\begin{table}[h]
+\centering
+\caption{Per-benchmark effect sizes: best transfer-learning surrogate against the
+baseline MFGP on final regret ($20$ paired seeds). The best transfer-learning (TL)
+surrogate is chosen by mean final regret; $r$ is the matched-pairs rank-biserial
+correlation ($r > 0$ favours transfer learning), w/t/l counts transfer-learning
+wins, ties, and losses over the paired seeds, and $p$ is the two-sided Wilcoxon
+$p$-value on the nonzero paired differences. Park-Fav ties on all $20$ seeds (both
+sides at regret $\approx 0$); on Park-Unfav ($\dag$) the paired differences are at
+floating-point scale ($\sim 10^{-8}$), so the entry is not practically meaningful.}
+\label{supptab:effect_sizes}
+\begin{tabular}{llrrrcr}
+\toprule
+Benchmark & Best TL surrogate & TL & MFGP & $r$ & w/t/l & $p$ \\
+\midrule
+Branin-Fav & Curriculum & 0.42 & 0.07 & $-0.79$ & 2/0/18 & $1.0\times10^{-3}$ \\
+Branin-Unfav & Curriculum & 1.24 & 0.05 & $-1.00$ & 0/1/19 & $1.3\times10^{-4}$ \\
+Park-Fav & Sequential & 0.00 & 0.00 & tie & 0/20/0 & -- \\
+Park-Unfav & Pseudo-Labelling & 0.00 & 0.00 & $+0.96^{\dag}$ & 17/2/1 & $2.9\times10^{-4}$ \\
+COFs & End-to-End Joint Training & 0.41 & 6.55 & $+0.97$ & 18/1/1 & $2.1\times10^{-4}$ \\
+FreeSolv & End-to-End Joint Training & 0.28 & 0.80 & $+1.00$ & 20/0/0 & $1.9\times10^{-6}$ \\
+Polarizability & Sequential & 0.06 & 0.17 & $+1.00$ & 15/5/0 & $6.3\times10^{-4}$ \\
+HOPV15 & Knowledge Distillation & 1.89 & 3.09 & $+0.61$ & 13/1/6 & $0.020$ \\
+Matbench-Gap & Progressive & 0.23 & 0.29 & $+0.19$ & 9/0/11 & $0.47$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Effect-size distributions on the controlled fidelity-quality grid ($126$
+cells, ten seeds per cell). For each pairwise family comparison and metric: the
+median and interquartile range (IQR) of the per-cell matched-pairs rank-biserial
+$r$ ($r > 0$ favours the first-named family), the number of cells with a
+significant paired Wilcoxon test ($p < 0.05$), the number of cells whose mean
+advantage favours the first-named family, and the number of all-tie cells (every
+seed pair identical, typically both sides at regret $0$; excluded from the median
+and IQR).}
+\label{supptab:grid_effect_sizes}
+\begin{tabular}{llrrrrr}
+\toprule
+Metric & Comparison & Median $r$ & IQR & Sig.\ cells & Adv.\ cells & Tie cells \\
+\midrule
+Final regret & TL vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 65/126 & 81/126 & 45 \\
+Final regret & TL vs MFGP variants & $+1.00$ & $[+0.33, +1.00]$ & 22/126 & 51/126 & 60 \\
+Final regret & MFGP variants vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 50/126 & 81/126 & 45 \\
+Anytime-AUC & TL vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 122/126 & 126/126 & 0 \\
+Anytime-AUC & TL vs MFGP variants & $+1.00$ & $[+0.91, +1.00]$ & 105/126 & 126/126 & 0 \\
+Anytime-AUC & MFGP variants vs baseline MFGP & $+0.67$ & $[+0.50, +0.83]$ & 39/126 & 126/126 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \end{document}
