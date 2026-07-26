@@ -78,10 +78,12 @@
 %%        claim rests on the scaling-law exponents and absolute FLOPs, which are
 %%        untouched. NOTE: panel j itself is still in computing_time.pdf.
 %% [done] Data/Code availability (2026-07-26): no repository link at preprint
-%%        stage (agreed with supervisors), so the "DOI to be assigned upon
-%%        acceptance" wording -- which also implied the deposit already existed --
-%%        is replaced by a plain release-on-publication statement. Insert the
-%%        Zenodo/GitHub URL at journal submission.
+%%        stage (agreed with supervisors). The "DOI to be assigned upon
+%%        acceptance" wording implied a deposit that does not exist, and its
+%%        replacement ("released on publication") was self-contradictory in a
+%%        preprint, so both sections are removed for now -- see the note above
+%%        \backmatter. Reinstate them with the Zenodo/GitHub DOI at journal
+%%        submission.
 %% [done] Review-feedback text (2026-07-22): tanh transition sentence restored
 %%        after the Sec 2.5 rewrite; RF-vs-direct-perturbation rationale and
 %%        synthetic-bias caveat added in sec:meth-grid; Discussion grid-scope
@@ -922,18 +924,12 @@ ablation studies (including activation, uncertainty placement, acquisition varia
 adaptive scheduling) are provided in the Supplementary Information.
 
 
-\section*{Data availability}
-The chemistry and materials datasets used in this study are derived from publicly
-available sources: COFs~\citep{gantzler2023multifidelity},
-FreeSolv~\citep{mobley2014freesolv}, the Alexandria polarizability
-library~\citep{ghahremanpour2018alexandria}, HOPV15, and the Matbench band-gap dataset.
-The processed candidate pools and cached result tables supporting the findings of this
-study will be deposited in a public repository and released on publication.
-
-\section*{Code availability}
-The code implementing the MFBO loop, all surrogate models,
-and the analysis and figure-generation scripts will be released in a public repository on
-publication.
+%% Data availability / Code availability sections removed for the preprint:
+%% "released on publication" is self-contradictory here, since the preprint is
+%% itself a publication, and there is no repository URL to give yet. Reinstate
+%% both sections with the Zenodo/GitHub DOI at journal submission, where they
+%% are required. The three dataset citations they carried (COFs, FreeSolv,
+%% Alexandria) are still made in Methods, ``Benchmarks''.
 
 
 \backmatter
