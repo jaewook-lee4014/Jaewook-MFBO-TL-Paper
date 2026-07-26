@@ -129,25 +129,43 @@
 
 \raggedbottom
 
+%% Corresponding-author asterisk. sn-jnl.cls emits it inside
+%%   \authorsep{#2}\unskip\ifx\@authfrstarg\empty\else ... {*} ... \fi
+%% in \@@corrauthor, where \@authfrstarg is the OPTIONAL affiliation argument.
+%% All four authors share one affiliation, so no affiliation superscripts are
+%% wanted and \author* is written without brackets -- which skips that branch
+%% entirely and leaves the "*Corresponding author(s)" footnote with no asterisk
+%% anchored to any name. Redefine the macro to print the asterisk
+%% unconditionally, and no affiliation number. (Delete this patch and restore
+%% \author*[n] / \affil[n] if a second affiliation is ever added.)
+\makeatletter
+\renewcommand{\@@corrauthor}[2][]{\def\@authfrstarg{#1}\@corauemailtrue%
+  \advance\corraucount by 1%
+  \g@addto@macro\artauthors{%
+    \global\@auemailtrue%
+    \Authorfont%
+    \def\baselinestretch{1}%
+    \authorsep{#2}\unskip\textsuperscript{*}\unskip%
+    \def\authorsep{\au@and~}%
+    \global\let\sep\@empty\global\let\@corref\@empty%
+  }}%
+\makeatother
+
 \begin{document}
 
 \title[Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
 Optimization]{Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
 Optimization}
 
-%% The corresponding-author asterisk is emitted by \@@corrauthor (sn-jnl.cls)
-%% only when the optional affiliation argument is present, so every \author
-%% carries [1] and the affiliation is \affil[1]. Without it the "*Corresponding
-%% author(s)" footnote prints with no asterisk anchored to any name.
-\author[1]{\fnm{Jaewook} \sur{Lee}}
+\author{\fnm{Jaewook} \sur{Lee}}
 
-\author[1]{\fnm{Ethan} \sur{Errington}}
+\author{\fnm{Ethan} \sur{Errington}}
 
-\author[1]{\fnm{Christian D.} \sur{Lorenz}}
+\author{\fnm{Christian D.} \sur{Lorenz}}
 
-\author*[1]{\fnm{Miao} \sur{Guo}}\email{miao.guo@kcl.ac.uk}
+\author*{\fnm{Miao} \sur{Guo}}\email{miao.guo@kcl.ac.uk}
 
-\affil[1]{\orgdiv{Department of Engineering}, \orgname{King's College London},
+\affil{\orgdiv{Department of Engineering}, \orgname{King's College London},
 \orgaddress{\city{London}, \postcode{WC2R 2LS}, \country{United Kingdom}}}
 \abstract{\unboldmath Self-driving laboratories increasingly rely on multi-fidelity Bayesian optimization (MFBO) to balance cheap, approximate evaluations against scarce, expensive ones, with a predictive surrogate at its core. Gaussian processes (GPs) are the default choice, but they scale poorly as data accumulate and assume a smooth landscape that molecular and materials search spaces routinely violate. Transfer learning offers an alternative suited to this regime: it learns a representation from abundant cheap data and adapts it to sparse expensive data. Despite its use in property prediction, transfer learning has not been tested as the engine of a closed-loop optimization. Here we benchmark eleven transfer-learning surrogates against four GP methods under an identical selection rule, fidelity budget, and model size, across nine tasks spanning synthetic functions to real chemistry and materials problems. GPs win on smooth, low-dimensional functions but perform worst on molecular and materials problems, where transfer-learning surrogates reach substantially better solutions using far less computation. Because acquisition policy is held fixed across surrogates, this advantage is attributable to the surrogate itself. Uncertainty-driven exploration is not reliably beneficial, and calibration does not predict optimization performance, so greedy exploitation of the transfer-learned mean is the more robust default. Transfer learning is therefore the surrogate of choice for molecular and materials MFBO.}
 
