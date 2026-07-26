@@ -135,20 +135,24 @@
 Optimization]{Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
 Optimization}
 
-\author{\fnm{Jaewook} \sur{Lee}}
+%% The corresponding-author asterisk is emitted by \@@corrauthor (sn-jnl.cls)
+%% only when the optional affiliation argument is present, so every \author
+%% carries [1] and the affiliation is \affil[1]. Without it the "*Corresponding
+%% author(s)" footnote prints with no asterisk anchored to any name.
+\author[1]{\fnm{Jaewook} \sur{Lee}}
 
-\author{\fnm{Ethan} \sur{Errington}}
+\author[1]{\fnm{Ethan} \sur{Errington}}
 
-\author{\fnm{Christian D.} \sur{Lorenz}}
+\author[1]{\fnm{Christian D.} \sur{Lorenz}}
 
-\author*{\fnm{Miao} \sur{Guo}}\email{miao.guo@kcl.ac.uk}
+\author*[1]{\fnm{Miao} \sur{Guo}}\email{miao.guo@kcl.ac.uk}
 
-\affil{\orgdiv{Department of Engineering}, \orgname{King's College London},
+\affil[1]{\orgdiv{Department of Engineering}, \orgname{King's College London},
 \orgaddress{\city{London}, \postcode{WC2R 2LS}, \country{United Kingdom}}}
 \abstract{\unboldmath Self-driving laboratories increasingly rely on multi-fidelity Bayesian optimization (MFBO) to balance cheap, approximate evaluations against scarce, expensive ones, with a predictive surrogate at its core. Gaussian processes (GPs) are the default choice, but they scale poorly as data accumulate and assume a smooth landscape that molecular and materials search spaces routinely violate. Transfer learning offers an alternative suited to this regime: it learns a representation from abundant cheap data and adapts it to sparse expensive data. Despite its use in property prediction, transfer learning has not been tested as the engine of a closed-loop optimization. Here we benchmark eleven transfer-learning surrogates against four GP methods under an identical selection rule, fidelity budget, and model size, across nine tasks spanning synthetic functions to real chemistry and materials problems. GPs win on smooth, low-dimensional functions but perform worst on molecular and materials problems, where transfer-learning surrogates reach substantially better solutions using far less computation. Because acquisition policy is held fixed across surrogates, this advantage is attributable to the surrogate itself. Uncertainty-driven exploration is not reliably beneficial, and calibration does not predict optimization performance, so greedy exploitation of the transfer-learned mean is the more robust default. Transfer learning is therefore the surrogate of choice for molecular and materials MFBO.}
 
-\keywords{Multi-fidelity Bayesian optimization, Transfer learning, Deep surrogate models,
-Self-driving laboratories, Materials and molecular discovery, Gaussian processes}
+\keywords{Multi-fidelity Bayesian optimization, Transfer learning,
+Materials and molecular discovery}
 
 \maketitle
 
@@ -874,15 +878,20 @@ fidelities, and descriptor standardization and PCA were applied
 once to the fixed candidate pool. Each benchmark-surrogate pair was evaluated for $20$ random seeds.
 Reported values are means over seeds with uncertainty as the standard error of the mean.
 Paired comparisons between surrogates use two-sided Wilcoxon signed-rank tests across
-matched seeds, with zero differences discarded; as the matched effect size we report
+matched seeds, with zero differences discarded; where both sides reach the same regret
+to the reported precision and the residual paired differences are at floating-point
+scale, the comparison is recorded as a tie rather than tested. As the matched effect
+size we report
 the rank-biserial correlation $r = (W_{+} - W_{-})/(W_{+} + W_{-})$, where $W_{+}$ and
 $W_{-}$ are the signed-rank sums of the nonzero paired differences favouring each
 side. $r$ ranges from $-1$ to $1$; $r > 0$ favours the first-named side (the
 transfer-learning side unless stated otherwise) and $|r| = 1$ means every decided seed
 favours the same side. Where the same comparison is repeated across the benchmark
-suite, the resulting $p$-values are corrected by the Benjamini--Hochberg procedure at
-$q = 0.05$ (Supplementary Table~\ref{supptab:effect_sizes}), as they are within each
-map of the controlled grid. The ordering in the average-rank panel
+suite, the resulting $p$-values are additionally assessed under the
+Benjamini--Hochberg procedure at $q = 0.05$, as they are within each map of the
+controlled grid; $p$-values quoted in the text and tables are unadjusted, and the
+outcome of the correction is reported in Supplementary
+Table~\ref{supptab:effect_sizes}. The ordering in the average-rank panel
 (Fig.~\ref{fig:final_regret}k) was assessed with the Dem\v{s}ar
 procedure~\citep{demsar2006statistical}: a Friedman test with the nine benchmarks as
 blocks and surrogates ranked within each benchmark by their seed-mean value (mid-ranks
@@ -910,6 +919,11 @@ publication.
 
 
 \backmatter
+
+\bmhead{Acknowledgements}
+
+The authors would like to acknowledge the financial support from the King's College
+London Net Zero Centre Ph.D.\ Scholarship scheme.
 
 \bibliography{references}
 
