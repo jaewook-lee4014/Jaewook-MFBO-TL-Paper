@@ -62,6 +62,26 @@
 %%        Sec 2.5 calibration paragraph restructured to lead with the correlation
 %%        range, FLOPs-vs-wall-clock justification sentence added in Methods.
 %%        Overleaf had collapsed this notes block; restored from local history.
+%% [done] Rank-panel statistics demoted to SI (2026-07-26), per first-supervisor
+%%        request that Friedman/Nemenyi serve as supplementary support only.
+%%        Fig 1k caption and Results 2.2 no longer carry chi^2/p; both point to
+%%        the new Supplementary Note suppnote:rank_stats, which reports the
+%%        omnibus in full and explains why the null is the design's prediction
+%%        (CD = 7.15 > observed rank range 6.52; the ranking reverses between
+%%        the synthetic and molecular regimes). The dashed CD line stays in the
+%%        caption gloss because it is baked into final_regret.pdf.
+%% [done] Compute-rank Friedman/Nemenyi removed entirely (2026-07-26, author
+%%        decision: the compute story does not need rank statistics). Dropped
+%%        from the Supp Fig computing_time caption (panel j is kept, described
+%%        descriptively) and from the contrast paragraph of suppnote:rank_stats;
+%%        the Methods Demsar sentence now scopes to Fig 1k alone. The compute
+%%        claim rests on the scaling-law exponents and absolute FLOPs, which are
+%%        untouched. NOTE: panel j itself is still in computing_time.pdf.
+%% [done] Data/Code availability (2026-07-26): no repository link at preprint
+%%        stage (agreed with supervisors), so the "DOI to be assigned upon
+%%        acceptance" wording -- which also implied the deposit already existed --
+%%        is replaced by a plain release-on-publication statement. Insert the
+%%        Zenodo/GitHub URL at journal submission.
 %% [done] Review-feedback text (2026-07-22): tanh transition sentence restored
 %%        after the Sec 2.5 rewrite; RF-vs-direct-perturbation rationale and
 %%        synthetic-bias caveat added in sec:meth-grid; Discussion grid-scope
@@ -174,11 +194,9 @@ on the molecular-descriptor benchmarks (\textbf{f}--\textbf{i}); on the
 low-discrimination Matbench-gap task (\textbf{j}) the baseline MFGP is competitive.
 Panel \textbf{k} reports the average rank of all fifteen surrogates across the nine
 benchmarks; the dashed line marks the best average rank plus the Nemenyi critical
-difference ($\mathrm{CD} = 7.15$ rank units at
-$\alpha = 0.05$)~\citep{demsar2006statistical}. A Friedman test across the nine
-benchmarks does not reject rank homogeneity ($\chi^2_{14} = 20.9$, $p = 0.11$) and no
-surrogate pair exceeds the critical difference, so the ordering is indicative rather
-than statistically resolved at nine benchmarks.
+difference ($\alpha = 0.05$)~\citep{demsar2006statistical}, which no surrogate pair
+exceeds, so the ordering is descriptive (omnibus rank analysis in Supplementary
+Note~\ref{suppnote:rank_stats}).
 \textbf{l--n,} family-split anytime-advantage maps from the controlled
 fidelity-quality grid (Methods). Mean anytime advantage (area under the regret--budget
 curve) in bins of the global LF--HF $R^2$ (horizontal) and the top-10 optimum agreement
@@ -284,11 +302,12 @@ COFs, FreeSolv, and polarizability.
 
 Performance also depended on transfer mechanism. Curriculum, Knowledge Distillation
 and End-to-End Joint Training achieved the lowest average ranks across the nine
-benchmarks among all fifteen surrogates (Fig.~\ref{fig:final_regret}k). A Friedman
-test across the nine benchmarks does not reject rank homogeneity
-($\chi^2_{14} = 20.9$, $p = 0.11$), and no pairwise difference in average rank exceeds
-the Nemenyi critical difference ($7.15$ rank units at $\alpha = 0.05$), so this
-ordering is indicative rather than statistically resolved with nine benchmarks. The
+benchmarks among all fifteen surrogates (Fig.~\ref{fig:final_regret}k). Because the
+surrogate ranking reverses between the synthetic and molecular regimes, an omnibus
+test on the pooled nine-benchmark ranking is not expected to resolve individual pairs,
+and it does not (Supplementary Note~\ref{suppnote:rank_stats}); the per-benchmark
+paired comparisons of Supplementary Table~\ref{supptab:effect_sizes}, rather than the
+pooled ordering, carry the statistical support. The
 spread of average ranks (from $5.3$ to $11.8$) nevertheless suggests that outcomes
 depended not merely on using transfer learning but on how transfer was implemented.
 In this benchmark suite, curriculum transfer, knowledge distillation and joint
@@ -342,7 +361,8 @@ $120$ of $126$ ($95\%$) individually significant after Benjamini--Hochberg
 false-discovery-rate correction across the map (map-level Wilcoxon across cells,
 $p = 2.0\times10^{-22}$; median per-cell rank-biserial $r = 1.00$, interquartile range
 $1.00$--$1.00$, that is, in the typical cell every seed favours transfer learning;
-Methods), and no cell shows a significant final-regret reversal. Second,
+Methods), and no cell reverses on final regret ($81$ of $126$ cells favour transfer
+learning and the remaining $45$ tie at zero regret). Second,
 the GP representative matters: against the best MFGP variant the
 final-regret gap closes, with a median advantage near zero, but the anytime advantage
 persists and remains individually significant in $101$ of $126$ cells ($80\%$) under
@@ -859,9 +879,11 @@ the rank-biserial correlation $r = (W_{+} - W_{-})/(W_{+} + W_{-})$, where $W_{+
 $W_{-}$ are the signed-rank sums of the nonzero paired differences favouring each
 side. $r$ ranges from $-1$ to $1$; $r > 0$ favours the first-named side (the
 transfer-learning side unless stated otherwise) and $|r| = 1$ means every decided seed
-favours the same side. The orderings in the two average-rank panels
-(Fig.~\ref{fig:final_regret}k and Supplementary
-Fig.~\ref{suppfig:computing_time}j) were assessed with the Dem\v{s}ar
+favours the same side. Where the same comparison is repeated across the benchmark
+suite, the resulting $p$-values are corrected by the Benjamini--Hochberg procedure at
+$q = 0.05$ (Supplementary Table~\ref{supptab:effect_sizes}), as they are within each
+map of the controlled grid. The ordering in the average-rank panel
+(Fig.~\ref{fig:final_regret}k) was assessed with the Dem\v{s}ar
 procedure~\citep{demsar2006statistical}: a Friedman test with the nine benchmarks as
 blocks and surrogates ranked within each benchmark by their seed-mean value (mid-ranks
 for ties), followed by Nemenyi post-hoc comparisons, for which the critical difference
@@ -879,12 +901,12 @@ available sources: COFs~\citep{gantzler2023multifidelity},
 FreeSolv~\citep{mobley2014freesolv}, the Alexandria polarizability
 library~\citep{ghahremanpour2018alexandria}, HOPV15, and the Matbench band-gap dataset.
 The processed candidate pools and cached result tables supporting the findings of this
-study are deposited in a public repository (DOI to be assigned upon acceptance).
+study will be deposited in a public repository and released on publication.
 
 \section*{Code availability}
 The code implementing the MFBO loop, all surrogate models,
-and the analysis and figure-generation scripts is available in a public repository (DOI to
-be assigned upon acceptance).
+and the analysis and figure-generation scripts will be released in a public repository on
+publication.
 
 
 \backmatter
@@ -1175,13 +1197,7 @@ baseline MFGP and NARGP scale as $\mathcal{O}(N^3)$ in the number of observation
 fit-FLOP exponent $k = 3.0$) against $\mathcal{O}(N)$ for the transfer-learning surrogates ($k = 1.0$),
 so the gap widens with the evaluation budget. Panel \textbf{j} summarizes these costs as
 the average compute rank across all nine benchmarks (lower is cheaper), with the colour
-split repeated in a shared legend below the panels. Unlike the performance ranking of
-Fig.~\ref{fig:final_regret}k, this ordering is statistically resolved: a Friedman test
-rejects rank homogeneity ($\chi^2_{14} = 99.0$, $p = 7.3\times10^{-15}$) and 22 of the
-105 surrogate pairs exceed the Nemenyi critical difference ($7.15$ rank units at
-$\alpha = 0.05$)~\citep{demsar2006statistical}: Sparse MFGP is separated from the eight
-cheapest surrogates, the deep-kernel GP from the six cheapest, and Progressive, the
-cheapest overall, from the seven most expensive.}
+split repeated in a shared legend below the panels.}
 \label{suppfig:computing_time}
 \end{figure*}
 
@@ -1218,7 +1234,14 @@ final regret $56 \to 39$, $20 \to 0$, and $43 \to 7$ across the three comparison
 and the cell-level fractions quoted in the main text move from $97\%$ to $95\%$ and
 from $83\%$ to $80\%$. The direction of every map is unaffected: the map-level
 Wilcoxon across the $126$ per-cell advantages gives $p \le 1.7\times10^{-7}$ for all
-six maps ($p = 2.0\times10^{-22}$ for each anytime-AUC comparison).
+six maps ($p = 2.0\times10^{-22}$ for each anytime-AUC comparison). The contrast
+between the vanishing per-cell counts on final regret and these small map-level values
+is a matter of statistical power rather than of conflicting evidence: ten seeds per
+cell cannot clear a $126$-way correction unless the within-cell separation is close to
+total, as it is on the anytime metric but not at the endpoint, whereas the map-level
+test draws instead on the consistency of the advantage across the $126$ conditions.
+Per-cell significance is therefore quoted only for the anytime maps, which carry the
+claim; the final-regret maps are read from their direction and effect sizes.
 
 %% TODO(authors): insert here, from the grid-analysis outputs:
 %%   (i)   the family-mean (no-selection) maps and their full numbers;
@@ -1273,7 +1296,10 @@ Benjamini--Hochberg (BH) false-discovery-rate correction across the map's $126$
 cells ($q\le0.05$); display bins starred under the previous majority rule versus the
 corrected criterion (one stratified signed-rank test per bin, BH across the map's
 $97$ non-empty bins); and the map-level two-sided Wilcoxon $p$ across the $126$
-per-cell advantages (conditions as units).}
+per-cell advantages (conditions as units). The map-level $p$ saturates once every
+non-tied cell favours the same family, so maps that share a sign pattern share a
+$p$-value; these values express the consistency of the direction, not the size of the
+advantage.}
 \label{supptab:star_sensitivity}%
 \begin{tabular}{@{}llccccc@{}}
 \toprule
@@ -1289,6 +1315,46 @@ Anytime AUC & MFGP variants vs baseline MFGP & 126/126 & 39 (31\%) & 0 (0\%) & 3
 \bottomrule
 \end{tabular}
 \end{table}
+
+\suppnote{Omnibus rank analysis of the average-rank panel}{suppnote:rank_stats}
+
+Panel k of Fig.~\ref{fig:final_regret} summarizes the fifteen surrogates as an average
+rank across the nine benchmarks. We assessed whether that ordering is statistically
+resolvable using the Dem\v{s}ar procedure (Methods, ``Implementation and
+reproducibility''): a Friedman omnibus test with the benchmarks as blocks and the
+surrogates ranked within each benchmark, followed, if the omnibus rejects, by Nemenyi
+post-hoc comparisons.
+
+The omnibus does not reject rank homogeneity ($\chi^2_{14} = 20.9$, $p = 0.11$), so no
+pairwise ordering is claimed. The Nemenyi critical difference,
+$\mathrm{CD} = q_{0.05}\sqrt{k(k+1)/(6N)}$ with $k = 15$ surrogates and $N = 9$
+benchmarks, is $7.15$ rank units, which is larger than the entire observed range of
+average ranks ($5.28$ for Curriculum to $11.8$; range $6.52$). The spread of the panel
+is therefore smaller than the smallest difference the post-hoc test can resolve, so no
+pair of surrogates is separable at this suite size, including the best against the
+worst. The dashed line in Fig.~\ref{fig:final_regret}k marks this critical difference.
+
+This null is what the benchmark design predicts rather than evidence against a
+surrogate effect. The suite deliberately spans regimes in which the ranking reverses:
+the Gaussian-process family is best on the two Branin functions and worst on the four
+molecular-descriptor benchmarks (Fig.~\ref{fig:final_regret}b--i). An omnibus test for
+a single consistent ordering across all nine benchmarks therefore tests a hypothesis
+that our central result already denies, and averaging ranks over a heterogeneous suite
+cancels an effect whose sign depends on the regime. Restricting the analysis to the
+five chemistry and materials benchmarks does not recover resolution, because the
+critical difference grows as the number of blocks falls ($\mathrm{CD} = 9.59$ at
+$N = 5$).
+
+The statistical support for the surrogate comparison accordingly rests on the
+per-benchmark paired tests and effect sizes of Supplementary
+Table~\ref{supptab:effect_sizes}, and on the controlled fidelity-quality grid
+(Supplementary Table~\ref{supptab:grid_effect_sizes}), rather than on the pooled
+ranking; Fig.~\ref{fig:final_regret}k is presented as a descriptive summary. The
+omnibus null therefore indicates that no single ordering holds across a deliberately
+heterogeneous suite, not that the choice of surrogate is without effect: on the
+individual molecular-descriptor benchmarks the paired comparisons are significant with
+near-unanimous effect sizes ($r = 0.97$--$1.00$; Supplementary
+Table~\ref{supptab:effect_sizes}).
 
 \suppnote{Effect sizes for the paired surrogate comparisons}{suppnote:effect_sizes}
 
@@ -1312,8 +1378,12 @@ surrogate is chosen by mean final regret; $r$ is the matched-pairs rank-biserial
 correlation ($r > 0$ favours transfer learning), w/t/l counts transfer-learning
 wins, ties, and losses over the paired seeds, and $p$ is the two-sided Wilcoxon
 $p$-value on the nonzero paired differences. Park-Fav ties on all $20$ seeds (both
-sides at regret $\approx 0$); on Park-Unfav ($\dag$) the paired differences are at
-floating-point scale ($\sim 10^{-8}$), so the entry is not practically meaningful.}
+sides at regret $\approx 0$); on Park-Unfav ($\dag$) both sides likewise reach regret
+$\approx 0$ and the paired differences are at floating-point scale ($\sim10^{-8}$), so
+the nominal comparison ($r = +0.96$, 17/2/1, $p = 2.9\times10^{-4}$) resolves numerical
+noise and is not reported as an effect. Across the seven benchmarks that yield a test,
+Benjamini--Hochberg correction at $q = 0.05$ leaves every comparison significant except
+Matbench-gap, which is not significant before correction either.}
 \label{supptab:effect_sizes}
 \begin{tabular}{llrrrcr}
 \toprule
@@ -1322,7 +1392,7 @@ Benchmark & Best TL surrogate & TL & MFGP & $r$ & w/t/l & $p$ \\
 Branin-Fav & Curriculum & 0.42 & 0.07 & $-0.79$ & 2/0/18 & $1.0\times10^{-3}$ \\
 Branin-Unfav & Curriculum & 1.24 & 0.05 & $-1.00$ & 0/1/19 & $1.3\times10^{-4}$ \\
 Park-Fav & Sequential & 0.00 & 0.00 & tie & 0/20/0 & -- \\
-Park-Unfav & Pseudo-Labelling & 0.00 & 0.00 & $+0.96^{\dag}$ & 17/2/1 & $2.9\times10^{-4}$ \\
+Park-Unfav & Pseudo-Labelling & 0.00 & 0.00 & tie$^{\dag}$ & -- & -- \\
 COFs & End-to-End Joint Training & 0.41 & 6.55 & $+0.97$ & 18/1/1 & $2.1\times10^{-4}$ \\
 FreeSolv & End-to-End Joint Training & 0.28 & 0.80 & $+1.00$ & 20/0/0 & $1.9\times10^{-6}$ \\
 Polarizability & Sequential & 0.06 & 0.17 & $+1.00$ & 15/5/0 & $6.3\times10^{-4}$ \\
@@ -1337,24 +1407,24 @@ Matbench-Gap & Progressive & 0.23 & 0.29 & $+0.19$ & 9/0/11 & $0.47$ \\
 \caption{Effect-size distributions on the controlled fidelity-quality grid ($126$
 cells, ten seeds per cell). For each pairwise family comparison and metric: the
 median and interquartile range (IQR) of the per-cell matched-pairs rank-biserial
-$r$ ($r > 0$ favours the first-named family), the number of cells with a
-significant unadjusted paired Wilcoxon test ($p < 0.05$; counts after
-Benjamini--Hochberg correction are in Supplementary
-Table~\ref{supptab:star_sensitivity}), the number of cells whose mean
-advantage favours the first-named family, and the number of all-tie cells (every
+$r$ ($r > 0$ favours the first-named family), and the number of all-tie cells (every
 seed pair identical, typically both sides at regret $0$; excluded from the median
-and IQR).}
+and IQR). Within a cell, $r$ measures how consistently the ten paired seeds favour
+one family, not how large the advantage is, so a median $r$ of $+1.00$ is compatible
+with a mean advantage near zero. Cell counts, significance before and after
+Benjamini--Hochberg correction, and the map-level tests are given in Supplementary
+Table~\ref{supptab:star_sensitivity}.}
 \label{supptab:grid_effect_sizes}
-\begin{tabular}{llrrrrr}
+\begin{tabular}{llrrr}
 \toprule
-Metric & Comparison & Median $r$ & IQR & Sig.\ cells & Adv.\ cells & Tie cells \\
+Metric & Comparison & Median $r$ & IQR & Tie cells \\
 \midrule
-Final regret & TL vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 65/126 & 81/126 & 45 \\
-Final regret & TL vs MFGP variants & $+1.00$ & $[+0.33, +1.00]$ & 22/126 & 51/126 & 60 \\
-Final regret & MFGP variants vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 50/126 & 81/126 & 45 \\
-Anytime-AUC & TL vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 122/126 & 126/126 & 0 \\
-Anytime-AUC & TL vs MFGP variants & $+1.00$ & $[+0.91, +1.00]$ & 105/126 & 126/126 & 0 \\
-Anytime-AUC & MFGP variants vs baseline MFGP & $+0.67$ & $[+0.50, +0.83]$ & 39/126 & 126/126 & 0 \\
+Final regret & TL vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 45 \\
+Final regret & TL vs MFGP variants & $+1.00$ & $[+0.33, +1.00]$ & 60 \\
+Final regret & MFGP variants vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 45 \\
+Anytime AUC & TL vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 0 \\
+Anytime AUC & TL vs MFGP variants & $+1.00$ & $[+0.91, +1.00]$ & 0 \\
+Anytime AUC & MFGP variants vs baseline MFGP & $+0.67$ & $[+0.50, +0.83]$ & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
