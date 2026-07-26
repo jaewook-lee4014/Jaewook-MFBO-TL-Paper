@@ -184,7 +184,9 @@ fidelity-quality grid (Methods). Mean anytime advantage (area under the regret--
 curve) in bins of the global LF--HF $R^2$ (horizontal) and the top-10 optimum agreement
 between fidelities (vertical), comparing TL against the baseline MFGP (\textbf{l}), TL
 against the MFGP variants (\textbf{m}), and the MFGP variants against the baseline MFGP
-(\textbf{n}); red favours the first-named family and asterisks mark significant bins. The TL
+(\textbf{n}); red favours the first-named family and asterisks mark bins significant
+under a per-bin stratified signed-rank test with Benjamini--Hochberg
+false-discovery-rate correction across each map (Methods). The TL
 advantage over the baseline is positive in every cell, grows as the top-10 agreement
 falls, and is nearly flat in $R^2$; the complete grid, with the final-regret maps and
 marginal profiles, is Supplementary Fig.~\ref{suppfig:family_split}.}
@@ -335,13 +337,16 @@ complete grid in Supplementary Fig.~\ref{suppfig:family_split}; per-cell effect-
 distributions are summarized in Supplementary Table~\ref{supptab:grid_effect_sizes}.
 
 Three observations emerge. First, transfer learning dominates the baseline MFGP across
-the entire plane: its anytime advantage is positive in $126$ of $126$ cells
-(significant in $97\%$; median per-cell rank-biserial $r = 1.00$, interquartile range
-$1.00$--$1.00$, that is, in the typical cell every seed favours transfer learning),
-and no cell shows a significant final-regret reversal. Second,
+the entire plane: its anytime advantage is positive in $126$ of $126$ cells, with
+$120$ of $126$ ($95\%$) individually significant after Benjamini--Hochberg
+false-discovery-rate correction across the map (map-level Wilcoxon across cells,
+$p = 2.0\times10^{-22}$; median per-cell rank-biserial $r = 1.00$, interquartile range
+$1.00$--$1.00$, that is, in the typical cell every seed favours transfer learning;
+Methods), and no cell shows a significant final-regret reversal. Second,
 the GP representative matters: against the best MFGP variant the
 final-regret gap closes, with a median advantage near zero, but the anytime advantage
-persists and remains significant in $83\%$ of cells (median per-cell $r = 1.00$,
+persists and remains individually significant in $101$ of $126$ cells ($80\%$) under
+the same correction (median per-cell $r = 1.00$,
 interquartile range $0.91$--$1.00$). Third, the advantage is organized
 along the agreement axis rather than the correlation axis: at fixed $R^2$ it grows
 steeply as the top-10 agreement falls, whereas at fixed agreement it is nearly flat
@@ -813,13 +818,28 @@ of the metric (second-named minus first-named family; both metrics are
 lower-is-better, so positive values favour the first-named family). Two metrics were
 scored: final regret at the budget, and anytime performance, defined as the area
 under the simple-regret-versus-budget curve, which rewards fast convergence rather
-than only the endpoint. Cell-level significance was assessed with paired Wilcoxon
-tests over the shared seeds, reported together with the matched-pairs rank-biserial
-correlation $r$ as the effect size (Methods, ``Implementation and reproducibility'';
-per-comparison distributions in Supplementary Table~\ref{supptab:grid_effect_sizes});
-in the displayed maps the conditions are binned by
-($R^2$, agreement), a bin is marked with an asterisk when the majority of its
-conditions reach $p<0.05$, and colour scales are shared within each row of the grid.
+than only the endpoint. Cell-level significance was assessed with two-sided paired
+Wilcoxon signed-rank tests over the ten shared seeds, reported together with the
+matched-pairs rank-biserial correlation $r$ as the effect size (Methods,
+``Implementation and reproducibility''; per-comparison distributions in Supplementary
+Table~\ref{supptab:grid_effect_sizes}) and corrected with the Benjamini--Hochberg
+(BH) false-discovery-rate procedure at $q = 0.05$ across the $126$ cells of each
+comparison--metric map; comparisons with identical per-seed values enter the
+correction with $p = 1$. In the displayed maps the conditions are binned by ($R^2$,
+agreement); because $74$ of the $97$ non-empty bins hold a single condition and the
+rest hold two or three, bin-level evidence is assessed with one test per bin rather
+than a vote: a stratified signed-rank test that uses the bin's conditions as strata
+and the paired per-seed differences within each condition as units (a paired-sample
+analogue of the van Elteren stratified rank test), with the null distribution
+obtained by sign-flip randomization (exact enumeration up to $2^{16}$ sign
+assignments, otherwise $2\times10^{5}$ Monte-Carlo draws). Bin-level $p$-values are
+BH-corrected across each map's non-empty bins and an asterisk marks $q \le 0.05$; in
+a single-condition bin the test reduces to that condition's Wilcoxon test. The
+map-wide direction of each comparison was additionally tested once with a two-sided
+Wilcoxon signed-rank test across the $126$ per-cell advantages (conditions as
+units), and colour scales are shared within each row of the grid. Sensitivity of the
+maps to the starring criterion is reported in Supplementary
+Note~\ref{suppnote:family_split}.
 Because best-of-family selection can favour the family with more members, the
 analysis was repeated with the unselected family mean, which preserved the ordering
 of the families (Supplementary Note~\ref{suppnote:family_split}).
@@ -1182,14 +1202,31 @@ Because best-of-family scoring can favour the family with more members (three
 transfer-learning surrogates against one baseline and two variants), the analysis was
 repeated with the unselected family mean; this preserved the ordering of the families
 and the structure along the agreement axis.
+The starring criterion itself was audited for sensitivity. The maps were originally
+starred by an uncorrected majority rule (a bin starred when at least half of its
+conditions reached unadjusted $p<0.05$), which ignores multiplicity across the map
+and, in the $74$ single-condition bins, reduces to a single uncorrected test.
+Supplementary Fig.~\ref{suppfig:star_sensitivity} and Supplementary
+Table~\ref{supptab:star_sensitivity} compare this rule with the corrected criterion
+adopted throughout (one stratified signed-rank test per non-empty bin, with the
+bin's conditions as strata, followed by Benjamini--Hochberg false-discovery-rate
+correction at $q = 0.05$ across each map's bins; Methods). The correction leaves the
+transfer-learning anytime-AUC maps nearly unchanged ($94 \to 91$ and $82 \to 82$
+bins starred against the baseline MFGP and the MFGP variants respectively) while
+thinning the weaker maps (MFGP variants versus baseline anytime-AUC $34 \to 16$;
+final regret $56 \to 39$, $20 \to 0$, and $43 \to 7$ across the three comparisons),
+and the cell-level fractions quoted in the main text move from $97\%$ to $95\%$ and
+from $83\%$ to $80\%$. The direction of every map is unaffected: the map-level
+Wilcoxon across the $126$ per-cell advantages gives $p \le 1.7\times10^{-7}$ for all
+six maps ($p = 2.0\times10^{-22}$ for each anytime-AUC comparison).
+
 %% TODO(authors): insert here, from the grid-analysis outputs:
 %%   (i)   the family-mean (no-selection) maps and their full numbers;
 %%   (ii)  grid-curation detail: knob-to-(R^2, agreement) calibration curves,
 %%         the cell manifest, and the coverage scatter of the curated conditions;
 %%   (iii) the per-cell significance table, including which member was
-%%         best-of-family in each cell;
-%%   (iv)  sensitivity checks for the bin size and the majority-p<0.05
-%%         starring criterion.
+%%         best-of-family in each cell (per-cell and per-bin CSVs:
+%%         experiments/regime_review_20260625/grid_fdr_percell.csv / _perbin.csv).
 
 \begin{figure*}[t]
 \centering
@@ -1203,9 +1240,55 @@ Fig.~\ref{fig:family_heatmap}l--n), and the marginal advantage profiles averaged
 $R^2$ (\textbf{g}--\textbf{i}; mean $\pm$ s.e.). Within each
 map, bins are indexed by the global LF--HF $R^2$ (horizontal) and the top-10 optimum
 agreement between fidelities (vertical); red favours the first-named family and
-asterisks mark significant bins.}
+asterisks mark bins significant under the per-bin stratified signed-rank test with
+Benjamini--Hochberg false-discovery-rate correction across each map (Methods).}
 \label{suppfig:family_split}
 \end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{paper_figures/si_star_sensitivity.pdf}
+\caption{Sensitivity of the family-split maps to the bin-starring criterion. Each row
+is one pairwise comparison (top to bottom: TL versus the baseline MFGP, TL versus the
+MFGP variants, and the MFGP variants versus the baseline MFGP); columns show the
+final-regret advantage (\textbf{a},\textbf{b}, \textbf{e},\textbf{f},
+\textbf{i},\textbf{j}) and the anytime-AUC advantage (\textbf{c},\textbf{d},
+\textbf{g},\textbf{h}, \textbf{k},\textbf{l}), each under the previous uncorrected
+majority rule (left member of each pair) and the corrected criterion (right member;
+one stratified signed-rank test per non-empty bin, Benjamini--Hochberg
+false-discovery-rate correction at $q \le 0.05$ across each map's bins; Methods).
+Colours (binned mean advantage, red favouring the first-named family) are identical
+within each pair; only the asterisks change. Summary counts are given in
+Supplementary Table~\ref{supptab:star_sensitivity}.}
+\label{suppfig:star_sensitivity}
+\end{figure*}
+
+\begin{table}[h]
+\centering
+\caption{Sensitivity of the controlled-grid maps to the bin-starring criterion. For
+each comparison--metric map of the family-split grid ($126$ cells, ten seeds per
+cell): cells with a positive advantage of the first-named family; cells individually
+significant under the uncorrected per-cell Wilcoxon test ($p<0.05$) and under
+Benjamini--Hochberg (BH) false-discovery-rate correction across the map's $126$
+cells ($q\le0.05$); display bins starred under the previous majority rule versus the
+corrected criterion (one stratified signed-rank test per bin, BH across the map's
+$97$ non-empty bins); and the map-level two-sided Wilcoxon $p$ across the $126$
+per-cell advantages (conditions as units).}
+\label{supptab:star_sensitivity}%
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Metric & Comparison & Positive & Raw $p<0.05$ & BH $q\le0.05$ & Bins starred & Map-level $p$ \\
+\midrule
+Final regret & TL vs baseline MFGP & 81/126 & 65 (52\%) & 0 (0\%) & 56 $\to$ 39 & $5.3\times10^{-15}$ \\
+Final regret & TL vs MFGP variants & 51/126 & 22 (17\%) & 0 (0\%) & 20 $\to$ 0 & $1.7\times10^{-7}$ \\
+Final regret & MFGP variants vs baseline MFGP & 81/126 & 50 (40\%) & 0 (0\%) & 43 $\to$ 7 & $5.3\times10^{-15}$ \\
+\midrule
+Anytime AUC & TL vs baseline MFGP & 126/126 & 122 (97\%) & 120 (95\%) & 94 $\to$ 91 & $2.0\times10^{-22}$ \\
+Anytime AUC & TL vs MFGP variants & 126/126 & 105 (83\%) & 101 (80\%) & 82 $\to$ 82 & $2.0\times10^{-22}$ \\
+Anytime AUC & MFGP variants vs baseline MFGP & 126/126 & 39 (31\%) & 0 (0\%) & 34 $\to$ 16 & $2.0\times10^{-22}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \suppnote{Effect sizes for the paired surrogate comparisons}{suppnote:effect_sizes}
 
@@ -1255,7 +1338,9 @@ Matbench-Gap & Progressive & 0.23 & 0.29 & $+0.19$ & 9/0/11 & $0.47$ \\
 cells, ten seeds per cell). For each pairwise family comparison and metric: the
 median and interquartile range (IQR) of the per-cell matched-pairs rank-biserial
 $r$ ($r > 0$ favours the first-named family), the number of cells with a
-significant paired Wilcoxon test ($p < 0.05$), the number of cells whose mean
+significant unadjusted paired Wilcoxon test ($p < 0.05$; counts after
+Benjamini--Hochberg correction are in Supplementary
+Table~\ref{supptab:star_sensitivity}), the number of cells whose mean
 advantage favours the first-named family, and the number of all-tie cells (every
 seed pair identical, typically both sides at regret $0$; excluded from the median
 and IQR).}
