@@ -30,7 +30,7 @@
   bayesian optimization}.
 \newblock \emph{\bibinfo{journal}{Proceedings of the IEEE}}
   \textbf{\bibinfo{volume}{104}}, \bibinfo{pages}{148--175}
-  (\bibinfo{year}{2015}).
+  (\bibinfo{year}{2016}).
 
 \bibitem{peherstorfer2018survey}
 \bibinfo{author}{Peherstorfer, B.}, \bibinfo{author}{Willcox, K.} \&
@@ -63,9 +63,9 @@
   \textbf{\bibinfo{volume}{7}}, \bibinfo{pages}{1--30} (\bibinfo{year}{2006}).
 
 \bibitem{williams2006gaussian}
-\bibinfo{author}{Williams, C.~K.} \& \bibinfo{author}{Rasmussen, C.~E.}
-\newblock \emph{\bibinfo{title}{Gaussian processes for machine learning}}
-  Vol.~\bibinfo{volume}{2} (\bibinfo{publisher}{MIT press Cambridge, MA},
+\bibinfo{author}{Rasmussen, C.~E.} \& \bibinfo{author}{Williams, C. K.~I.}
+\newblock \emph{\bibinfo{title}{Gaussian Processes for Machine Learning}}
+  (\bibinfo{publisher}{MIT Press}, \bibinfo{address}{Cambridge, MA},
   \bibinfo{year}{2006}).
 
 \bibitem{snoek2015scalable}
@@ -151,12 +151,14 @@
   Uncertainty in Artificial Intelligence}}, \bibinfo{pages}{282--290}
   (\bibinfo{year}{2013}).
 
-\bibitem{gawlikowski2023survey}
-\bibinfo{author}{Gawlikowski, J.} \emph{et~al.}
-\newblock \bibinfo{title}{A survey of uncertainty in deep neural networks}.
-\newblock \emph{\bibinfo{journal}{Artificial Intelligence Review}}
-  \textbf{\bibinfo{volume}{56}}, \bibinfo{pages}{1513--1589}
-  (\bibinfo{year}{2023}).
+\bibitem{mckay2000comparison}
+\bibinfo{author}{McKay, M.~D.}, \bibinfo{author}{Beckman, R.~J.} \&
+  \bibinfo{author}{Conover, W.~J.}
+\newblock \bibinfo{title}{A comparison of three methods for selecting values of
+  input variables in the analysis of output from a computer code}.
+\newblock \emph{\bibinfo{journal}{Technometrics}}
+  \textbf{\bibinfo{volume}{42}}, \bibinfo{pages}{55--61}
+  (\bibinfo{year}{2000}).
 
 \bibitem{jones1998efficient}
 \bibinfo{author}{Jones, D.~R.}, \bibinfo{author}{Schonlau, M.} \&
@@ -166,6 +168,14 @@
 \newblock \emph{\bibinfo{journal}{Journal of Global optimization}}
   \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{455--492}
   (\bibinfo{year}{1998}).
+
+\bibitem{snoek2012practical}
+\bibinfo{author}{Snoek, J.}, \bibinfo{author}{Larochelle, H.} \&
+  \bibinfo{author}{Adams, R.~P.}
+\newblock \bibinfo{title}{Practical bayesian optimization of machine learning
+  algorithms}.
+\newblock \emph{\bibinfo{journal}{Advances in neural information processing
+  systems}} \textbf{\bibinfo{volume}{25}} (\bibinfo{year}{2012}).
 
 \bibitem{kushner1964new}
 \bibinfo{author}{Kushner, H.~J.}
@@ -202,23 +212,6 @@
 \newblock \emph{\bibinfo{journal}{Foundations and Trends in Machine Learning}}
   \textbf{\bibinfo{volume}{11}}, \bibinfo{pages}{1--96} (\bibinfo{year}{2018}).
 
-\bibitem{mckay2000comparison}
-\bibinfo{author}{McKay, M.~D.}, \bibinfo{author}{Beckman, R.~J.} \&
-  \bibinfo{author}{Conover, W.~J.}
-\newblock \bibinfo{title}{A comparison of three methods for selecting values of
-  input variables in the analysis of output from a computer code}.
-\newblock \emph{\bibinfo{journal}{Technometrics}}
-  \textbf{\bibinfo{volume}{42}}, \bibinfo{pages}{55--61}
-  (\bibinfo{year}{2000}).
-
-\bibitem{snoek2012practical}
-\bibinfo{author}{Snoek, J.}, \bibinfo{author}{Larochelle, H.} \&
-  \bibinfo{author}{Adams, R.~P.}
-\newblock \bibinfo{title}{Practical bayesian optimization of machine learning
-  algorithms}.
-\newblock \emph{\bibinfo{journal}{Advances in neural information processing
-  systems}} \textbf{\bibinfo{volume}{25}} (\bibinfo{year}{2012}).
-
 \bibitem{balandat2020botorch}
 \bibinfo{author}{Balandat, M.} \emph{et~al.}
 \newblock \bibinfo{title}{Botorch: A framework for efficient monte-carlo
@@ -226,6 +219,13 @@
 \newblock \emph{\bibinfo{journal}{Advances in neural information processing
   systems}} \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{21524--21538}
   (\bibinfo{year}{2020}).
+
+\bibitem{gawlikowski2023survey}
+\bibinfo{author}{Gawlikowski, J.} \emph{et~al.}
+\newblock \bibinfo{title}{A survey of uncertainty in deep neural networks}.
+\newblock \emph{\bibinfo{journal}{Artificial Intelligence Review}}
+  \textbf{\bibinfo{volume}{56}}, \bibinfo{pages}{1513--1589}
+  (\bibinfo{year}{2023}).
 
 \bibitem{gantzler2023multifidelity}
 \bibinfo{author}{Gantzler, N.}, \bibinfo{author}{Deshwal, A.},

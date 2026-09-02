@@ -1,0 +1,540 @@
+%% Supplementary Information content, shared by
+%%   si.tex   -> standalone SI file for submission (own title page and reference list;
+%%               \ref to main-text figures resolved from main.aux via the xr package), and
+%%   main.tex -> combined working PDF when built with \def\withSI{1} (see build.sh).
+%% Numbering: Supplementary Notes 1-9, Supplementary Figures 1-3, Supplementary Tables 1-8.
+% ---------------------------------------------------------------------------
+% Supplementary Information
+% Replace the previous \begin{appendices}...\end{appendices} block with this block.
+% ---------------------------------------------------------------------------
+
+\ifdefined\withSI\section*{Supplementary Information}\fi
+%% Supplementary Notes are unnumbered \section*s, so numbered subsections would print as 0.1, 0.2, ...
+\setcounter{secnumdepth}{0}
+
+% Supplementary Note counter for Nature/NCS-style references.
+% This lets \ref{suppnote:...} print the Supplementary Note number.
+\newcounter{suppnotecounter}
+\newcommand{\suppnote}[2]{%
+  \refstepcounter{suppnotecounter}%
+  \section*{Supplementary Note \thesuppnotecounter. #1}%
+  \label{#2}%
+}
+
+% Supplementary figure/table numbering.
+% These make captions appear as "Supplementary Figure 1" and
+% "Supplementary Table 1" in standard LaTeX classes.
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\renewcommand{\figurename}{Supplementary Figure}
+\renewcommand{\tablename}{Supplementary Table}
+
+\suppnote{MFGP baseline implementation details}{suppnote:mfgp}
+
+We provide implementation details for the multi-fidelity Gaussian process (MFGP) baseline.
+
+\subsection{Model configuration}
+
+We use \texttt{SingleTaskMultiFidelityGP} from BoTorch~\citep{balandat2020botorch}, which
+internally employs a Mat\'{e}rn 5/2 kernel with automatic relevance determination (ARD)
+for the input dimensions and a linear truncated kernel for the fidelity dimension.
+Supplementary Table~\ref{supptab:mfgp_config} summarizes the key configuration.
+
+\begin{table}[h]
+\centering
+\caption{MFGP baseline configuration.}
+\label{supptab:mfgp_config}
+\begin{tabular}{ll}
+\toprule
+\textbf{Component} & \textbf{Specification} \\
+\midrule
+GP class & \texttt{SingleTaskMultiFidelityGP} \\
+Input kernel & Mat\'{e}rn 5/2 + ARD \\
+Fidelity kernel & Linear truncated kernel \\
+Outcome transform & \texttt{Standardize(m=1)} \\
+Hyperparameter optimization & Exact marginal log-likelihood via L-BFGS-B \\
+Fidelity encoding & Last column: 0 = LF, 1 = HF \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At each iteration the GP was retrained from scratch by maximizing the exact marginal
+log-likelihood with L-BFGS-B via \texttt{fit\_gpytorch\_mll}, and predictions were taken
+from the posterior at the high-fidelity (HF) level $s=1$. The multi-fidelity GP uses this
+single cross-fidelity posterior for acquisition at both fidelity steps.
+
+
+\suppnote{Uncertainty quantification via Bayesian linear regression}{suppnote:blr}
+Uncertainty for the transfer-learning surrogates is obtained from a Bayesian linear regression (BLR)
+head on the low-fidelity (LF) network's last-layer features. Let $\varphi(x) \in \mathbb{R}^D$
+denote the penultimate-layer representation and $\tilde{\varphi}(x) = [\varphi(x), 1]$ the
+augmented feature vector, with a Gaussian prior over the weights $w$:
+\begin{equation}
+y \mid x \sim \mathcal{N}\!\left(\tilde{\varphi}(x)^\top w,\, \beta^{-1}\right), \qquad w \sim \mathcal{N}\!\left(0,\, \alpha^{-1} I\right),
+\end{equation}
+with prior precision $\alpha$ and noise precision $\beta$. The closed-form posterior
+yields predictive moments
+\begin{equation}
+\mu(x) = \tilde{\varphi}(x)^\top m_N, \qquad \sigma^2(x) = \beta^{-1} + \tilde{\varphi}(x)^\top S_N\, \tilde{\varphi}(x),
+\end{equation}
+where $(m_N, S_N)$ are the posterior mean and covariance and we set $\alpha = \beta = 1$.
+In the primary configuration the LF expected improvement (EI) uses a constant predictive standard
+deviation, so the BLR head contributes a regularized posterior mean and the acquisition
+reduces to greedy selection; the five-acquisition uncertainty-driven portfolio that instead
+uses the BLR predictive standard deviation, and an optional HF BLR head with EI
+on both fidelities, are evaluated in Supplementary Note~\ref{suppnote:acquisition_variants}.
+
+
+\suppnote{Implementation details}{suppnote:implementation}
+
+All transfer-learning surrogates share a common architectural backbone, with model-specific training
+configurations detailed below.
+
+\subsection{Common settings}
+\label{suppsec:common_settings}
+Supplementary Table~\ref{supptab:common_hyperparams} summarizes the shared hyperparameters across all deep
+surrogates.
+
+\begin{table}[h]
+\centering
+\caption{Shared hyperparameters across all transfer-learning surrogates.}
+\label{supptab:common_hyperparams}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Hidden dimension & 64 \\
+Number of layers & 2 (for each of LF and HF networks) \\
+Activation & Tanh \\
+Optimizer & Adam \\
+$\ell_2$ weight decay & 1e-4 \\
+BLR prior precision $\alpha$ & 1.0 \\
+BLR noise precision $\beta$ & 1.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Model-specific settings}
+\label{suppsec:model_settings}
+Supplementary Table~\ref{supptab:model_hyperparams} presents the training hyperparameters for each transfer-learning
+method. Sequential methods use 200 LF epochs followed by 100 HF epochs, while
+joint training methods use 300 epochs for simultaneous LF and HF optimization.
+
+\begin{table}[h]
+\centering
+\caption{Training hyperparameters for each transfer-learning method. LR denotes learning
+rate.}
+\label{supptab:model_hyperparams}
+{\footnotesize%
+\begin{tabular}{lccccl}
+\toprule
+\textbf{Model} & \textbf{LF LR} & \textbf{HF LR} & \textbf{LF Epochs} & \textbf{HF Epochs} & \textbf{Method-Specific Parameters} \\
+\midrule
+Sequential & 1e-3 & 1e-3 & 200 & 100 & LF frozen during HF training \\
+Progressive & 1e-3 & 1e-3 $\rightarrow$ 1e-4 & 200 & 50+50 & Stage 1: head only; Stage 2: full finetune \\
+Curriculum & 1e-3 & 1e-3 & 200 & 100 & HF samples added gradually \\
+Pretrain-then-Joint & 1e-3 & 1e-4 & 200 & 100 & Stage 1: LF only; Stage 2: joint training \\
+Stop-Gradient Joint & 1e-3 & 1e-3 & 300 & (joint) & $\alpha_{\text{loss}}$=0.5; stop-gradient on LF$\rightarrow$HF \\
+End-to-End Joint & 1e-3 & 1e-3 & 300 & (joint) & Full gradient flow \\
+Soft Parameter Sharing & 1e-3 & 1e-3 & 300 & (joint) & $\lambda_{\text{soft}}$=0.01 \\
+Knowledge Distillation & 1e-3 & 1e-3 & 200 & 100 & $\alpha_{\text{KD}}$=0.3; $T$=3.0 \\
+Domain Adaptation (MMD) & 1e-3 & 1e-3 & 200 & 100 & $\lambda_{\text{MMD}}$=0.1 \\
+Pseudo-Labelling & 1e-3 & 1e-3 & 200 & 100 & $w_{\text{pseudo}}$=0.5 \\
+Adapter & 1e-3 & 1e-3 & 200 & 100 & $d_{\text{bottleneck}}$=16; backbone frozen \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Training procedures and method-specific parameters}
+\label{suppsec:training_procedures}
+All models use $\ell_2$ weight decay (WD=1e-4). \emph{Sequential}: the LF network is
+trained first and frozen, then the HF residual network is trained on top.
+\emph{Progressive}: Stage 1 trains only the HF head with the backbone frozen; Stage 2
+finetunes the full network at a reduced learning rate. \emph{Curriculum}: at epoch $e$ the
+number of HF samples used is $n_{\text{use}} = \min(n, \max(2, e/200 \cdot n))$.
+\emph{Pretrain-then-Joint}: Stage 1 pretrains on LF data; Stage 2 jointly trains on both
+fidelities at a reduced learning rate. \emph{Stop-Gradient Joint}: joint training with
+stop-gradient on the LF network and loss weighting $\mathcal{L} = \alpha_{\text{loss}}
+\mathcal{L}_{\text{LF}} + (1-\alpha_{\text{loss}})\mathcal{L}_{\text{HF}}$,
+$\alpha_{\text{loss}}=0.5$. \emph{End-to-End Joint}: joint training with full gradient
+flow. \emph{Soft Parameter Sharing}: penalty
+$\lambda_{\text{soft}}\|\theta^{(L)}-\theta^{(H)}\|_2^2$, $\lambda_{\text{soft}}=0.01$.
+\emph{Knowledge Distillation}: HF student trained with task loss plus distillation loss,
+$\alpha_{\text{KD}}=0.3$, $T=3.0$. \emph{Domain Adaptation (MMD)}: maximum-mean-discrepancy penalty
+$\lambda_{\text{MMD}}=0.1$ aligning LF and HF features. \emph{Pseudo-Labelling}: LF
+pseudo-labels weighted $w_{\text{pseudo}}=0.5$. \emph{Adapter}: frozen LF backbone with a
+bottleneck adapter ($d_{\text{bottleneck}}=16$) and HF head.
+
+\suppnote{Synthetic function definitions}{suppnote:synthetic_functions}
+
+Both synthetic functions are standard multi-fidelity Bayesian optimization (MFBO) benchmarks adopted from~Sabanza-Gil et
+al.~\citep{sabanza2025best}.
+
+\subsection{Branin function}
+The HF Branin function is
+\begin{equation}
+f^{(H)}(x_1, x_2) = \left(x_2 - b x_1^2 + c x_1 - 6\right)^2 + 10\left(1 - \frac{1}{8\pi}\right)\cos(x_1) + 10,
+\end{equation}
+with $b = 5.1/(4\pi^2)$, $c = 5/\pi$, domain $x_1 \in [-5, 10]$, $x_2 \in [0, 15]$, and
+global minimum $f^* = 0.397887$. The LF approximation modifies only the
+quadratic coefficient, $b_{\text{LF}} = b - 0.1(1-\alpha)$, so that the correlation
+degrades as $\alpha$ decreases.
+
+\subsection{Park function}
+The HF Park function is
+\begin{equation}
+f^{(H)}(x_1, x_2, x_3, x_4) = \frac{x_1}{2}\sqrt{1 + \frac{(x_2 + x_3^2)x_4}{x_1^2}} + (x_1 + 3x_4)\exp\!\left(1 + \sin(x_3)\right),
+\end{equation}
+with $x_i \in [0,1]$ and global minimum $f^* = 0$. The LF approximation modifies
+the $x_4$ coefficient ($3 \rightarrow 3 - 1.5(1-\alpha)$) and scales the exponential
+argument by $\alpha$.
+
+\subsection{Scenario configurations}
+Supplementary Table~\ref{supptab:synthetic_scenarios} lists the $\alpha$ values and resulting
+characteristics. The $R^2$ values were computed by sampling 1,000 uniform points,
+evaluating both fidelities, and fitting a linear regression from LF to HF. Candidate pools
+were constructed by uniform grid discretization ($50^2 = 2{,}500$ for Branin; $4^4 = 256$
+for Park).
+
+\begin{table}[h]
+\centering
+\caption{Synthetic function scenario configurations.}
+\label{supptab:synthetic_scenarios}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Benchmark} & \textbf{Scenario} & $\alpha$ & $R^2$ & $\rho$ & \textbf{Pool Size} & $f^*$ \\
+\midrule
+Branin-Fav & Favourable & 0.8 & 0.97 & 0.1 & 2,500 & 0.398 \\
+Branin-Unfav & Unfavourable & 0.1 & 0.56 & 0.5 & 2,500 & 0.398 \\
+Park-Fav & Favourable & 0.6 & 0.97 & 0.1 & 256 & 0.0 \\
+Park-Unfav & Unfavourable & 0.0 & 0.72 & 0.5 & 256 & 0.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\suppnote{Ablation studies}{suppnote:acquisition_variants}
+
+This section specifies the protocol for each ablation summarized in the main text. The activation ablation is tabulated in Supplementary Table~\ref{supptab:activation}; the acquisition-portfolio results are shown in Fig.~\ref{fig:portfolio} and their aggregated result files are included in the code release; per-benchmark results of the remaining ablations are available from the corresponding author on request.
+
+\paragraph{Acquisition variants.} Beyond the primary greedy policy, we evaluated a
+portfolio of five uncertainty-driven acquisitions spanning the standard taxonomy of myopic
+acquisition functions~\citep{shahriari2015taking}: the improvement-based EI~\citep{jones1998efficient} and probability of
+improvement~\citep{kushner1964new}; the optimistic Gaussian-process lower confidence
+bound~\citep{srinivas2012information} ($\beta=2$); the information-theoretic max-value
+entropy search~\citep{wang2017max} (Gumbel approximation, ten max-value samples); and
+sampling-based Thompson sampling~\citep{russo2018tutorial}. Each replaces only the
+LF acquisition, using the BLR predictive standard deviation with the surrogate,
+round-robin schedule, HF step, and seeds held fixed, and was run across all
+eleven transfer-learning surrogates and nine benchmarks ($11\times 9\times 20$ seeds per
+acquisition). For each acquisition and benchmark we report the fraction of surrogates on
+which it beats the greedy policy: the greedy policy beat all five acquisitions on COFs on ten of the
+eleven surrogates, whereas Thompson sampling beat the greedy policy on every surrogate on FreeSolv and
+polarizability, and the improvement-based acquisitions ranked weakest overall
+(Fig.~\ref{fig:portfolio}). We additionally evaluated a fully uncertainty-aware variant
+that adds a second BLR head on the HF network and applies EI at both fidelities.
+As a matched control for the surrogate-versus-acquisition question, the baseline MFGP was also run
+with a greedy policy that selects by its posterior mean, all other settings held fixed
+(Fig.~\ref{fig:acquisition}).
+
+\paragraph{Activation.} To isolate the effect of the activation function, the benchmark
+suite was repeated with ReLU in place of $\tanh$ under otherwise identical architectures
+and training, recording expected calibration error, negative log-likelihood, sharpness, and final regret for both. Two representative surrogates, Curriculum and End-to-End Joint Training, were run with each activation on all nine benchmarks (ten seeds on COFs, FreeSolv and polarizability, twenty elsewhere). On the three chemistry benchmarks the mean held-out LF expected calibration error was $0.30$ for both activations, whereas the mean final regret was $0.39$ with $\tanh$ and $0.58$ with ReLU; across the suite the sign of the difference varies by benchmark and only COFs ($\tanh$ better) and Matbench-gap (ReLU better) reach $p < 0.05$, so the activation effect is small relative to the surrogate effect (Supplementary Table~\ref{supptab:activation}).
+
+\paragraph{Calibration.} For every surrogate we computed the LF expected
+calibration error, negative log-likelihood, and sharpness on held-out candidates and
+related them to the final optimization regret; the resulting correlation is reported in
+the main text (Fig.~\ref{fig:calibration}).
+
+\paragraph{Uncertainty placement, promotion, and adaptive scheduling.} Three other ablations were run: the placement of the BLR head
+(LF only, HF only, or both), allowing LF candidates to be
+promoted to HF rather than excluded once sampled, and replacing the round-robin
+schedule with an adaptive cost-weighted policy. Each was evaluated on a representative
+subset of three to five benchmarks spanning the favourable and unfavourable regimes, and on
+every benchmark tested none altered the qualitative ranking of the surrogate families.
+
+\begin{table}[h]
+\centering
+\caption{Activation ablation: $\tanh$ versus ReLU. Two transfer-learning surrogates
+(Curriculum and End-to-End Joint Training) were run with each activation under otherwise
+identical architectures, training schedules and seeds. Entries are the final regret at the
+designated budget (mean $\pm$ s.e.\ over the $n$ surrogate--seed pairs per activation) and
+the mean held-out low-fidelity expected calibration error (ECE); $p$ is the two-sided
+Wilcoxon signed-rank test over the paired (surrogate, seed) differences. Both Park
+functions are solved by every run at the full budget (all-tie); Park-Fav exhausts its
+candidate pool, so no held-out ECE is available.}
+\label{supptab:activation}
+\begin{tabular}{lrcccccc}
+\toprule
+ & & \multicolumn{2}{c}{Final regret} & \multicolumn{2}{c}{LF ECE} & \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Benchmark & $n$ & $\tanh$ & ReLU & $\tanh$ & ReLU & $p$ \\
+\midrule
+Branin-Fav & 40 & $0.22 \pm 0.05$ & $0.23 \pm 0.05$ & 0.37 & 0.35 & 0.96 \\
+Branin-Unfav & 40 & $0.65 \pm 0.15$ & $0.50 \pm 0.14$ & 0.27 & 0.33 & 0.15 \\
+Park-Fav & 40 & $0.00$ & $0.00$ & -- & -- & tie \\
+Park-Unfav & 40 & $0.00$ & $0.00$ & 0.38 & 0.41 & 0.50 \\
+COFs & 20 & $0.42 \pm 0.17$ & $0.89 \pm 0.19$ & 0.27 & 0.29 & 0.037 \\
+FreeSolv & 20 & $0.62 \pm 0.07$ & $0.74 \pm 0.07$ & 0.26 & 0.31 & 0.15 \\
+Polarizability & 20 & $0.14 \pm 0.02$ & $0.12 \pm 0.02$ & 0.35 & 0.30 & 0.20 \\
+HOPV15 & 40 & $2.32 \pm 0.16$ & $2.50 \pm 0.16$ & 0.11 & 0.13 & 0.23 \\
+Matbench-Gap & 40 & $0.43 \pm 0.07$ & $0.20 \pm 0.04$ & 0.09 & 0.08 & 0.002 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\suppnote{Family-split advantage maps: complete grid and robustness}{suppnote:family_split}
+
+Supplementary Fig.~\ref{suppfig:family_split} reports the complete family-split
+advantage grid underlying panels l--n of Fig.~\ref{fig:family_heatmap}
+(protocol in Methods, Section ``Controlled fidelity-quality grid''): the
+final-regret advantage maps, the anytime-AUC (area under the regret--budget curve) advantage maps (the row reproduced in
+the main text), and the marginal advantage profiles obtained by averaging over the
+global LF--HF $R^2$. The two metrics agree on the structure, with the advantage largest at low top-10 optimum agreement and only weakly dependent on $R^2$ (for the anytime advantage of TL over the baseline MFGP, the Spearman correlation across the $126$ cells is $-0.71$ with agreement and $-0.38$ with $R^2$, and the $R^2$ dependence is concentrated at $R^2 \le 0.2$); the
+final-regret maps additionally show that the MFGP variants close most of the baseline
+MFGP's endpoint gap, whereas the anytime gap persists.
+
+Because best-of-family scoring can favour the family with more members (three
+transfer-learning surrogates against one baseline and two variants), the analysis was
+repeated with the unselected family mean; this preserved the ordering of the families
+and the structure along the agreement axis.
+The starring criterion itself was audited for sensitivity. The maps were originally
+starred by an uncorrected majority rule (a bin starred when at least half of its
+conditions reached unadjusted $p<0.05$), which ignores multiplicity across the map
+and, in the $74$ single-condition bins, reduces to a single uncorrected test.
+Supplementary Fig.~\ref{suppfig:star_sensitivity} and Supplementary
+Table~\ref{supptab:star_sensitivity} compare this rule with the corrected criterion
+adopted throughout (one stratified signed-rank test per non-empty bin, with the
+bin's conditions as strata, followed by Benjamini--Hochberg false-discovery-rate
+correction at $q = 0.05$ across each map's bins; Methods). The correction leaves the
+transfer-learning anytime-AUC maps nearly unchanged ($94 \to 91$ and $82 \to 82$
+bins starred against the baseline MFGP and the MFGP variants respectively) while
+thinning the weaker maps (MFGP variants versus baseline anytime-AUC $34 \to 16$;
+final regret $56 \to 39$, $20 \to 0$, and $43 \to 7$ across the three comparisons),
+and the cell-level fractions quoted in the main text move from $97\%$ to $95\%$ and
+from $83\%$ to $80\%$. The direction of every map is unaffected: the map-level
+Wilcoxon across the $126$ per-cell advantages gives $p \le 1.7\times10^{-7}$ for all
+six maps ($p = 2.0\times10^{-22}$ for each anytime-AUC comparison). The contrast
+between the vanishing per-cell counts on final regret and these small map-level values
+is a matter of statistical power rather than of conflicting evidence: ten seeds per
+cell cannot clear a $126$-way correction unless the within-cell separation is close to
+total, as it is on the anytime metric but not at the endpoint, whereas the map-level
+test draws instead on the consistency of the advantage across the $126$ conditions.
+Per-cell significance is therefore quoted only for the anytime maps, which carry the
+claim; the final-regret maps are read from their direction and effect sizes.
+
+%% TODO(authors): insert here, from the grid-analysis outputs:
+%%   (i)   the family-mean (no-selection) maps and their full numbers;
+%%   (ii)  grid-curation detail: knob-to-(R^2, agreement) calibration curves,
+%%         the cell manifest, and the coverage scatter of the curated conditions;
+%%   (iii) the per-cell significance table, including which member was
+%%         best-of-family in each cell (per-cell and per-bin CSVs:
+%%         experiments/regime_review_20260625/grid_fdr_percell.csv / _perbin.csv).
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{paper_figures/fig1c_family_split_grid.pdf}
+\caption{Family-split advantage maps: the complete grid. Columns compare transfer
+learning (TL) against the baseline MFGP (left), TL against the MFGP variants
+(deep-kernel and sparse variational; centre), and the MFGP variants against the
+baseline MFGP (right). Rows show the final-regret advantage (\textbf{a}--\textbf{c}),
+the anytime-AUC advantage (\textbf{d}--\textbf{f}; the row reproduced as
+Fig.~\ref{fig:family_heatmap}l--n), and the marginal advantage profiles averaged over
+$R^2$ (\textbf{g}--\textbf{i}; mean $\pm$ s.e.). Within each
+map, bins are indexed by the global LF--HF $R^2$ (horizontal) and the top-10 optimum
+agreement between fidelities (vertical); red favours the first-named family and
+asterisks mark bins significant under the per-bin stratified signed-rank test with
+Benjamini--Hochberg false-discovery-rate correction across each map (Methods).}
+\label{suppfig:family_split}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{paper_figures/si_star_sensitivity.pdf}
+\caption{Sensitivity of the family-split maps to the bin-starring criterion. Each row
+is one pairwise comparison (top to bottom: TL versus the baseline MFGP, TL versus the
+MFGP variants, and the MFGP variants versus the baseline MFGP); columns show the
+final-regret advantage (\textbf{a},\textbf{b}, \textbf{e},\textbf{f},
+\textbf{i},\textbf{j}) and the anytime-AUC advantage (\textbf{c},\textbf{d},
+\textbf{g},\textbf{h}, \textbf{k},\textbf{l}), each under the previous uncorrected
+majority rule (left member of each pair) and the corrected criterion (right member;
+one stratified signed-rank test per non-empty bin, Benjamini--Hochberg
+false-discovery-rate correction at $q \le 0.05$ across each map's bins; Methods).
+Colours (binned mean advantage, red favouring the first-named family) are identical
+within each pair; only the asterisks change. Summary counts are given in
+Supplementary Table~\ref{supptab:star_sensitivity}.}
+\label{suppfig:star_sensitivity}
+\end{figure*}
+
+\begin{table}[h]
+\centering
+\caption{Sensitivity of the controlled-grid maps to the bin-starring criterion. For
+each comparison--metric map of the family-split grid ($126$ cells, ten seeds per
+cell): cells with a positive advantage of the first-named family; cells individually
+significant under the uncorrected per-cell Wilcoxon test ($p<0.05$) and under
+Benjamini--Hochberg (BH) false-discovery-rate correction across the map's $126$
+cells ($q\le0.05$); display bins starred under the previous majority rule versus the
+corrected criterion (one stratified signed-rank test per bin, BH across the map's
+$97$ non-empty bins); and the map-level two-sided Wilcoxon $p$ across the $126$
+per-cell advantages (conditions as units). The map-level $p$ saturates once every
+non-tied cell favours the same family, so maps that share a sign pattern share a
+$p$-value; these values express the consistency of the direction, not the size of the
+advantage.}
+\label{supptab:star_sensitivity}%
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Metric & Comparison & Positive & Raw $p<0.05$ & BH $q\le0.05$ & Bins starred & Map-level $p$ \\
+\midrule
+Final regret & TL vs baseline MFGP & 81/126 & 65 (52\%) & 0 (0\%) & 56 $\to$ 39 & $5.3\times10^{-15}$ \\
+Final regret & TL vs MFGP variants & 51/126 & 22 (17\%) & 0 (0\%) & 20 $\to$ 0 & $1.7\times10^{-7}$ \\
+Final regret & MFGP variants vs baseline MFGP & 81/126 & 50 (40\%) & 0 (0\%) & 43 $\to$ 7 & $5.3\times10^{-15}$ \\
+\midrule
+Anytime AUC & TL vs baseline MFGP & 126/126 & 122 (97\%) & 120 (95\%) & 94 $\to$ 91 & $2.0\times10^{-22}$ \\
+Anytime AUC & TL vs MFGP variants & 126/126 & 105 (83\%) & 101 (80\%) & 82 $\to$ 82 & $2.0\times10^{-22}$ \\
+Anytime AUC & MFGP variants vs baseline MFGP & 126/126 & 39 (31\%) & 0 (0\%) & 34 $\to$ 16 & $2.0\times10^{-22}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\suppnote{Computational cost: absolute FLOPs and compute ranking}{suppnote:computational_cost}
+
+Fig.~\ref{fig:scaling_law} establishes how surrogate compute scales with problem size;
+here we report the absolute cost that underlies those laws. The total floating-point operations (FLOPs) of the
+MFBO loop (one surrogate fit plus one pool-wide prediction per iteration,
+summed over the loop) are shown per surrogate and benchmark, confirming that the
+$\mathcal{O}(N^3)$ Gaussian processes dominate the budget while the $\mathcal{O}(N)$
+transfer-learning surrogates stay one to two orders of magnitude cheaper.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{paper_figures/computing_time.pdf}
+\caption{Absolute computational cost across the nine benchmarks, in floating-point
+operations (FLOPs), a hardware-independent measure: total FLOPs of the MFBO
+loop (one surrogate fit plus one pool-wide prediction per iteration, summed over the loop),
+with the Gaussian-process family in salmon and the transfer-learning surrogates in blue.
+The sparse variational (Sparse MFGP) and deep-kernel (DKL) GPs are the most expensive on
+every benchmark, up to roughly $45\times$ and $30\times$ the fastest transfer-learning surrogate; the
+baseline MFGP and NARGP scale as $\mathcal{O}(N^3)$ in the number of observations (measured
+fit-FLOP exponent $k = 3.0$) against $\mathcal{O}(N)$ for the transfer-learning surrogates ($k = 1.0$),
+so the gap widens with the evaluation budget. Panel \textbf{j} summarizes these costs as
+the average compute rank across all nine benchmarks (lower is cheaper), with the colour
+split repeated in a shared legend below the panels.}
+\label{suppfig:computing_time}
+\end{figure*}
+
+
+\suppnote{Omnibus rank analysis of the average-rank panel}{suppnote:rank_stats}
+
+Panel k of Fig.~\ref{fig:final_regret} summarizes the fifteen surrogates as an average
+rank across the nine benchmarks. We assessed whether that ordering is statistically
+resolvable using the Dem\v{s}ar procedure (Methods, ``Implementation and
+reproducibility''): a Friedman omnibus test with the benchmarks as blocks and the
+surrogates ranked within each benchmark, followed, if the omnibus rejects, by Nemenyi
+post-hoc comparisons.
+
+The omnibus does not reject rank homogeneity ($\chi^2_{14} = 20.9$, $p = 0.11$), so no
+pairwise ordering is claimed. The Nemenyi critical difference,
+$\mathrm{CD} = q_{0.05}\sqrt{k(k+1)/(6N)}$ with $k = 15$ surrogates and $N = 9$
+benchmarks, is $7.15$ rank units, which is larger than the entire observed range of
+average ranks ($5.28$ for Curriculum to $11.8$; range $6.50$). The spread of the panel
+is therefore smaller than the smallest difference the post-hoc test can resolve, so no
+pair of surrogates is separable at this suite size, including the best against the
+worst. The dashed line in Fig.~\ref{fig:final_regret}k marks this critical difference.
+
+This null is what the benchmark design predicts rather than evidence against a
+surrogate effect. The suite deliberately spans regimes in which the ranking reverses:
+the Gaussian-process family is best on the two Branin functions and worst on the four
+molecular-descriptor benchmarks (Fig.~\ref{fig:final_regret}b--i). An omnibus test for
+a single consistent ordering across all nine benchmarks therefore tests a hypothesis
+that our central result already denies, and averaging ranks over a heterogeneous suite
+cancels an effect whose sign depends on the regime. Restricting the analysis to the
+five chemistry and materials benchmarks does not recover resolution, because the
+critical difference grows as the number of blocks falls ($\mathrm{CD} = 9.59$ at
+$N = 5$).
+
+The statistical support for the surrogate comparison accordingly rests on the
+per-benchmark paired tests and effect sizes of Supplementary
+Table~\ref{supptab:effect_sizes}, and on the controlled fidelity-quality grid
+(Supplementary Table~\ref{supptab:grid_effect_sizes}), rather than on the pooled
+ranking; Fig.~\ref{fig:final_regret}k is presented as a descriptive summary. The
+omnibus null therefore indicates that no single ordering holds across a deliberately
+heterogeneous suite, not that the choice of surrogate is without effect: on the
+individual molecular-descriptor benchmarks the paired comparisons are significant with
+near-unanimous effect sizes ($r = 0.97$--$1.00$; Supplementary
+Table~\ref{supptab:effect_sizes}).
+
+\suppnote{Effect sizes for the paired surrogate comparisons}{suppnote:effect_sizes}
+
+Supplementary Table~\ref{supptab:effect_sizes} reports, for each of the nine
+benchmarks, the paired comparison between the best transfer-learning surrogate
+(chosen by mean final regret) and the baseline MFGP over the twenty matched seeds:
+the matched-pairs rank-biserial correlation $r$ (Methods), the seed-level
+wins/ties/losses, and the two-sided Wilcoxon $p$-value. Supplementary
+Table~\ref{supptab:grid_effect_sizes} summarizes the distribution of the per-cell
+$r$ over the $126$ cells of the controlled fidelity-quality grid for the three
+pairwise family comparisons, on both metrics. On the anytime metric the typical
+cell is unanimous: the median per-cell $r$ is $1.00$ against both GP families. On
+final regret a large fraction of cells tie exactly (both sides reach regret $0$);
+these ties are reported separately.
+
+\begin{table}[h]
+\centering
+\caption{Per-benchmark effect sizes: best transfer-learning surrogate against the
+baseline MFGP on final regret ($20$ paired seeds). The best transfer-learning (TL)
+surrogate is chosen by mean final regret; $r$ is the matched-pairs rank-biserial
+correlation ($r > 0$ favours transfer learning), w/t/l counts transfer-learning
+wins, ties, and losses over the paired seeds, and $p$ is the two-sided Wilcoxon
+$p$-value on the nonzero paired differences. Park-Fav ties on all $20$ seeds (both
+sides at regret $\approx 0$); on Park-Unfav ($\dag$) both sides likewise reach regret
+$\approx 0$ and the paired differences are at floating-point scale ($\sim10^{-8}$), so
+the nominal comparison ($r = +0.96$, 17/2/1, $p = 2.9\times10^{-4}$) resolves numerical
+noise and is not reported as an effect. Across the seven benchmarks that yield a test,
+Benjamini--Hochberg correction at $q = 0.05$ leaves every comparison significant except
+Matbench-gap, which is not significant before correction either.}
+\label{supptab:effect_sizes}
+\begin{tabular}{llrrrcr}
+\toprule
+Benchmark & Best TL surrogate & TL & MFGP & $r$ & w/t/l & $p$ \\
+\midrule
+Branin-Fav & Curriculum & 0.42 & 0.07 & $-0.79$ & 2/0/18 & $1.0\times10^{-3}$ \\
+Branin-Unfav & Curriculum & 1.24 & 0.05 & $-1.00$ & 0/1/19 & $1.3\times10^{-4}$ \\
+Park-Fav & Sequential & 0.00 & 0.00 & tie & 0/20/0 & -- \\
+Park-Unfav & Pseudo-Labelling & 0.00 & 0.00 & tie$^{\dag}$ & -- & -- \\
+COFs & End-to-End Joint Training & 0.41 & 6.55 & $+0.97$ & 18/1/1 & $2.1\times10^{-4}$ \\
+FreeSolv & End-to-End Joint Training & 0.28 & 0.80 & $+1.00$ & 20/0/0 & $1.9\times10^{-6}$ \\
+Polarizability & Sequential & 0.06 & 0.17 & $+1.00$ & 15/5/0 & $6.3\times10^{-4}$ \\
+HOPV15 & Knowledge Distillation & 1.89 & 3.09 & $+0.61$ & 13/1/6 & $0.020$ \\
+Matbench-Gap & Progressive & 0.23 & 0.29 & $+0.19$ & 9/0/11 & $0.47$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Effect-size distributions on the controlled fidelity-quality grid ($126$
+cells, ten seeds per cell). For each pairwise family comparison and metric: the
+median and interquartile range (IQR) of the per-cell matched-pairs rank-biserial
+$r$ ($r > 0$ favours the first-named family), and the number of all-tie cells (every
+seed pair identical, typically both sides at regret $0$; excluded from the median
+and IQR). Within a cell, $r$ measures how consistently the ten paired seeds favour
+one family, not how large the advantage is, so a median $r$ of $+1.00$ is compatible
+with a mean advantage near zero. Cell counts, significance before and after
+Benjamini--Hochberg correction, and the map-level tests are given in Supplementary
+Table~\ref{supptab:star_sensitivity}.}
+\label{supptab:grid_effect_sizes}
+\begin{tabular}{llrrr}
+\toprule
+Metric & Comparison & Median $r$ & IQR & Tie cells \\
+\midrule
+Final regret & TL vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 45 \\
+Final regret & TL vs MFGP variants & $+1.00$ & $[+0.33, +1.00]$ & 60 \\
+Final regret & MFGP variants vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 45 \\
+Anytime AUC & TL vs baseline MFGP & $+1.00$ & $[+1.00, +1.00]$ & 0 \\
+Anytime AUC & TL vs MFGP variants & $+1.00$ & $[+0.91, +1.00]$ & 0 \\
+Anytime AUC & MFGP variants vs baseline MFGP & $+0.67$ & $[+0.50, +0.83]$ & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
