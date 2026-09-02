@@ -65,8 +65,7 @@ single cross-fidelity posterior for acquisition at both fidelity steps.
 
 
 \suppnote{Uncertainty quantification via Bayesian linear regression}{suppnote:blr}
-Uncertainty for the transfer-learning surrogates is obtained from a Bayesian linear regression (BLR)
-head on the low-fidelity (LF) network's last-layer features. Let $\varphi(x) \in \mathbb{R}^D$
+Uncertainty for the transfer-learning surrogates is obtained from a Bayesian linear regression (BLR) head on the low-fidelity (LF) network's last-layer features, following DNGO~\citep{snoek2015scalable}. Let $\varphi(x) \in \mathbb{R}^D$
 denote the penultimate-layer representation and $\tilde{\varphi}(x) = [\varphi(x), 1]$ the
 augmented feature vector, with a Gaussian prior over the weights $w$:
 \begin{equation}
@@ -247,10 +246,7 @@ calibration error, negative log-likelihood, and sharpness on held-out candidates
 related them to the final optimization regret; the resulting correlation is reported in
 the main text (Fig.~\ref{fig:calibration}).
 
-\paragraph{Uncertainty placement, promotion, and adaptive scheduling.} Three other ablations were run: the placement of the BLR head
-(LF only, HF only, or both), allowing LF candidates to be
-promoted to HF rather than excluded once sampled, and replacing the round-robin
-schedule with an adaptive cost-weighted policy. Each was evaluated on a representative
+\paragraph{Uncertainty placement, candidate masking, and adaptive scheduling.} Three other ablations were run: the placement of the BLR head (LF only, HF only, or both); the candidate-masking rule, excluding LF-evaluated candidates from HF evaluation instead of the default rule under which each fidelity excludes only the candidates it has already evaluated; and replacing the round-robin schedule with an adaptive cost-weighted policy. Each was evaluated on a representative
 subset of three to five benchmarks spanning the favourable and unfavourable regimes, and on
 every benchmark tested none altered the qualitative ranking of the surrogate families.
 

@@ -244,12 +244,12 @@ Most MFBO methods remain rooted in Gaussian process (GP) surrogates whose streng
 Here we test an alternative hypothesis: in high-dimensional multi-fidelity discovery, optimization performance is governed less by uncertainty calibration or global LF--HF correlation than by the surrogate's capability to learn useful representations of the design landscape. When LF and HF signals share structure, such representations support cross-fidelity transfer; when LF information is weak or biased, they can still improve optimization by providing a more expressive model of high-dimensional molecular and materials descriptors than fixed-kernel GPs. This reframes multi-fidelity optimization as a representation-learning problem, in which the central challenge is to identify which structures in inexpensive data remain informative for expensive HF decisions.
 
 Transfer-learning surrogates provide a natural mechanism for this reframing. By learning representations
-from abundant LF data and adapting them to sparse HF observations through targeted correction~\citep{yosinski2014transferable}, these models can capture cross-fidelity structure while retaining the expressive capacity needed for \emph{prediction} in complex molecular and materials descriptor spaces~\citep{buterez2024transfer}. Although transfer-learning models have advanced multi-fidelity molecular property prediction, their role as decision-making engines in closed-loop optimization remains largely unexplored~\citep{li2020dnnmfbo}: MFBO in molecular and materials discovery has been developed around GP surrogates~\citep{sabanza2025best}, and transfer-learning architectures representing distinct mechanisms of knowledge transfer have not been systematically evaluated under controlled closed-loop conditions. It therefore remains unclear when transfer-learning surrogates outperform GP baselines, which transfer mechanisms are most effective and whether any advantage arises from better uncertainty estimates, better predictive means or improved representation of the design space.
+from abundant LF data and adapting them to sparse HF observations through targeted correction~\citep{yosinski2014transferable}, these models can capture cross-fidelity structure while retaining the expressive capacity needed for \emph{prediction} in complex molecular and materials descriptor spaces~\citep{buterez2024transfer}. Although transfer-learning models have advanced multi-fidelity molecular property prediction, deep surrogates have served as the decision-making engine of closed-loop MFBO only in bespoke engineering-design settings~\citep{li2020dnnmfbo}: MFBO in molecular and materials discovery has been developed around GP surrogates~\citep{sabanza2025best}, and transfer-learning architectures representing distinct mechanisms of knowledge transfer have not been systematically evaluated under controlled closed-loop conditions. It therefore remains unclear when transfer-learning surrogates outperform GP baselines, which transfer mechanisms are most effective and whether any advantage arises from better uncertainty estimates, better predictive means or improved representation of the design space.
 
 We address these questions through a controlled benchmark study of 15 multi-fidelity surrogates across nine synthetic, chemistry and materials optimization tasks. The comparison includes eleven transfer-learning
 surrogates and four GP baselines: autoregressive
 MFGP~\citep{kennedy2000predicting}, nonlinear autoregressive GP (NARGP)~\citep{perdikaris2017nonlinear},
-deep-kernel GP~\citep{wilson2016deep}, and sparse variational MFGP\citep{titsias2009variational, hensman2013gaussian}. All transfer-learning surrogates shared a two-stage structure in which  an LF network learns from abundant proxy data and an HF network learns the residual correction required to predict sparse HF observations.
+deep-kernel GP~\citep{wilson2016deep}, and sparse variational MFGP\citep{titsias2009variational, hensman2013gaussian}. All transfer-learning surrogates shared a two-stage structure in which  an LF network learns from abundant proxy data and an HF network learns the residual correction required to predict sparse HF observations, a composite structure related to multi-fidelity neural networks~\citep{meng2020composite}.
 The architectures differ only in how information is transferred between these stages, allowing the transfer mechanism to be isolated from model capacity. We evaluated all methods under a shared closed-loop optimization protocol and used matched-acquisition control to separate surrogate effects from acquisition-policy effects (Fig.~\ref{fig:overview}).
 
 Our results show that GPs remain highly effective when their inductive bias matches the objective, but that transfer-learning surrogates are more effective on most molecular and materials benchmarks considered here. The advantage is explained primarily by the quality of the transfer-learned predictive mean and by preservation of the near-optimal region, rather than by calibrated uncertainty or global LF--HF correlation alone. Transfer-learning surrogates also scale more favourably under the repeated model updates typical of SDL workflows with abundant LF data, suggesting that surrogate design for MFBO should emphasize scalable learned representations that transfer information across fidelities while adapting to biased, local or weak LF signals.
@@ -480,7 +480,7 @@ exploration acting as a secondary and benchmark-dependent factor.
 A learned surrogate is not equally valuable for every optimization problem. To identify when surrogate learning adds benefit, we compared each method with a surrogate-free screening baseline that ranks candidates by their LF
 value and evaluates the top-ranked candidates at HF. The resulting deterministic screening
 regret provides a reference for distinguishing cases where the LF proxy is sufficient from those in which a learned cross-fidelity model is required
-(Fig.~\ref{fig:topk}). This analysis separated the benchmarks into two regimes. In Regime~A, represented by Park-Fav and polarizability, the top LF
+(Fig.~\ref{fig:topk}). This analysis separated the benchmarks into two regimes by their screening regret (Regime~A, at most $0.3$; Regime~B, above $0.3$). In Regime~A, represented by Park-Fav and polarizability, the top LF
 candidates coincide almost exactly with the top HF candidates. The top-1\% overlap was approximately $1$ and the screening regret was no greater than $ 0.09$. Under this setting, a learned surrogate added little value and all
 methods, including non-learning baselines, performed similarly. In Regime~B, represented by COFs and
 Branin, high global LF--HF correlation conceals poor agreement among the top-ranked  candidates. COFs had a
@@ -585,8 +585,7 @@ larger architectures or learned molecular representations could further widen th
 were deliberately excluded to keep the comparison fair. The comparison also leaves the
 transfer-learning hyperparameters fixed while the GP baselines re-fit their kernel
 hyperparameters by marginal-likelihood maximization at every iteration; this asymmetry
-is conservative where transfer learning wins, but the GP advantage on the smooth
-synthetic objectives should be read with it in mind. Our evaluation is also retrospective,
+is conservative where transfer learning wins, but the GP advantage on the smooth synthetic objectives should be read with it in mind. The predictive uncertainty of the transfer-learning surrogates likewise comes from a single BLR head with fixed prior and noise precisions ($\alpha = \beta = 1$) that were not calibrated per benchmark, so the limited value of uncertainty-driven exploration reported here is specific to that construction; better-calibrated or ensemble-based uncertainty could shift the balance. Our evaluation is also retrospective,
 optimizing over fixed candidate pools that emulate the closed loop rather than driving a live
 autonomous platform, so the surrogate ranking we report remains to be confirmed in
 deployment. Finally, the comparison is against
@@ -621,7 +620,7 @@ s_t = H} f^{(H)}(x_t) - f^{(H)}(x^\star)$.
 
 \subsection{Pool-based optimization loop and acquisition}\label{sec:meth-loop}
 
-Optimization was performed over a fixed candidate pool $\mathcal{X}_{\mathrm{cand}}$  with sampled candidates removed after each query. The initial design used approximately $10\%$ of the budget, split equally in cost between the two fidelities with at least two points per fidelity, and was generated by Latin-hypercube sampling for continuous domains and furthest-point
+Optimization was performed over a fixed candidate pool $\mathcal{X}_{\mathrm{cand}}$. A candidate already evaluated at a given fidelity was excluded from further queries at that fidelity only, so a candidate screened at LF remained available for HF evaluation. The initial design used approximately $10\%$ of the budget, split equally in cost between the two fidelities with at least two points per fidelity, and was generated by Latin-hypercube sampling for continuous domains and furthest-point
 sampling for molecular pools~\citep{mckay2000comparison}. At each iteration, the surrogate model was retrained
 de novo on all accumulated observations. A deterministic round-robin
 schedule issued $n_{\mathrm{LF}\rightarrow\mathrm{HF}} = \lfloor 1/\rho \rfloor$
@@ -664,8 +663,7 @@ mean. The deep-kernel GP~\citep{wilson2016deep} replaces the conventional kernel
 defined on neural network features trained jointly with the marginal-likelihood optimization. The sparse
 variational MFGP approximated the multi-fidelity posterior using stochastic variational
 inference over inducing points with a multi-task index kernel, providing a scalable alternative to
-exact GP inference~\citep{titsias2009variational, hensman2013gaussian}. The transfer-learning surrogates followed a two-network residual parameterization
-in which an LF predictor $g_{\theta}^{(L)}:\mathbb{R}^d\to\mathbb{R}$ and an
+exact GP inference~\citep{titsias2009variational, hensman2013gaussian}. The transfer-learning surrogates followed a two-network residual parameterization, a composite structure of the kind used in multi-fidelity neural networks~\citep{meng2020composite}, in which an LF predictor $g_{\theta}^{(L)}:\mathbb{R}^d\to\mathbb{R}$ and an
 HF residual network $g_{\phi}^{(H)}:\mathbb{R}^{d+1}\to\mathbb{R}$ (conditioned
 on the input and the LF prediction) combine as
 \begin{equation}\label{eq:residual}
@@ -676,7 +674,7 @@ This parameterization encourages the residual network to learn the discrepancy $
 which is smoother than the HF function itself when the two fidelities are
 correlated. Both networks were two-layer multilayer perceptrons of hidden width 64 with
 $\tanh$ activations. The choice of $\tanh$ rather than ReLU was validated in a matched ablation
-reported in the Supplementary Information. Predictive uncertainty was obtained from a BLR head on the final-layer features of the LF network~\citep{gawlikowski2023survey}. This yielded a closed-form predictive mean and
+reported in the Supplementary Information. Predictive uncertainty was obtained from a BLR head on the final-layer features of the LF network, following the adaptive-basis construction of DNGO~\citep{snoek2015scalable,gawlikowski2023survey}. This yielded a closed-form predictive mean and
 variance with prior precision $\alpha = 1$ and noise precision $\beta = 1$. The 
 derivation, together with the eleven transfer-learning
 architectures, their training schedules, and method-specific hyperparameters is provided
@@ -816,8 +814,7 @@ of the families (Supplementary Note~\ref{suppnote:family_split}).
 \subsection{Implementation and reproducibility}\label{sec:meth-impl}
 
 All surrogates were trained using Adam and fixed $\ell_2$ weight decay, full-batch
-optimization and fixed epoch budgets. Dropout, batch normalization, and gradient
-clipping were not used. Models were retrained de novo at every optimization iteration to remove path dependence
+optimization and fixed epoch budgets. Dropout, batch normalization, and gradient clipping were not used. The transfer-learning hyperparameters (Supplementary Tables~\ref{supptab:common_hyperparams} and~\ref{supptab:model_hyperparams}) were set a priori to common defaults and were not tuned on any benchmark. Models were retrained de novo at every optimization iteration to remove path dependence
 from warm-starting. Inputs and targets were standardized using statistics pooled across
 fidelities, and descriptor standardization and PCA were applied
 once to the fixed candidate pool. Each benchmark-surrogate pair was evaluated for $20$ random seeds.
@@ -848,8 +845,7 @@ release (\texttt{requirements.txt}).
 Common and
 model-specific hyperparameters, GP configuration, the
 BLR derivation, synthetic function definitions, and
-ablation studies (including activation, uncertainty placement, acquisition variants, promotion, and
-adaptive scheduling) are provided in the Supplementary Information.
+ablation studies (including activation, uncertainty placement, acquisition variants, candidate masking, and adaptive scheduling) are provided in the Supplementary Information.
 
 
 \backmatter
@@ -873,7 +869,7 @@ College London Net Zero Centre Ph.D.\ Scholarship scheme.
 %% Zenodo DOI here if one is minted before submission.
 The nine candidate-pool datasets used by every optimization run, the curated
 low-fidelity sources of the controlled fidelity-quality grid, and the result
-files underlying every figure and quoted statistic are available at \url{https://github.com/MGuo-Lab/MFBO-TL} (per-benchmark results of the placement, promotion and scheduling ablations of Supplementary Note~\ref{suppnote:acquisition_variants} are available from the corresponding author on request), together with build scripts
+files underlying every figure and quoted statistic are available at \url{https://github.com/MGuo-Lab/MFBO-TL} (per-benchmark results of the placement, candidate-masking and scheduling ablations of Supplementary Note~\ref{suppnote:acquisition_variants} are available from the corresponding author on request), together with build scripts
 that regenerate the pools from their public sources: COFs from
 ref.~\citep{gantzler2023multifidelity}, FreeSolv from
 ref.~\citep{mobley2014freesolv}, polarizability from the Alexandria

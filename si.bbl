@@ -15,6 +15,16 @@
   systems}} \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{21524--21538}
   (\bibinfo{year}{2020}).
 
+\bibitem{snoek2015scalable}
+\bibinfo{author}{Snoek, J.} \emph{et~al.}
+\newblock \bibinfo{editor}{Bach, F.} \& \bibinfo{editor}{Blei, D.} (eds)
+  \emph{\bibinfo{title}{Scalable bayesian optimization using deep neural
+  networks}}.
+\newblock (eds \bibinfo{editor}{Bach, F.} \& \bibinfo{editor}{Blei, D.})
+  \emph{\bibinfo{booktitle}{International conference on machine learning}},
+  \bibinfo{pages}{2171--2180} (\bibinfo{organization}{PMLR},
+  \bibinfo{year}{2015}).
+
 \bibitem{sabanza2025best}
 \bibinfo{author}{Sabanza-Gil, V.} \emph{et~al.}
 \newblock \bibinfo{title}{Best practices for multi-fidelity {B}ayesian

@@ -151,6 +151,15 @@
   Uncertainty in Artificial Intelligence}}, \bibinfo{pages}{282--290}
   (\bibinfo{year}{2013}).
 
+\bibitem{meng2020composite}
+\bibinfo{author}{Meng, X.} \& \bibinfo{author}{Karniadakis, G.~E.}
+\newblock \bibinfo{title}{A composite neural network that learns from
+  multi-fidelity data: Application to function approximation and inverse {PDE}
+  problems}.
+\newblock \emph{\bibinfo{journal}{Journal of Computational Physics}}
+  \textbf{\bibinfo{volume}{401}}, \bibinfo{pages}{109020}
+  (\bibinfo{year}{2020}).
+
 \bibitem{mckay2000comparison}
 \bibinfo{author}{McKay, M.~D.}, \bibinfo{author}{Beckman, R.~J.} \&
   \bibinfo{author}{Conover, W.~J.}
