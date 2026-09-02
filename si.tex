@@ -1,0 +1,190 @@
+%% Standalone Supplementary Information for the NCS submission.
+%% Build order matters (cross-references through xr): see build.sh.
+%%%%%%%%  Nature Computational Science submission (2026-09)  —  Springer Nature template (sn-jnl)  %%%%%%%%
+%% Display-item budget (npj Comp. Mater.): up to 6 items (figures and/or tables).
+%% Current count = 6:
+%%   Fig 1  overview + final regret (a--j) + family-split heatmap (anytime-AUC row)
+%%   Fig 2  regret trajectories
+%%   Fig 3  surrogate x acquisition matrix
+%%   Fig 4  acquisition portfolio + calibration-vs-regret
+%%   Fig 5  top-k/screening + compute scaling law
+%%   Tab 1  benchmark suite (Methods)
+%% [done] Combine old Figs 1+2, add heatmap -> Fig 1. Main text shows the
+%%        anytime-AUC row (strongest claim: TL > baseline in 126/126 cells); the
+%%        final-regret row's message (variants close the endpoint gap) is carried
+%%        by one sentence of text, per the NCS plan. Full 3x3 grid (final-regret
+%%        + anytime-AUC + marginals) kept as Supplementary Fig., suppfig:family_split
+%% [done] Grid-experiment text integrated: Results subsection sec:res-grid
+%%        (~250 w), Methods protocol sec:meth-grid, Discussion paragraph,
+%%        SI note suppnote:family_split (robustness + curation TODO stubs)
+%% [done] Combine old Figs 6,7,8 -> old 6 (calibration) merged with old 5 (portfolio)
+%%        as Fig 4, and old 7+8 (top-k + scaling) form Fig 5, so each composite
+%%        stays within one page and maps one-to-one onto the Results sections
+%% [done] plain/standard MFGP renamed "baseline MFGP" (matches heatmap panel titles)
+%% [done] remaining "Appendix" cross-refs changed to Supplementary (they were broken)
+%% [todo] Verify grid-protocol numbers in Methods sec:meth-grid against the
+%%        analysis scripts (RF config, knob calibration, budget, binning)
+%% [done] Terminology unified (2026-07-13). Canonical choices:
+%%        "transfer-learning surrogate(s)" (was: deep / deep neural / neural /
+%%        transfer-learning deep surrogate); "baseline MFGP" (was: the MFGP,
+%%        exact MFGP, baseline autoregressive MFGP); "MFGP variants" (was: GP
+%%        variants); "deep-kernel GP", "sparse variational MFGP" (was: ...GP);
+%%        "acquisition policy" (was: rule/strategy) with individual members
+%%        called "acquisitions"; "greedy policy" (was: greedy selection /
+%%        exploitation / configuration); "uncertainty-driven" (was: -guided);
+%%        "BLR" (was: Bayesian last-layer); "LF--HF" en-dash; -ization spelling
+%%        (was: -isation) with British behaviour/favourable/colour; "among"
+%%        (was: amongst). Abstract + Fig 1 keep plain-language "selection rule"
+%%        (glossed as acquisition policy in the Fig 1 caption).
+%% [done] Figures re-exported (2026-07-13) with unique Nature-style panel letters:
+%%        Fig 1 = a (LaTeX overlay on overview) + b--k (final regret) + l--n
+%%        (fig1_anytime_row.pdf, replaces the old trim/clip crop); Fig 2 = a--i;
+%%        Fig 4 = a--d + e--m; Fig 5 = a,b + c; SI full grid = a--i.
+%%        trajectory legend now uses paper terminology; code-name mapping verified
+%%        in the experiment repo: TwoStageJoint = Pretrain-then-Joint,
+%%        DNGOJoint = Stop-Gradient (no_grad on LF path), DNGOGradient = End-to-End.
+%%        Known pre-existing issue (see Downloads/REPORT.md): several figures are
+%%        drawn 4-5x wider than print width, so body fonts land at 2-4pt in print;
+%%        fixing requires figsize reduction (layout change, needs approval).
+%% [done] Abbreviation-consistency + British-spelling pass (2026-07-13, 2nd pass):
+%%        defined abbreviations now used consistently after first use in body text
+%%        (BO, MFBO, SDL, LF/HF, EI, BLR, FLOPs); PCA defined at first use; unused
+%%        "(DKL)" definition dropped (canonical term: deep-kernel GP); duplicate
+%%        NARGP definition in Methods removed; SI given its own definitions for
+%%        standalone submission (MFBO, LF/HF, EI, FLOPs, MMD, AUC; "MLL" spelled
+%%        out); captions/abstract/headings deliberately keep full forms
+%%        (self-contained). British 2nd pass: analysed, modelled/modelling,
+%%        pseudo-labelling, towards (-ization kept per Oxford/Nature house style).
+%% [done] Figure re-export from the experiment repo (2026-07-24): Fig 3 legend
+%%        renamed to TL/MFGP x greedy/EI (was DNN . greedy / DNN . UQ-EI (BLR-std)
+%%        / MFGP . UQ-EI; "DNN" was undefined in the text); "Pseudo-Labelling"
+%%        (UK) in final_regret, regret_trajectory, A1_calibration_vs_regret,
+%%        computing_time. Data verified bit-identical, only label strings changed.
+%% [note] 2026-07-22 Overleaf sync (Chris's review edits) merged: abstract rewrite,
+%%        Sec 2.5 calibration paragraph restructured to lead with the correlation
+%%        range, FLOPs-vs-wall-clock justification sentence added in Methods.
+%%        Overleaf had collapsed this notes block; restored from local history.
+%% [done] Rank-panel statistics demoted to SI (2026-07-26), per first-supervisor
+%%        request that Friedman/Nemenyi serve as supplementary support only.
+%%        Fig 1k caption and Results 2.2 no longer carry chi^2/p; both point to
+%%        the new Supplementary Note suppnote:rank_stats, which reports the
+%%        omnibus in full and explains why the null is the design's prediction
+%%        (CD = 7.15 > observed rank range 6.52; the ranking reverses between
+%%        the synthetic and molecular regimes). The dashed CD line stays in the
+%%        caption gloss because it is baked into final_regret.pdf.
+%% [done] Compute-rank Friedman/Nemenyi removed entirely (2026-07-26, author
+%%        decision: the compute story does not need rank statistics). Dropped
+%%        from the Supp Fig computing_time caption (panel j is kept, described
+%%        descriptively) and from the contrast paragraph of suppnote:rank_stats;
+%%        the Methods Demsar sentence now scopes to Fig 1k alone. The compute
+%%        claim rests on the scaling-law exponents and absolute FLOPs, which are
+%%        untouched. NOTE: panel j itself is still in computing_time.pdf.
+%% [done] Data/Code availability (2026-07-26): no repository link at preprint
+%%        stage (agreed with supervisors). The "DOI to be assigned upon
+%%        acceptance" wording implied a deposit that does not exist, and its
+%%        replacement ("released on publication") was self-contradictory in a
+%%        preprint, so both sections are removed for now -- see the note above
+%%        \backmatter. Reinstate them with the Zenodo/GitHub DOI at journal
+%%        submission.
+%% [done] Review-feedback text (2026-07-22): tanh transition sentence restored
+%%        after the Sec 2.5 rewrite; RF-vs-direct-perturbation rationale and
+%%        synthetic-bias caveat added in sec:meth-grid; Discussion grid-scope
+%%        clause extended to match.
+\documentclass[pdflatex,sn-nature]{sn-jnl}% single-column Supplementary Information
+
+%% ===== AUTHOR TODO (preserved as comments so they don't break the build) =====
+%% decouple GP familys to GP and TL based GP --> Done
+%% Seperate heatmap (GP vs TL, TL vs GP families) --> Done
+%% Change "Appendix" to "supplementary". --> Done
+%% Cobine 1+2, Combine 6,7,8 together. Add heatmap(rename plain MFGP to Baseline MFGP) Update methods section accordingly --> Done
+%% Checking terminology --> Done
+%% - Greedy vs exploitation terminology comparison       --> Done
+%% - generate basic graphical abstract and discuss it with Miao   [pending — needs re-design]
+%% - transitional message at the end of Introduction (What, How)  [addressed: methodology-flow bridge paragraph closes the Introduction]
+%% - summary of novelty at the end of Introduction ("we propose ~~, this contributes ~~")  [addressed]
+%% - less methods in Results: keep high-level findings only, refer to Methods for detail  [done: former Results 2.1/2.2 (surrogate + benchmark-suite) and the benchmark table moved into Methods; Results now opens with a brief framing that points to Methods]
+%% - plain language, less technical like Nature journals
+%% - wider significance at the end of introduction  [addressed: closing paragraph of the Introduction (representation-centric impact, generalization, future representations)]
+%% - conceptual novelty --> similar 2 hypothesis  (representation learning focused)[addressed: representational central-hypothesis paragraph inserted after the problem framing, before the methodological "isolating the surrogate" paragraph]
+%% - (Knowledge embedding/ representation transfer) why using transfer learning? --> conceptual novelty  [addressed: same paragraph frames the LF->HF link as a learned knowledge embedding / representation transfer]
+
+
+%============================================================================
+
+%%%% Standard packages. Note: the sn-jnl class assumes xcolor / textcomp /
+%%%% manyfoot are loaded (it uses them in its \begin{document} hook), so they
+%%%% are kept here even though the original ICML preamble did not list them.
+\usepackage{graphicx}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{mathtools}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{microtype}%
+\usepackage[title]{appendix}%
+
+%% Tighten Springer Nature's default page margins (the class leaves a very
+%% large bottom margin and ~24mm sides). This widens the two-column text block
+%% and reduces whitespace while keeping the two-column journal layout.
+\geometry{a4paper, top=16mm, bottom=18mm, left=18mm, right=18mm,
+          marginparwidth=0mm, marginparsep=0mm, bindingoffset=0mm, columnsep=8mm}
+
+\raggedbottom
+
+%% Corresponding-author asterisk. sn-jnl.cls emits it inside
+%%   \authorsep{#2}\unskip\ifx\@authfrstarg\empty\else ... {*} ... \fi
+%% in \@@corrauthor, where \@authfrstarg is the OPTIONAL affiliation argument.
+%% All four authors share one affiliation, so no affiliation superscripts are
+%% wanted and \author* is written without brackets -- which skips that branch
+%% entirely and leaves the "*Corresponding author(s)" footnote with no asterisk
+%% anchored to any name. Redefine the macro to print the asterisk
+%% unconditionally, and no affiliation number. (Delete this patch and restore
+%% \author*[n] / \affil[n] if a second affiliation is ever added.)
+\makeatletter
+\renewcommand{\@@corrauthor}[2][]{\def\@authfrstarg{#1}\@corauemailtrue%
+  \advance\corraucount by 1%
+  \g@addto@macro\artauthors{%
+    \global\@auemailtrue%
+    \Authorfont%
+    \def\baselinestretch{1}%
+    \authorsep{#2}\unskip\textsuperscript{*}\unskip%
+    \def\authorsep{\au@and~}%
+    \global\let\sep\@empty\global\let\@corref\@empty%
+  }}%
+\makeatother
+
+\usepackage{xr}
+%% Import only the labels of the other file: natbib's \bibcite entries in its .aux
+%% must not override this document's own citation numbers.
+\makeatletter\let\XR@savedbibcite\bibcite\let\bibcite\@gobbletwo
+\externaldocument{main}
+\let\bibcite\XR@savedbibcite\makeatother
+
+\begin{document}
+
+\title[Supplementary Information]{Supplementary Information for ``Transfer Learning
+Architectures for Scalable Multi-Fidelity Bayesian Optimization''}
+
+\author{\fnm{Jaewook} \sur{Lee}}
+
+\author{\fnm{Ethan} \sur{Errington}}
+
+\author{\fnm{Christian D.} \sur{Lorenz}}
+
+\author*{\fnm{Miao} \sur{Guo}}\email{miao.guo@kcl.ac.uk}
+
+\affil{\orgdiv{Department of Engineering}, \orgname{King's College London},
+\orgaddress{\city{London}, \postcode{WC2R 2LS}, \country{United Kingdom}}}
+
+\abstract{This file contains Supplementary Notes 1--9, Supplementary Figures 1--3 and
+Supplementary Tables 1--8, which are referred to from the main text. Figure and table
+numbers without the ``Supplementary'' prefix refer to the main text.}
+
+\maketitle
+
+\input{si-content}
+
+\bibliography{references}
+
+\end{document}

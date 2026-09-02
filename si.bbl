@@ -1,0 +1,80 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\burl{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\bibcommenthead
+
+\bibitem{balandat2020botorch}
+\bibinfo{author}{Balandat, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Botorch: A framework for efficient monte-carlo
+  bayesian optimization}.
+\newblock \emph{\bibinfo{journal}{Advances in neural information processing
+  systems}} \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{21524--21538}
+  (\bibinfo{year}{2020}).
+
+\bibitem{sabanza2025best}
+\bibinfo{author}{Sabanza-Gil, V.} \emph{et~al.}
+\newblock \bibinfo{title}{Best practices for multi-fidelity {B}ayesian
+  optimization in materials and molecular research}.
+\newblock \emph{\bibinfo{journal}{Nature Computational Science}}
+  \textbf{\bibinfo{volume}{5}}, \bibinfo{pages}{572--581}
+  (\bibinfo{year}{2025}).
+
+\bibitem{shahriari2015taking}
+\bibinfo{author}{Shahriari, B.}, \bibinfo{author}{Swersky, K.},
+  \bibinfo{author}{Wang, Z.}, \bibinfo{author}{Adams, R.~P.} \&
+  \bibinfo{author}{De~Freitas, N.}
+\newblock \bibinfo{title}{Taking the human out of the loop: A review of
+  bayesian optimization}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the IEEE}}
+  \textbf{\bibinfo{volume}{104}}, \bibinfo{pages}{148--175}
+  (\bibinfo{year}{2016}).
+
+\bibitem{jones1998efficient}
+\bibinfo{author}{Jones, D.~R.}, \bibinfo{author}{Schonlau, M.} \&
+  \bibinfo{author}{Welch, W.~J.}
+\newblock \bibinfo{title}{Efficient global optimization of expensive black-box
+  functions}.
+\newblock \emph{\bibinfo{journal}{Journal of Global optimization}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{455--492}
+  (\bibinfo{year}{1998}).
+
+\bibitem{kushner1964new}
+\bibinfo{author}{Kushner, H.~J.}
+\newblock \bibinfo{title}{A new method of locating the maximum point of an
+  arbitrary multipeak curve in the presence of noise}.
+\newblock \emph{\bibinfo{journal}{Journal of Basic Engineering}}
+  \textbf{\bibinfo{volume}{86}}, \bibinfo{pages}{97--106}
+  (\bibinfo{year}{1964}).
+
+\bibitem{srinivas2012information}
+\bibinfo{author}{Srinivas, N.}, \bibinfo{author}{Krause, A.},
+  \bibinfo{author}{Kakade, S.~M.} \& \bibinfo{author}{Seeger, M.~W.}
+\newblock \bibinfo{title}{Information-theoretic regret bounds for {Gaussian}
+  process optimization in the bandit setting}.
+\newblock \emph{\bibinfo{journal}{IEEE Transactions on Information Theory}}
+  \textbf{\bibinfo{volume}{58}}, \bibinfo{pages}{3250--3265}
+  (\bibinfo{year}{2012}).
+
+\bibitem{wang2017max}
+\bibinfo{author}{Wang, Z.} \& \bibinfo{author}{Jegelka, S.}
+\newblock \bibinfo{editor}{Precup, D.} \& \bibinfo{editor}{Teh, Y.~W.} (eds)
+  \emph{\bibinfo{title}{Max-value entropy search for efficient {Bayesian}
+  optimization}}.
+\newblock (eds \bibinfo{editor}{Precup, D.} \& \bibinfo{editor}{Teh, Y.~W.})
+  \emph{\bibinfo{booktitle}{Proceedings of the 34th International Conference on
+  Machine Learning}}, \bibinfo{pages}{3627--3635}
+  (\bibinfo{organization}{PMLR}, \bibinfo{year}{2017}).
+
+\bibitem{russo2018tutorial}
+\bibinfo{author}{Russo, D.~J.}, \bibinfo{author}{Van~Roy, B.},
+  \bibinfo{author}{Kazerouni, A.}, \bibinfo{author}{Osband, I.} \&
+  \bibinfo{author}{Wen, Z.}
+\newblock \bibinfo{title}{A tutorial on {Thompson} sampling}.
+\newblock \emph{\bibinfo{journal}{Foundations and Trends in Machine Learning}}
+  \textbf{\bibinfo{volume}{11}}, \bibinfo{pages}{1--96} (\bibinfo{year}{2018}).
+
+\end{thebibliography}

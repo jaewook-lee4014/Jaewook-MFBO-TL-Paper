@@ -1,0 +1,11 @@
+*.aux
+*.log
+*.out
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+/main.pdf
+/si.pdf
+/main_with_si.pdf
+/main_with_si.bbl
