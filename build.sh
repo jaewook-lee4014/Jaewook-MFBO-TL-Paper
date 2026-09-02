@@ -7,10 +7,10 @@ set -e
 cd "$(dirname "$0")"
 PDFLATEX="pdflatex -interaction=nonstopmode -halt-on-error"
 if [ "${1:-}" = "combined" ]; then
-  $PDFLATEX -jobname=main_with_si "\def\withSI{1}\input{main.tex}" >/dev/null
+  $PDFLATEX main_with_si.tex >/dev/null
   bibtex main_with_si >/dev/null
-  $PDFLATEX -jobname=main_with_si "\def\withSI{1}\input{main.tex}" >/dev/null
-  $PDFLATEX -jobname=main_with_si "\def\withSI{1}\input{main.tex}" >/dev/null
+  $PDFLATEX main_with_si.tex >/dev/null
+  $PDFLATEX main_with_si.tex >/dev/null
   echo "built main_with_si.pdf"; exit 0
 fi
 $PDFLATEX main.tex >/dev/null || true      # first pass: main.aux for the SI
