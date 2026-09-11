@@ -149,11 +149,5 @@
 \fill[tlcol] (\Cl+1.15,0.57) rectangle (\Cl+1.65,0.83);
 \node[text=tlbox, font=\bfseries\normalsize, anchor=west] at (\Cl+1.8,0.70) {up to $45\times$ fewer FLOPs};
 
-% ===================== closed-loop feedback (SDL) =====================
-\draw[->, line width=1.0pt, draw=sub, dashed, rounded corners=9pt]
-  (\Cc,\ya-0.06) -- (\Cc,-0.85) -- (\Ac,-0.85) -- (\Ac,\ya-0.06);
-\node[text=sub, font=\footnotesize\itshape, fill=white, inner xsep=6pt] at (\Bc,-0.85)
-  {closed-loop optimization: propose next query, evaluate, update};
-
 \end{tikzpicture}
 \end{document}
