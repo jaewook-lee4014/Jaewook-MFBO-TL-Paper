@@ -1,7 +1,7 @@
 %% Fig. 1 overview for
 %% "Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian Optimization"
 %% Vector source of paper_figures/fig1_overview.pdf (3-panel schematic); labels match the main text
-%% (DKL; up to 45x fewer FLOPs). Edited 2026-09-03 for the NCS submission:
+%% (DKL; up to 43x fewer FLOPs, BLR-head profile 2026-09-11). Edited 2026-09-03 for the NCS submission:
 %% panels widened and shortened so the content fills them, fonts one step larger, included at \textwidth.
 %% Counts updated 2026-09-11 to the final data basis (13 benchmarks; 3 GP + 9 TL surrogates: NARGP excluded,
 %% Curriculum/KD/Pseudo-labelling merged into feature-extraction transfer) and to the Fig. 1b-p attainment result
@@ -147,7 +147,7 @@
 \fill[gpcol] (\Cl+1.15,1.17) rectangle (\Cr-0.45,1.43);
 \node[glab, anchor=east, text=sub] at (\Cl+1.05,0.70) {TL};
 \fill[tlcol] (\Cl+1.15,0.57) rectangle (\Cl+1.65,0.83);
-\node[text=tlbox, font=\bfseries\normalsize, anchor=west] at (\Cl+1.8,0.70) {up to $45\times$ fewer FLOPs};
+\node[text=tlbox, font=\bfseries\normalsize, anchor=west] at (\Cl+1.8,0.70) {up to $43\times$ fewer FLOPs};
 
 \end{tikzpicture}
 \end{document}
