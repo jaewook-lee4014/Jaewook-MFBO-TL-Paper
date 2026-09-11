@@ -123,6 +123,11 @@
 \usepackage{booktabs}%
 \usepackage{microtype}%
 \usepackage[title]{appendix}%
+%% [2026-09-11] Redline macros, identical to main.tex (needed for the standalone SI build).
+\usepackage[normalem]{ulem}%
+\newif\ifredline\redlinetrue
+\DeclareRobustCommand{\del}[1]{\ifredline\sout{#1}\fi}
+\DeclareRobustCommand{\new}[1]{\ifredline\textcolor{blue}{#1}\else#1\fi}
 
 %% Tighten Springer Nature's default page margins (the class leaves a very
 %% large bottom margin and ~24mm sides). This widens the two-column text block

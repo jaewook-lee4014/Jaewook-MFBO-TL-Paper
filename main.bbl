@@ -285,4 +285,74 @@
 \newblock \emph{\bibinfo{journal}{npj Computational Materials}}
   \textbf{\bibinfo{volume}{6}}, \bibinfo{pages}{138} (\bibinfo{year}{2020}).
 
+\bibitem{zhuo2018predicting}
+\bibinfo{author}{Zhuo, Y.}, \bibinfo{author}{Mansouri~Tehrani, A.} \&
+  \bibinfo{author}{Brgoch, J.}
+\newblock \bibinfo{title}{Predicting the band gaps of inorganic solids by
+  machine learning}.
+\newblock \emph{\bibinfo{journal}{The Journal of Physical Chemistry Letters}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{1668--1673}
+  (\bibinfo{year}{2018}).
+
+\bibitem{jain2013commentary}
+\bibinfo{author}{Jain, A.} \emph{et~al.}
+\newblock \bibinfo{title}{Commentary: {The Materials Project}: A materials
+  genome approach to accelerating materials innovation}.
+\newblock \emph{\bibinfo{journal}{APL Materials}} \textbf{\bibinfo{volume}{1}},
+  \bibinfo{pages}{011002} (\bibinfo{year}{2013}).
+
+\bibitem{ward2018matminer}
+\bibinfo{author}{Ward, L.} \emph{et~al.}
+\newblock \bibinfo{title}{Matminer: An open source toolkit for materials data
+  mining}.
+\newblock \emph{\bibinfo{journal}{Computational Materials Science}}
+  \textbf{\bibinfo{volume}{152}}, \bibinfo{pages}{60--69}
+  (\bibinfo{year}{2018}).
+
+\bibitem{dejong2015charting}
+\bibinfo{author}{de~Jong, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Charting the complete elastic properties of inorganic
+  crystalline compounds}.
+\newblock \emph{\bibinfo{journal}{Scientific Data}}
+  \textbf{\bibinfo{volume}{2}}, \bibinfo{pages}{150009} (\bibinfo{year}{2015}).
+
+\bibitem{matcalc}
+\bibinfo{author}{Ong, S.~P.} \emph{et~al.}
+\newblock \bibinfo{title}{matcalc: A {Python} library for calculating materials
+  properties from the potential energy surface}.
+\newblock
+  \bibinfo{howpublished}{\url{https://github.com/materialsvirtuallab/matcalc}}
+  (\bibinfo{year}{2024}).
+
+\bibitem{deng2023chgnet}
+\bibinfo{author}{Deng, B.} \emph{et~al.}
+\newblock \bibinfo{title}{{CHGNet} as a pretrained universal neural network
+  potential for charge-informed atomistic modelling}.
+\newblock \emph{\bibinfo{journal}{Nature Machine Intelligence}}
+  \textbf{\bibinfo{volume}{5}}, \bibinfo{pages}{1031--1041}
+  (\bibinfo{year}{2023}).
+
+\bibitem{park2024scalable}
+\bibinfo{author}{Park, Y.}, \bibinfo{author}{Kim, J.}, \bibinfo{author}{Hwang,
+  S.} \& \bibinfo{author}{Han, S.}
+\newblock \bibinfo{title}{Scalable parallel algorithm for graph neural network
+  interatomic potentials in molecular dynamics simulations}.
+\newblock \emph{\bibinfo{journal}{Journal of Chemical Theory and Computation}}
+  \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{4857--4868}
+  (\bibinfo{year}{2024}).
+
+\bibitem{yang2024mattersim}
+\bibinfo{author}{Yang, H.} \emph{et~al.}
+\newblock \bibinfo{title}{{MatterSim}: A deep learning atomistic model across
+  elements, temperatures and pressures}.
+\newblock \bibinfo{howpublished}{arXiv:2405.04967} (\bibinfo{year}{2024}).
+
+\bibitem{ward2016general}
+\bibinfo{author}{Ward, L.}, \bibinfo{author}{Agrawal, A.},
+  \bibinfo{author}{Choudhary, A.} \& \bibinfo{author}{Wolverton, C.}
+\newblock \bibinfo{title}{A general-purpose machine learning framework for
+  predicting properties of inorganic materials}.
+\newblock \emph{\bibinfo{journal}{npj Computational Materials}}
+  \textbf{\bibinfo{volume}{2}}, \bibinfo{pages}{16028} (\bibinfo{year}{2016}).
+
 \end{thebibliography}

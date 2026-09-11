@@ -284,10 +284,9 @@ Matbench-Gap & 40 & $0.43 \pm 0.07$ & $0.20 \pm 0.04$ & 0.09 & 0.08 & 0.002 \\
 \suppnote{Family-split advantage maps: complete grid and robustness}{suppnote:family_split}
 
 Supplementary Fig.~\ref{suppfig:family_split} reports the complete family-split
-advantage grid underlying panels l--n of Fig.~\ref{fig:family_heatmap}
+advantage grid underlying panels \del{l--n}\new{a--c} of Fig.~\ref{fig:family_heatmap}
 (protocol in Methods, Section ``Controlled fidelity-quality grid''): the
-final-regret advantage maps, the anytime-AUC (area under the regret--budget curve) advantage maps (the row reproduced in
-the main text), and the marginal advantage profiles obtained by averaging over the
+final-regret advantage maps\new{ (the metric now shown in the main text)}, the anytime-AUC (area under the regret--budget curve) advantage maps \del{(the row reproduced in the main text)}, and the marginal advantage profiles obtained by averaging over the
 global LF--HF $R^2$. The two metrics agree on the structure, with the advantage largest at low top-10 optimum agreement and only weakly dependent on $R^2$ (for the anytime advantage of TL over the baseline MFGP, the Spearman correlation across the $126$ cells is $-0.71$ with agreement and $-0.38$ with $R^2$, and the $R^2$ dependence is concentrated at $R^2 \le 0.2$); the
 final-regret maps additionally show that the MFGP variants close most of the baseline
 MFGP's endpoint gap, whereas the anytime gap persists.
@@ -336,8 +335,7 @@ claim; the final-regret maps are read from their direction and effect sizes.
 learning (TL) against the baseline MFGP (left), TL against the MFGP variants
 (deep-kernel and sparse variational; centre), and the MFGP variants against the
 baseline MFGP (right). Rows show the final-regret advantage (\textbf{a}--\textbf{c}),
-the anytime-AUC advantage (\textbf{d}--\textbf{f}; the row reproduced as
-Fig.~\ref{fig:family_heatmap}l--n), and the marginal advantage profiles averaged over
+the anytime-AUC advantage (\textbf{d}--\textbf{f}\del{; the row reproduced as Fig.~\ref{fig:family_heatmap}l--n}), and the marginal advantage profiles averaged over
 $R^2$ (\textbf{g}--\textbf{i}; mean $\pm$ s.e.). Within each
 map, bins are indexed by the global LF--HF $R^2$ (horizontal) and the top-10 optimum
 agreement between fidelities (vertical); red favours the first-named family and
@@ -423,8 +421,9 @@ split repeated in a shared legend below the panels.}
 
 \suppnote{Omnibus rank analysis of the average-rank panel}{suppnote:rank_stats}
 
-Panel k of Fig.~\ref{fig:final_regret} summarizes the fifteen surrogates as an average
-rank across the nine benchmarks. We assessed whether that ordering is statistically
+%% [2026-09-11] This note and the effect-size note below describe the previous Fig. 1 (average-rank panel,
+%% paired tests); they are kept for review and are expected to go under the no-significance-test rule.
+\new{[This note refers to the average-rank panel of the previous version of Fig.~\ref{fig:final_regret}, which has been replaced by the attainment summary; it is retained for review only.]} \del{Panel k of Fig.~\ref{fig:final_regret} summarizes the fifteen surrogates as an average rank across the nine benchmarks.} We assessed whether that ordering is statistically
 resolvable using the Dem\v{s}ar procedure (Methods, ``Implementation and
 reproducibility''): a Friedman omnibus test with the benchmarks as blocks and the
 surrogates ranked within each benchmark, followed, if the omnibus rejects, by Nemenyi
@@ -463,7 +462,7 @@ Table~\ref{supptab:effect_sizes}).
 
 \suppnote{Effect sizes for the paired surrogate comparisons}{suppnote:effect_sizes}
 
-Supplementary Table~\ref{supptab:effect_sizes} reports, for each of the nine
+\new{[Supplementary Tables~\ref{supptab:effect_sizes} and~\ref{supptab:grid_effect_sizes} report the paired tests of the previous run set and are retained for review only; the revised main text reports means without significance tests.]} Supplementary Table~\ref{supptab:effect_sizes} reports, for each of the nine
 benchmarks, the paired comparison between the best transfer-learning surrogate
 (chosen by mean final regret) and the baseline MFGP over the twenty matched seeds:
 the matched-pairs rank-biserial correlation $r$ (Methods), the seed-level
