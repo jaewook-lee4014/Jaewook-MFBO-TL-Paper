@@ -19,10 +19,12 @@
 %%   baseline MFGP, sparse variational MFGP, deep-kernel GP; the 11 TL configurations as run; the nine
 %%   original pools). Dependent text and captions redlined. Table 1 d column re-checked against the run
 %%   logs of the regenerated runs (dim = 10 PCA features on every descriptor pool, 14 on COFs, 2/4 synthetic).
+%%   Fig. 6 a,b (top-k overlap + LF-only screening regret) extended to the 13 benchmarks on 2026-09-11
+%%   (paper_figures/B2_topk_13.pdf, values in B2_topk_13_values.csv; script make_b2_topk_13.py in the
+%%   refig_20260908 figrepo; the nine original values are reproduced exactly).
 %%   NOT yet updated (still the previous run set): the acquisition-matrix section and Fig. 4, the portfolio
-%%   panels a-d of Fig. 5 and their text, panels a,b of Fig. 6 (data-only, nine pools; 13-pool re-render
-%%   pending), SI Figs. 1-2 and the SI tables, and Data availability. Only sentences that restate Fig. 1/2
-%%   results were redlined there.
+%%   panels a-d of Fig. 5 and their text, SI Figs. 1-2 and the SI tables, and Data availability. Only
+%%   sentences that restate Fig. 1/2 results were redlined there.
 %% Display-item budget (npj Comp. Mater.): up to 6 items (figures and/or tables).
 %% Current count = 6:
 %%   Fig 1  overview + final regret (a--j) + family-split heatmap (anytime-AUC row)
@@ -547,23 +549,24 @@ rank correlation of $0.998$ but a screening regret of $4.52$. In this setting, a
 essential; \del{the best transfer-learning surrogate achieved a regret of $0.41$}\new{every surrogate reached zero regret within the budget (Fig.~\ref{fig:regret_trajectory}e)}, substantially outperforming the surrogate-free screen. COFs and polarizability both had $R^2 \ge 0.96$ but their screening regrets differed by approximately $50\times$, so the need for a surrogate depends less on global LF--HF correlation than on whether the LF proxy preserves the near-optimal region. The
 transfer-learning surrogate was a robust choice as it matched the surrogate-free screen when the proxy already identified the optimum and substantially improved performance when the proxy failed near the top of the ranking. Both HOPV15 and Matbench-gap fall in
 Regime~B. An LF screen produced a regret of $3.90$ on HOPV15 where the Scharber proxy
-was nearly uninformative and $0.91$ on Matbench-gap. These results indicate that  surrogate learning is warranted\del{, even though the choice among surrogates had limited impact on the low-discrimination Matbench-gap task}\new{, and on both pools the choice of surrogate matters as well (Fig.~\ref{fig:final_regret}i,j)}.
+was nearly uninformative and $0.91$ on Matbench-gap. \new{The four larger materials pools fall in Regime~B as well. On ExptGap-PBE the screen misses the optimum by $1.15$~eV (the HF optimum sits at LF rank $1{,}033$ of $3{,}508$), and along the elastic-modulus ladder the screening regret falls from $384$~GPa with the CHGNet source and $369$~GPa with SevenNet ($74\%$ and $97\%$ of the respective HF ranges) to $3$~GPa with MatterSim ($0.6\%$ of the range, the HF optimum at LF rank 2), so the same HF target spans the whole range from a useless to a nearly sufficient screen as the LF source improves (Fig.~\ref{fig:topk}a,b).} These results indicate that  surrogate learning is warranted\del{, even though the choice among surrogates had limited impact on the low-discrimination Matbench-gap task}\new{, and on both pools the choice of surrogate matters as well (Fig.~\ref{fig:final_regret}i,j)}.
 
 \begin{figure*}[tp]
 \centering
 %% Display item 5 of 6 — composite: (a,b) top-k overlap and LF-only screening
 %% regret; (c) compute scaling law. Together: when a learned surrogate is
 %% needed, and what it costs. Panel letters baked into the PDFs.
-\includegraphics[width=0.92\textwidth]{paper_figures/B2_topk_overlap_and_screening.pdf}\\[6pt]
+%%\includegraphics[width=0.92\textwidth]{paper_figures/B2_topk_overlap_and_screening.pdf}\\[6pt]
+\includegraphics[width=0.92\textwidth]{paper_figures/B2_topk_13.pdf}\\[6pt]
 %%\includegraphics[width=0.85\textwidth]{paper_figures/compute_scaling_law.pdf}
 \includegraphics[width=0.85\textwidth]{paper_figures/compute_scaling_law_blr.pdf}
 \caption{When a surrogate is needed, and what it costs.
 \textbf{a},\textbf{b,} task difficulty and the need for a surrogate. Top-$k$ overlap
 between the low- and high-fidelity rankings (\textbf{a}) and the resulting LF-only
-screening regret (\textbf{b}) for each benchmark. High global correlation does not
+screening regret (\textbf{b}) for each \new{of the thirteen} benchmark\new{s (the nine original pools and the four larger materials pools; the screening regret is in the HF units of each pool and is drawn on a symmetric-logarithmic axis, with the Regime boundary as a dashed line)}. High global correlation does not
 guarantee top-$k$ agreement, so a learned surrogate is required precisely where a
 low-fidelity screen fails (Regime~B), while in Regime~A the screen is already
-near-optimal.
+near-optimal. \new{The four larger materials pools all fall in Regime~B: the screen misses the optimum by $1.15$~eV on ExptGap-PBE and by $384$, $369$ and $3$~GPa on the CHGNet, SevenNet and MatterSim elastic-modulus pools, so that along the ladder the screening regret shrinks as the LF agreement rises.}
 \textbf{c,} computational scaling law across the nine \del{benchmarks}\new{original benchmarks, for the surrogates as run in Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory} (BLR head included)}. Each point is
 the median surrogate-fit compute (hardware-independent floating-point operations, FLOPs) of one surrogate on one
 benchmark at one budget fraction, placed at the training-set size $N$ (high- plus
