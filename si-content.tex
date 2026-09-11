@@ -243,8 +243,8 @@ and training, recording expected calibration error, negative log-likelihood, sha
 
 \paragraph{Calibration.} For every surrogate we computed the LF expected
 calibration error, negative log-likelihood, and sharpness on held-out candidates and
-related them to the final optimization regret; the resulting correlation is reported in
-the main text (Fig.~\ref{fig:calibration}).
+related them to \del{the final optimization regret}\new{the attainment of Fig.~\ref{fig:final_regret}}; the resulting correlation is reported in
+the main text (Fig.~\ref{fig:calibration}\new{e--q}).
 
 \paragraph{Uncertainty placement, candidate masking, and adaptive scheduling.} Three other ablations were run: the placement of the BLR head (LF only, HF only, or both); the candidate-masking rule, excluding LF-evaluated candidates from HF evaluation instead of the default rule under which each fidelity excludes only the candidates it has already evaluated; and replacing the round-robin schedule with an adaptive cost-weighted policy. Each was evaluated on a representative
 subset of three to five benchmarks spanning the favourable and unfavourable regimes, and on
@@ -397,24 +397,25 @@ Anytime AUC & MFGP variants vs baseline MFGP & 126/126 & 39 (31\%) & 0 (0\%) & 3
 Fig.~\ref{fig:scaling_law} establishes how surrogate compute scales with problem size;
 here we report the absolute cost that underlies those laws. The total floating-point operations (FLOPs) of the
 MFBO loop (one surrogate fit plus one pool-wide prediction per iteration,
-summed over the loop) are shown per surrogate and benchmark, confirming that the
+summed over the loop) are shown per surrogate and benchmark, \del{confirming that the
 $\mathcal{O}(N^3)$ Gaussian processes dominate the budget while the $\mathcal{O}(N)$
-transfer-learning surrogates stay one to two orders of magnitude cheaper.
+transfer-learning surrogates stay one to two orders of magnitude cheaper}\new{profiled for the surrogates as run in Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory} (BLR head included): the sparse variational and deep-kernel GPs cost up to $43\times$ and $28\times$ the cheapest transfer-learning surrogate and the baseline MFGP up to $11\times$, whereas on the two smallest pools and budgets (Park-Unfav and HOPV15) the baseline MFGP is the cheapest surrogate of all}.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{paper_figures/computing_time.pdf}
+%%\includegraphics[width=\textwidth]{paper_figures/computing_time.pdf}
+\includegraphics[width=\textwidth]{paper_figures/computing_time_blr.pdf}
 \caption{Absolute computational cost across the nine benchmarks, in floating-point
 operations (FLOPs), a hardware-independent measure: total FLOPs of the MFBO
 loop (one surrogate fit plus one pool-wide prediction per iteration, summed over the loop),
 with the Gaussian-process family in salmon and the transfer-learning surrogates in blue.
 The sparse variational (Sparse MFGP) and deep-kernel (DKL) GPs are the most expensive on
-every benchmark, up to roughly $45\times$ and $30\times$ the fastest transfer-learning surrogate; the
-baseline MFGP and NARGP scale as $\mathcal{O}(N^3)$ in the number of observations (measured
-fit-FLOP exponent $k = 3.0$) against $\mathcal{O}(N)$ for the transfer-learning surrogates ($k = 1.0$),
+every benchmark, up to roughly \del{$45\times$ and $30\times$}\new{$43\times$ and $28\times$} the fastest transfer-learning surrogate; the
+baseline MFGP \del{and NARGP }scale\new{s} as $\mathcal{O}(N^3)$ in the number of observations (measured
+fit-FLOP exponent $k = 3.0$) against $\mathcal{O}(N)$ for the transfer-learning surrogates (\del{$k = 1.0$}\new{$k = 0.9$--$1.0$}),
 so the gap widens with the evaluation budget. Panel \textbf{j} summarizes these costs as
 the average compute rank across all nine benchmarks (lower is cheaper), with the colour
-split repeated in a shared legend below the panels.}
+split repeated in a shared legend below the panels.\new{ FLOPs are profiled for the surrogates as run in the main text (BLR head and the unused residual network included) with the three-member GP family; the transfer-learning configurations are listed as run, so Curriculum, Knowledge Distillation and Pseudo-Labelling, merged as feature-extraction transfer in the main text, appear separately. On Park-Unfav and HOPV15 the baseline MFGP is the cheapest surrogate of all.}}
 \label{suppfig:computing_time}
 \end{figure*}
 
