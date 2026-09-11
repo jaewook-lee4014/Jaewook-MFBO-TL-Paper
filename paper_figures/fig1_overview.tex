@@ -1,8 +1,11 @@
 %% Fig. 1 overview for
 %% "Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian Optimization"
 %% Vector source of paper_figures/fig1_overview.pdf (3-panel schematic); labels match the main text
-%% (DKL; up to 16x lower regret on COFs; up to 45x fewer FLOPs). Edited 2026-09-03 for the NCS submission:
+%% (DKL; up to 45x fewer FLOPs). Edited 2026-09-03 for the NCS submission:
 %% panels widened and shortened so the content fills them, fonts one step larger, included at \textwidth.
+%% Counts updated 2026-09-11 to the final data basis (13 benchmarks; 3 GP + 9 TL surrogates: NARGP excluded,
+%% Curriculum/KD/Pseudo-labelling merged into feature-extraction transfer) and to the Fig. 1b-p attainment result
+%% (best TL at or above best GP on all 9 chemistry & materials pools).
 %% Helvetica, colour-blind-safe blue/orange palette (matches graphical_abstract.tex / Figs 2-4).
 %% Build:  pdflatex fig1_overview.tex  ->  fig1_overview.pdf (auto-cropped)
 \documentclass[border=6pt]{standalone}
@@ -56,7 +59,9 @@
 \node[hdr, anchor=north] at (\Ac,\yb-0.20) {Multi-fidelity problem};
 \node[slab, anchor=north] at (\Ac,\yb-0.82) {self-driving laboratory};
 \node[text=ink, font=\small, draw=pline, line width=0.7pt, rounded corners=3pt, fill=white,
-      inner sep=5pt, anchor=north] at (\Ac,\yb-1.35) {candidate pool $\mathcal{X}_{\mathrm{cand}}$};
+      inner sep=5pt, anchor=north] at (\Ac,\yb-1.30) {candidate pool $\mathcal{X}_{\mathrm{cand}}$};
+\node[text=sub, font=\scriptsize, anchor=north, align=center] at (\Ac,\yb-2.12)
+     {13 benchmarks: 4 synthetic $\cdot$ 9 chemistry \& materials};
 
 % --- monitor icon (LF) ---
 \pgfmathsetmacro\mx{1.55}\pgfmathsetmacro\my{2.75}
@@ -91,15 +96,15 @@
 
 % GP lane
 \node[chip, fill=gpbox, anchor=west] (gpc) at (\Bl+0.35,3.3)
-     {Gaussian-process\\(GP) family $\times 4$};
+     {Gaussian-process\\(GP) family $\times 3$};
 \draw[gpbox, line width=1.3pt]
    (10.85,3.3) .. controls (11.07,3.75) and (11.29,2.85) .. (11.51,3.3)
    .. controls (11.73,3.75) and (11.95,2.85) .. (12.17,3.3);
-\node[glab, anchor=west] at (12.4,3.3) {MFGP $\cdot$ NARGP\\DKL $\cdot$ sparse GP};
+\node[glab, anchor=west] at (12.4,3.3) {MFGP $\cdot$ DKL\\sparse variational MFGP};
 
 % TL lane
 \node[chip, fill=tlbox, anchor=west] (tlc) at (\Bl+0.35,1.95)
-     {Transfer-learning\\(TL) surrogates $\times 11$};
+     {Transfer-learning\\(TL) surrogates $\times 9$};
 \node[netbox, anchor=west] (gL) at (10.85,1.95) {$g^{(L)}$};
 \node[netbox, right=0.32cm of gL] (gH) {$g^{(H)}$};
 \node[circle, draw=tldk, line width=0.8pt, fill=white, inner sep=1.8pt, font=\footnotesize,
@@ -116,7 +121,7 @@
 % ===================== PANEL C : transfer-learning wins =====================
 \node[panelbox, fit={(\Cl,\ya) (\Cr,\yb)}] (PC) {};
 \node[hdr, anchor=north] at (\Cc,\yb-0.20) {Transfer-learning wins};
-\node[slab, anchor=north] at (\Cc,\yb-0.82) {on molecular \& materials tasks};
+\node[slab, anchor=north] at (\Cc,\yb-0.82) {on chemistry \& materials benchmarks};
 
 % regret curve
 \begin{scope}[shift={(\Cl+1.0,3.05)}]
@@ -128,7 +133,7 @@
   \node[text=gpbox, font=\footnotesize\bfseries, anchor=west] at (4.38,0.78) {GP};
   \node[text=tlbox, font=\footnotesize\bfseries, anchor=west] at (4.38,0.14) {TL};
 \end{scope}
-\node[text=sub, font=\footnotesize, anchor=north] at (\Cc,2.62) {converges fast, up to $16\times$ lower regret};
+\node[text=sub, font=\footnotesize, anchor=north] at (\Cc,2.62) {TL $\geq$ GP on all 9 chemistry \& materials pools};
 
 % compute bars
 \node[text=sub, font=\footnotesize, anchor=south] at (\Cc,1.85) {compute per optimization loop};
