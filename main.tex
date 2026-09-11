@@ -769,7 +769,7 @@ hyperparameters are provided in the Supplementary Information.
 
 \begin{table}[h]
 \centering
-\caption{Benchmark suite. $d$: input dimension, $|\mathcal{X}_{\mathrm{cand}}|$:
+\caption{Benchmark suite. $d$: \del{input dimension}\new{descriptor dimension (the RDKit descriptors of the three molecular pools and the Magpie descriptors of the five inorganic pools are reduced to ten dimensions by PCA before modelling; Methods)}, $|\mathcal{X}_{\mathrm{cand}}|$:
 candidate-pool size, $\rho$: cost ratio, $R^2$: squared LF--HF Pearson correlation over the candidate pool (for the synthetic functions, over $1{,}000$ uniform samples; Supplementary Information), $B$: \del{total budget in HF-equivalent units}\new{budget in HF-equivalent units over which Fig.~\ref{fig:final_regret} is evaluated (the FreeSolv runs continue to 50, and the HOPV15 and Matbench-gap runs to 45 and 100, in Fig.~\ref{fig:regret_trajectory})}. HOPV15 and Matbench-gap extend the original suite of~Sabanza-Gil et
 al.~\citep{sabanza2025best} with two materials tasks introduced here\new{; ExptGap-PBE and the three elastic-modulus pools add four larger materials tasks (Methods)}.}
 \label{tab:benchmarks}
@@ -782,14 +782,14 @@ Branin-Unfav & 2 & 2{,}500 & 0.5 & 0.56 & 50 \\
 Park-Fav & 4 & 256 & 0.1 & 0.97 & 50 \\
 Park-Unfav & 4 & 256 & 0.5 & 0.72 & 50 \\
 COFs & 14 & 608 & 0.065 & 0.96 & 30 \\
-FreeSolv & 10 & 640 & 0.1 & 0.87 & \del{50}\new{30} \\
-Polarizability & 10 & 1{,}134 & 0.167 & 0.99 & 30 \\
-HOPV15 & 10 & 240 & 0.1 & 0.02 & 30 \\
-Matbench-gap & 10 & 3{,}347 & 0.05 & 0.46 & \del{20}\new{30} \\
-\new{ExptGap-PBE} & \new{10} & \new{3{,}508} & \new{0.05} & \new{0.41} & \new{20} \\
-\new{Elastic-CHGNet} & \new{10} & \new{10{,}819} & \new{0.05} & \new{0.29} & \new{20} \\
-\new{Elastic-SevenNet} & \new{10} & \new{10{,}460} & \new{0.05} & \new{0.41} & \new{20} \\
-\new{Elastic-MatterSim} & \new{10} & \new{10{,}946} & \new{0.05} & \new{0.80} & \new{20} \\
+FreeSolv & \del{10}\new{210} & 640 & 0.1 & 0.87 & \del{50}\new{30} \\
+Polarizability & \del{10}\new{210} & 1{,}134 & 0.167 & 0.99 & 30 \\
+HOPV15 & \del{10}\new{210} & 240 & 0.1 & 0.02 & 30 \\
+Matbench-gap & \del{10}\new{132} & 3{,}347 & 0.05 & 0.46 & \del{20}\new{30} \\
+\new{ExptGap-PBE} & \new{132} & \new{3{,}508} & \new{0.05} & \new{0.41} & \new{20} \\
+\new{Elastic-CHGNet} & \new{132} & \new{10{,}819} & \new{0.05} & \new{0.29} & \new{20} \\
+\new{Elastic-SevenNet} & \new{132} & \new{10{,}460} & \new{0.05} & \new{0.41} & \new{20} \\
+\new{Elastic-MatterSim} & \new{132} & \new{10{,}946} & \new{0.05} & \new{0.80} & \new{20} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -811,7 +811,7 @@ organic-photovoltaic donor molecules, using experimental power conversion effici
 and a Scharber-model estimate from computed frontier orbitals as the LF
 proxy~\citep{lopez2016harvard}.
 Matbench-gap contained $3{,}347$ inorganic compositions with experimental and computed band
-gaps~\citep{dunn2020benchmarking}. \new{Four larger materials pools complete the suite. ExptGap-PBE pairs the experimental band gaps of $3{,}508$ inorganic compositions~\citep{zhuo2018predicting} with their PBE band gaps from the Materials Project~\citep{jain2013commentary} as the LF source (both taken from matminer~\citep{ward2018matminer}, averaged over entries sharing a reduced formula and matched by formula), optimized towards the same $1.4$~eV target as Matbench-gap. The three elastic-modulus pools share one HF target, the DFT Voigt--Reuss--Hill shear modulus of the Materials Project compounds in the Matbench \texttt{log\_gvrh} task~\citep{dunn2020benchmarking,dejong2015charting}, to be maximized, and differ only in the LF source: the shear modulus recomputed on the same structures with the elasticity workflow of matcalc~\citep{matcalc} and one of three pretrained universal machine-learned interatomic potentials, CHGNet~\citep{deng2023chgnet}, SevenNet~\citep{park2024scalable} or MatterSim~\citep{yang2024mattersim}, whose agreement with the DFT values increases in that order ($R^2 = 0.29$, $0.41$ and $0.80$; pools of $10{,}819$, $10{,}460$ and $10{,}946$ compounds for which the respective potential converged). They therefore form a real-data ladder of LF quality at fixed HF. All four pools use composition-based Magpie descriptors~\citep{ward2016general} reduced to ten dimensions by PCA, $\rho = 0.05$ and $B = 20$.} Molecular benchmarks were encoded as RDKit or composition-based descriptors,
+gaps~\citep{dunn2020benchmarking}. \new{Four larger materials pools complete the suite. ExptGap-PBE pairs the experimental band gaps of $3{,}508$ inorganic compositions~\citep{zhuo2018predicting} with their PBE band gaps from the Materials Project~\citep{jain2013commentary} as the LF source (both taken from matminer~\citep{ward2018matminer}, averaged over entries sharing a reduced formula and matched by formula), optimized towards the same $1.4$~eV target as Matbench-gap. The three elastic-modulus pools share one HF target, the DFT Voigt--Reuss--Hill shear modulus of the Materials Project compounds in the Matbench \texttt{log\_gvrh} task~\citep{dunn2020benchmarking,dejong2015charting}, to be maximized, and differ only in the LF source: the shear modulus recomputed on the same structures with the elasticity workflow of matcalc~\citep{matcalc} and one of three pretrained universal machine-learned interatomic potentials, CHGNet~\citep{deng2023chgnet}, SevenNet~\citep{park2024scalable} or MatterSim~\citep{yang2024mattersim}, whose agreement with the DFT values increases in that order ($R^2 = 0.29$, $0.41$ and $0.80$; pools of $10{,}819$, $10{,}460$ and $10{,}946$ compounds for which the respective potential converged). They therefore form a real-data ladder of LF quality at fixed HF. All four pools use composition-based Magpie descriptors~\citep{ward2016general} reduced to ten dimensions by PCA, $\rho = 0.05$ and $B = 20$.} Molecular benchmarks were encoded as RDKit\new{ 2D ($210$)} or composition-based\new{ Magpie ($132$)} descriptors,
 standardized, and reduced to ten dimensions by PCA once at
 initialization; maximization targets were negated. Cost ratios were matched to the originating
 studies to enable indirect comparison with prior single- and multi-fidelity GP
