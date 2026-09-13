@@ -2,7 +2,7 @@
 %%   si.tex   -> standalone SI file for submission (own title page and reference list;
 %%               \ref to main-text figures resolved from main.aux via the xr package), and
 %%   main.tex -> combined working PDF when built with \def\withSI{1} (see build.sh).
-%% Numbering: Supplementary Notes 1-9, Supplementary Figures 1-3, Supplementary Tables 1-8.
+%% Numbering: Supplementary Notes 1-9, Supplementary Figures 1-5, Supplementary Tables 1-8.
 % ---------------------------------------------------------------------------
 % Supplementary Information
 % Replace the previous \begin{appendices}...\end{appendices} block with this block.
@@ -215,7 +215,7 @@ Park-Unfav & Unfavourable & 0.0 & 0.72 & 0.5 & 256 & 0.0 \\
 
 \suppnote{Ablation studies}{suppnote:acquisition_variants}
 
-This section specifies the protocol for each ablation summarized in the main text. The activation ablation is tabulated in Supplementary Table~\ref{supptab:activation}; the acquisition-portfolio results are shown in Fig.~\ref{fig:portfolio} and their aggregated result files are included in the code release; per-benchmark results of the remaining ablations are available from the corresponding author on request.
+This section specifies the protocol for each ablation summarized in the main text. The activation ablation is tabulated in Supplementary Table~\ref{supptab:activation}; the \del{acquisition-portfolio results are shown in Fig.~5}\new{matched-acquisition and acquisition-portfolio results are shown in Supplementary Figs.~\ref{suppfig:acquisition} and~\ref{suppfig:portfolio}} and their aggregated result files are included in the code release; per-benchmark results of the remaining ablations are available from the corresponding author on request.
 
 \paragraph{Acquisition variants.} Beyond the primary greedy policy, we evaluated a
 portfolio of five uncertainty-driven acquisitions spanning the standard taxonomy of myopic
@@ -226,16 +226,30 @@ entropy search~\citep{wang2017max} (Gumbel approximation, ten max-value samples)
 sampling-based Thompson sampling~\citep{russo2018tutorial}. Each replaces only the
 LF acquisition, using the BLR predictive standard deviation with the surrogate,
 round-robin schedule, HF step, and seeds held fixed, and was run across all
-eleven transfer-learning surrogates and nine benchmarks ($11\times 9\times 20$ seeds per
-acquisition). For each acquisition and benchmark we report the fraction of surrogates on
-which it beats the greedy policy: the greedy policy beat all five acquisitions on COFs on ten of the
+\del{eleven}\new{nine} transfer-learning surrogates and nine benchmarks (\del{$11\times 9\times 20$}\new{$9\times 9\times 20$} seeds per
+acquisition\new{, seeds 42--61}). For each acquisition and benchmark we report the fraction of surrogates on
+which it beats the greedy policy\new{ and the mean paired difference in attainment}\del{: the greedy policy beat all five acquisitions on COFs on ten of the
 eleven surrogates, whereas Thompson sampling beat the greedy policy on every surrogate on FreeSolv and
-polarizability, and the improvement-based acquisitions ranked weakest overall
-(Fig.~\ref{fig:portfolio}). We additionally evaluated a fully uncertainty-aware variant
+polarizability, and the improvement-based acquisitions ranked weakest overall}\new{: no acquisition raises the mean attainment by more than $0.05$ on any benchmark (probability of improvement on Branin-Fav, Thompson sampling on Branin-Unfav), Thompson sampling lowers it by $0.11$ on HOPV15 and $0.13$ on Matbench-gap, and the lower confidence bound and max-value entropy search lower it by $0.06$--$0.10$ on the Branin functions}
+(\del{Fig.~5}\new{Supplementary Fig.~\ref{suppfig:portfolio}}). We additionally evaluated a fully uncertainty-aware variant
 that adds a second BLR head on the HF network and applies EI at both fidelities.
 As a matched control for the surrogate-versus-acquisition question, the baseline MFGP was also run
 with a greedy policy that selects by its posterior mean, all other settings held fixed
-(Fig.~\ref{fig:acquisition}).
+(\del{Fig.~4}\new{Supplementary Fig.~\ref{suppfig:acquisition}}).
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{paper_figures/supp_acq_matrix.pdf}
+\caption{\new{Surrogate $\times$ acquisition comparison under attainment. \textbf{a--i,} Attainment (the Fig.~\ref{fig:final_regret} rule: the mean over the pool's top 5, 2, 1 and 0.5\% targets of the share of the budget window spent at or below the target) for the baseline MFGP with its default expected-improvement (EI) acquisition and with the greedy policy, and for the End-to-End Joint Training surrogate with its default greedy policy and with EI driven by its BLR predictive standard deviation; bars, mean $\pm$ s.e.\ over 40 seeds (42--81; FreeSolv MFGP with EI, $n = 39$, one failed fit). Budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap, whose acquisition runs stop at their original budget of 20. \textbf{j,} Attainment with EI minus attainment with the greedy policy, paired per seed and averaged, for the baseline MFGP (40 seeds) and each of the nine transfer-learning surrogates (seeds 42--61); positive values mean that EI attains more.}}
+\label{suppfig:acquisition}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{paper_figures/supp_acq_portfolio.pdf}
+\caption{\new{Acquisition portfolio under attainment. \textbf{a,} Share of the nine transfer-learning surrogates for which the uncertainty-driven acquisition (EI, probability of improvement, the GP lower confidence bound, max-value entropy search or Thompson sampling, each using the BLR predictive standard deviation) attains more than the greedy policy on each benchmark. \textbf{b,} Mean paired difference in attainment (acquisition minus greedy) over the nine surrogates. \textbf{c--k,} Attainment per acquisition, mean $\pm$ s.e.\ over the nine surrogates of each surrogate's mean over 20 seeds (42--61); budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap at its original budget of 20.}}
+\label{suppfig:portfolio}
+\end{figure*}
 
 \paragraph{Activation.} To isolate the effect of the activation function, the benchmark
 suite was repeated with ReLU in place of $\tanh$ under otherwise identical architectures
@@ -244,7 +258,7 @@ and training, recording expected calibration error, negative log-likelihood, sha
 \paragraph{Calibration.} For every surrogate we computed the LF expected
 calibration error, negative log-likelihood, and sharpness on held-out candidates and
 related them to \del{the final optimization regret}\new{the attainment of Fig.~\ref{fig:final_regret}}; the resulting correlation is reported in
-the main text (Fig.~\ref{fig:calibration}\new{e--q}).
+the main text (Fig.~\ref{fig:calibration}\new{a--m}).
 
 \paragraph{Uncertainty placement, candidate masking, and adaptive scheduling.} Three other ablations were run: the placement of the BLR head (LF only, HF only, or both); the candidate-masking rule, excluding LF-evaluated candidates from HF evaluation instead of the default rule under which each fidelity excludes only the candidates it has already evaluated; and replacing the round-robin schedule with an adaptive cost-weighted policy. Each was evaluated on a representative
 subset of three to five benchmarks spanning the favourable and unfavourable regimes, and on

@@ -35,95 +35,22 @@
 %%   optimum; PI beats greedy only on Branin-Fav/Park-Fav; Thompson the least reliable; ReLU better on 3 of
 %%   the 4 pools tested). No numbers are quoted on purpose: Figs. 4 and 5 a-d still show the previous runs
 %%   and are to be regenerated on the 40-seed set (SI) before the captions and these panels agree again.
-%% Display-item budget (npj Comp. Mater.): up to 6 items (figures and/or tables).
-%% Current count = 6:
-%%   Fig 1  overview + final regret (a--j) + family-split heatmap (anytime-AUC row)
-%%   Fig 2  regret trajectories
-%%   Fig 3  surrogate x acquisition matrix
-%%   Fig 4  acquisition portfolio + calibration-vs-regret
-%%   Fig 5  top-k/screening + compute scaling law
-%%   Tab 1  benchmark suite (Methods)
-%% [done] Combine old Figs 1+2, add heatmap -> Fig 1. Main text shows the
-%%        anytime-AUC row (strongest claim: TL > baseline in 126/126 cells); the
-%%        final-regret row's message (variants close the endpoint gap) is carried
-%%        by one sentence of text, per the NCS plan. Full 3x3 grid (final-regret
-%%        + anytime-AUC + marginals) kept as Supplementary Fig., suppfig:family_split
-%% [done] Grid-experiment text integrated: Results subsection sec:res-grid
-%%        (~250 w), Methods protocol sec:meth-grid, Discussion paragraph,
-%%        SI note suppnote:family_split (robustness + curation TODO stubs)
-%% [done] Combine old Figs 6,7,8 -> old 6 (calibration) merged with old 5 (portfolio)
-%%        as Fig 4, and old 7+8 (top-k + scaling) form Fig 5, so each composite
-%%        stays within one page and maps one-to-one onto the Results sections
-%% [done] plain/standard MFGP renamed "baseline MFGP" (matches heatmap panel titles)
-%% [done] remaining "Appendix" cross-refs changed to Supplementary (they were broken)
-%% [todo] Verify grid-protocol numbers in Methods sec:meth-grid against the
-%%        analysis scripts (RF config, knob calibration, budget, binning)
-%% [done] Terminology unified (2026-07-13). Canonical choices:
-%%        "transfer-learning surrogate(s)" (was: deep / deep neural / neural /
-%%        transfer-learning deep surrogate); "baseline MFGP" (was: the MFGP,
-%%        exact MFGP, baseline autoregressive MFGP); "MFGP variants" (was: GP
-%%        variants); "deep-kernel GP", "sparse variational MFGP" (was: ...GP);
-%%        "acquisition policy" (was: rule/strategy) with individual members
-%%        called "acquisitions"; "greedy policy" (was: greedy selection /
-%%        exploitation / configuration); "uncertainty-driven" (was: -guided);
-%%        "BLR" (was: Bayesian last-layer); "LF--HF" en-dash; -ization spelling
-%%        (was: -isation) with British behaviour/favourable/colour; "among"
-%%        (was: amongst). Abstract + Fig 1 keep plain-language "selection rule"
-%%        (glossed as acquisition policy in the Fig 1 caption).
-%% [done] Figures re-exported (2026-07-13) with unique Nature-style panel letters:
-%%        Fig 1 = a (LaTeX overlay on overview) + b--k (final regret) + l--n
-%%        (fig1_anytime_row.pdf, replaces the old trim/clip crop); Fig 2 = a--i;
-%%        Fig 4 = a--d + e--m; Fig 5 = a,b + c; SI full grid = a--i.
-%%        trajectory legend now uses paper terminology; code-name mapping verified
-%%        in the experiment repo: TwoStageJoint = Pretrain-then-Joint,
-%%        DNGOJoint = Stop-Gradient (no_grad on LF path), DNGOGradient = End-to-End.
-%%        Known pre-existing issue (see Downloads/REPORT.md): several figures are
-%%        drawn 4-5x wider than print width, so body fonts land at 2-4pt in print;
-%%        fixing requires figsize reduction (layout change, needs approval).
-%% [done] Abbreviation-consistency + British-spelling pass (2026-07-13, 2nd pass):
-%%        defined abbreviations now used consistently after first use in body text
-%%        (BO, MFBO, SDL, LF/HF, EI, BLR, FLOPs); PCA defined at first use; unused
-%%        "(DKL)" definition dropped (canonical term: deep-kernel GP); duplicate
-%%        NARGP definition in Methods removed; SI given its own definitions for
-%%        standalone submission (MFBO, LF/HF, EI, FLOPs, MMD, AUC; "MLL" spelled
-%%        out); captions/abstract/headings deliberately keep full forms
-%%        (self-contained). British 2nd pass: analysed, modelled/modelling,
-%%        pseudo-labelling, towards (-ization kept per Oxford/Nature house style).
-%% [done] Figure re-export from the experiment repo (2026-07-24): Fig 3 legend
-%%        renamed to TL/MFGP x greedy/EI (was DNN . greedy / DNN . UQ-EI (BLR-std)
-%%        / MFGP . UQ-EI; "DNN" was undefined in the text); "Pseudo-Labelling"
-%%        (UK) in final_regret, regret_trajectory, A1_calibration_vs_regret,
-%%        computing_time. Data verified bit-identical, only label strings changed.
-%% [note] 2026-07-22 Overleaf sync (Chris's review edits) merged: abstract rewrite,
-%%        Sec 2.5 calibration paragraph restructured to lead with the correlation
-%%        range, FLOPs-vs-wall-clock justification sentence added in Methods.
-%%        Overleaf had collapsed this notes block; restored from local history.
-%% [done] Rank-panel statistics demoted to SI (2026-07-26), per first-supervisor
-%%        request that Friedman/Nemenyi serve as supplementary support only.
-%%        Fig 1k caption and Results 2.2 no longer carry chi^2/p; both point to
-%%        the new Supplementary Note suppnote:rank_stats, which reports the
-%%        omnibus in full and explains why the null is the design's prediction
-%%        (CD = 7.15 > observed rank range 6.52; the ranking reverses between
-%%        the synthetic and molecular regimes). The dashed CD line stays in the
-%%        caption gloss because it is baked into final_regret.pdf.
-%% [done] Compute-rank Friedman/Nemenyi removed entirely (2026-07-26, author
-%%        decision: the compute story does not need rank statistics). Dropped
-%%        from the Supp Fig computing_time caption (panel j is kept, described
-%%        descriptively) and from the contrast paragraph of suppnote:rank_stats;
-%%        the Methods Demsar sentence now scopes to Fig 1k alone. The compute
-%%        claim rests on the scaling-law exponents and absolute FLOPs, which are
-%%        untouched. NOTE: panel j itself is still in computing_time.pdf.
-%% [done] Data/Code availability (2026-07-26): no repository link at preprint
-%%        stage (agreed with supervisors). The "DOI to be assigned upon
-%%        acceptance" wording implied a deposit that does not exist, and its
-%%        replacement ("released on publication") was self-contradictory in a
-%%        preprint, so both sections are removed for now -- see the note above
-%%        \backmatter. Reinstate them with the Zenodo/GitHub DOI at journal
-%%        submission.
-%% [done] Review-feedback text (2026-07-22): tanh transition sentence restored
-%%        after the Sec 2.5 rewrite; RF-vs-direct-perturbation rationale and
-%%        synthetic-bias caveat added in sec:meth-grid; Discussion grid-scope
-%%        clause extended to match.
+%%   [2026-09-13, pass 4] Fig. 4 (surrogate x acquisition) and Fig. 5 a-d (portfolio) moved to the SI as
+%%   Supplementary Figs. suppfig:acquisition (attainment, 40 seeds, paper_figures/supp_acq_matrix.pdf) and
+%%   suppfig:portfolio (attainment, 20 seeds 42-61, paper_figures/supp_acq_portfolio.pdf), both regenerated
+%%   from the new run set (refig_20260908/supp_attain.py). The calibration panels are now a standalone
+%%   figure (Fig. 4, panels a-m; fig4_calibration_attain.pdf), Fig. 6 becomes Fig. 5. The pass-3 blue
+%%   sentences on acquisition were aligned with the regenerated figures. Old figure environments are kept
+%%   commented out in place. Main text now has 5 figures + Table 1 = 6 display items.
+%% Display-item budget (Nature Computational Science): up to 6 items (figures and/or tables).
+%% Current count = 6 (2026-09-13):
+%%   Fig 1  overview (a) + multi-target attainment on 13 benchmarks (b-p)
+%%   Fig 2  regret trajectories (a-m)
+%%   Fig 3  controlled-grid final-regret advantage maps (a-c)
+%%   Fig 4  calibration versus attainment (a-m)
+%%   Fig 5  top-k overlap + LF-screening regret (a,b) + compute scaling (c)
+%%   Table 1 benchmark suite
+%%   SI: Supplementary Figs. 1 (surrogate x acquisition), 2 (portfolio), 3 (grid, complete), 4 (star sensitivity), 5 (loop FLOPs)
 
 \documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Nature Portfolio (npj Computational Materials), two-column journal layout
 
@@ -271,7 +198,7 @@ improving sample efficiency in autonomous discovery under constrained experiment
 \textbf{a,} in a self-driving laboratory, a shared candidate pool
 $\mathcal{X}_{\mathrm{cand}}$ is queried through a cheap low-fidelity (LF)
 source (cost $\rho \ll 1$) and a scarce, expensive high-fidelity (HF) experiment
-(cost $1$). With the budget, fidelity schedule and model capacity held fixed (the acquisition policy is matched separately, Fig.~\ref{fig:acquisition}), only the surrogate is varied: a \del{four}\new{three}-member Gaussian-process family (baseline MFGP, \del{NARGP, }deep-kernel
+(cost $1$). With the budget, fidelity schedule and model capacity held fixed (the acquisition policy is matched separately, \del{Fig.~4}\new{Supplementary Fig.~\ref{suppfig:acquisition}}), only the surrogate is varied: a \del{four}\new{three}-member Gaussian-process family (baseline MFGP, \del{NARGP, }deep-kernel
 GP, sparse variational MFGP) against \del{eleven}\new{nine} transfer-learning (TL) surrogates, in
 which a network trained on
 LF data, $g^{(L)}$, is corrected by a second network, $g^{(H)}$, trained on
@@ -460,31 +387,34 @@ policy}\label{sec:res-acquisition}
 
 Because the GP and transfer-learning surrogates used structurally different acquisition
 policies under the default protocol, we matched the acquisition policy across both model families to test whether
-the observed advantage of transfer-learning surrogates could be explained by this asymmetry. In the default setting, the baseline MFGP used an uncertainty-driven expected-improvement (EI) acquisition whereas the transfer-learning surrogates used a greedy policy (Methods). We therefore compared matched acquisition settings by running the baseline MFGP under a greedy policy and the transfer-learning surrogates under an uncertainty-driven EI policy using their own Bayesian linear-regression (BLR) predictive standard deviation (Fig.~\ref{fig:acquisition} shows End-to-End Joint Training\del{; the medians below cover all eleven}). Using the greedy policy for the baseline MFGP had little effect on performance. \del{Final regret changed only marginally, for example $6.55 \rightarrow 6.71$ on COFs and $0.17 \rightarrow 0.14$ on polarizability, so}\new{Its regret trajectory under the greedy policy followed that under EI, so} the limitation of the baseline MFGP\new{, where one appears,} arises primarily from the surrogate rather than the acquisition policy. \del{Under this matched greedy policy the transfer-learning surrogates retained
+the observed advantage of transfer-learning surrogates could be explained by this asymmetry. In the default setting, the baseline MFGP used an uncertainty-driven expected-improvement (EI) acquisition whereas the transfer-learning surrogates used a greedy policy (Methods). We therefore compared matched acquisition settings by running the baseline MFGP under a greedy policy and the transfer-learning surrogates under an uncertainty-driven EI policy using their own Bayesian linear-regression (BLR) predictive standard deviation (\del{Fig.~4}\new{Supplementary Fig.~\ref{suppfig:acquisition}} shows End-to-End Joint Training\del{; the medians below cover all eleven}). Using the greedy policy for the baseline MFGP had little effect on performance. \del{Final regret changed only marginally, for example $6.55 \rightarrow 6.71$ on COFs and $0.17 \rightarrow 0.14$ on polarizability, so}\new{Its attainment under the greedy policy was within $0.02$ of that under EI on eight of the nine benchmarks, and on HOPV15 the greedy policy lowered it ($0.23$ against $0.32$) rather than raising it, so} the limitation of the baseline MFGP\new{, where one appears,} arises primarily from the surrogate rather than the acquisition policy. \del{Under this matched greedy policy the transfer-learning surrogates retained
 a large advantage on COFs, achieving approximately an $8\times$ lower regret than the baseline MFGP for the median transfer-learning surrogate and a $16\times$ lower regret for the
 best. Smaller but consistent advantages were also observed on the remaining molecular benchmarks. The transfer-learning surrogates showed the opposite behaviour: their performance was strongly sensitive to the acquisition policy. On COFs the median regret across the eleven transfer-learning surrogates
 increased from $0.80$ under the greedy policy to $6.13$ when its predictive uncertainty was used to drive
-exploration.}\new{The transfer-learning surrogate was likewise insensitive to the acquisition policy: with its BLR uncertainty driving EI it performed as well as or better than under the greedy policy on every benchmark of Fig.~\ref{fig:acquisition} except Branin-Fav.}
+exploration.}\new{The transfer-learning surrogate was likewise insensitive to the acquisition policy: with its BLR uncertainty driving EI, End-to-End Joint Training attained within $0.01$ of its greedy value on seven benchmarks, $0.04$ less on Branin-Fav and $0.07$ more on HOPV15 (Supplementary Fig.~\ref{suppfig:acquisition}a--i); across the nine transfer-learning surrogates the sign of the EI effect on HOPV15 depends on the architecture (Supplementary Fig.~\ref{suppfig:acquisition}j).}
 These results suggest that the baseline MFGP
 posterior \emph{mean} misranks the promising regions in these descriptor spaces, so changing the acquisition policy has limited effect. By contrast, the transfer-learning surrogate appeared to provide a more useful ranking of HF candidates\del{, making performance more dependent on how scarce HF
 evaluations were allocated between exploitation and exploration}\new{, and it was that ranking, not the allocation of scarce HF evaluations between exploitation and exploration, that set its performance}. We therefore examined \del{this sensitivity}\new{the role of exploration further} using a broader acquisition-function portfolio.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.92\textwidth]{paper_figures/A6_acquisition_matrix.pdf}
-\caption{Surrogate $\times$ acquisition comparison. Regret (mean $\pm$ s.e.) at the budget
-shown in each panel title, for the baseline multi-fidelity Gaussian process (MFGP) and one transfer-learning (TL) surrogate, End-to-End Joint Training, under uncertainty-driven (expected improvement, EI) and greedy acquisition policies; the TL EI policy uses the surrogate's Bayesian linear-regression predictive standard deviation. The two Park functions
-(\textbf{c},\textbf{d}) are solved by every condition at the full budget, so \del{following Fig.~\ref{fig:final_regret}} they are evaluated at the earlier budget $B=10$, before every
-condition saturates. On the chemistry benchmarks the two baseline MFGP bars are nearly equal,
-showing that the acquisition policy does not explain the baseline MFGP's \del{poor performance there,
-whereas the transfer-learning surrogate degrades sharply when uncertainty-driven exploration replaces
-greedy exploitation of the transfer-learned mean}\new{shortfall where it occurs; the transfer-learning surrogate performs as well as or better when uncertainty-driven exploration replaces greedy exploitation of the transfer-learned mean, except on Branin-Fav}.}
-\label{fig:acquisition}
-\end{figure*}
+%% [2026-09-13, pass 4] The surrogate x acquisition figure moved to the Supplementary Information as
+%% Supplementary Fig. suppfig:acquisition (regenerated on the new run set, attainment, 40 seeds;
+%% paper_figures/supp_acq_matrix.pdf). The previous main-text figure (old run set) is kept here commented out.
+%% \begin{figure*}[t]
+%% \centering
+%% \includegraphics[width=0.92\textwidth]{paper_figures/A6_acquisition_matrix.pdf}
+%% \caption{Surrogate $\times$ acquisition comparison. Regret (mean $\pm$ s.e.) at the budget
+%% shown in each panel title, for the baseline multi-fidelity Gaussian process (MFGP) and one transfer-learning (TL) surrogate, End-to-End Joint Training, under uncertainty-driven (expected improvement, EI) and greedy acquisition policies; the TL EI policy uses the surrogate's Bayesian linear-regression predictive standard deviation. The two Park functions
+%% (\textbf{c},\textbf{d}) are solved by every condition at the full budget, so \del{following Fig.~\ref{fig:final_regret}} they are evaluated at the earlier budget $B=10$, before every
+%% condition saturates. On the chemistry benchmarks the two baseline MFGP bars are nearly equal,
+%% showing that the acquisition policy does not explain the baseline MFGP's \del{poor performance there,
+%% whereas the transfer-learning surrogate degrades sharply when uncertainty-driven exploration replaces
+%% greedy exploitation of the transfer-learned mean}\new{shortfall where it occurs; the transfer-learning surrogate performs as well as or better when uncertainty-driven exploration replaces greedy exploitation of the transfer-learned mean, except on Branin-Fav}.}
+%% \label{fig:acquisition}
+%% \end{figure*}
 
 \subsection{Uncertainty-driven exploration has benchmark-dependent value}\label{sec:res-uq}
 
-Whether calibrated surrogate uncertainty improves BO depends on both the acquisition policy and the structure of the benchmark. To test this systematically, we replaced the greedy policy with a portfolio of five uncertainty-driven acquisitions spanning the standard taxonomy (the improvement-based EI and probability of improvement, the optimistic GP lower confidence bound, the information-theoretic max-value entropy search and sampling-based Thompson sampling; Methods), each using the BLR predictive standard deviation of the transfer-learning surrogate with the architecture, fidelity schedule, HF protocol and random seeds held fixed, across all eleven transfer-learning surrogates and nine benchmarks (Fig.~\ref{fig:portfolio}).
+Whether calibrated surrogate uncertainty improves BO depends on both the acquisition policy and the structure of the benchmark. To test this systematically, we replaced the greedy policy with a portfolio of five uncertainty-driven acquisitions spanning the standard taxonomy (the improvement-based EI and probability of improvement, the optimistic GP lower confidence bound, the information-theoretic max-value entropy search and sampling-based Thompson sampling; Methods), each using the BLR predictive standard deviation of the transfer-learning surrogate with the architecture, fidelity schedule, HF protocol and random seeds held fixed, across all \del{eleven}\new{nine} transfer-learning surrogates and nine benchmarks (\del{Fig.~5}\new{Supplementary Fig.~\ref{suppfig:portfolio}}).
 
 The effect of uncertainty-driven exploration was case-dependent rather than uniform\new{, and small where the LF signal transferred strongly}. \del{On COFs, where the LF
 signal transferred strongly,
@@ -498,34 +428,38 @@ surrogates, and on polarizability most
 uncertainty-driven acquisitions improved over the greedy policy.}\new{On COFs, FreeSolv and polarizability every acquisition reached the optimum within the budget for every surrogate, and none improved on the greedy policy by more than a small margin in how early it did so: when the transfer-learned mean already provides a useful ranking, exploration has little to add.} The acquisition family mattered more than the presence
 of uncertainty alone. \del{Thompson sampling was the most robust uncertainty-driven acquisition,
 outperforming the greedy policy on the largest fraction of surrogates on average, whereas the
-improvement-based acquisitions (EI and probability of improvement) were the least reliable}\new{Probability of improvement was the only acquisition that beat the greedy policy on most surrogates, and only on Branin-Fav and Park-Fav, whereas Thompson sampling was the least reliable, falling behind the greedy policy on most surrogates on several benchmarks} (Fig.~\ref{fig:portfolio}a).
+improvement-based acquisitions (EI and probability of improvement) were the least reliable}\new{No uncertainty-driven acquisition raised the mean attainment of the transfer-learning surrogates by more than a small margin on any benchmark, whereas Thompson sampling lowered it markedly on HOPV15 and Matbench-gap and the lower confidence bound and max-value entropy search lowered it on the Branin functions} (\del{Fig.~5a}\new{Supplementary Fig.~\ref{suppfig:portfolio}}).
 The greedy policy therefore remained the most robust single default,
 whereas uncertainty-driven exploration showed benchmark-dependent benefits, motivating evaluation across an acquisition-function
 portfolio rather than reliance on a single acquisition.
 
+%% [2026-09-13, pass 4] former caption text of panels a-d (portfolio), now in the SI:
+%% \textbf{a--d,} a five-member acquisition portfolio spanning the standard taxonomy
+%% (expected improvement and probability of improvement; the Gaussian-process lower
+%% confidence bound; max-value entropy search; Thompson sampling), each using the transfer-learning
+%% surrogate's Bayesian linear-regression (BLR) predictive standard deviation, compared against the greedy policy
+%% across all eleven transfer-learning surrogates and nine benchmarks. \textbf{a,} the
+%% fraction of the eleven surrogates on which each uncertainty-driven acquisition beats the greedy policy (red:
+%% rarely; blue: usually); \del{averaged over benchmarks, Thompson sampling beats the greedy policy most
+%% often and the improvement-based acquisitions least often}\new{no acquisition beats the greedy policy on most surrogates except probability of improvement on Branin-Fav and Park-Fav, and Thompson sampling does so least often}. \textbf{b--d,} final regret (mean
+%% over the eleven surrogates; error bars, s.e.\ across surrogates) on the three
+%% high-correlation chemistry benchmarks (LF--HF rank correlation $\ge 0.94$)\del{: every
+%% uncertainty-driven acquisition is worse than the greedy policy on COFs, whereas Thompson sampling beats
+%% it on FreeSolv and polarizability}\new{, on which every acquisition reaches the optimum within the budget for every surrogate, so the acquisitions differ there only marginally in how early they reach it}.
 \begin{figure*}[tp]
 \centering
 %% Display item 4 of 6 — composite: (a--d) acquisition portfolio;
 %% (e--q) calibration versus attainment (pass 2, 13 benchmarks). Both blocks belong to this section's
 %% uncertainty story; panel letters are baked into the PDFs and unique across
 %% the composite.
-\includegraphics[width=0.8\textwidth]{paper_figures/acquisition_portfolio.pdf}\\[4pt]
+%% [2026-09-13, pass 4] portfolio panels a-d moved to the SI (Supplementary Fig. suppfig:portfolio, regenerated);
+%% this figure now holds the calibration panels only, re-lettered a-m (fig4_calibration_attain.pdf =
+%% A1_calibration_13_attain_mean.pdf re-rendered with CAL_LETTERS=abcdefghijklm).
+%%\includegraphics[width=0.8\textwidth]{paper_figures/acquisition_portfolio.pdf}\\[4pt]
 %%\includegraphics[width=\textwidth]{paper_figures/A1_calibration_vs_regret.pdf}
-\includegraphics[width=0.9\textwidth]{paper_figures/A1_calibration_13_attain_mean.pdf}
-\caption{The value of uncertainty-driven exploration is case-dependent, and calibration
-does not predict optimization performance.
-\textbf{a--d,} a five-member acquisition portfolio spanning the standard taxonomy
-(expected improvement and probability of improvement; the Gaussian-process lower
-confidence bound; max-value entropy search; Thompson sampling), each using the transfer-learning
-surrogate's Bayesian linear-regression (BLR) predictive standard deviation, compared against the greedy policy
-across all eleven transfer-learning surrogates and nine benchmarks. \textbf{a,} the
-fraction of the eleven surrogates on which each uncertainty-driven acquisition beats the greedy policy (red:
-rarely; blue: usually); \del{averaged over benchmarks, Thompson sampling beats the greedy policy most
-often and the improvement-based acquisitions least often}\new{no acquisition beats the greedy policy on most surrogates except probability of improvement on Branin-Fav and Park-Fav, and Thompson sampling does so least often}. \textbf{b--d,} final regret (mean
-over the eleven surrogates; error bars, s.e.\ across surrogates) on the three
-high-correlation chemistry benchmarks (LF--HF rank correlation $\ge 0.94$)\del{: every
-uncertainty-driven acquisition is worse than the greedy policy on COFs, whereas Thompson sampling beats
-it on FreeSolv and polarizability}\new{, on which every acquisition reaches the optimum within the budget for every surrogate, so the acquisitions differ there only marginally in how early they reach it}.
+%%\includegraphics[width=0.9\textwidth]{paper_figures/A1_calibration_13_attain_mean.pdf}
+\includegraphics[width=0.9\textwidth]{paper_figures/fig4_calibration_attain.pdf}
+\caption{\del{The value of uncertainty-driven exploration is case-dependent, and calibration does not predict optimization performance.}\new{Calibration does not predict optimization performance.}
 \del{\textbf{e--m,} calibration versus regret: each point is one of the fifteen surrogates (Gaussian-process
 family in warm colours, transfer-learning surrogates in cool colours; legend); axes are
 the low-fidelity expected calibration error and the final regret, one panel per
@@ -534,11 +468,11 @@ to $-0.08$ on HOPV15), so the best-calibrated surrogates (the Gaussian-process f
 are, if anything, the worst optimizers on the molecular-descriptor benchmarks. The two
 Park benchmarks (\textbf{g},\textbf{h}) saturate to $\approx 0$ regret by the
 full budget (Park-Fav additionally exhausts its $256$-point candidate pool), so both
-are evaluated at the early decision budget $B=10$, consistent with the regret figures (Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory}).}\new{\textbf{e--q,} calibration versus attainment: each point is one of the twelve surrogates (legend), placed at its held-out low-fidelity expected calibration error averaged over the refits of the optimization loop (horizontal) and at its attainment from Fig.~\ref{fig:final_regret} at the budget shown (vertical; mean $\pm$ s.e.\ over 40 seeds), one panel per benchmark. The Pearson correlation across the twelve surrogate means is given for description only (higher attainment is better, so a positive $r$ would mean that better-calibrated surrogates optimize better). No consistent relation appears: $|r| \ge 0.5$ only on Matbench-gap and ExptGap-PBE (\textbf{m},\textbf{n}), where the three GP surrogates are both the worst-calibrated and the least effective, and on COFs (\textbf{i}), where, as on FreeSolv and polarizability (\textbf{j},\textbf{k}), every surrogate attains $0.84$--$0.96$ and the correlation carries no information.}}
-\label{fig:portfolio}\label{fig:calibration}
+are evaluated at the early decision budget $B=10$, consistent with the regret figures (Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory}).}\new{\textbf{a--m,} calibration versus attainment: each point is one of the twelve surrogates (legend), placed at its held-out low-fidelity expected calibration error averaged over the refits of the optimization loop (horizontal) and at its attainment from Fig.~\ref{fig:final_regret} at the budget shown (vertical; mean $\pm$ s.e.\ over 40 seeds), one panel per benchmark. The Pearson correlation across the twelve surrogate means is given for description only (higher attainment is better, so a positive $r$ would mean that better-calibrated surrogates optimize better). No consistent relation appears: $|r| \ge 0.5$ only on Matbench-gap and ExptGap-PBE (\textbf{i},\textbf{j}), where the three GP surrogates are both the worst-calibrated and the least effective, and on COFs (\textbf{e}), where, as on FreeSolv and polarizability (\textbf{f},\textbf{g}), every surrogate attains $0.84$--$0.96$ and the correlation carries no information.}}
+\label{fig:calibration}
 \end{figure*}
 
-Calibration quality was a poor predictor of optimization performance\del{: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from $-0.88$ on COFs to $-0.08$ on HOPV15 (Fig.~\ref{fig:calibration}e--m). If anything, the best-calibrated surrogates, including the entire GP family, were the weakest optimizers on the molecular-descriptor benchmarks.}\new{: across the twelve surrogates and thirteen benchmarks, the correlation between the loop-mean held-out LF calibration error and attainment had no consistent sign, and exceeded $|r| = 0.5$ only on Matbench-gap and ExptGap-PBE ($r = -0.66$ and $-0.89$), where the three GP surrogates were both the worst-calibrated LF models (calibration error $0.15$--$0.36$ against $0.09$--$0.12$ for the transfer-learning surrogates) and the weakest optimizers, and on COFs ($r = -0.52$), where every surrogate attains $0.90$--$0.93$ and the correlation is uninformative (Fig.~\ref{fig:calibration}e--q). Nor did good calibration mark the best optimizers: the baseline MFGP had the lowest LF calibration error on eight of the thirteen benchmarks yet ranked in the lower half of the twelve surrogates by attainment on seven of the nine chemistry and materials pools, whereas the deep-kernel GP, the worst-calibrated on eight benchmarks, was among the best optimizers on Branin.}
+Calibration quality was a poor predictor of optimization performance\del{: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from $-0.88$ on COFs to $-0.08$ on HOPV15 (Fig.~\ref{fig:calibration}e--m). If anything, the best-calibrated surrogates, including the entire GP family, were the weakest optimizers on the molecular-descriptor benchmarks.}\new{: across the twelve surrogates and thirteen benchmarks, the correlation between the loop-mean held-out LF calibration error and attainment had no consistent sign, and exceeded $|r| = 0.5$ only on Matbench-gap and ExptGap-PBE ($r = -0.66$ and $-0.89$), where the three GP surrogates were both the worst-calibrated LF models (calibration error $0.15$--$0.36$ against $0.09$--$0.12$ for the transfer-learning surrogates) and the weakest optimizers, and on COFs ($r = -0.52$), where every surrogate attains $0.90$--$0.93$ and the correlation is uninformative (Fig.~\ref{fig:calibration}a--m). Nor did good calibration mark the best optimizers: the baseline MFGP had the lowest LF calibration error on eight of the thirteen benchmarks yet ranked in the lower half of the twelve surrogates by attainment on seven of the nine chemistry and materials pools, whereas the deep-kernel GP, the worst-calibrated on eight benchmarks, was among the best optimizers on Branin.}
 \del{The bounded $\tanh$ activation used throughout was likewise justified by
 optimization rather than calibration. In a
 matched $\tanh$-versus-ReLU ablation on the molecular-descriptor benchmarks, calibration error was nearly identical for the two activations ($0.30$
@@ -621,7 +555,7 @@ high-evaluation tasks it delivers this accuracy at up to roughly \del{$45\times$
 The most counter-intuitive result concerns uncertainty-driven exploration, whose value we
 found to be case-dependent rather than uniformly beneficial or harmful. \del{Where the LF signal transfers strongly and cleanly (COFs), the transfer-learning surrogates perform best by greedily exploiting their transfer-learned mean, and every member of a five-acquisition portfolio spanning the standard taxonomy degrades, by up to an order of magnitude, when its BLR uncertainty drives exploration instead, so this failure is a property of the regime, not of a particular acquisition. On other high-correlation chemistry benchmarks
 (FreeSolv, polarizability), by contrast, a sampling-based acquisition (Thompson sampling) beat the
-greedy policy on every surrogate, while the improvement-based acquisitions won least often on average.}\new{Where the LF signal transfers strongly and cleanly (COFs, FreeSolv, polarizability), the transfer-learning surrogates reach the optimum by greedily exploiting their transfer-learned mean, and no member of a five-acquisition portfolio spanning the standard taxonomy improves on this when its BLR uncertainty drives exploration instead. Where exploration did help, on Branin-Fav and Park-Fav, it was the improvement-based probability of improvement that beat the greedy policy, whereas the sampling-based Thompson sampling was the least reliable acquisition.}
+greedy policy on every surrogate, while the improvement-based acquisitions won least often on average.}\new{Where the LF signal transfers strongly and cleanly (COFs, FreeSolv, polarizability), the transfer-learning surrogates reach the optimum by greedily exploiting their transfer-learned mean, and no member of a five-acquisition portfolio spanning the standard taxonomy improves on this when its BLR uncertainty drives exploration instead. Where exploration changed the outcome at all, on the smooth synthetic functions, the gains were small, whereas Thompson sampling lowered attainment on HOPV15 and Matbench-gap and was the least reliable acquisition.}
 Calibration quality did not \new{consistently }predict optimization performance\del{, and the best-calibrated surrogates (the GP family) were, if anything, the worst optimizers on the molecular-descriptor tasks}\new{; where a strong correlation appeared, it arose because poorly calibrated GP surrogates were also the weakest optimizers}. We interpret this through the strong-transfer regime that often characterizes SDL pipelines: when an abundant LF signal already orders candidates well, a high-quality posterior mean is worth more than exploration\del{, and the wrong kind of exploration is sharply counterproductive}\new{, and exploration adds little}. Effort is therefore better spent first on the quality of the transferred representation\del{, with sampling-based acquisitions preferred where exploration is used}.
 
 The benchmark also clarifies when a learned surrogate is needed at all. Our
@@ -717,7 +651,7 @@ bound~\citep{srinivas2012information}, max-value entropy search~\citep{wang2017m
 Thompson sampling~\citep{russo2018tutorial}, spanning the standard acquisition-function
 taxonomy~\citep{shahriari2015taking}. We further tested a fully uncertainty-aware variant with a
 second BLR head on the HF network and EI applied at both fidelities. These variants are analysed in
-the Results (Fig.~\ref{fig:portfolio}) and reported in full in the Supplementary
+the Results (\del{Fig.~5}\new{Supplementary Fig.~\ref{suppfig:portfolio}}) and reported in full in the Supplementary
 Information. All objectives were formulated as minimization problems, with maximization
 targets negated.
 
