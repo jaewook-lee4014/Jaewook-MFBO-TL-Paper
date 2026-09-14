@@ -34,6 +34,7 @@ bf9b2eb858b0b071337e16f80101daee  snapshot/refig_20260908/figrepo/figures/_commo
 dcdc272d7cf9119f43f7f6e4f23802be  snapshot/refig_20260908/figrepo/figures/make_a1_calibration_13_attain.py
 2f1b9be75633db8b6f1c0d9e7efb1dab  snapshot/refig_20260908/figrepo/figures/make_b2_topk_13.py
 47a4446ded816248ed49c093d895a293  snapshot/refig_20260908/figrepo/figures/make_fig1ln_final.py
+717c7e257e19e1a8aaa424b6b271727d  snapshot/refig_20260908/figrepo/figures/make_fig1ln_final_5tl.py
 ee8ac2bfe28c953d81e170aec48135f9  snapshot/refig_20260908/figrepo/figures/make_flops_blr.sh
 e7c6a21ec3f36358a49763538cf4a08a  snapshot/refig_20260908/figrepo/figures/make_scaling_law_blr.py
 3341c81da207cbedafa78db9170f908b  snapshot/refig_20260908/figrepo/figures/make_scaling_law_blr_5tl.py
@@ -41,6 +42,8 @@ f8083e4441f20ef2be936a4ff56d637c  snapshot/refig_20260908/figrepo/figures/plot_c
 4ced72791dba9d76cc0feeae7b830e90  snapshot/refig_20260908/figrepo/figures/plot_computing_flops_blr_5tl.py
 e436296167b46a5a9f6006981919fbca  snapshot/refig_20260908/final_pipeline.sh
 3899535beaae40671a2b1edc8f88caea  snapshot/refig_20260908/make_all.sh
+2d3ba00ac2b6e0db8e31a465a01a511f  snapshot/refig_20260908/merge_grid5tl.py
+0eb87607c63c0fdb4dbaf0faf797d029  snapshot/refig_20260908/one_task_grid5tl.sh
 fe3f05231c856397db0c6fcccab4057f  snapshot/refig_20260908/pools.py
 ae1ce3ca1f0afe090b7e5e69d5d34610  snapshot/refig_20260908/prep_candidates2.py
 2f178f54f83cb6cfcd7be2b04a9749cc  snapshot/refig_20260908/run_flop_profile_blr.py

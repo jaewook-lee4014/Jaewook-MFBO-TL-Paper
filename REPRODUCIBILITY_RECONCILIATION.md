@@ -24,9 +24,9 @@ The machine-readable version is `reproducibility/run_manifest.csv` (experiments 
 
 | Display item | Experiments | Raw cells (VM) | Aggregation |
 |---|---|---|---|
-| Fig. 1 b-p (attainment, 13 pools, 12 surrogates, 40 seeds) | E01-E04 (nine pools, budget runs), E05-E07 (extension runs of FreeSolv, Polarizability, HOPV15, Matbench-Gap), E08 (four large pools, cap 60/31) | `refig_20260908/{results, results_gp, results_gp_vm, results_gp_vm2, results_conf, results_gp_conf}`, `ext_chem_20260909/{results, results_slurm, results_ext100, results_confirm_ext}` | `export_explorer.py` (longest run per seed, seeds 42-81, NARGP dropped, Curriculum = KD = PL merged) -> `explorer_data.json` -> `fig1_attainment.py` (targets = pool top 5/2/1/0.5 %, window [end of initial design, B], B = 50 / 30) |
+| Fig. 1 b-p (attainment, 13 pools, 8 surrogates, 40 seeds) | E01-E04 (nine pools, budget runs), E05-E07 (extension runs of FreeSolv, Polarizability, HOPV15, Matbench-Gap), E08 (four large pools, cap 60/31) | `refig_20260908/{results, results_gp, results_gp_vm, results_gp_vm2, results_conf, results_gp_conf}`, `ext_chem_20260909/{results, results_slurm, results_ext100, results_confirm_ext}` | `export_explorer.py` (longest run per seed, seeds 42-81, NARGP dropped, the five retained transfer-learning surrogates) -> `explorer_data.json` -> `fig1_attainment.py` (targets = pool top 5/2/1/0.5 %, window [end of initial design, B], B = 50 / 30) |
 | Fig. 2 a-m | same cells | same | `fig2_trajectories.py` (mean +- s.e. of best-so-far regret on a 0.25-unit grid; windows 50 / 30) |
-| Fig. 3 a-c | E09 (TL grid rows, refig runner) + E10 (MFGP / SV-MFGP / DKL rows = public `results/grid`, June 2026) | `refig_20260908/figrepo/results/grid/cells` (merged by `collect.py`) | `make_fig1ln_final.py` best-of-family final regret, 126 cells x 10 seeds |
+| Fig. 3 a-c | E09 (TL grid rows; re-run 2026-09-14 for the five retained surrogates into `results_grid_5tl`) + E10 (MFGP / SV-MFGP / DKL rows = public `results/grid`, June 2026) | `refig_20260908/figrepo/results/grid5tl/cells` (new TL rows + unchanged GP rows, merged by `merge_grid5tl.py`) | `make_fig1ln_final_5tl.py` best-of-family final regret, 126 cells x 5 TL surrogates x 10 seeds |
 | Fig. 4 a-m | ECE from the summary CSVs of E01-E04 and E08; attainment from Fig. 1 | as above | `make_a1_calibration_13_attain.py ECE_X=mean` |
 | Fig. 5 a,b | E15 (pool statistics) | the 13 pool CSVs | `make_b2_topk_13.py` |
 | Fig. 5 c, SI Fig. 3 | E11 (FLOP profile, BLR head) | `figrepo/results/flop_profile_blr/flop_profile.csv` | `make_scaling_law_blr.py`, `plot_computing_flops_blr.py` (GP set = MFGP, SV-MFGP, DKL) |
@@ -50,7 +50,7 @@ Verified in `refig_20260908/run_tl.py` (md5 `c89da997`) and `benchmark.py` (`24f
   chosen by leave-one-out error over {10, 30, 100, 300, 1000}), 10 on the `g_L` coefficient, 1 on the bias; noise precision `beta = 1 / LOO-MSE`
   clipped to [1, 100]. The residual MLP `g_H` is trained by each mechanism but its output is not used (`HF_HEAD=blr_replace`).
   This matches Methods ("Surrogate models") and SI Note 2. Consequence, verified on 720/720 trajectory pairs: Curriculum, Knowledge
-  Distillation and Pseudo-Labelling are identical (reported as feature-extraction transfer).
+  Distillation and Pseudo-Labelling are identical; all three are outside the five-surrogate set of the manuscript.
 - Uncertainty: `sigma_H` from the same head (`blr_predict`), used only by the acquisition-portfolio arms; the calibration analysis uses the
   LF head with alpha = beta = 1 (`benchmark.py _fit_lf_blr`, `run_tl.py` ECE on the held-out pool). SI Note 2 says the same.
 - Queries: TL surrogates take `argmin mu_H` at both fidelities among the candidates not yet evaluated at that fidelity. GP baselines take
@@ -72,7 +72,7 @@ VM-versus-SLURM identity. Outcome (details per claim in `claim_manifest.csv`, 72
 - 3 **clarifications** added where the text was correct but incomplete (GP acquisition rules, Park LF formula wording, regret reference).
 - 1 **author action** (public repository, section 9) and 2 **ambiguous-version** items left to the authors (section 6).
 
-Reproduced exactly (recomputed / quoted): grid 81/45/0, 60/65/1, 81; rho -0.79/-0.15, -0.62/+0.04; mean advantage 0.0636 / 0.0171;
+Reproduced exactly (recomputed / quoted): grid 81/45/0, 66/60/0, 81; rho -0.81/-0.09, -0.78/+0.11; mean advantage 0.0717 / 0.0253;
 calibration r -0.657 / -0.820 / -0.525 with |r| >= 0.5 nowhere else; MFGP lowest ECE 7/13, DKL highest 8/13; screening regrets 4.517 /
 3.90 / 0.91 / 0.0892 / 1.15 eV / 384 / 369 / 3 GPa (73.6 / 96.6 / 0.57 % of range), LF rank 1033; FLOPs k_N 0.942 (R^2 0.995) and
 2.294 (0.932), break-even 39.8, 3.47x / 8.86x, per-model k 3.04 / 2.32 / 1.52 / 0.89-0.99, loop ratios 43.1x / 27.8x / 11.0x; HOPV15
@@ -114,7 +114,7 @@ no LaTeX errors, no undefined references or citations.
 4. **Fig. 3 GP rows (missing provenance for the generating commit).** The 126 x 3 GP cells are byte-identical to the public
    `results/grid` (June 2026 campaign, `runners/grid/run_ext.py`); the commit and environment that produced them were not recorded.
    The protocol identity with the TL rows (FPS design, 2 HF + 5 LF, per-fidelity masking, EI/greedy) was checked at code level on
-   2026-09-08 and the TL rows carry n_hf 25 / n_lf 249 as stated. Re-running the 3,780 GP grid runs would remove the caveat.
+   2026-09-08 and the TL rows carry n_hf 25 / n_lf 249 as stated. Re-running the 3,780 GP grid runs would remove the caveat. The 2026-09-14 five-surrogate re-run replaced only the TL rows (`results_grid_5tl`); these GP cells were reused verbatim.
 5. **FLOP profile budgets.** The compute comparison profiles FreeSolv on the 50-unit loop and Matbench-Gap on the 20-unit loop while the
    performance comparison evaluates both at 30 (stated in SI Note 6). A B = 30 profile would need `run_flop_profile_blr.py` with a
    changed SCHED (minutes on the VM).
@@ -128,7 +128,7 @@ no LaTeX errors, no undefined references or citations.
    command would not regenerate the shipped files. (b) A controlled version restricted to the 10,311 compounds present in all three
    pools, with one shared PCA basis and identical HF, is prepared on the VM in `/mnt/data/jaewook_mfbo/pools_elastic_common/`
    (`elastic_{chgnet,sevennet,mattersim}_shear_common.csv` + `ids_common.csv`; not registered in `pools.py`, no runs). Running the
-   12 surrogates x 40 seeds on it would allow the ladder claim to be restated as a controlled comparison. (c) No mp-ids exist in the
+   8 surrogates x 40 seeds on it would allow the ladder claim to be restated as a controlled comparison. (c) No mp-ids exist in the
    pipeline; rows are identified by the `idx` column of the generation CSVs (`experiments/matbench_budget_ext/mlip_elastic/gen_csvs/`).
 
 9. **RDKit version behind the 210-descriptor count.** Table 1 and Supplementary Table 4 state 210 RDKit 2D descriptors for the three
@@ -155,7 +155,7 @@ no LaTeX errors, no undefined references or citations.
 - Current = anything produced by `refig_20260908` / `ext_chem_20260909` runners (`run_tl.py` with `HF_HEAD=blr_replace LF_TARGET=hf_argmin`,
   `run_gp.py` with `GP_ACQ=ei`), summary/trajectory cells named `summary_<pool>_<model>_s<a>-<b>.csv` with 2026-09-08 to 2026-09-13 mtimes,
   seeds 42-81, per-fidelity masking, ECE columns present. The paper's aggregate inputs are `explorer_data.json` (2026-09-14 exact export),
-  `figrepo/results/grid`, `flop_profile_blr/flop_profile.csv`, the pool CSVs.
+  `figrepo/results/grid5tl`, `flop_profile_blr/flop_profile.csv`, the pool CSVs.
 - Previous = the public repository `results/*` (`main_9bench`, `main_corrected`, `extra_baselines`, `gpfamily_newbench`, `mfgp_greedy_*`,
   `calibration_*`, `acq_portfolio`, `flop_profile`, `ranking_analysis`, `traj_cells`) and `paper_figures/{final_regret, regret_trajectory,
   fig1_anytime_row, fig1c_family_split_grid, A6_acquisition_matrix, acquisition_portfolio, A1_calibration_vs_regret, B2_topk_overlap_and_screening,
@@ -177,7 +177,7 @@ SUMMARY=score $PY figcand2_20260914_exact/scripts/fig1_attainment_exact.py
 $PY figcand2_20260914_exact/scripts/fig2_trajectories_exact.py
 cd figrepo/figures && ECE_X=mean CAL_LETTERS=abcdefghijklm CAL_STEM=fig4_calibration_attain $PY ../../figcand2_20260914_exact/scripts/make_a1_calibration_13_attain_exact.py
 # Fig. 3
-cd figrepo/figures && FIG1LN_LETTERS=a,b,c FIG_STEM=fig_grid_final $PY make_fig1ln_final.py
+cd figrepo/figures && FIG1LN_LETTERS=a,b,c FIG_STEM=fig_grid_final $PY make_fig1ln_final_5tl.py   # GRID_DIR=results/grid5tl, built by merge_grid5tl.py
 # Fig. 5 a,b
 cd figrepo/figures && MPLBACKEND=Agg FIG_OUT=fig5_13 $PY make_b2_topk_13.py
 # Fig. 5 c and SI Fig. 3
@@ -185,7 +185,7 @@ cd figrepo/figures && GP_VARIANTS=DKL FIG_OUT=dkl $PY make_scaling_law_blr.py &&
 # SI Figs. 1-2
 $PY supp_attain.py S1 S2
 # verification of every quoted number
-OUT=/mnt/data/jaewook_mfbo/verify_out $PY /path/to/reproducibility/verify/verify_paper_numbers.py
+OUT=/mnt/data/jaewook_mfbo/verify_out_5tl $PY /path/to/reproducibility/verify/verify_paper_numbers_5tl.py   # five-surrogate set
 # manuscript
 bash build.sh clean      # main.pdf / si.pdf (redline) and main_clean.pdf / si_clean.pdf
 ```
@@ -199,7 +199,7 @@ Exact reproduction of the PDFs requires the VM matplotlib (`figcand2_20260914_ex
   the current TL surrogates use `argmin mu_H` of the BLR HF head at both fidelities.
 - `src/benchmark.py` in the public repo is the model code the paper uses (identical except an activation switch), but its BO loop
   (`run_bo*`) is not the loop that produced the paper's runs (`run_tl.py` / `run_gp.py`).
-- `results/grid` is current (reused unchanged); every other `results/*` folder is superseded.
+- `results/grid` supplies the Fig. 3 GP rows unchanged; its TL rows are superseded by the five-surrogate re-run (`results_grid_5tl`). Every other `results/*` folder is superseded.
 - Only nine pool CSVs and two benchmark build scripts are present; the four materials pools of Table 1 rows 10-13 are missing.
 Draft wording for the release is in `reproducibility/public_release_manifest.csv` (action column). Suggested structure: keep `src/`,
 `data/` (+4 CSVs), `benchmarks/` (+2 scripts), add `experiments/refig_20260908` and `experiments/ext_chem_20260909` (runners, task lists,

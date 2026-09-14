@@ -264,19 +264,22 @@ if len(PX):
     REPORT['ext_prefix'] = dict(compared=int(len(PX)), mismatches=int((~PX.prefix_match).sum()), by_model=g[g.mismatch > 0].to_dict('records'))
 
 # ----------------------------------------------------------------------------------------------------------------------- Fig. 3 grid
-log('# 5. Fig. 3 a-c: 126-cell grid (figrepo/results/grid; TL rows from results_grid, GP rows = public results/grid)')
-man = pd.read_csv(f'{R}/figrepo/results/grid/grid_manifest.csv').set_index('cell_id')
-# 2026-09-14: the grid's TL family is now the five retained classes. The 126-cell campaign was run only with
-# Progressive / KnowledgeDistillation / PseudoLabeling, so this section has no data under the reduced set and is skipped.
+log('# 5. Fig. 3 a-c: 126-cell grid (figrepo/results/grid5tl; TL rows = the five retained classes from results_grid_5tl, GP rows = public results/grid)')
+# 2026-09-14: the grid's TL family is the five retained classes. The whole 126-cell campaign was re-run for them
+# (results_grid_5tl/, 126 cells x 5 classes x 10 seeds); merge_grid5tl.py combines those TL rows with the unchanged
+# GP rows of figrepo/results/grid/cells into figrepo/results/grid5tl/, which is what Fig. 3 is drawn from.
+GRID = os.environ.get('GRID_DIR', f'{R}/figrepo/results/grid5tl')
+GRID_RUNS = os.environ.get('GRID_RUNS', f'{R}/results_grid_5tl')
+GRID_REF = os.environ.get('GRID_REF', f'{R}/figrepo/figures/out/fig5tl_20260914/fig1ln_final_cells.csv')
+man = pd.read_csv(f'{GRID}/grid_manifest.csv').set_index('cell_id')
 FAM = {'TL': ['DNGOJoint', 'TwoStageJoint', 'DNGOGradient', 'SoftParameterSharing', 'DomainAdaptationMMD'],
        'MFGP': ['MFGP'], 'variants': ['DKL', 'SparseMFGP']}
-_gfiles = sorted(glob.glob(f'{R}/figrepo/results/grid/cells/summary_cell_*.csv'))
+_gfiles = sorted(glob.glob(f'{GRID}/cells/summary_cell_*.csv'))
 _gmodels = sorted(pd.read_csv(_gfiles[0]).model.unique()) if _gfiles else []
-GRID_OK = bool(set(FAM['TL']) & set(_gmodels))
+GRID_OK = set(FAM['TL']) <= set(_gmodels) and set(FAM['MFGP'] + FAM['variants']) <= set(_gmodels)
 if not GRID_OK:
-    log(f'  SKIPPED: the grid cells contain only {_gmodels}; none of the five retained TL classes was run on the 126-cell grid.')
-    log('  Fig. 3 is therefore out of scope for the 5-TL regeneration (no grid data exists for the reduced set).')
-    REPORT['grid'] = f'skipped: grid cells contain only {_gmodels}, none of the five retained TL classes'
+    log(f'  SKIPPED: {GRID}/cells contains only {_gmodels}; the eight grid models of the reduced set are not all present.')
+    REPORT['grid'] = f'skipped: grid cells contain only {_gmodels}'
 
 
 def _grid_section():
@@ -305,11 +308,11 @@ def _grid_section():
       log(f'     profile vs agreement (raw): ' + ' '.join(f'{i/10:.1f}:{v:.3f}' for i, v in prof_t.items()))
       log(f'     profile vs R2 (raw): ' + ' '.join(f'{(i+1)/10:.1f}:{v:.3f}' for i, v in prof_r.items()))
   REPORT['grid'] = gres
-  refg = pd.read_csv(f'{R}/figrepo/figures/out/fig1ln_final_cells.csv')
+  refg = pd.read_csv(GRID_REF)
   cg = G.merge(refg, on='cell'); REPORT['grid_max_diff_vs_fig1ln_cells'] = float(max((cg.adv_TL_MFGP - cg['TL|MFGP baseline']).abs().max(), (cg.adv_TL_var - cg['TL|MFGP variants']).abs().max(), (cg.adv_var_MFGP - cg['MFGP variants|MFGP baseline']).abs().max()))
   log(f'  max |diff| vs fig1ln_final_cells.csv: {REPORT["grid_max_diff_vs_fig1ln_cells"]:.3g}')
   # grid run sizes (n_hf, n_lf) from the TL grid summaries
-  gt = pd.concat([pd.read_csv(f) for f in glob.glob(f'{R}/results_grid/blr_replace__hf_argmin/cells/summary_*.csv')[:50]])
+  gt = pd.concat([pd.read_csv(f) for f in glob.glob(f'{GRID_RUNS}/blr_replace__hf_argmin/cells/summary_*.csv')[:50]])
   log(f'  grid TL runs: n_hf {sorted(gt.n_hf.unique())}, n_lf {sorted(gt.n_lf.unique())} (sample of 50 files)')
   REPORT['grid_n_hf_n_lf'] = dict(n_hf=sorted(int(x) for x in gt.n_hf.unique()), n_lf=sorted(int(x) for x in gt.n_lf.unique()))
 
