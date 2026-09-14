@@ -1,11 +1,12 @@
 %% Fig. 1 overview for
 %% "Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian Optimization"
 %% Vector source of paper_figures/fig1_overview.pdf (3-panel schematic); labels match the main text
-%% (DKL; up to 43x fewer FLOPs, BLR-head profile 2026-09-11). Edited 2026-09-03 for the NCS submission:
+%% (DKL; up to 22x fewer FLOPs, BLR-head profile 2026-09-14). Edited 2026-09-03 for the NCS submission:
 %% panels widened and shortened so the content fills them, fonts one step larger, included at \textwidth.
-%% Counts updated 2026-09-11 to the final data basis (13 benchmarks; 3 GP + 9 TL surrogates: NARGP excluded,
-%% Curriculum/KD/Pseudo-labelling merged into feature-extraction transfer) and to the Fig. 1b-p attainment result
-%% (best TL at or above best GP on all 9 chemistry & materials pools).
+%% Counts updated 2026-09-14 to the final data basis (13 benchmarks; 3 GP + 5 TL surrogates: NARGP excluded;
+%% Sequential, Progressive, feature-extraction transfer (Curriculum/KD/Pseudo-labelling) and Adapter dropped, leaving
+%% Frozen-representation transfer, Pretrain-then-Joint, End-to-End Joint, Soft Parameter Sharing and Domain Adaptation
+%% (MMD)) and to the Fig. 1b-p attainment result (best TL at or above best GP on all 9 chemistry & materials pools).
 %% Helvetica, colour-blind-safe blue/orange palette (matches graphical_abstract.tex / Figs 2-4).
 %% Build:  pdflatex fig1_overview.tex  ->  fig1_overview.pdf (auto-cropped)
 \documentclass[border=6pt]{standalone}
@@ -104,7 +105,7 @@
 
 % TL lane
 \node[chip, fill=tlbox, anchor=west] (tlc) at (\Bl+0.35,1.95)
-     {Transfer-learning\\(TL) surrogates $\times 9$};
+     {Transfer-learning\\(TL) surrogates $\times 5$};
 \node[netbox, anchor=west] (gL) at (10.85,1.95) {$g^{(L)}$};
 \node[netbox, right=0.32cm of gL] (gH) {$g^{(H)}$};
 \node[circle, draw=tldk, line width=0.8pt, fill=white, inner sep=1.8pt, font=\footnotesize,
@@ -147,7 +148,7 @@
 \fill[gpcol] (\Cl+1.15,1.17) rectangle (\Cr-0.45,1.43);
 \node[glab, anchor=east, text=sub] at (\Cl+1.05,0.70) {TL};
 \fill[tlcol] (\Cl+1.15,0.57) rectangle (\Cl+1.65,0.83);
-\node[text=tlbox, font=\bfseries\normalsize, anchor=west] at (\Cl+1.8,0.70) {up to $43\times$ fewer FLOPs};
+\node[text=tlbox, font=\bfseries\normalsize, anchor=west] at (\Cl+1.8,0.70) {up to $22\times$ fewer FLOPs};
 
 \end{tikzpicture}
 \end{document}

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Export per-seed best-so-far change points for the interactive figure explorer (13 pools x 12 models x seeds 42-81).
-Reuses the loading rules of prep_candidates2.py (largest horizon wins; no NARGP; merged FET). Output: explorer_data.json"""
+"""Export per-seed best-so-far change points for the interactive figure explorer (13 pools x 8 models x seeds 42-81).
+Reuses the loading rules of prep_candidates2.py (largest horizon wins; no NARGP; five TL surrogates). Output: explorer_data.json"""
 import json, os, sys, numpy as np, pandas as pd
 sys.argv = ["x"]
 os.environ["OUT"] = "/tmp/explorer_tmp"
-src = open("/mnt/data/jaewook_mfbo/MFBO-TL-Paper/experiments/refig_20260908/prep_candidates2.py").read()
+src = open("/mnt/data/jaewook_mfbo/MFBO-TL-Paper/experiments/refig_20260908/figcand2_20260914_5tl/scripts/prep_candidates2.py").read()
 # execute only the loading part (everything before the metrics section)
 head = src.split("S = {\"meta\"")[0]
 ns = {}
@@ -40,6 +40,6 @@ for b in POOLS:
             rows[str(s)] = {"hz": float(hz), "pts": [[float(x), float(y)] for x, y in pts]}
         if rows: P["series"][m] = rows
     data["pools"][b] = P
-out = "/mnt/data/jaewook_mfbo/MFBO-TL-Paper/experiments/refig_20260908/figcand2_20260914_exact/explorer_data.json"
+out = "/mnt/data/jaewook_mfbo/MFBO-TL-Paper/experiments/refig_20260908/figcand2_20260914_5tl/explorer_data.json"
 json.dump(data, open(out, "w"), separators=(",", ":"))
 print("wrote", out, os.path.getsize(out) // 1024, "KB")

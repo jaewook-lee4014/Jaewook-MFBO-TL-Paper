@@ -37,20 +37,24 @@ SHORT = {"Branin-Fav": "Branin-Fav", "Branin-Unfav": "Branin-Unfav", "Park-Fav":
          "Polarizability": "Polarizability", "HOPV15": "HOPV15", "Matbench-Gap": "Matbench-gap", "ExptGap-PBE": "ExptGap-PBE", "Elastic-CHGNet": "Elastic-CHGNet",
          "Elastic-SevenNet": "Elastic-SevenNet", "Elastic-MatterSim": "Elastic-MatterSim"}
 
-MERGED = "Feature-extraction transfer"
-RENAME = {"DNGOGradient": "End-to-End Joint", "DNGO-Gradient": "End-to-End Joint", "DNGOJoint": "Stop-Gradient Joint", "DNGO-Joint": "Stop-Gradient Joint",
-          "TwoStageJoint": "Pretrain-then-Joint", "Two-Stage Joint": "Pretrain-then-Joint", "DomainAdaptationMMD": "Domain Adaptation (MMD)", "Domain Adaptation (MMD)": "Domain Adaptation (MMD)",
+# 2026-09-14: transfer-learning set reduced from 9 display models (11 classes) to 5. Dropped: Sequential, Progressive, Adapter,
+# Curriculum / KnowledgeDistillation / PseudoLabeling (the former 'Feature-extraction transfer' merge). DNGOJoint is relabelled
+# 'Frozen-representation transfer' and keeps the colour of the former 'Stop-Gradient Joint'. Display count 12 -> 8.
+RENAME = {"DNGOGradient": "End-to-End Joint", "DNGO-Gradient": "End-to-End Joint",
+          "DNGOJoint": "Frozen-representation transfer", "DNGO-Joint": "Frozen-representation transfer",
+          "TwoStageJoint": "Pretrain-then-Joint", "Two-Stage Joint": "Pretrain-then-Joint",
+          "DomainAdaptationMMD": "Domain Adaptation (MMD)", "Domain Adaptation (MMD)": "Domain Adaptation (MMD)",
           "SoftParameterSharing": "Soft Parameter Sharing", "Soft Parameter Sharing": "Soft Parameter Sharing",
-          "KnowledgeDistillation": MERGED, "Knowledge Distillation": MERGED, "PseudoLabeling": MERGED, "Pseudo-Labeling": MERGED, "Pseudo-Labelling": MERGED, "Curriculum": MERGED,
-          "Sequential": "Sequential", "Progressive": "Progressive", "Adapter": "Adapter",
           "MFGP": "MFGP", "SparseMFGP": "Sparse MFGP", "Sparse MFGP": "Sparse MFGP", "DKL": "DKL", "DKL Multi-Fidelity": "DKL"}
 GP = ["MFGP", "Sparse MFGP", "DKL"]
-TL = ["Sequential", MERGED, "End-to-End Joint", "Progressive", "Pretrain-then-Joint", "Stop-Gradient Joint", "Domain Adaptation (MMD)", "Soft Parameter Sharing", "Adapter"]
+TL = ["Frozen-representation transfer", "Pretrain-then-Joint", "End-to-End Joint", "Soft Parameter Sharing", "Domain Adaptation (MMD)"]
 ORDER = GP + TL
-ABBR = {"MFGP": "MFGP", "Sparse MFGP": "SV-MFGP", "DKL": "DKL", "Sequential": "Seq", MERGED: "FET", "End-to-End Joint": "E2E", "Progressive": "Prog", "Pretrain-then-Joint": "PtJ",
-        "Stop-Gradient Joint": "SGJ", "Domain Adaptation (MMD)": "MMD", "Soft Parameter Sharing": "SPS", "Adapter": "Adpt"}
-LINECOL = {"MFGP": "#1f3a93", "Sparse MFGP": "#1b9e77", "DKL": "#5aa9e6", "Sequential": "#7fb3e6", MERGED: "#e6a23c", "End-to-End Joint": "#5cb85c", "Progressive": "#f28e8e",
-           "Pretrain-then-Joint": "#8e7cc3", "Stop-Gradient Joint": "#b5651d", "Domain Adaptation (MMD)": "#9e9e9e", "Soft Parameter Sharing": "#c9b037", "Adapter": "#d62728"}
+MERGED = None
+ABBR = {"MFGP": "MFGP", "Sparse MFGP": "SV-MFGP", "DKL": "DKL", "Frozen-representation transfer": "Frozen", "Pretrain-then-Joint": "PtJ",
+        "End-to-End Joint": "E2E", "Soft Parameter Sharing": "SPS", "Domain Adaptation (MMD)": "MMD"}
+LINECOL = {"MFGP": "#1f3a93", "Sparse MFGP": "#1b9e77", "DKL": "#5aa9e6", "Frozen-representation transfer": "#b5651d",
+           "Pretrain-then-Joint": "#8e7cc3", "End-to-End Joint": "#5cb85c", "Soft Parameter Sharing": "#c9b037",
+           "Domain Adaptation (MMD)": "#9e9e9e"}
 GP_FILL, GP_EDGE, GP_BEST = "#F5B49A", "#C0654A", "#D9734F"
 TL_FILL, TL_EDGE, TL_BEST = "#A9CBEE", "#3B6FB6", "#4C86D6"
 

@@ -59,7 +59,24 @@ CODE_NAMES = {'MFGP': 'MFGP',
               'Domain Adaptation (MMD)': 'MMD',
               'Soft Parameter Sharing': 'SPS',
               'Pseudo-Labelling': 'PL',
-              'Adapter': 'Adpt'}
+              'Adapter': 'Adpt',
+              # 2026-09-14 reduced transfer-learning set (5 configurations)
+              'Frozen-representation transfer': 'Frozen',
+              'Pretrain-then-Joint': 'PtJ',
+              'End-to-End Joint': 'E2E'}
+
+# ---------------------------------------------------------------------------
+# 2026-09-14: the paper's transfer-learning set is reduced from 11 training
+# configurations (9 display models) to 5. These are the model names as they
+# appear in the FLOP-profile CSV, and their display names.
+TL5_PROFILE = ['DNGO-Joint', 'Two-Stage Joint', 'DNGO-Gradient',
+               'Soft Parameter Sharing', 'Domain Adaptation (MMD)']
+RENAME_5TL = {'DNGO-Joint': 'Frozen-representation transfer',
+              'Two-Stage Joint': 'Pretrain-then-Joint',
+              'DNGO-Gradient': 'End-to-End Joint'}
+CODE_KEY_TL_5 = ('TL: Frozen = Frozen-representation transfer · '
+                 'PtJ = Pretrain-then-Joint · E2E = End-to-End Joint · '
+                 'SPS = Soft Parameter Sharing · MMD = Domain Adaptation (MMD)')
 
 
 def code(name):
