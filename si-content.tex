@@ -61,7 +61,7 @@ Fidelity encoding & Last column: 0 = LF, 1 = HF \\
 At each iteration the GP was retrained from scratch by maximizing the exact marginal
 log-likelihood with L-BFGS-B via \texttt{fit\_gpytorch\_mll}, and predictions were taken
 from the posterior at the high-fidelity (HF) level $s=1$. The multi-fidelity GP uses this
-single cross-fidelity posterior for acquisition at both fidelity steps.
+single cross-fidelity posterior for acquisition at both fidelity steps\new{: EI with the HF incumbent selects the LF query and the lowest posterior mean selects the HF query (Methods)}.
 
 
 \suppnote{Uncertainty quantification via Bayesian linear regression}{suppnote:blr}
@@ -177,18 +177,18 @@ degrades as $\alpha$ decreases.
 \subsection{Park function}
 The HF Park function is
 \begin{equation}
-f^{(H)}(x_1, x_2, x_3, x_4) = \frac{x_1}{2}\sqrt{1 + \frac{(x_2 + x_3^2)x_4}{x_1^2}} + (x_1 + 3x_4)\exp\!\left(1 + \sin(x_3)\right),
+f^{(H)}(x_1, x_2, x_3, x_4) = \frac{x_1}{2}\sqrt{\frac{(x_2 + x_3^2)x_4}{x_1^2}} + (x_1 + 3x_4)\exp\!\left(1 + \sin(x_3)\right),
 \end{equation}
-with $x_i \in [0,1]$ and global minimum $f^* = 0$. The LF approximation modifies
-the $x_4$ coefficient ($3 \rightarrow 3 - 1.5(1-\alpha)$) and scales the exponential
-argument by $\alpha$.
+with $x_i \in [0,1]$ and global minimum $f^* = 0$\new{, approached as $x_1, x_4 \to 0$. This is the form implemented in the released code and used to generate the candidate lattice; it differs from the classical Park function, $\tfrac{x_1}{2}\bigl[\sqrt{1 + (x_2 + x_3^2)x_4/x_1^2} - 1\bigr] + (x_1 + 3x_4)\exp(1 + \sin x_3)$, in the first term, and lattice points with $x_1 = 0$ or $x_4 = 0$ are evaluated with a $10^{-8}$ guard on $x_1$ and $x_4$}. The LF approximation modifies
+the $x_4$ coefficient ($3 \rightarrow 3 - 1.5(1-\alpha)$) and scales the \del{exponential
+argument}\new{sine term of the exponent} by $\alpha$\new{, $\exp(1 + \alpha\sin(x_3))$}.
 
 \subsection{Scenario configurations}
 Supplementary Table~\ref{supptab:synthetic_scenarios} lists the $\alpha$ values and resulting
 characteristics. The $R^2$ values were computed by sampling 1,000 uniform points,
 evaluating both fidelities, and fitting a linear regression from LF to HF. Candidate pools
 were constructed by uniform grid discretization ($50^2 = 2{,}500$ for Branin; $4^4 = 256$
-for Park).
+for Park). \new{The lattices include the domain boundaries, and regret is measured relative to the best candidate of the lattice rather than the analytical minimum: the best Branin lattice point has $f^{(H)} = 0.4045$ (analytical $f^* = 0.3979$) and the best Park lattice point $1.1 \times 10^{-7}$.}
 
 \begin{table}[h]
 \centering
@@ -222,7 +222,7 @@ sampling-based Thompson sampling~\citep{russo2018tutorial}. Each replaces only t
 acquisition\new{, seeds 42--61}). For each acquisition and benchmark we report the fraction of surrogates on
 which it beats the greedy policy\new{ and the mean paired difference in attainment}\del{: the greedy policy beat all five acquisitions on COFs on ten of the
 eleven surrogates, whereas Thompson sampling beat the greedy policy on every surrogate on FreeSolv and
-polarizability, and the improvement-based acquisitions ranked weakest overall}\new{: no acquisition raises the mean attainment by more than $0.05$ on any benchmark (probability of improvement on Branin-Fav, Thompson sampling on Branin-Unfav), Thompson sampling lowers it by $0.11$ on HOPV15 and $0.13$ on Matbench-gap, and the lower confidence bound and max-value entropy search lower it by $0.06$--$0.10$ on the Branin functions}
+polarizability, and the improvement-based acquisitions ranked weakest overall}\new{: no acquisition raises the mean attainment by more than \del{$0.05$}\new{about $0.05$ ($+0.052$ and $+0.051$)} on any benchmark (probability of improvement on Branin-Fav, Thompson sampling on Branin-Unfav), Thompson sampling lowers it by $0.11$ on HOPV15 and $0.13$ on Matbench-gap, and the lower confidence bound and max-value entropy search lower it by $0.06$--$0.10$ on the Branin functions}
 (\del{Fig.~5}\new{Supplementary Fig.~\ref{suppfig:portfolio}}). \del{We additionally evaluated a fully uncertainty-aware variant
 that adds a second BLR head on the HF network and applies EI at both fidelities.}
 As a matched control for the surrogate-versus-acquisition question, the baseline MFGP was also run

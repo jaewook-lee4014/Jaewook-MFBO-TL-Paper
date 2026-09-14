@@ -1,0 +1,1825 @@
+{
+ "thr_max_diff_vs_explorer": 0.0,
+ "same_horizon_conflicts": 0,
+ "fet_identity": {
+  "identical": 720,
+  "compared": 720,
+  "maxdev": 0.0
+ },
+ "fig1_attainment_max_diff_vs_values_csv": 0.010851648351647258,
+ "fig1_n_not_40": [
+  {
+   "pool": "Branin-Fav",
+   "model": "Sparse MFGP",
+   "n": 36
+  },
+  {
+   "pool": "Branin-Unfav",
+   "model": "Sparse MFGP",
+   "n": 39
+  }
+ ],
+ "fig1_best_of_family": [
+  {
+   "pool": "Branin-Fav",
+   "best_TL": "E2E",
+   "TL": 0.688,
+   "best_GP": "DKL",
+   "GP": 0.913,
+   "diff": -0.226,
+   "verdict": "GP",
+   "min_all": 0.287,
+   "max_all": 0.913,
+   "min_TL": 0.287,
+   "max_GP": 0.913
+  },
+  {
+   "pool": "Branin-Unfav",
+   "best_TL": "E2E",
+   "TL": 0.358,
+   "best_GP": "MFGP",
+   "GP": 0.756,
+   "diff": -0.398,
+   "verdict": "GP",
+   "min_all": 0.011,
+   "max_all": 0.756,
+   "min_TL": 0.011,
+   "max_GP": 0.756
+  },
+  {
+   "pool": "Park-Fav",
+   "best_TL": "Prog",
+   "TL": 0.946,
+   "best_GP": "DKL",
+   "GP": 0.854,
+   "diff": 0.091,
+   "verdict": "TL",
+   "min_all": 0.615,
+   "max_all": 0.946,
+   "min_TL": 0.737,
+   "max_GP": 0.854
+  },
+  {
+   "pool": "Park-Unfav",
+   "best_TL": "SPS",
+   "TL": 0.868,
+   "best_GP": "SV-MFGP",
+   "GP": 0.888,
+   "diff": -0.02,
+   "verdict": "GP",
+   "min_all": 0.774,
+   "max_all": 0.888,
+   "min_TL": 0.801,
+   "max_GP": 0.888
+  },
+  {
+   "pool": "COFs",
+   "best_TL": "MMD",
+   "TL": 0.934,
+   "best_GP": "SV-MFGP",
+   "GP": 0.923,
+   "diff": 0.011,
+   "verdict": "TL",
+   "min_all": 0.9,
+   "max_all": 0.934,
+   "min_TL": 0.9,
+   "max_GP": 0.923
+  },
+  {
+   "pool": "FreeSolv",
+   "best_TL": "Prog",
+   "TL": 0.938,
+   "best_GP": "MFGP",
+   "GP": 0.938,
+   "diff": 0.0,
+   "verdict": "tie(<=0.01)",
+   "min_all": 0.899,
+   "max_all": 0.938,
+   "min_TL": 0.928,
+   "max_GP": 0.938
+  },
+  {
+   "pool": "Polarizability",
+   "best_TL": "FET",
+   "TL": 0.963,
+   "best_GP": "MFGP",
+   "GP": 0.954,
+   "diff": 0.009,
+   "verdict": "tie(<=0.01)",
+   "min_all": 0.844,
+   "max_all": 0.963,
+   "min_TL": 0.963,
+   "max_GP": 0.954
+  },
+  {
+   "pool": "HOPV15",
+   "best_TL": "FET",
+   "TL": 0.405,
+   "best_GP": "MFGP",
+   "GP": 0.317,
+   "diff": 0.087,
+   "verdict": "TL",
+   "min_all": 0.08,
+   "max_all": 0.405,
+   "min_TL": 0.179,
+   "max_GP": 0.317
+  },
+  {
+   "pool": "Matbench-Gap",
+   "best_TL": "Adpt",
+   "TL": 0.462,
+   "best_GP": "SV-MFGP",
+   "GP": 0.322,
+   "diff": 0.141,
+   "verdict": "TL",
+   "min_all": 0.245,
+   "max_all": 0.462,
+   "min_TL": 0.363,
+   "max_GP": 0.322
+  },
+  {
+   "pool": "ExptGap-PBE",
+   "best_TL": "SPS",
+   "TL": 0.41,
+   "best_GP": "SV-MFGP",
+   "GP": 0.337,
+   "diff": 0.072,
+   "verdict": "TL",
+   "min_all": 0.29,
+   "max_all": 0.41,
+   "min_TL": 0.349,
+   "max_GP": 0.337
+  },
+  {
+   "pool": "Elastic-CHGNet",
+   "best_TL": "SGJ",
+   "TL": 0.622,
+   "best_GP": "DKL",
+   "GP": 0.604,
+   "diff": 0.018,
+   "verdict": "TL",
+   "min_all": 0.334,
+   "max_all": 0.622,
+   "min_TL": 0.334,
+   "max_GP": 0.604
+  },
+  {
+   "pool": "Elastic-SevenNet",
+   "best_TL": "MMD",
+   "TL": 0.754,
+   "best_GP": "SV-MFGP",
+   "GP": 0.725,
+   "diff": 0.03,
+   "verdict": "TL",
+   "min_all": 0.568,
+   "max_all": 0.754,
+   "min_TL": 0.675,
+   "max_GP": 0.725
+  },
+  {
+   "pool": "Elastic-MatterSim",
+   "best_TL": "Adpt",
+   "TL": 0.881,
+   "best_GP": "SV-MFGP",
+   "GP": 0.863,
+   "diff": 0.017,
+   "verdict": "TL",
+   "min_all": 0.757,
+   "max_all": 0.881,
+   "min_TL": 0.854,
+   "max_GP": 0.863
+  }
+ ],
+ "chem9_wins_ties": {
+  "TL": 7,
+  "tie": 2,
+  "GP": 0
+ },
+ "panel_o_max_diff": 0.0012963915353311206,
+ "panel_p_max_diff": 0.00040257648953306857,
+ "panel_o": {
+  "Stop-Gradient Joint": 0.7554,
+  "End-to-End Joint": 0.7358,
+  "Feature-extraction transfer": 0.7045,
+  "Sequential": 0.7008,
+  "Adapter": 0.6947,
+  "Domain Adaptation (MMD)": 0.6746,
+  "Soft Parameter Sharing": 0.642,
+  "Pretrain-then-Joint": 0.6211,
+  "DKL": 0.6022,
+  "Progressive": 0.5512,
+  "Sparse MFGP": 0.4922,
+  "MFGP": 0.4332
+ },
+ "panel_p": {
+  "Stop-Gradient Joint": 0.8675,
+  "Domain Adaptation (MMD)": 0.856,
+  "Feature-extraction transfer": 0.7996,
+  "Sequential": 0.7978,
+  "Adapter": 0.7866,
+  "End-to-End Joint": 0.7818,
+  "Pretrain-then-Joint": 0.6796,
+  "Soft Parameter Sharing": 0.6796,
+  "Progressive": 0.5967,
+  "DKL": 0.5199,
+  "Sparse MFGP": 0.4408,
+  "MFGP": 0.4038
+ },
+ "panel_o_TL_above_every_GP": 8,
+ "panel_p_TL_above_every_GP": 9,
+ "fig2_max_diff_vs_values_csv": 7.003382800352398e-07,
+ "fig2_endpoints": {
+  "HOPV15": {
+   "MFGP": 2.3125,
+   "SV-MFGP": 3.32,
+   "DKL": 2.6132,
+   "Seq": 1.15,
+   "FET": 1.07,
+   "E2E": 1.2,
+   "Prog": 2.963,
+   "PtJ": 1.658,
+   "SGJ": 1.2705,
+   "MMD": 1.47,
+   "SPS": 2.4407,
+   "Adpt": 1.8427
+  },
+  "Matbench-Gap": {
+   "MFGP": 0.1242,
+   "SV-MFGP": 0.1222,
+   "DKL": 0.207,
+   "Seq": 0.094,
+   "FET": 0.118,
+   "E2E": 0.115,
+   "Prog": 0.1015,
+   "PtJ": 0.0585,
+   "SGJ": 0.1205,
+   "MMD": 0.0948,
+   "SPS": 0.051,
+   "Adpt": 0.0712
+  }
+ },
+ "fig2_Branin-Fav_MFGP_below_all_TL_share": 1.0,
+ "fig2_Branin-Fav_DKL_below_all_TL_share": 0.9601990049751243,
+ "fig2_Branin-Fav_SV-MFGP_below_all_TL_share": 0.0,
+ "fig2_Branin-Unfav_MFGP_below_all_TL_share": 0.9601990049751243,
+ "fig2_Branin-Unfav_DKL_below_all_TL_share": 0.9601990049751243,
+ "fig2_Branin-Unfav_SV-MFGP_below_all_TL_share": 0.0,
+ "ext_prefix": {
+  "compared": 1460,
+  "mismatches": 19,
+  "by_model": [
+   {
+    "pool": "FreeSolv",
+    "model": "Sparse MFGP",
+    "n": 40,
+    "match": 38,
+    "mismatch": 2
+   },
+   {
+    "pool": "HOPV15",
+    "model": "Sparse MFGP",
+    "n": 40,
+    "match": 35,
+    "mismatch": 5
+   },
+   {
+    "pool": "Matbench-Gap",
+    "model": "Sparse MFGP",
+    "n": 40,
+    "match": 28,
+    "mismatch": 12
+   }
+  ]
+ },
+ "grid": {
+  "TL vs MFGP": {
+   "pos": 81,
+   "tie": 45,
+   "neg": 0,
+   "rho_agreement": -0.786,
+   "rho_r2": -0.145,
+   "mean_raw": 0.0636,
+   "mean_range_units": 0.0636,
+   "profile_agreement_raw": {
+    "0": 0.1968,
+    "1": 0.114,
+    "2": 0.1058,
+    "3": 0.0822,
+    "4": 0.0716,
+    "5": 0.0367,
+    "6": 0.0401,
+    "7": 0.0242,
+    "8": 0.0296,
+    "9": 0.0177,
+    "10": 0.0043
+   },
+   "profile_r2_raw": {
+    "0": 0.0866,
+    "1": 0.0646,
+    "2": 0.0529,
+    "3": 0.064,
+    "4": 0.0624,
+    "5": 0.0746,
+    "6": 0.0588,
+    "7": 0.075,
+    "8": 0.0352
+   },
+   "profile_agreement_range": {
+    "0": 0.1968,
+    "1": 0.114,
+    "2": 0.1058,
+    "3": 0.0822,
+    "4": 0.0716,
+    "5": 0.0367,
+    "6": 0.0401,
+    "7": 0.0242,
+    "8": 0.0296,
+    "9": 0.0177,
+    "10": 0.0043
+   },
+   "profile_r2_range": {
+    "0": 0.0866,
+    "1": 0.0646,
+    "2": 0.0529,
+    "3": 0.064,
+    "4": 0.0624,
+    "5": 0.0746,
+    "6": 0.0588,
+    "7": 0.075,
+    "8": 0.0352
+   }
+  },
+  "TL vs variants": {
+   "pos": 60,
+   "tie": 65,
+   "neg": 1,
+   "rho_agreement": -0.624,
+   "rho_r2": 0.035,
+   "mean_raw": 0.0171,
+   "mean_range_units": 0.0171,
+   "profile_agreement_raw": {
+    "0": 0.0421,
+    "1": 0.035,
+    "2": 0.0327,
+    "3": 0.0298,
+    "4": 0.016,
+    "5": 0.0071,
+    "6": 0.0178,
+    "7": 0.0049,
+    "8": 0.0059,
+    "9": 0.0,
+    "10": 0.0
+   },
+   "profile_r2_raw": {
+    "0": 0.0174,
+    "1": 0.0166,
+    "2": 0.0159,
+    "3": 0.0107,
+    "4": 0.0151,
+    "5": 0.0237,
+    "6": 0.0096,
+    "7": 0.0286,
+    "8": 0.0172
+   },
+   "profile_agreement_range": {
+    "0": 0.0421,
+    "1": 0.035,
+    "2": 0.0327,
+    "3": 0.0298,
+    "4": 0.016,
+    "5": 0.0071,
+    "6": 0.0178,
+    "7": 0.0049,
+    "8": 0.0059,
+    "9": 0.0,
+    "10": 0.0
+   },
+   "profile_r2_range": {
+    "0": 0.0174,
+    "1": 0.0166,
+    "2": 0.0159,
+    "3": 0.0107,
+    "4": 0.0151,
+    "5": 0.0237,
+    "6": 0.0096,
+    "7": 0.0286,
+    "8": 0.0172
+   }
+  },
+  "variants vs MFGP": {
+   "pos": 81,
+   "tie": 45,
+   "neg": 0,
+   "rho_agreement": -0.722,
+   "rho_r2": -0.203,
+   "mean_raw": 0.0464,
+   "mean_range_units": 0.0464,
+   "profile_agreement_raw": {
+    "0": 0.1547,
+    "1": 0.079,
+    "2": 0.0731,
+    "3": 0.0524,
+    "4": 0.0557,
+    "5": 0.0295,
+    "6": 0.0223,
+    "7": 0.0193,
+    "8": 0.0236,
+    "9": 0.0177,
+    "10": 0.0043
+   },
+   "profile_r2_raw": {
+    "0": 0.0692,
+    "1": 0.048,
+    "2": 0.0369,
+    "3": 0.0533,
+    "4": 0.0473,
+    "5": 0.0509,
+    "6": 0.0492,
+    "7": 0.0464,
+    "8": 0.018
+   },
+   "profile_agreement_range": {
+    "0": 0.1547,
+    "1": 0.079,
+    "2": 0.0731,
+    "3": 0.0524,
+    "4": 0.0557,
+    "5": 0.0295,
+    "6": 0.0223,
+    "7": 0.0193,
+    "8": 0.0236,
+    "9": 0.0177,
+    "10": 0.0043
+   },
+   "profile_r2_range": {
+    "0": 0.0692,
+    "1": 0.048,
+    "2": 0.0369,
+    "3": 0.0533,
+    "4": 0.0473,
+    "5": 0.0509,
+    "6": 0.0492,
+    "7": 0.0464,
+    "8": 0.018
+   }
+  }
+ },
+ "grid_max_diff_vs_fig1ln_cells": 1.3877787807814457e-16,
+ "grid_n_hf_n_lf": {
+  "n_hf": [
+   25
+  ],
+  "n_lf": [
+   249
+  ]
+ },
+ "fig4_max_diff_vs_values_csv": {
+  "ece": 0.0006684600055431034,
+  "attainment": 0.010851648351647258
+ },
+ "calibration": {
+  "r": {
+   "Branin-Fav": -0.013,
+   "Branin-Unfav": 0.176,
+   "Park-Fav": 0.284,
+   "Park-Unfav": 0.32,
+   "COFs": -0.525,
+   "FreeSolv": 0.332,
+   "Polarizability": 0.469,
+   "HOPV15": -0.221,
+   "Matbench-Gap": -0.657,
+   "ExptGap-PBE": -0.82,
+   "Elastic-CHGNet": 0.212,
+   "Elastic-SevenNet": 0.041,
+   "Elastic-MatterSim": -0.108
+  },
+  "MFGP_lowest_ece_count": 7,
+  "DKL_highest_ece_count": 8,
+  "MFGP_lower_half_chem": 7,
+  "abs_r_ge_05": [
+   "COFs",
+   "Matbench-Gap",
+   "ExptGap-PBE"
+  ]
+ },
+ "fig5_max_diff_vs_values_csv": 4.440892098500626e-16,
+ "screening": {
+  "Branin-Fav": {
+   "n": 2500,
+   "r2": 0.9688,
+   "spearman": 0.9874,
+   "top10_overlap": 0.6,
+   "top1pct_overlap": 0.6,
+   "screening_regret": 3.3551,
+   "screening_regret_pct_range": 1.0903,
+   "lf_rank_of_hf_best": 139,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 307.7246
+  },
+  "Branin-Unfav": {
+   "n": 2500,
+   "r2": 0.5802,
+   "spearman": 0.8132,
+   "top10_overlap": 0.1,
+   "top1pct_overlap": 0.36,
+   "screening_regret": 0.9969,
+   "screening_regret_pct_range": 0.324,
+   "lf_rank_of_hf_best": 1380,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 307.7246
+  },
+  "Park-Fav": {
+   "n": 256,
+   "r2": 0.9649,
+   "spearman": 0.9872,
+   "top10_overlap": 1.0,
+   "top1pct_overlap": 1.0,
+   "screening_regret": 0.0,
+   "screening_regret_pct_range": 0.0,
+   "lf_rank_of_hf_best": 1,
+   "top1_hit": 1,
+   "regime": "A",
+   "hf_range": 25.9303
+  },
+  "Park-Unfav": {
+   "n": 256,
+   "r2": 0.7171,
+   "spearman": 0.8791,
+   "top10_overlap": 0.9,
+   "top1pct_overlap": 0.5,
+   "screening_regret": 0.0,
+   "screening_regret_pct_range": 0.0,
+   "lf_rank_of_hf_best": 1,
+   "top1_hit": 1,
+   "regime": "A",
+   "hf_range": 25.9303
+  },
+  "COFs": {
+   "n": 608,
+   "r2": 0.9582,
+   "spearman": 0.9984,
+   "top10_overlap": 0.8,
+   "top1pct_overlap": 0.8333,
+   "screening_regret": 4.517,
+   "screening_regret_pct_range": 24.4007,
+   "lf_rank_of_hf_best": 2,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 18.5116
+  },
+  "FreeSolv": {
+   "n": 640,
+   "r2": 0.8676,
+   "spearman": 0.9404,
+   "top10_overlap": 0.6,
+   "top1pct_overlap": 0.6667,
+   "screening_regret": 0.27,
+   "screening_regret_pct_range": 0.9343,
+   "lf_rank_of_hf_best": 4,
+   "top1_hit": 0,
+   "regime": "A",
+   "hf_range": 28.9
+  },
+  "Polarizability": {
+   "n": 1134,
+   "r2": 0.9878,
+   "spearman": 0.9915,
+   "top10_overlap": 1.0,
+   "top1pct_overlap": 1.0,
+   "screening_regret": 0.0892,
+   "screening_regret_pct_range": 8.9194,
+   "lf_rank_of_hf_best": 2,
+   "top1_hit": 0,
+   "regime": "A",
+   "hf_range": 1.0
+  },
+  "HOPV15": {
+   "n": 240,
+   "r2": 0.0153,
+   "spearman": 0.1175,
+   "top10_overlap": 0.0,
+   "top1pct_overlap": 0.0,
+   "screening_regret": 3.9,
+   "screening_regret_pct_range": 38.2653,
+   "lf_rank_of_hf_best": 13,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 10.192
+  },
+  "Matbench-Gap": {
+   "n": 3347,
+   "r2": 0.4563,
+   "spearman": 0.5749,
+   "top10_overlap": 0.0,
+   "top1pct_overlap": 0.0303,
+   "screening_regret": 0.91,
+   "screening_regret_pct_range": 8.835,
+   "lf_rank_of_hf_best": 973,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 10.3
+  },
+  "ExptGap-PBE": {
+   "n": 3508,
+   "r2": 0.41,
+   "spearman": 0.4872,
+   "top10_overlap": 0.0,
+   "top1pct_overlap": 0.0,
+   "screening_regret": 1.15,
+   "screening_regret_pct_range": 11.165,
+   "lf_rank_of_hf_best": 1033,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 10.3
+  },
+  "Elastic-CHGNet": {
+   "n": 10819,
+   "r2": 0.2907,
+   "spearman": 0.6783,
+   "top10_overlap": 0.4,
+   "top1pct_overlap": 0.1389,
+   "screening_regret": 384.0,
+   "screening_regret_pct_range": 73.5632,
+   "lf_rank_of_hf_best": 8,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 522.0
+  },
+  "Elastic-SevenNet": {
+   "n": 10460,
+   "r2": 0.4054,
+   "spearman": 0.7295,
+   "top10_overlap": 0.3,
+   "top1pct_overlap": 0.3846,
+   "screening_regret": 369.0,
+   "screening_regret_pct_range": 96.5969,
+   "lf_rank_of_hf_best": 4,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 382.0
+  },
+  "Elastic-MatterSim": {
+   "n": 10946,
+   "r2": 0.7954,
+   "spearman": 0.8556,
+   "top10_overlap": 0.8,
+   "top1pct_overlap": 0.7064,
+   "screening_regret": 3.0,
+   "screening_regret_pct_range": 0.5747,
+   "lf_rank_of_hf_best": 2,
+   "top1_hit": 0,
+   "regime": "B",
+   "hf_range": 522.0
+  }
+ },
+ "flops": {
+  "kN_GP": 2.294,
+  "r2_GP": 0.932,
+  "kN_TL": 0.942,
+  "r2_TL": 0.995,
+  "break_even": 39.8,
+  "ratio_100": 3.47,
+  "ratio_200": 8.86,
+  "per_model_k": {
+   "Adapter": 0.95,
+   "Curriculum": 0.93,
+   "DKL Multi-Fidelity": 1.52,
+   "DNGO-Gradient": 0.92,
+   "DNGO-Joint": 0.95,
+   "Domain Adaptation (MMD)": 0.97,
+   "Knowledge Distillation": 0.95,
+   "MFGP": 3.04,
+   "Progressive": 0.89,
+   "Pseudo-Labeling": 0.99,
+   "Sequential": 0.95,
+   "Soft Parameter Sharing": 0.91,
+   "Sparse MFGP": 2.32,
+   "Two-Stage Joint": 0.94
+  },
+  "loop": {
+   "Branin-Fav": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.121,
+    "Sparse_x": 38.5,
+    "DKL_x": 27.8,
+    "MFGP_x": 7.8,
+    "Sparse_tflops": 4.655,
+    "cheapest_overall": "Progressive"
+   },
+   "Branin-Unfav": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.013,
+    "Sparse_x": 9.9,
+    "DKL_x": 9.4,
+    "MFGP_x": 3.2,
+    "Sparse_tflops": 0.125,
+    "cheapest_overall": "Progressive"
+   },
+   "Park-Fav": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.106,
+    "Sparse_x": 42.4,
+    "DKL_x": 23.0,
+    "MFGP_x": 4.6,
+    "Sparse_tflops": 4.485,
+    "cheapest_overall": "Progressive"
+   },
+   "Park-Unfav": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.009,
+    "Sparse_x": 14.0,
+    "DKL_x": 7.4,
+    "MFGP_x": 0.7,
+    "Sparse_tflops": 0.122,
+    "cheapest_overall": "MFGP"
+   },
+   "COFs": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.092,
+    "Sparse_x": 41.8,
+    "DKL_x": 19.6,
+    "MFGP_x": 6.9,
+    "Sparse_tflops": 3.843,
+    "cheapest_overall": "Progressive"
+   },
+   "FreeSolv": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.117,
+    "Sparse_x": 43.1,
+    "DKL_x": 24.5,
+    "MFGP_x": 11.0,
+    "Sparse_tflops": 5.045,
+    "cheapest_overall": "Progressive"
+   },
+   "Polarizability": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.017,
+    "Sparse_x": 21.3,
+    "DKL_x": 8.4,
+    "MFGP_x": 1.5,
+    "Sparse_tflops": 0.37,
+    "cheapest_overall": "Progressive"
+   },
+   "HOPV15": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.04,
+    "Sparse_x": 37.6,
+    "DKL_x": 12.8,
+    "MFGP_x": 0.9,
+    "Sparse_tflops": 1.492,
+    "cheapest_overall": "MFGP"
+   },
+   "Matbench-Gap": {
+    "cheapest_TL": "Progressive",
+    "cheapest_TL_tflops": 0.08,
+    "Sparse_x": 34.0,
+    "DKL_x": 20.5,
+    "MFGP_x": 7.3,
+    "Sparse_tflops": 2.719,
+    "cheapest_overall": "Progressive"
+   }
+  },
+  "max_Sparse_x": 43.1,
+  "max_DKL_x": 27.8,
+  "max_MFGP_x": 11.0,
+  "profile_sched_vs_paper_budget": {
+   "FreeSolv": "SCHED (27,283) = B 50 schedule; paper B = 30",
+   "Matbench-Gap": "SCHED (22,209) = B 20 schedule; paper B = 30"
+  },
+  "ref_scaling_law_json": {
+   "kG": 2.294272971673004,
+   "kT": 0.9421423650525949,
+   "break_even": 39.8370298535218,
+   "r2": {
+    "GP": 0.9324712531871904,
+    "TL": 0.9949331925403101
+   }
+  }
+ },
+ "s1": {
+  "rows": [
+   {
+    "pool": "Branin-Fav",
+    "B": 50,
+    "MFGP_EI": 0.9118,
+    "n_MFGP_EI": 40,
+    "MFGP_greedy": 0.9124,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": -0.0005,
+    "n_pairs_MFGP": 40,
+    "E2E_EI": 0.651,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.6878,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": -0.0367,
+    "n_pairs_E2E": 40
+   },
+   {
+    "pool": "Branin-Unfav",
+    "B": 50,
+    "MFGP_EI": 0.756,
+    "n_MFGP_EI": 40,
+    "MFGP_greedy": 0.739,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": 0.017,
+    "n_pairs_MFGP": 40,
+    "E2E_EI": 0.3652,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.3578,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": 0.0075,
+    "n_pairs_E2E": 40
+   },
+   {
+    "pool": "Park-Fav",
+    "B": 50,
+    "MFGP_EI": 0.6154,
+    "n_MFGP_EI": 40,
+    "MFGP_greedy": 0.6302,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": -0.0148,
+    "n_pairs_MFGP": 40,
+    "E2E_EI": 0.8352,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.836,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": -0.0008,
+    "n_pairs_E2E": 40
+   },
+   {
+    "pool": "Park-Unfav",
+    "B": 50,
+    "MFGP_EI": 0.7739,
+    "n_MFGP_EI": 40,
+    "MFGP_greedy": 0.7896,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": -0.0157,
+    "n_pairs_MFGP": 40,
+    "E2E_EI": 0.8613,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.8599,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": 0.0014,
+    "n_pairs_E2E": 40
+   },
+   {
+    "pool": "COFs",
+    "B": 30,
+    "MFGP_EI": 0.9022,
+    "n_MFGP_EI": 40,
+    "MFGP_greedy": 0.9022,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": 0.0,
+    "n_pairs_MFGP": 40,
+    "E2E_EI": 0.9176,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.9199,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": -0.0023,
+    "n_pairs_E2E": 40
+   },
+   {
+    "pool": "FreeSolv",
+    "B": 30,
+    "MFGP_EI": 0.9367,
+    "n_MFGP_EI": 39,
+    "MFGP_greedy": 0.9377,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": 0.0,
+    "n_pairs_MFGP": 39,
+    "E2E_EI": 0.9368,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.9368,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": 0.0,
+    "n_pairs_E2E": 40
+   },
+   {
+    "pool": "Polarizability",
+    "B": 30,
+    "MFGP_EI": 0.9535,
+    "n_MFGP_EI": 40,
+    "MFGP_greedy": 0.9514,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": 0.0022,
+    "n_pairs_MFGP": 40,
+    "E2E_EI": 0.9626,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.9626,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": 0.0,
+    "n_pairs_E2E": 40
+   },
+   {
+    "pool": "HOPV15",
+    "B": 30,
+    "MFGP_EI": 0.3175,
+    "n_MFGP_EI": 40,
+    "MFGP_greedy": 0.2344,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": 0.083,
+    "n_pairs_MFGP": 40,
+    "E2E_EI": 0.3991,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.3321,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": 0.067,
+    "n_pairs_E2E": 40
+   },
+   {
+    "pool": "Matbench-Gap",
+    "B": 20,
+    "MFGP_EI": 0.1654,
+    "n_MFGP_EI": 40,
+    "MFGP_greedy": 0.1437,
+    "n_MFGP_greedy": 40,
+    "MFGP_paired_delta_EI_minus_greedy": 0.0217,
+    "n_pairs_MFGP": 40,
+    "E2E_EI": 0.2875,
+    "n_E2E_EI": 40,
+    "E2E_greedy": 0.2875,
+    "n_E2E_greedy": 40,
+    "E2E_paired_delta": 0.0,
+    "n_pairs_E2E": 40
+   }
+  ],
+  "hopv15_per_surrogate": {
+   "Seq": [
+    -0.158,
+    20
+   ],
+   "FET": [
+    -0.225,
+    20
+   ],
+   "E2E": [
+    0.134,
+    20
+   ],
+   "Prog": [
+    -0.047,
+    20
+   ],
+   "PtJ": [
+    0.002,
+    20
+   ],
+   "SGJ": [
+    0.05,
+    20
+   ],
+   "MMD": [
+    -0.05,
+    20
+   ],
+   "SPS": [
+    0.058,
+    20
+   ],
+   "Adpt": [
+    0.089,
+    20
+   ]
+  },
+  "MFGP_within_0_02": 7,
+  "E2E_within_0_01": 7
+ },
+ "s2": [
+  {
+   "acq": "EI",
+   "pool": "Branin-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": -0.0334,
+   "win_share": 0.1111,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "EI",
+   "pool": "Branin-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": -0.0161,
+   "win_share": 0.1111,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "EI",
+   "pool": "Park-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0012,
+   "win_share": 0.5556,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "EI",
+   "pool": "Park-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0037,
+   "win_share": 0.7778,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "EI",
+   "pool": "COFs",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.002,
+   "win_share": 0.3333,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "EI",
+   "pool": "FreeSolv",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.0004,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "EI",
+   "pool": "Polarizability",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.0,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "EI",
+   "pool": "HOPV15",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.0162,
+   "win_share": 0.5556,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "EI",
+   "pool": "Matbench-Gap",
+   "B": 20,
+   "n_models": 9,
+   "mean_delta": -0.011,
+   "win_share": 0.3333,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "Branin-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0518,
+   "win_share": 1.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "Branin-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": -0.0031,
+   "win_share": 0.4444,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "Park-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0056,
+   "win_share": 0.5556,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "Park-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0031,
+   "win_share": 0.5556,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "COFs",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.0019,
+   "win_share": 0.3333,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "FreeSolv",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.0009,
+   "win_share": 0.1111,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "Polarizability",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.0,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "HOPV15",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.0167,
+   "win_share": 0.5556,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "PI",
+   "pool": "Matbench-Gap",
+   "B": 20,
+   "n_models": 9,
+   "mean_delta": -0.0118,
+   "win_share": 0.4444,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "Branin-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": -0.0902,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "Branin-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": -0.0626,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "Park-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0007,
+   "win_share": 0.5556,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "Park-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0048,
+   "win_share": 0.7778,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "COFs",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.0008,
+   "win_share": 0.3333,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "FreeSolv",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.002,
+   "win_share": 0.4444,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "Polarizability",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.0,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "HOPV15",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.0075,
+   "win_share": 0.5556,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "UCB",
+   "pool": "Matbench-Gap",
+   "B": 20,
+   "n_models": 9,
+   "mean_delta": -0.044,
+   "win_share": 0.2222,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "Branin-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": -0.0993,
+   "win_share": 0.1111,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "Branin-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": -0.0756,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "Park-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0012,
+   "win_share": 0.6667,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "Park-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0063,
+   "win_share": 0.7778,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "COFs",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.0022,
+   "win_share": 0.3333,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "FreeSolv",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.002,
+   "win_share": 0.4444,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "Polarizability",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.0,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "HOPV15",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.0051,
+   "win_share": 0.4444,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "MES",
+   "pool": "Matbench-Gap",
+   "B": 20,
+   "n_models": 9,
+   "mean_delta": -0.027,
+   "win_share": 0.1111,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "Branin-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": -0.0655,
+   "win_share": 0.2222,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "Branin-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0509,
+   "win_share": 0.8889,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "Park-Fav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0021,
+   "win_share": 0.4444,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "Park-Unfav",
+   "B": 50,
+   "n_models": 9,
+   "mean_delta": 0.0073,
+   "win_share": 0.7778,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "COFs",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.0023,
+   "win_share": 0.4444,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "FreeSolv",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.0084,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "Polarizability",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": 0.0,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "HOPV15",
+   "B": 30,
+   "n_models": 9,
+   "mean_delta": -0.1143,
+   "win_share": 0.1111,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  },
+  {
+   "acq": "TS",
+   "pool": "Matbench-Gap",
+   "B": 20,
+   "n_models": 9,
+   "mean_delta": -0.1342,
+   "win_share": 0.0,
+   "n_seeds_min": 20,
+   "n_seeds_max": 20
+  }
+ ],
+ "table1": [
+  {
+   "pool": "Branin-Fav",
+   "n": 2500,
+   "rho": 0.1,
+   "r2_pool": 0.9688,
+   "budget_cfg": 50,
+   "negate": false,
+   "csv": "synthetic_branin_fav.csv",
+   "r2_1000uniform": 0.9665,
+   "csv_regenerates_from_src": true,
+   "alpha": 0.8,
+   "lattice_points_per_axis": 50.0,
+   "pool_min_HF": 0.4044926977871608
+  },
+  {
+   "pool": "Branin-Unfav",
+   "n": 2500,
+   "rho": 0.5,
+   "r2_pool": 0.5802,
+   "budget_cfg": 50,
+   "negate": false,
+   "csv": "synthetic_branin_unfav.csv",
+   "r2_1000uniform": 0.5615,
+   "csv_regenerates_from_src": true,
+   "alpha": 0.1,
+   "lattice_points_per_axis": 50.0,
+   "pool_min_HF": 0.4044926977871608
+  },
+  {
+   "pool": "Park-Fav",
+   "n": 256,
+   "rho": 0.1,
+   "r2_pool": 0.9649,
+   "budget_cfg": 50,
+   "negate": false,
+   "csv": "synthetic_park_fav.csv",
+   "r2_1000uniform": 0.9651,
+   "csv_regenerates_from_src": true,
+   "alpha": 0.6,
+   "lattice_points_per_axis": 4.0,
+   "pool_min_HF": 1.087312731383618e-07
+  },
+  {
+   "pool": "Park-Unfav",
+   "n": 256,
+   "rho": 0.5,
+   "r2_pool": 0.7171,
+   "budget_cfg": 50,
+   "negate": false,
+   "csv": "synthetic_park_unfav.csv",
+   "r2_1000uniform": 0.7241,
+   "csv_regenerates_from_src": true,
+   "alpha": 0.0,
+   "lattice_points_per_axis": 4.0,
+   "pool_min_HF": 1.087312731383618e-07
+  },
+  {
+   "pool": "COFs",
+   "n": 608,
+   "rho": 0.065,
+   "r2_pool": 0.9582,
+   "budget_cfg": 30,
+   "negate": true,
+   "csv": "cofs.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  },
+  {
+   "pool": "FreeSolv",
+   "n": 640,
+   "rho": 0.1,
+   "r2_pool": 0.8676,
+   "budget_cfg": 50,
+   "negate": false,
+   "csv": "freesolv.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  },
+  {
+   "pool": "Polarizability",
+   "n": 1134,
+   "rho": 0.167,
+   "r2_pool": 0.9878,
+   "budget_cfg": 30,
+   "negate": true,
+   "csv": "polarizability.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  },
+  {
+   "pool": "HOPV15",
+   "n": 240,
+   "rho": 0.1,
+   "r2_pool": 0.0153,
+   "budget_cfg": 30,
+   "negate": true,
+   "csv": "hopv15.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  },
+  {
+   "pool": "Matbench-Gap",
+   "n": 3347,
+   "rho": 0.05,
+   "r2_pool": 0.4563,
+   "budget_cfg": 20,
+   "negate": false,
+   "csv": "matbench_gap.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  },
+  {
+   "pool": "ExptGap-PBE",
+   "n": 3508,
+   "rho": 0.05,
+   "r2_pool": 0.41,
+   "budget_cfg": 20,
+   "negate": false,
+   "csv": "expt_gap_pbe.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  },
+  {
+   "pool": "Elastic-CHGNet",
+   "n": 10819,
+   "rho": 0.05,
+   "r2_pool": 0.2907,
+   "budget_cfg": 20,
+   "negate": false,
+   "csv": "elastic_chgnet_shear.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  },
+  {
+   "pool": "Elastic-SevenNet",
+   "n": 10460,
+   "rho": 0.05,
+   "r2_pool": 0.4054,
+   "budget_cfg": 20,
+   "negate": false,
+   "csv": "elastic_sevennet_shear.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  },
+  {
+   "pool": "Elastic-MatterSim",
+   "n": 10946,
+   "rho": 0.05,
+   "r2_pool": 0.7954,
+   "budget_cfg": 20,
+   "negate": false,
+   "csv": "elastic_mattersim_shear.csv",
+   "r2_1000uniform": NaN,
+   "csv_regenerates_from_src": NaN,
+   "alpha": NaN,
+   "lattice_points_per_axis": NaN,
+   "pool_min_HF": NaN
+  }
+ ],
+ "park_formula": {
+  "max_abs_diff_vs_standard_park": 0.7070360655087846,
+  "max_abs_diff_vs_SI_equation": 0.7070360705087815,
+  "max_abs_diff_vs_code": 0.7070360705087815
+ },
+ "init": [
+  {
+   "pool": "Branin-Fav",
+   "budget_cfg": 50,
+   "rho": 0.1,
+   "n_init_hf": 2,
+   "n_init_lf": 25,
+   "init_cost": 4.5,
+   "n_hf_end": [
+    24
+   ],
+   "n_lf_end": [
+    259
+   ]
+  },
+  {
+   "pool": "Branin-Unfav",
+   "budget_cfg": 50,
+   "rho": 0.5,
+   "n_init_hf": 2,
+   "n_init_lf": 5,
+   "init_cost": 4.5,
+   "n_hf_end": [
+    24
+   ],
+   "n_lf_end": [
+    52
+   ]
+  },
+  {
+   "pool": "Park-Fav",
+   "budget_cfg": 50,
+   "rho": 0.1,
+   "n_init_hf": 2,
+   "n_init_lf": 25,
+   "init_cost": 4.5,
+   "n_hf_end": [
+    24
+   ],
+   "n_lf_end": [
+    256
+   ]
+  },
+  {
+   "pool": "Park-Unfav",
+   "budget_cfg": 50,
+   "rho": 0.5,
+   "n_init_hf": 2,
+   "n_init_lf": 5,
+   "init_cost": 4.5,
+   "n_hf_end": [
+    24
+   ],
+   "n_lf_end": [
+    52
+   ]
+  },
+  {
+   "pool": "COFs",
+   "budget_cfg": 30,
+   "rho": 0.065,
+   "n_init_hf": 2,
+   "n_init_lf": 23,
+   "init_cost": 3.495,
+   "n_hf_end": [
+    15
+   ],
+   "n_lf_end": [
+    230
+   ]
+  },
+  {
+   "pool": "FreeSolv",
+   "budget_cfg": 50,
+   "rho": 0.1,
+   "n_init_hf": 2,
+   "n_init_lf": 25,
+   "init_cost": 4.5,
+   "n_hf_end": [
+    24
+   ],
+   "n_lf_end": [
+    259
+   ]
+  },
+  {
+   "pool": "Polarizability",
+   "budget_cfg": 30,
+   "rho": 0.167,
+   "n_init_hf": 2,
+   "n_init_lf": 8,
+   "init_cost": 3.336,
+   "n_hf_end": [
+    16
+   ],
+   "n_lf_end": [
+    83
+   ]
+  },
+  {
+   "pool": "HOPV15",
+   "budget_cfg": 30,
+   "rho": 0.1,
+   "n_init_hf": 2,
+   "n_init_lf": 15,
+   "init_cost": 3.5,
+   "n_hf_end": [
+    15
+   ],
+   "n_lf_end": [
+    149
+   ]
+  },
+  {
+   "pool": "Matbench-Gap",
+   "budget_cfg": 20,
+   "rho": 0.05,
+   "n_init_hf": 2,
+   "n_init_lf": 20,
+   "init_cost": 3.0,
+   "n_hf_end": [
+    10
+   ],
+   "n_lf_end": [
+    199
+   ]
+  },
+  {
+   "pool": "ExptGap-PBE",
+   "budget_cfg": 20,
+   "rho": 0.05,
+   "n_init_hf": 2,
+   "n_init_lf": 20,
+   "init_cost": 3.0,
+   "n_hf_end": [
+    30
+   ],
+   "n_lf_end": [
+    600
+   ]
+  },
+  {
+   "pool": "Elastic-CHGNet",
+   "budget_cfg": 20,
+   "rho": 0.05,
+   "n_init_hf": 2,
+   "n_init_lf": 20,
+   "init_cost": 3.0,
+   "n_hf_end": [
+    30
+   ],
+   "n_lf_end": [
+    600
+   ]
+  },
+  {
+   "pool": "Elastic-SevenNet",
+   "budget_cfg": 20,
+   "rho": 0.05,
+   "n_init_hf": 2,
+   "n_init_lf": 20,
+   "init_cost": 3.0,
+   "n_hf_end": [
+    30
+   ],
+   "n_lf_end": [
+    600
+   ]
+  },
+  {
+   "pool": "Elastic-MatterSim",
+   "budget_cfg": 20,
+   "rho": 0.05,
+   "n_init_hf": 2,
+   "n_init_lf": 20,
+   "init_cost": 3.0,
+   "n_hf_end": [
+    30
+   ],
+   "n_lf_end": [
+    600
+   ]
+  }
+ ],
+ "crossenv": {
+  "overlap": 1846,
+  "final_identical": 1846,
+  "auc_identical": 1846,
+  "max_auc_diff": 0.0
+ },
+ "figrepo_vs_raw": {
+  "rows": 2160,
+  "missing": 0,
+  "max_diff": 4.440892098500626e-16
+ }
+}

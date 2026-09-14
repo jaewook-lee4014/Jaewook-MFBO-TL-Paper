@@ -1,0 +1,127 @@
+benchmark,model,flops,disp
+Branin-Fav,Adapter,214493264900.5,Adapter
+Branin-Fav,Curriculum,218085788100.5,Curriculum
+Branin-Fav,DKL Multi-Fidelity,3363858786400.0,DKL Multi-Fidelity
+Branin-Fav,DNGO-Gradient,351635716740.5,End-to-End Joint Training
+Branin-Fav,DNGO-Joint,334178596740.5,Stop-Gradient Joint Training
+Branin-Fav,Domain Adaptation (MMD),318517140228.5,Domain Adaptation (MMD)
+Branin-Fav,Knowledge Distillation,218182289540.5,Knowledge Distillation
+Branin-Fav,MFGP,941196099870.0,MFGP
+Branin-Fav,Progressive,121000878340.5,Progressive
+Branin-Fav,Pseudo-Labeling,343625465476.5,Pseudo-Labelling
+Branin-Fav,Sequential,218182289540.5,Sequential
+Branin-Fav,Soft Parameter Sharing,241372241540.5,Soft Parameter Sharing
+Branin-Fav,Sparse MFGP,4655422499676.0,Sparse MFGP
+Branin-Fav,Two-Stage Joint,224309415428.5,Pretrain-then-Joint Training
+Branin-Unfav,Adapter,17879586855.5,Adapter
+Branin-Unfav,Curriculum,18861101927.5,Curriculum
+Branin-Unfav,DKL Multi-Fidelity,119537673080.0,DKL Multi-Fidelity
+Branin-Unfav,DNGO-Gradient,34988916647.5,End-to-End Joint Training
+Branin-Unfav,DNGO-Joint,30237780647.499992,Stop-Gradient Joint Training
+Branin-Unfav,Domain Adaptation (MMD),26213075495.5,Domain Adaptation (MMD)
+Branin-Unfav,Knowledge Distillation,18884750247.5,Knowledge Distillation
+Branin-Unfav,MFGP,40638245066.0,MFGP
+Branin-Unfav,Progressive,12652388647.5,Progressive
+Branin-Unfav,Pseudo-Labeling,25731013927.499996,Pseudo-Labelling
+Branin-Unfav,Sequential,18884750247.5,Sequential
+Branin-Unfav,Soft Parameter Sharing,25196135847.5,Soft Parameter Sharing
+Branin-Unfav,Sparse MFGP,125375083308.0,Sparse MFGP
+Branin-Unfav,Two-Stage Joint,20485261095.5,Pretrain-then-Joint Training
+Park-Fav,Adapter,203798037631.0,Adapter
+Park-Fav,Curriculum,202715441407.0,Curriculum
+Park-Fav,DKL Multi-Fidelity,2437529617664.0,DKL Multi-Fidelity
+Park-Fav,DNGO-Gradient,336634872959.0,End-to-End Joint Training
+Park-Fav,DNGO-Joint,318844652159.0,Stop-Gradient Joint Training
+Park-Fav,Domain Adaptation (MMD),303024591487.0,Domain Adaptation (MMD)
+Park-Fav,Knowledge Distillation,202814508159.0,Knowledge Distillation
+Park-Fav,MFGP,490112010280.0,MFGP
+Park-Fav,Progressive,105833125759.0,Progressive
+Park-Fav,Pseudo-Labeling,328215098239.0,Pseudo-Labelling
+Park-Fav,Sequential,202814508159.0,Sequential
+Park-Fav,Soft Parameter Sharing,226364152959.0,Soft Parameter Sharing
+Park-Fav,Sparse MFGP,4485451085648.0,Sparse MFGP
+Park-Fav,Two-Stage Joint,209054940287.0,Pretrain-then-Joint Training
+Park-Unfav,Adapter,15354620535.5,Adapter
+Park-Unfav,Curriculum,15060399927.5,Curriculum
+Park-Unfav,DKL Multi-Fidelity,64854681360.0,DKL Multi-Fidelity
+Park-Unfav,DNGO-Gradient,31572045431.5,End-to-End Joint Training
+Park-Unfav,DNGO-Joint,26680135031.5,Stop-Gradient Joint Training
+Park-Unfav,Domain Adaptation (MMD),22562089335.5,Domain Adaptation (MMD)
+Park-Unfav,Knowledge Distillation,15084519031.5,Knowledge Distillation
+Park-Unfav,MFGP,6191910848.0,MFGP
+Park-Unfav,Progressive,8726883831.5,Progressive
+Park-Unfav,Pseudo-Labeling,22084243191.5,Pseudo-Labelling
+Park-Unfav,Sequential,15084519031.5,Sequential
+Park-Unfav,Soft Parameter Sharing,21560141431.5,Soft Parameter Sharing
+Park-Unfav,Sparse MFGP,122332354960.0,Sparse MFGP
+Park-Unfav,Two-Stage Joint,16732463735.5,Pretrain-then-Joint Training
+COFs,Adapter,173458445866.5,Adapter
+COFs,Curriculum,174545806570.5,Curriculum
+COFs,DKL Multi-Fidelity,1796630886896.0,DKL Multi-Fidelity
+COFs,DNGO-Gradient,279550618026.50006,End-to-End Joint Training
+COFs,DNGO-Joint,268502534826.49997,Stop-Gradient Joint Training
+COFs,Domain Adaptation (MMD),258765784618.5,Domain Adaptation (MMD)
+COFs,Knowledge Distillation,174424294826.5,Knowledge Distillation
+COFs,MFGP,636255349853.0,MFGP
+COFs,Progressive,91845789226.5,Progressive
+COFs,Pseudo-Labeling,283778811946.5,Pseudo-Labelling
+COFs,Sequential,174424294826.5,Sequential
+COFs,Soft Parameter Sharing,188830810026.5,Soft Parameter Sharing
+COFs,Sparse MFGP,3843163158374.0,Sparse MFGP
+COFs,Two-Stage Joint,178386795818.5,Pretrain-then-Joint Training
+FreeSolv,Adapter,221593651004.5,Adapter
+FreeSolv,Curriculum,222001621244.5,Curriculum
+FreeSolv,DKL Multi-Fidelity,2868448292448.0,DKL Multi-Fidelity
+FreeSolv,DNGO-Gradient,367166062524.5,End-to-End Joint Training
+FreeSolv,DNGO-Joint,347639950524.5,Stop-Gradient Joint Training
+FreeSolv,Domain Adaptation (MMD),330636509756.5,Domain Adaptation (MMD)
+FreeSolv,Knowledge Distillation,222105902524.5,Knowledge Distillation
+FreeSolv,MFGP,1291223464199.9998,MFGP
+FreeSolv,Progressive,117110910524.5,Progressive
+FreeSolv,Pseudo-Labeling,358792993724.5,Pseudo-Labelling
+FreeSolv,Sequential,222105902524.5,Sequential
+FreeSolv,Soft Parameter Sharing,247709678524.5,Soft Parameter Sharing
+FreeSolv,Sparse MFGP,5045451218036.0,Sparse MFGP
+FreeSolv,Two-Stage Joint,228960036156.5,Pretrain-then-Joint Training
+Polarizability,Adapter,29084678681.499996,Adapter
+Polarizability,Curriculum,29827384921.5,Curriculum
+Polarizability,DKL Multi-Fidelity,145925468700.0,DKL Multi-Fidelity
+Polarizability,DNGO-Gradient,51662647705.5,End-to-End Joint Training
+Polarizability,DNGO-Joint,47055818905.5,Stop-Gradient Joint Training
+Polarizability,Domain Adaptation (MMD),43174158361.5,Domain Adaptation (MMD)
+Polarizability,Knowledge Distillation,29804676505.5,Knowledge Distillation
+Polarizability,MFGP,25686821154.0,MFGP
+Polarizability,Progressive,17399348505.5,Progressive
+Polarizability,Pseudo-Labeling,45215169305.50001,Pseudo-Labelling
+Polarizability,Sequential,29804676505.5,Sequential
+Polarizability,Soft Parameter Sharing,35845418905.5,Soft Parameter Sharing
+Polarizability,Sparse MFGP,370227844260.0,Sparse MFGP
+Polarizability,Two-Stage Joint,31379220761.5,Pretrain-then-Joint Training
+HOPV15,Adapter,74871466356.5,Adapter
+HOPV15,Curriculum,74907915572.5,Curriculum
+HOPV15,DKL Multi-Fidelity,507659900912.0,DKL Multi-Fidelity
+HOPV15,DNGO-Gradient,124479757812.5,End-to-End Joint Training
+HOPV15,DNGO-Joint,117431802612.5,Stop-Gradient Joint Training
+HOPV15,Domain Adaptation (MMD),111322894964.50002,Domain Adaptation (MMD)
+HOPV15,Knowledge Distillation,74830465012.5,Knowledge Distillation
+HOPV15,MFGP,35988680945.0,MFGP
+HOPV15,Progressive,39642705012.5,Progressive
+HOPV15,Pseudo-Labeling,120477409012.5,Pseudo-Labelling
+HOPV15,Sequential,74830465012.5,Sequential
+HOPV15,Soft Parameter Sharing,84072154612.5,Soft Parameter Sharing
+HOPV15,Sparse MFGP,1492346074236.0,Sparse MFGP
+HOPV15,Two-Stage Joint,77295138164.5,Pretrain-then-Joint Training
+Matbench-Gap,Adapter,132543752362.0,Adapter
+Matbench-Gap,Curriculum,138475157930.0,Curriculum
+Matbench-Gap,DKL Multi-Fidelity,1637716339608.0,DKL Multi-Fidelity
+Matbench-Gap,DNGO-Gradient,209064117930.0,End-to-End Joint Training
+Matbench-Gap,DNGO-Joint,202929410730.0,Stop-Gradient Joint Training
+Matbench-Gap,Domain Adaptation (MMD),197321185961.99997,Domain Adaptation (MMD)
+Matbench-Gap,Knowledge Distillation,138175337130.0,Knowledge Distillation
+Matbench-Gap,MFGP,584133839829.0,MFGP
+Matbench-Gap,Progressive,79874217130.0,Progressive
+Matbench-Gap,Pseudo-Labeling,215587657130.0,Pseudo-Labelling
+Matbench-Gap,Sequential,138175337130.0,Sequential
+Matbench-Gap,Soft Parameter Sharing,146219522730.0,Soft Parameter Sharing
+Matbench-Gap,Sparse MFGP,2718979269359.0,Sparse MFGP
+Matbench-Gap,Two-Stage Joint,140415893162.0,Pretrain-then-Joint Training
