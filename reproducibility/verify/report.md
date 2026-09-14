@@ -114,9 +114,19 @@ MFGP                            0.412   0.612  9
       HOPV15 Sparse MFGP 40     35         5
 Matbench-Gap Sparse MFGP 40     28        12
   total compared 980, mismatches 19
-# 5. Fig. 3 a-c: 126-cell grid (figrepo/results/grid; TL rows from results_grid, GP rows = public results/grid)
-  SKIPPED: the grid cells contain only ['DKL', 'KnowledgeDistillation', 'MFGP', 'NARGP', 'Progressive', 'PseudoLabeling', 'SparseMFGP']; none of the five retained TL classes was run on the 126-cell grid.
-  Fig. 3 is therefore out of scope for the 5-TL regeneration (no grid data exists for the reduced set).
+# 5. Fig. 3 a-c: 126-cell grid (figrepo/results/grid5tl; TL rows = the five retained classes from results_grid_5tl, GP rows = public results/grid)
+  cells 126; seeds per model per cell [10]; polarizability HF range 1.0000 (advantages below are in raw HF units and in range units)
+  TL vs MFGP: pos 81 tie 45 neg 0; rho(agreement) -0.81 rho(R2) -0.09; mean adv 0.0717 raw = 0.0717 range units
+     profile vs agreement (raw): 0.0:0.221 0.1:0.137 0.2:0.106 0.3:0.100 0.4:0.094 0.5:0.037 0.6:0.040 0.7:0.024 0.8:0.030 0.9:0.018 1.0:0.004
+     profile vs R2 (raw): 0.1:0.087 0.2:0.066 0.3:0.058 0.4:0.075 0.5:0.074 0.6:0.083 0.7:0.073 0.8:0.086 0.9:0.040
+  TL vs variants: pos 66 tie 60 neg 0; rho(agreement) -0.78 rho(R2) +0.11; mean adv 0.0253 raw = 0.0253 range units
+     profile vs agreement (raw): 0.0:0.066 0.1:0.058 0.2:0.033 0.3:0.048 0.4:0.038 0.5:0.007 0.6:0.018 0.7:0.005 0.8:0.006 0.9:0.000 1.0:0.000
+     profile vs R2 (raw): 0.1:0.017 0.2:0.018 0.3:0.021 0.4:0.022 0.5:0.027 0.6:0.033 0.7:0.024 0.8:0.040 0.9:0.022
+  variants vs MFGP: pos 81 tie 45 neg 0; rho(agreement) -0.72 rho(R2) -0.20; mean adv 0.0464 raw = 0.0464 range units
+     profile vs agreement (raw): 0.0:0.155 0.1:0.079 0.2:0.073 0.3:0.052 0.4:0.056 0.5:0.030 0.6:0.022 0.7:0.019 0.8:0.024 0.9:0.018 1.0:0.004
+     profile vs R2 (raw): 0.1:0.069 0.2:0.048 0.3:0.037 0.4:0.053 0.5:0.047 0.6:0.051 0.7:0.049 0.8:0.046 0.9:0.018
+  max |diff| vs fig1ln_final_cells.csv: 1.39e-16
+  grid TL runs: n_hf [np.int64(25)], n_lf [np.int64(249)] (sample of 50 files)
 # 6. Fig. 4 a-m: loop-mean held-out LF ECE vs attainment (ECE from the summary CSVs of the original-budget runs)
              pool      r  MFGP_lowest_ece  DKL_highest_ece  MFGP_att_rank  gp_ece_min  gp_ece_max  tl_ece_min  tl_ece_max  att_min  att_max  DKL_att_rank  n_ece_min  nan_ece
        Branin-Fav -0.285             True            False              2       0.169       0.397       0.217       0.339    0.374    0.913             1         36        0
