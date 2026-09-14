@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Paper Fig. 2 a-m: regret trajectories (mean +/- s.e. over seeds) for the 13 benchmarks under the fixed rules
-(40 seeds where available, no NARGP, no reference policies, Curriculum/KD/PL merged as FET, two hues: TL blues / GP oranges,
+(40 seeds where available, no NARGP, no reference policies, five TL surrogates, two hues: TL blues / GP oranges,
 no bold). Windows: Branin 50; Park x2, COFs, FreeSolv, Polarizability 30; HOPV15 45; Matbench-gap 100; the four large pools 20.
 No reference lines (user rule).
-Input: figcand2_20260911/explorer_data.json (per-seed best-so-far change points). Output: fig2_trajectories.{pdf,png,svg} + values csv."""
+Input: figcand2_20260914_5tl/explorer_data.json (per-seed best-so-far change points). Output: fig2_trajectories.{pdf,png,svg} + values csv."""
 import json, os, sys, numpy as np, pandas as pd
 import matplotlib
 matplotlib.use("Agg")
@@ -11,7 +11,7 @@ import matplotlib.ticker
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-OUT = "/mnt/data/jaewook_mfbo/MFBO-TL-Paper/experiments/refig_20260908/figcand2_20260914_exact"
+OUT = "/mnt/data/jaewook_mfbo/MFBO-TL-Paper/experiments/refig_20260908/figcand2_20260914_5tl"
 D = json.load(open(f"{OUT}/explorer_data.json"))
 POOLS = ["Branin-Fav", "Branin-Unfav", "Park-Fav", "Park-Unfav", "COFs", "FreeSolv", "Polarizability", "HOPV15", "Matbench-Gap",
          "ExptGap-PBE", "Elastic-CHGNet", "Elastic-SevenNet", "Elastic-MatterSim"]
@@ -28,13 +28,14 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "axes.linewid
 # (legends, panel titles) and 6.5 pt here = 6.2 pt in print (tick labels, subtitles, footnotes); nothing below 6.5 pt.
 TITLE, TICK, LAB, SUB, LEG, FOOT = 7.5, 6.5, 7, 6.5, 7.5, 6.5
 # two hues: GP oranges (solid), TL blues (dashed variants)
+# 2026-09-14: five TL surrogates. Frozen-representation transfer keeps the colour and dash of the former Stop-Gradient Joint.
 STYLE = {
     "MFGP": ("#b5532e", "-", 1.35), "Sparse MFGP": ("#f2aa84", "-", 1.35), "DKL": ("#e07b4f", "-", 1.35),
-    "Sequential": ("#0b3d7a", (0, (4, 1.5)), 1.0), "Feature-extraction transfer": ("#0b3d7a", (0, (1.2, 1.2)), 1.0),
-    "End-to-End Joint": ("#2467b3", (0, (4, 1.5)), 1.0), "Progressive": ("#2467b3", (0, (1.2, 1.2)), 1.0),
-    "Pretrain-then-Joint": ("#4e95d9", (0, (4, 1.5)), 1.0), "Stop-Gradient Joint": ("#4e95d9", (0, (1.2, 1.2)), 1.0),
-    "Domain Adaptation (MMD)": ("#8fc0ec", (0, (4, 1.5)), 1.0), "Soft Parameter Sharing": ("#8fc0ec", (0, (1.2, 1.2)), 1.0),
-    "Adapter": ("#2467b3", (0, (4, 1.5, 1.2, 1.5)), 1.0),
+    "Frozen-representation transfer": ("#4e95d9", (0, (1.2, 1.2)), 1.0),
+    "Pretrain-then-Joint": ("#0b3d7a", (0, (4, 1.5)), 1.0),
+    "End-to-End Joint": ("#2467b3", (0, (4, 1.5)), 1.0),
+    "Soft Parameter Sharing": ("#8fc0ec", (0, (1.2, 1.2)), 1.0),
+    "Domain Adaptation (MMD)": ("#8fc0ec", (0, (4, 1.5)), 1.0),
 }
 
 def reg_at(pts, grid):
@@ -80,17 +81,17 @@ for i, p in enumerate(POOLS):
 for k in (13, 14): ax[k].axis("off")
 hg = [Line2D([0], [0], color=STYLE[m][0], ls=STYLE[m][1], lw=STYLE[m][2], label=ABBR[m]) for m in GP]
 ht = [Line2D([0], [0], color=STYLE[m][0], ls=STYLE[m][1], lw=STYLE[m][2], label=ABBR[m]) for m in TL]
-# both legends at 7.5 pt (7.1 pt in print): the GP legend in the first spare slot, the TL legend in two columns anchored next to it so that
-# it spans the second slot (a single 9-row column would run below the panel row)
+# both legends at 7.5 pt (7.1 pt in print): the GP legend in the first spare slot, the TL legend in a single column anchored next to it
+# (five TL rows fit one column, 2026-09-14)
 LEGKW = dict(fontsize=LEG, frameon=False, title_fontsize=LEG, labelspacing=0.4, borderaxespad=0, handlelength=2.2, handletextpad=0.6)
 ax[13].legend(handles=hg, loc="upper left", title="GP family (solid)", **LEGKW)
 ax[13].add_artist(ax[13].get_legend())
-ax[13].legend(handles=ht, loc="upper left", bbox_to_anchor=(0.98, 1.0), title="TL surrogates", ncol=2, columnspacing=1.2, **LEGKW)
+ax[13].legend(handles=ht, loc="upper left", bbox_to_anchor=(0.98, 1.0), title="TL surrogates", ncol=1, columnspacing=1.2, **LEGKW)
 fig.subplots_adjust(left=0.065, right=0.982, top=0.935, bottom=0.15, wspace=0.55, hspace=0.55)
 # footnote at 6.5 pt (6.2 pt in print); the abbreviation key is wrapped over three lines so that it fits the 7.2 in width
 FOOTNOTE = ["Mean ± s.e. over seeds; budget in HF-equivalent cost.",
-            "TL: Seq = Sequential · FET = Feature-extraction transfer · E2E = End-to-End Joint · Prog = Progressive · PtJ = Pretrain-then-Joint",
-            "SGJ = Stop-Gradient Joint · MMD = Domain Adaptation (MMD) · SPS = Soft Parameter Sharing · Adpt = Adapter",
+            "TL: Frozen = Frozen-representation transfer · PtJ = Pretrain-then-Joint · E2E = End-to-End Joint",
+            "SPS = Soft Parameter Sharing · MMD = Domain Adaptation (MMD)",
             "GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP"]
 for k, line in enumerate(FOOTNOTE):
     fig.text(0.5, 0.069 - 0.0198 * k, line, ha="center", va="bottom", fontsize=FOOT, color="#333333")
