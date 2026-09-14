@@ -92,6 +92,7 @@ endpoints 2.31 / 2.61 / 3.32 vs 1.07 / 1.15; Matbench-Gap 0.051-0.071 vs 0.122-0
 | F7 | Methods, SI Note 1, Results 2.4 | GP acquisition: the HF query is the posterior-mean argmin (greedy), EI is used for the LF query only; the default-protocol "asymmetry" concerns the LF query. | Sentences added. |
 | F8 | SI Note 4 | Regret is measured against the best lattice candidate (Branin 0.4045, Park 1.1e-7), not the analytical minima listed as f*. | Sentence added. |
 | F9 | Methods (implementation) | Only Python 3.9 was named although most runs were executed under Python 3.12 / NumPy 2.0.2 on the VM; the longest-run rule for repeated seeds was undocumented. | Sentence added (two environments, 1,846 identical TL runs, SV-MFGP not bit-reproducible, longest run per seed). |
+| F10 | Results 2.2, 2.6, Fig. 5 caption, Methods (benchmarks) | The three elastic-modulus pools were described as a controlled ladder ("same HF target and candidate set", "differ only in the LF source", "real-data ladder of LF quality at fixed HF", attainment / screening regret "rises as the LF agreement rises"). Verified on the VM (2026-09-14): the candidate sets differ (10,819 / 10,460 / 10,946; three-way common set 10,311), the HF maxima differ (523 / 383 / 523 GPa: the SevenNet calculations cover only 10,560 of the 10,987 structures, so diamond is absent; the filter also drops 159 / 91 / 24 non-positive and 9 / 9 / 17 failed predictions), the Magpie standardisation + PCA-10 is fitted per pool (`benchmarks/_common.py` 78-81), and each potential relaxes the structure before the modulus is computed (`gen_mlip_elastic.py`, `relax_structure=True`). HF values agree on shared ids (max diff 0). On the common set the ordering CHGNet < SevenNet < MatterSim survives but the screening regrets become 244 / 369 / 0 GPa (R2 0.27 / 0.44 / 0.79). | Wording changed to three related pools that draw on one HF source but differ in candidate set and LF source; the causal reading (attainment or screening regret as a function of LF quality alone) removed; Methods state the pool filter, the SevenNet coverage, the HF maxima and the per-pool PCA. Claim rows C15 / C40 annotated. |
 
 Builds after the edits (`bash build.sh clean`): redline `main.pdf` 18 pp, `si.pdf` 7 pp; clean `main_clean.pdf` 15 pp, `si_clean.pdf` 6 pp;
 no LaTeX errors, no undefined references or citations.
@@ -120,6 +121,14 @@ no LaTeX errors, no undefined references or citations.
    editorial choices previously left to the authors; untouched.
 7. **Superseded files in `paper_figures/`** (12 PDFs + one PNG not referenced by any `\includegraphics`) are listed in
    `figure_manifest.csv`; left in place.
+
+8. **Elastic-modulus pools.** (a) `build_elastic_benchmarks.sh` (VM and Copy260818) passes `--objective-mode log` and describes
+   "maximize log10(G_VRH)", but the shipped CSVs and cache pickles are `objective_mode 'raw'` (linear GPa, negated); the recorded
+   command would not regenerate the shipped files. (b) A controlled version restricted to the 10,311 compounds present in all three
+   pools, with one shared PCA basis and identical HF, is prepared on the VM in `/mnt/data/jaewook_mfbo/pools_elastic_common/`
+   (`elastic_{chgnet,sevennet,mattersim}_shear_common.csv` + `ids_common.csv`; not registered in `pools.py`, no runs). Running the
+   12 surrogates x 40 seeds on it would allow the ladder claim to be restated as a controlled comparison. (c) No mp-ids exist in the
+   pipeline; rows are identified by the `idx` column of the generation CSVs (`experiments/matbench_budget_ext/mlip_elastic/gen_csvs/`).
 
 ## 7. How to tell current from previous results
 
