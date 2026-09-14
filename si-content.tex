@@ -2,7 +2,7 @@
 %%   si.tex   -> standalone SI file for submission (own title page and reference list;
 %%               \ref to main-text figures resolved from main.aux via the xr package), and
 %%   main.tex -> combined working PDF when built with \def\withSI{1} (see build.sh).
-%% Numbering: Supplementary Notes 1-6, Supplementary Figures 1-3, Supplementary Tables 1-4 (2026-09-14: the earlier Notes 6, 8 and 9, Figs. 3-4 and Tables 5-8 were removed; struck markers show where).
+%% Numbering: Supplementary Notes 1-6, Supplementary Figures 1-3, Supplementary Tables 1-5 (2026-09-14: the earlier Notes 6, 8 and 9, Figs. 3-4 and Tables 5-8 were removed; struck markers show where; Note 4 renamed Benchmark definitions and Supplementary Table 4, benchmark definitions, added, so the synthetic-scenario table is now Table 5).
 % ---------------------------------------------------------------------------
 % Supplementary Information
 % Replace the previous \begin{appendices}...\end{appendices} block with this block.
@@ -159,9 +159,60 @@ $\alpha_{\text{KD}}=0.3$, $T=3.0$.} \emph{Domain Adaptation (MMD)}: maximum-mean
 pseudo-labels weighted $w_{\text{pseudo}}=0.5$.} \emph{Adapter}: frozen LF backbone with a
 bottleneck adapter ($d_{\text{bottleneck}}=16$) and HF head.
 
-\suppnote{Synthetic function definitions}{suppnote:synthetic_functions}
+\suppnote{\texorpdfstring{\del{Synthetic function definitions}\new{Benchmark definitions}}{Benchmark definitions}}{suppnote:synthetic_functions}
 
-Both synthetic functions are standard multi-fidelity Bayesian optimization (MFBO) benchmarks adopted from~Sabanza-Gil et
+\subsection{Objectives, sources, transformations and cost ratios}
+\new{Supplementary Table~\ref{supptab:benchmark_definitions} states, for each of the thirteen benchmarks, the physical quantity sought and its original unit, the HF and LF sources, the scalar $y$ minimized over the candidate pool, the native representation and the model input dimension, and the provenance of the cost ratio $\rho$. The LF source is always transformed exactly like the HF source, so the squared LF--HF correlation $R^2$ of Table~\ref{tab:benchmarks} is invariant to the sign convention and, for the two band-gap pools, refers to the target-transformed values. Cost is charged per query in HF-equivalent units ($c_H = 1$, $c_L = \rho$), so $\rho$ acts only through the round-robin schedule ($\lfloor 1/\rho \rfloor$ LF queries per HF query) and the LF share of the initial design.}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{\new{Benchmark definitions. Objective: the physical quantity sought, its direction and original unit (--: dimensionless); $y$: the scalar minimized by every surrogate, with the construction of the candidate pool; representation: the native descriptors and the transformation to the model input, native dimension $\to$ input dimension; $\rho$: cost ratio and its provenance. $^{\dagger}$: cost ratio set in this work as a schedule parameter, not taken from a cost measurement (see text).}}
+\label{supptab:benchmark_definitions}
+\setlength{\tabcolsep}{4pt}%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.125\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.165\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}@{}}
+\toprule
+\new{\textbf{Benchmark}} & \new{\textbf{Objective (unit); HF source; LF source}} & \new{\textbf{Minimized quantity $y$; pool construction}} & \new{\textbf{Representation (native $\to$ model input)}} & \new{$\boldsymbol{\rho}$ \textbf{(provenance)}} \\
+\midrule
+\new{Branin-Fav / Branin-Unfav} & \new{min Branin function (--); HF $f^{(H)}$, LF $f^{(L)}$ with $\alpha = 0.8$ / $0.1$ (definitions below)} & \new{$y = f^{(H)}(x)$ on a $50^2$ lattice of the domain; regret relative to the lattice minimum $0.4045$} & \new{lattice coordinates, standardized, $2 \to 2$} & \new{$0.1$ / $0.5$; ref.~\citep{sabanza2025best}} \\
+\addlinespace
+\new{Park-Fav / Park-Unfav} & \new{min Park function (--); HF $f^{(H)}$, LF $f^{(L)}$ with $\alpha = 0.6$ / $0.0$ (definitions below)} & \new{$y = f^{(H)}(x)$ on a $4^4$ lattice of the domain; regret relative to the lattice minimum $1.1\times10^{-7}$} & \new{lattice coordinates, standardized, $4 \to 4$} & \new{$0.1$ / $0.5$; ref.~\citep{sabanza2025best}} \\
+\addlinespace
+\new{COFs} & \new{max Xe/Kr selectivity (--); HF grand-canonical Monte Carlo mixture selectivity, LF Henry's-law selectivity~\citep{gantzler2023multifidelity}} & \new{$y = -S_{\mathrm{Xe/Kr}}$; 608 frameworks as released with ref.~\citep{sabanza2025best}} & \new{14 structural and compositional descriptors (pore diameter, void fraction, surface area, crystal density, elemental fractions), standardized, $14 \to 14$ (no PCA)} & \new{$0.065$; refs.~\citep{gantzler2023multifidelity,sabanza2025best}} \\
+\addlinespace
+\new{FreeSolv} & \new{max hydration free energy $\Delta G_{\mathrm{hyd}}$ (kcal\,mol$^{-1}$), i.e.\ the most positive value, the least hydrophilic molecule; HF experimental, LF computed (alchemical free-energy calculation)~\citep{mobley2014freesolv}} & \new{$y = -\Delta G_{\mathrm{hyd}}$ (the released pool stores $-\Delta G_{\mathrm{hyd}}$ for both fidelities and is minimized as stored); optimum $+3.43$~kcal\,mol$^{-1}$ (octafluorocyclobutane); the opposite direction from ref.~\citep{sabanza2025best}, which seeks the most negative $\Delta G_{\mathrm{hyd}}$; 640 molecules as released} & \new{RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$} & \new{$0.1$; ref.~\citep{sabanza2025best}} \\
+\addlinespace
+\new{Polarizability} & \new{max molecular polarizability (min--max normalised to $[0,1]$ in the released pool; original units not retained); HF experimental, LF Hartree--Fock~\citep{ghahremanpour2018alexandria,fare2022multi}} & \new{$y = -\tilde{\alpha}$ (normalised value); 1,134 molecules as released} & \new{RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$} & \new{$0.167$; refs.~\citep{fare2022multi,sabanza2025best}} \\
+\addlinespace
+\new{HOPV15} & \new{max experimental power conversion efficiency PCE (\%); HF reported device PCE, LF Scharber-model PCE from the reported HOMO level and optical gap (below)~\citep{lopez2016harvard,scharber2006design}} & \new{$y = -\mathrm{PCE}$; 240 of the 350 molecules of the experimental set (entries lacking HOMO, gap or PCE dropped)} & \new{RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$} & \new{$0.1^{\dagger}$; set in this work, equal to FreeSolv} \\
+\addlinespace
+\new{Matbench-gap} & \new{band gap nearest $1.4$~eV (eV); HF experimental gap (\texttt{matbench\_expt\_gap}), LF PBE gap from the Materials Project (\texttt{matbench\_mp\_gap})~\citep{dunn2020benchmarking,jain2013commentary}} & \new{$y = |E_g^{\mathrm{expt}} - 1.4~\mathrm{eV}|$, LF likewise; PBE gap averaged over the polymorphs of a reduced formula, duplicate experimental entries averaged, matched by formula; 3,347 compositions, 66\% metals ($E_g = 0$, $y = 1.4$)} & \new{Magpie composition descriptors (132) $\to$ standardize $\to$ PCA $\to$ standardize, $132 \to 10$} & \new{$0.05^{\dagger}$; set in this work (20 LF queries per HF query)} \\
+\addlinespace
+\new{ExptGap-PBE} & \new{same objective; HF matminer \texttt{expt\_gap}~\citep{zhuo2018predicting,ward2018matminer}, LF Materials Project PBE gap~\citep{jain2013commentary}} & \new{same transformation; 3,508 compositions, 70\% metals} & \new{Magpie composition descriptors (132) $\to$ standardize $\to$ PCA $\to$ standardize, $132 \to 10$} & \new{$0.05^{\dagger}$; as Matbench-gap} \\
+\addlinespace
+\new{Elastic-CHGNet / -SevenNet / -MatterSim} & \new{max Voigt--Reuss--Hill shear modulus $G_{\mathrm{VRH}}$ (GPa); HF DFT value of the Matbench \texttt{log\_gvrh} task~\citep{dunn2020benchmarking,dejong2015charting}, LF matcalc elasticity workflow~\citep{matcalc} with CHGNet / SevenNet / MatterSim after relaxation} & \new{$y = -G_{\mathrm{VRH}}$ (linear GPa); compounds with a finite, positive modulus at both fidelities; 10,819 / 10,460 / 10,946; PCA fitted per pool} & \new{Magpie composition descriptors (132) $\to$ standardize $\to$ PCA $\to$ standardize, $132 \to 10$} & \new{$0.05^{\dagger}$; set in this work (the MLIP-to-DFT cost ratio is of order $10^{-3}$)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Scharber proxy for HOPV15.}
+\new{The LF value of each donor is the Scharber-model power conversion efficiency~\citep{scharber2006design},
+\begin{equation}
+\begin{aligned}
+V_{\mathrm{OC}} &= \max\{0,\; -E_{\mathrm{HOMO}} - E^{\mathrm{acc}}_{\mathrm{LUMO}} - \Delta\}, &\quad E^{\mathrm{acc}}_{\mathrm{LUMO}} &= 4.3~\mathrm{eV}~(\mathrm{PC}_{61}\mathrm{BM}),\; \Delta = 0.3~\mathrm{V},\\
+J_{\mathrm{SC}} &= \mathrm{EQE}\cdot J_{\max}(E_g), &\quad \mathrm{EQE} &= 0.65,\\
+\mathrm{PCE}\,(\%) &= 100\, V_{\mathrm{OC}}\, J_{\mathrm{SC}}\,\mathrm{FF}/P_{\mathrm{in}}, &\quad \mathrm{FF} &= 0.65,\; P_{\mathrm{in}} = 100~\mathrm{mW\,cm^{-2}},
+\end{aligned}
+\end{equation}
+where $J_{\max}(E_g)$ is the short-circuit current density available from the AM1.5G spectrum for photon energies above $E_g$, tabulated at 19 gap values between $0.5$ and $3.0$~eV ($65$ to $1.8$~mA\,cm$^{-2}$) and interpolated linearly (clamped outside the table). $E_{\mathrm{HOMO}}$ and $E_g$ are the experimentally reported values of the HOPV15 experimental block (electrochemical HOMO level; optical gap), not computed orbital energies; the gap is taken from, in order, the optical gap ($194$ molecules), the electrochemical gap ($46$) and the LUMO--HOMO difference ($0$). Molecules lacking a HOMO level, any gap or a PCE were dropped ($350 \to 240$; no SMILES failed to parse). The PC$_{61}$BM acceptor level is applied to every donor although the reported devices used PC$_{71}$BM ($123$ molecules), PC$_{61}$BM ($101$) or other acceptors ($16$). The clamp at $V_{\mathrm{OC}} = 0$ is never active (LF minimum $0.42\%$); the LF ranges from $0.42$ to $14.43\%$ and the HF from $0.008$ to $10.2\%$.}
+
+\paragraph{Band-gap target and elastic-modulus pools.}
+\new{Both fidelities of the two band-gap pools are replaced by $|E_g - 1.4~\mathrm{eV}|$ before optimization, so that the $R^2$ of Table~\ref{tab:benchmarks} is computed on the transformed values. The elastic-modulus pools are used on the linear GPa scale, negated, after removing the compounds without a finite, positive modulus at either fidelity.}
+
+\paragraph{Cost ratios.}
+\new{The cost ratios of the synthetic functions ($0.1$ / $0.5$), COFs ($0.065$), FreeSolv ($0.1$) and polarizability ($0.167$) are inherited from the studies that introduced the pools~\citep{sabanza2025best,gantzler2023multifidelity,fare2022multi}. The remaining values are assumptions of this work: HOPV15 uses $0.1$ by analogy with FreeSolv, because the Scharber proxy is a closed-form estimate from measured quantities rather than a calculation; Matbench-gap uses $0.05$, chosen so that the round-robin schedule issues $20$ LF queries per HF query, whereas a literal PBE-to-experiment cost ratio would be far smaller and would give hundreds of LF queries per HF query; ExptGap-PBE and the three elastic-modulus pools use $0.05$ by the same convention, although an MLIP elastic calculation costs roughly $10^{-3}$ of a DFT one. Because cost is charged per query, $\rho$ is a schedule parameter rather than a measured cost.}
+
+\new{The remaining subsections of this note define the two synthetic functions and their scenarios. }Both synthetic functions are standard multi-fidelity Bayesian optimization (MFBO) benchmarks adopted from~Sabanza-Gil et
 al.~\citep{sabanza2025best}.
 
 \subsection{Branin function}

@@ -276,6 +276,14 @@
 \newblock \emph{\bibinfo{journal}{Scientific Data}}
   \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{160086} (\bibinfo{year}{2016}).
 
+\bibitem{scharber2006design}
+\bibinfo{author}{Scharber, M.~C.} \emph{et~al.}
+\newblock \bibinfo{title}{Design rules for donors in bulk-heterojunction solar
+  cells---towards 10\% energy-conversion efficiency}.
+\newblock \emph{\bibinfo{journal}{Advanced Materials}}
+  \textbf{\bibinfo{volume}{18}}, \bibinfo{pages}{789--794}
+  (\bibinfo{year}{2006}).
+
 \bibitem{dunn2020benchmarking}
 \bibinfo{author}{Dunn, A.}, \bibinfo{author}{Wang, Q.},
   \bibinfo{author}{Ganose, A.}, \bibinfo{author}{Dopp, D.} \&

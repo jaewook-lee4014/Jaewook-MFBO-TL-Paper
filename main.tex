@@ -584,55 +584,56 @@ coupling, comparing stop-gradient and end-to-end joint training. \new{Because th
 
 \subsection{Benchmarks}\label{sec:meth-benchmarks}
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
-\caption{Benchmark suite. $d$: \del{input dimension}\new{descriptor dimension (the RDKit descriptors of the three molecular pools and the Magpie descriptors of the five inorganic pools are reduced to ten dimensions by PCA before modelling; Methods)}, $|\mathcal{X}_{\mathrm{cand}}|$:
-candidate-pool size, $\rho$: cost ratio, $R^2$: squared LF--HF Pearson correlation over the candidate pool (for the synthetic functions, over $1{,}000$ uniform samples; Supplementary Information), $B$: \del{total budget in HF-equivalent units}\new{budget in HF-equivalent units at which Fig.~\ref{fig:final_regret} is evaluated, matched at $B = 30$ across the nine chemistry and materials pools and $B = 50$ on the synthetic functions}. HOPV15 and Matbench-gap extend the original suite of~Sabanza-Gil et
+\footnotesize
+\caption{Benchmark suite. \new{Objective: the physical quantity sought, the direction of optimization and its original unit (--, dimensionless); the HF and LF sources, the quantity actually minimized and the provenance of every setting are listed in Supplementary Table~\ref{supptab:benchmark_definitions}.} $d$: \del{input dimension}\new{descriptor dimension \del{(the RDKit descriptors of the three molecular pools and the Magpie descriptors of the five inorganic pools are reduced to ten dimensions by PCA before modelling; Methods)}\new{of the pool's native representation; $d_{\mathrm{in}}$: model input dimension (the RDKit descriptors of the three molecular pools and the Magpie descriptors of the five inorganic pools are reduced to ten dimensions by PCA before modelling; Methods)}}, $|\mathcal{X}_{\mathrm{cand}}|$:
+candidate-pool size, $\rho$: cost ratio\new{, taken from the study that introduced the pool or, where marked $\dagger$, set in this work (Methods)}, $R^2$: squared LF--HF Pearson correlation over the candidate pool (for the synthetic functions, over $1{,}000$ uniform samples\new{; for the two band-gap pools, over the target-transformed values}; Supplementary Information), $B$: \del{total budget in HF-equivalent units}\new{budget in HF-equivalent units at which Fig.~\ref{fig:final_regret} is evaluated, matched at $B = 30$ across the nine chemistry and materials pools and $B = 50$ on the synthetic functions}. HOPV15 and Matbench-gap extend the original suite of~Sabanza-Gil et
 al.~\citep{sabanza2025best} with two materials tasks introduced here\new{; ExptGap-PBE and the three elastic-modulus pools add four larger materials tasks (Methods)}.}
 \label{tab:benchmarks}
-\begin{tabular}{lccccc}
+\begin{tabular}{llcccccc}
 \toprule
-\textbf{Benchmark} & $d$ & $|\mathcal{X}_{\mathrm{cand}}|$ & $\rho$ & $R^2$ & $B$ \\
+\textbf{Benchmark} & \new{\textbf{Objective (unit)}} & $d$ & \new{$d_{\mathrm{in}}$} & $|\mathcal{X}_{\mathrm{cand}}|$ & $\rho$ & $R^2$ & $B$ \\
 \midrule
-Branin-Fav & 2 & 2{,}500 & 0.1 & 0.97 & 50 \\
-Branin-Unfav & 2 & 2{,}500 & 0.5 & 0.56 & 50 \\
-Park-Fav & 4 & 256 & 0.1 & 0.97 & 50 \\
-Park-Unfav & 4 & 256 & 0.5 & 0.72 & 50 \\
-COFs & 14 & 608 & 0.065 & 0.96 & 30 \\
-FreeSolv & \del{10}\new{210} & 640 & 0.1 & 0.87 & \del{50}\new{30} \\
-Polarizability & \del{10}\new{210} & 1{,}134 & 0.167 & 0.99 & 30 \\
-HOPV15 & \del{10}\new{210} & 240 & 0.1 & 0.02 & 30 \\
-Matbench-gap & \del{10}\new{132} & 3{,}347 & 0.05 & 0.46 & \del{20}\new{30} \\
-\new{ExptGap-PBE} & \new{132} & \new{3{,}508} & \new{0.05} & \new{0.41} & \new{30} \\
-\new{Elastic-CHGNet} & \new{132} & \new{10{,}819} & \new{0.05} & \new{0.29} & \new{30} \\
-\new{Elastic-SevenNet} & \new{132} & \new{10{,}460} & \new{0.05} & \new{0.41} & \new{30} \\
-\new{Elastic-MatterSim} & \new{132} & \new{10{,}946} & \new{0.05} & \new{0.80} & \new{30} \\
+Branin-Fav & \new{min $f$ (--)} & 2 & \new{2} & 2{,}500 & 0.1 & 0.97 & 50 \\
+Branin-Unfav & \new{min $f$ (--)} & 2 & \new{2} & 2{,}500 & 0.5 & 0.56 & 50 \\
+Park-Fav & \new{min $f$ (--)} & 4 & \new{4} & 256 & 0.1 & 0.97 & 50 \\
+Park-Unfav & \new{min $f$ (--)} & 4 & \new{4} & 256 & 0.5 & 0.72 & 50 \\
+COFs & \new{max Xe/Kr selectivity (--)} & 14 & \new{14} & 608 & 0.065 & 0.96 & 30 \\
+FreeSolv & \new{max $\Delta G_{\mathrm{hyd}}$ (kcal\,mol$^{-1}$)} & \del{10}\new{210} & \new{10} & 640 & 0.1 & 0.87 & \del{50}\new{30} \\
+Polarizability & \new{max polarizability (normalised)} & \del{10}\new{210} & \new{10} & 1{,}134 & 0.167 & 0.99 & 30 \\
+HOPV15 & \new{max PCE (\%)} & \del{10}\new{210} & \new{10} & 240 & 0.1\new{$^{\dagger}$} & 0.02 & 30 \\
+Matbench-gap & \new{min $|E_g - 1.4|$ (eV)} & \del{10}\new{132} & \new{10} & 3{,}347 & 0.05\new{$^{\dagger}$} & 0.46 & \del{20}\new{30} \\
+\new{ExptGap-PBE} & \new{min $|E_g - 1.4|$ (eV)} & \new{132} & \new{10} & \new{3{,}508} & \new{0.05$^{\dagger}$} & \new{0.41} & \new{30} \\
+\new{Elastic-CHGNet} & \new{max $G_{\mathrm{VRH}}$ (GPa)} & \new{132} & \new{10} & \new{10{,}819} & \new{0.05$^{\dagger}$} & \new{0.29} & \new{30} \\
+\new{Elastic-SevenNet} & \new{max $G_{\mathrm{VRH}}$ (GPa)} & \new{132} & \new{10} & \new{10{,}460} & \new{0.05$^{\dagger}$} & \new{0.41} & \new{30} \\
+\new{Elastic-MatterSim} & \new{max $G_{\mathrm{VRH}}$ (GPa)} & \new{132} & \new{10} & \new{10{,}946} & \new{0.05$^{\dagger}$} & \new{0.80} & \new{30} \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 We evaluated all methods using \del{nine}\new{thirteen} benchmarks spanning input dimension, cost ratio, and LF--HF
 correlation. The squared LF--HF correlation $R^2$ ranged from $0.02$ for organic
 photovoltaics, where the LF proxy is nearly uninformative, to $0.99$ for molecular polarizability.
-Key benchmark properties are summarized in Table~\ref{tab:benchmarks}. The synthetic benchmarks comprised the two-dimensional Branin function
-and four-dimensional Park function, each evaluated under favourable and unfavourable fidelity relationships. In both cases, a
+Key benchmark properties are summarized in Table~\ref{tab:benchmarks}\new{; the physical objective of each task, its HF and LF sources with their units, the quantity actually minimized and the origin of each cost ratio are listed in Supplementary Table~\ref{supptab:benchmark_definitions}. Every task was posed as the minimization of a scalar $y$ over the candidate pool: $y$ is the HF value where the objective is a minimum, its negative where the objective is a maximum, and the absolute deviation from the target where a target value is sought; the LF source is transformed in the same way, so that Table~\ref{tab:benchmarks} and all regrets refer to $y$ in the original unit of the property}. The synthetic benchmarks comprised the two-dimensional Branin function
+and four-dimensional Park function, \new{minimized directly on lattices of $2{,}500$ and $256$ points whose coordinates are the model inputs, }each evaluated under favourable and unfavourable fidelity relationships. In both cases, a
 bias parameter $\alpha \in [0,1]$ controlled the discrepancy between LF and HF functions, with $\alpha = 1$ corresponding to identical fidelities. Full function definitions and scenario settings are given in the Supplementary
 Information. The chemistry and materials benchmarks comprised \del{five}\new{nine} empirical datasets. COFs contained $608$ covalent organic
-frameworks for Xe/Kr selectivity represented by $14$ structural descriptors with grand-canonical
+frameworks \del{for}\new{whose dimensionless} Xe/Kr selectivity \new{is to be maximized, }represented by $14$ structural \new{and compositional }descriptors \new{used directly as model inputs, }with grand-canonical
 Monte Carlo simulations as the HF source and Henry's-law estimates as the LF source ($\rho =
-0.065$)~\citep{gantzler2023multifidelity}. FreeSolv contained $640$ molecules with experimental
-and computed hydration free energies~\citep{mobley2014freesolv}. The polarizability benchmark included
-$1{,}134$ molecules from the Alexandria library with experimental versus Hartree--Fock
-values~\citep{ghahremanpour2018alexandria, fare2022multi}. HOPV15 contained $240$
-organic-photovoltaic donor molecules, using experimental power conversion efficiency as the HF target
-and a Scharber-model estimate from computed frontier orbitals as the LF
-proxy~\citep{lopez2016harvard}.
-Matbench-gap contained $3{,}347$ inorganic compositions with experimental and computed band
-gaps~\citep{dunn2020benchmarking}. \new{Four larger materials pools complete the suite. ExptGap-PBE pairs the experimental band gaps of $3{,}508$ inorganic compositions~\citep{zhuo2018predicting} with their PBE band gaps from the Materials Project~\citep{jain2013commentary} as the LF source (both taken from matminer~\citep{ward2018matminer}, averaged over entries sharing a reduced formula and matched by formula), optimized towards the same $1.4$~eV target as Matbench-gap. The three elastic-modulus pools \del{share one HF target}\new{draw on one HF source}, the DFT Voigt--Reuss--Hill shear modulus of the Materials Project compounds in the Matbench \texttt{log\_gvrh} task~\citep{dunn2020benchmarking,dejong2015charting}, to be maximized, \del{and differ only in the LF source}\new{each paired with a different LF source}: the shear modulus \del{recomputed on the same structures}\new{recomputed for the same compounds, after relaxing each structure with the potential,} with the elasticity workflow of matcalc~\citep{matcalc} and one of three pretrained universal machine-learned interatomic potentials, CHGNet~\citep{deng2023chgnet}, SevenNet~\citep{park2024scalable} or MatterSim~\citep{yang2024mattersim}, whose agreement with the DFT values increases in that order ($R^2 = 0.29$, $0.41$ and $0.80$; pools of $10{,}819$, $10{,}460$ and $10{,}946$ compounds \del{for which the respective potential converged}\new{for which the respective potential returned a finite, positive modulus; the SevenNet calculations cover $10{,}560$ of the $10{,}987$ structures}). \del{They therefore form a real-data ladder of LF quality at fixed HF.}\new{The three candidate sets therefore differ, as do their HF ranges (maximum shear modulus $523$, $383$ and $523$~GPa), and the descriptor PCA is fitted per pool; the three are related benchmarks that differ in candidate set and LF source together, not a controlled comparison in which only the LF source varies.} All four pools use composition-based Magpie descriptors~\citep{ward2016general} reduced to ten dimensions by PCA, $\rho = 0.05$ and, as every other chemistry and materials pool, the evaluation budget $B = 30$.} Molecular benchmarks were encoded as RDKit\new{ 2D ($210$)} or composition-based\new{ Magpie ($132$)} descriptors,
-standardized, and reduced to ten dimensions by PCA once at
-initialization; maximization targets were negated. Cost ratios were matched to the originating
+0.065$\new{, as in refs.~\citep{gantzler2023multifidelity,sabanza2025best}})\del{~\citep{gantzler2023multifidelity}}. FreeSolv contained $640$ molecules with experimental \new{(HF) }
+and computed \new{(LF) }hydration free energies \new{in kcal\,mol$^{-1}$}~\citep{mobley2014freesolv}\new{; the objective is the largest, that is the most positive, hydration free energy, the least hydrophilic molecule of the pool (optimum $+3.43$~kcal\,mol$^{-1}$, octafluorocyclobutane), so the optimizer minimizes $y = -\Delta G_{\mathrm{hyd}}$. This is the opposite direction from ref.~\citep{sabanza2025best}, which seeks the most negative hydration free energy; the cost ratio $\rho = 0.1$ follows that study}. The polarizability benchmark included
+$1{,}134$ molecules from the Alexandria library with experimental \new{(HF) }versus Hartree--Fock \new{(LF) }
+values~\citep{ghahremanpour2018alexandria, fare2022multi}\new{, to be maximized; the released pool stores both fidelities min--max normalised to $[0, 1]$, so the objective and all regrets on this pool are in normalised units ($\rho = 0.167$, as in refs.~\citep{fare2022multi,sabanza2025best})}. HOPV15 contained $240$
+organic-photovoltaic donor molecules \new{of the Harvard Organic Photovoltaic dataset~\citep{lopez2016harvard}}, using experimental power conversion efficiency \new{(PCE, \%) }as the HF target\new{, to be maximized,}
+and a Scharber-model \new{PCE~\citep{scharber2006design} }\del{estimate from computed frontier orbitals}\new{evaluated from the experimentally reported HOMO level and optical gap of each donor} as the LF
+proxy\del{~\citep{lopez2016harvard}}\new{: $V_{\mathrm{OC}} = -E_{\mathrm{HOMO}} - E^{\mathrm{acc}}_{\mathrm{LUMO}} - \Delta$ with the PC$_{61}$BM acceptor level $E^{\mathrm{acc}}_{\mathrm{LUMO}} = 4.3$~eV and an empirical loss $\Delta = 0.3$~V, $J_{\mathrm{SC}}$ the AM1.5G photocurrent above the gap at an external quantum efficiency of $0.65$, a fill factor of $0.65$ and $100$~mW\,cm$^{-2}$ incident power. The electrochemical gap replaces a missing optical gap ($46$ of the $240$ molecules) and the LUMO--HOMO difference would be the last fallback (not needed for any molecule); the $110$ entries of the $350$-molecule experimental set that lack a HOMO level, a gap or a PCE were dropped. Because this proxy is a closed-form estimate from measured quantities rather than a calculation, its cost ratio $\rho = 0.1$ is an assumption of this work, chosen to match FreeSolv}.
+Matbench-gap contained $3{,}347$ inorganic compositions with experimental \new{(HF) }and \del{computed}\new{PBE-computed (LF)} band
+gaps \new{in eV}~\citep{dunn2020benchmarking}\new{; the objective is the band gap closest to the photovoltaic target of $1.4$~eV, so both fidelities were replaced by $|E_g - 1.4~\mathrm{eV}|$ before optimization (the $R^2$ of Table~\ref{tab:benchmarks} refers to these transformed values, and the $66\%$ of the pool that are metals, $E_g = 0$, all map to $1.4$~eV), and the PBE gap is averaged over the polymorphs sharing a reduced formula. Its cost ratio $\rho = 0.05$ is an assumption of this work: a PBE calculation is far cheaper than a synthesis-and-measurement cycle, and the value was chosen so that the round-robin schedule issues $20$ LF queries per HF query rather than the hundreds that a literal cost ratio would imply}. \new{Four larger materials pools complete the suite. ExptGap-PBE pairs the experimental band gaps of $3{,}508$ inorganic compositions~\citep{zhuo2018predicting} with their PBE band gaps from the Materials Project~\citep{jain2013commentary} as the LF source (both taken from matminer~\citep{ward2018matminer}, averaged over entries sharing a reduced formula and matched by formula), optimized towards the same $1.4$~eV target as Matbench-gap\new{ with the same transformation ($70\%$ of the pool are metals)}. The three elastic-modulus pools \del{share one HF target}\new{draw on one HF source}, the DFT Voigt--Reuss--Hill shear modulus of the Materials Project compounds in the Matbench \texttt{log\_gvrh} task~\citep{dunn2020benchmarking,dejong2015charting}, \new{in GPa and }to be maximized \new{(so $y = -G_{\mathrm{VRH}}$)}, \del{and differ only in the LF source}\new{each paired with a different LF source}: the shear modulus \del{recomputed on the same structures}\new{recomputed for the same compounds, after relaxing each structure with the potential,} with the elasticity workflow of matcalc~\citep{matcalc} and one of three pretrained universal machine-learned interatomic potentials, CHGNet~\citep{deng2023chgnet}, SevenNet~\citep{park2024scalable} or MatterSim~\citep{yang2024mattersim}, whose agreement with the DFT values increases in that order ($R^2 = 0.29$, $0.41$ and $0.80$; pools of $10{,}819$, $10{,}460$ and $10{,}946$ compounds \del{for which the respective potential converged}\new{for which the respective potential returned a finite, positive modulus; the SevenNet calculations cover $10{,}560$ of the $10{,}987$ structures}). \del{They therefore form a real-data ladder of LF quality at fixed HF.}\new{The three candidate sets therefore differ, as do their HF ranges (maximum shear modulus $523$, $383$ and $523$~GPa), and the descriptor PCA is fitted per pool; the three are related benchmarks that differ in candidate set and LF source together, not a controlled comparison in which only the LF source varies.} All four pools use composition-based Magpie descriptors~\citep{ward2016general} reduced to ten dimensions by PCA, $\rho = 0.05$ \new{(for the elastic-modulus pools also an assumption of this work, the same schedule convention as for the band-gap pools rather than the ratio of the two calculation costs, which is of order $10^{-3}$) }and, as every other chemistry and materials pool, the evaluation budget $B = 30$.} \del{Molecular benchmarks}\new{The three molecular and the five inorganic pools} were encoded as RDKit\new{ 2D ($210$)} or composition-based\new{ Magpie ($132$)} descriptors,
+standardized, and reduced to ten dimensions by PCA \new{fitted }once \new{on the whole pool }at
+initialization\new{ (Table~\ref{tab:benchmarks}, $d_{\mathrm{in}}$); the $14$ COF descriptors and the synthetic lattice coordinates were standardized and used directly}\del{; maximization targets were negated}. \del{Cost ratios were matched to the originating
 studies to enable indirect comparison with prior single- and multi-fidelity GP
-results~\citep{sabanza2025best}.
+results~\citep{sabanza2025best}.}\new{The cost ratios of the synthetic functions, COFs, FreeSolv and polarizability are those of the studies that introduced the pools~\citep{sabanza2025best,gantzler2023multifidelity,fare2022multi}, which permits an indirect comparison with their single- and multi-fidelity GP results; those of HOPV15 and the five inorganic pools are set in this work as stated above (Table~\ref{tab:benchmarks}, $\dagger$). In every case the cost enters only through the query accounting of the problem setup and the round-robin schedule, so $\rho$ fixes the number of LF queries per HF query and the LF share of the initial design, not a measured cost.}
 
 \subsection{Controlled fidelity-quality grid}\label{sec:meth-grid}
 
