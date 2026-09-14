@@ -236,6 +236,52 @@
   \textbf{\bibinfo{volume}{56}}, \bibinfo{pages}{1513--1589}
   (\bibinfo{year}{2023}).
 
+\bibitem{houlsby2019parameter}
+\bibinfo{author}{Houlsby, N.} \emph{et~al.}
+\newblock \bibinfo{title}{Parameter-efficient transfer learning for nlp}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the 36th International
+  Conference on Machine Learning, PMLR}} \textbf{\bibinfo{volume}{97}},
+  \bibinfo{pages}{2790--2799} (\bibinfo{year}{2019}).
+
+\bibitem{ruder2017overview}
+\bibinfo{author}{Ruder, S.}
+\newblock \bibinfo{title}{An overview of multi-task learning in deep neural
+  networks}.
+\newblock \emph{\bibinfo{journal}{arXiv preprint arXiv:1706.05098}}
+  (\bibinfo{year}{2017}).
+
+\bibitem{hinton2015distilling}
+\bibinfo{author}{Hinton, G.}, \bibinfo{author}{Vinyals, O.} \&
+  \bibinfo{author}{Dean, J.}
+\newblock \bibinfo{title}{Distilling the knowledge in a neural network}.
+\newblock \emph{\bibinfo{journal}{arXiv preprint arXiv:1503.02531}}
+  (\bibinfo{year}{2015}).
+
+\bibitem{lee2013pseudo}
+\bibinfo{author}{Lee, D.-H.} \emph{et~al.}
+\newblock \bibinfo{title}{Pseudo-label: The simple and efficient
+  semi-supervised learning method for deep neural networks}.
+\newblock \emph{\bibinfo{journal}{Workshop on Challenges in Representation
+  Learning, ICML}} \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{896}
+  (\bibinfo{year}{2013}).
+
+\bibitem{bengio2009curriculum}
+\bibinfo{author}{Bengio, Y.}, \bibinfo{author}{Louradour, J.},
+  \bibinfo{author}{Collobert, R.} \& \bibinfo{author}{Weston, J.}
+\newblock \bibinfo{title}{Curriculum learning}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the 26th International
+  Conference on Machine Learning}} \bibinfo{pages}{41--48}
+  (\bibinfo{year}{2009}).
+
+\bibitem{gretton2012kernel}
+\bibinfo{author}{Gretton, A.}, \bibinfo{author}{Borgwardt, K.~M.},
+  \bibinfo{author}{Rasch, M.~J.}, \bibinfo{author}{Sch{\"o}lkopf, B.} \&
+  \bibinfo{author}{Smola, A.}
+\newblock \bibinfo{title}{A kernel two-sample test}.
+\newblock \emph{\bibinfo{journal}{The journal of machine learning research}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{723--773}
+  (\bibinfo{year}{2012}).
+
 \bibitem{gantzler2023multifidelity}
 \bibinfo{author}{Gantzler, N.}, \bibinfo{author}{Deshwal, A.},
   \bibinfo{author}{Doppa, J.~R.} \& \bibinfo{author}{Simon, C.~M.}
