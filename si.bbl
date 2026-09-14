@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\burl{#1}}\fi
 \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
@@ -32,6 +32,102 @@
 \newblock \emph{\bibinfo{journal}{Nature Computational Science}}
   \textbf{\bibinfo{volume}{5}}, \bibinfo{pages}{572--581}
   (\bibinfo{year}{2025}).
+
+\bibitem{gantzler2023multifidelity}
+\bibinfo{author}{Gantzler, N.}, \bibinfo{author}{Deshwal, A.},
+  \bibinfo{author}{Doppa, J.~R.} \& \bibinfo{author}{Simon, C.~M.}
+\newblock \bibinfo{title}{Multi-fidelity {B}ayesian optimization of covalent
+  organic frameworks for xenon/krypton separations}.
+\newblock \emph{\bibinfo{journal}{Digital Discovery}}
+  \textbf{\bibinfo{volume}{2}}, \bibinfo{pages}{1937--1956}
+  (\bibinfo{year}{2023}).
+
+\bibitem{mobley2014freesolv}
+\bibinfo{author}{Mobley, D.~L.} \& \bibinfo{author}{Guthrie, J.~P.}
+\newblock \bibinfo{title}{{FreeSolv}: A database of experimental and calculated
+  hydration free energies, with input files}.
+\newblock \emph{\bibinfo{journal}{Journal of Computer-Aided Molecular Design}}
+  \textbf{\bibinfo{volume}{28}}, \bibinfo{pages}{711--720}
+  (\bibinfo{year}{2014}).
+
+\bibitem{ghahremanpour2018alexandria}
+\bibinfo{author}{Ghahremanpour, M.~M.}, \bibinfo{author}{van Maaren, P.~J.} \&
+  \bibinfo{author}{van~der Spoel, D.}
+\newblock \bibinfo{title}{The {A}lexandria library, a quantum-chemical database
+  of molecular properties for force field development}.
+\newblock \emph{\bibinfo{journal}{Scientific Data}}
+  \textbf{\bibinfo{volume}{5}}, \bibinfo{pages}{180062} (\bibinfo{year}{2018}).
+
+\bibitem{fare2022multi}
+\bibinfo{author}{Fare, C.}, \bibinfo{author}{Fenner, P.},
+  \bibinfo{author}{Benatan, M.}, \bibinfo{author}{Varsi, A.} \&
+  \bibinfo{author}{Pyzer-Knapp, E.~O.}
+\newblock \bibinfo{title}{A multi-fidelity machine learning approach to high
+  throughput materials screening}.
+\newblock \emph{\bibinfo{journal}{npj Computational Materials}}
+  \textbf{\bibinfo{volume}{8}}, \bibinfo{pages}{257} (\bibinfo{year}{2022}).
+
+\bibitem{lopez2016harvard}
+\bibinfo{author}{Lopez, S.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{The harvard organic photovoltaic dataset}.
+\newblock \emph{\bibinfo{journal}{Scientific Data}}
+  \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{160086} (\bibinfo{year}{2016}).
+
+\bibitem{scharber2006design}
+\bibinfo{author}{Scharber, M.~C.} \emph{et~al.}
+\newblock \bibinfo{title}{Design rules for donors in bulk-heterojunction solar
+  cells---towards 10\% energy-conversion efficiency}.
+\newblock \emph{\bibinfo{journal}{Advanced Materials}}
+  \textbf{\bibinfo{volume}{18}}, \bibinfo{pages}{789--794}
+  (\bibinfo{year}{2006}).
+
+\bibitem{dunn2020benchmarking}
+\bibinfo{author}{Dunn, A.}, \bibinfo{author}{Wang, Q.},
+  \bibinfo{author}{Ganose, A.}, \bibinfo{author}{Dopp, D.} \&
+  \bibinfo{author}{Jain, A.}
+\newblock \bibinfo{title}{Benchmarking materials property prediction methods:
+  the {Matbench} test set and {Automatminer} reference algorithm}.
+\newblock \emph{\bibinfo{journal}{npj Computational Materials}}
+  \textbf{\bibinfo{volume}{6}}, \bibinfo{pages}{138} (\bibinfo{year}{2020}).
+
+\bibitem{jain2013commentary}
+\bibinfo{author}{Jain, A.} \emph{et~al.}
+\newblock \bibinfo{title}{Commentary: {The Materials Project}: A materials
+  genome approach to accelerating materials innovation}.
+\newblock \emph{\bibinfo{journal}{APL Materials}} \textbf{\bibinfo{volume}{1}},
+  \bibinfo{pages}{011002} (\bibinfo{year}{2013}).
+
+\bibitem{zhuo2018predicting}
+\bibinfo{author}{Zhuo, Y.}, \bibinfo{author}{Mansouri~Tehrani, A.} \&
+  \bibinfo{author}{Brgoch, J.}
+\newblock \bibinfo{title}{Predicting the band gaps of inorganic solids by
+  machine learning}.
+\newblock \emph{\bibinfo{journal}{The Journal of Physical Chemistry Letters}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{1668--1673}
+  (\bibinfo{year}{2018}).
+
+\bibitem{ward2018matminer}
+\bibinfo{author}{Ward, L.} \emph{et~al.}
+\newblock \bibinfo{title}{Matminer: An open source toolkit for materials data
+  mining}.
+\newblock \emph{\bibinfo{journal}{Computational Materials Science}}
+  \textbf{\bibinfo{volume}{152}}, \bibinfo{pages}{60--69}
+  (\bibinfo{year}{2018}).
+
+\bibitem{dejong2015charting}
+\bibinfo{author}{de~Jong, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Charting the complete elastic properties of inorganic
+  crystalline compounds}.
+\newblock \emph{\bibinfo{journal}{Scientific Data}}
+  \textbf{\bibinfo{volume}{2}}, \bibinfo{pages}{150009} (\bibinfo{year}{2015}).
+
+\bibitem{matcalc}
+\bibinfo{author}{Ong, S.~P.} \emph{et~al.}
+\newblock \bibinfo{title}{matcalc: A {Python} library for calculating materials
+  properties from the potential energy surface}.
+\newblock
+  \bibinfo{howpublished}{\url{https://github.com/materialsvirtuallab/matcalc}}
+  (\bibinfo{year}{2024}).
 
 \bibitem{shahriari2015taking}
 \bibinfo{author}{Shahriari, B.}, \bibinfo{author}{Swersky, K.},

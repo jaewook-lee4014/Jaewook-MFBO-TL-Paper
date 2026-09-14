@@ -21,9 +21,13 @@ TARGETS = ["5", "2", "1", "0.5"]
 LABEL = {"Matbench-Gap": "Matbench-gap"}
 MODELS = D["models"]; GP = set(D["gp"]); ABBR = D["abbr"]
 TL_COLOR, GP_COLOR = "#4e95d9", "#f2aa84"
-plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 6.5, "axes.linewidth": 0.5, "xtick.major.width": 0.5, "ytick.major.width": 0.5,
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "axes.linewidth": 0.5, "xtick.major.width": 0.5, "ytick.major.width": 0.5,
                      "xtick.major.size": 2, "ytick.major.size": 2, "pdf.fonttype": 42, "ps.fonttype": 42, "svg.fonttype": "none"})
-TITLE, TICK, LAB = 7, 6, 6.5
+# Type sizes (2026-09-14 legibility pass): the figure is printed at \textwidth = 174 mm, i.e. 0.951 x its 7.2 in width, so 7.5 pt here
+# = 7.1 pt in print (legend, panel titles) and 6.5 pt here = 6.2 pt in print (tick labels, subtitles, footnotes); the 12 vertical
+# labels of panels o and p are 6 pt (5.7 pt in print), the largest size that clears their bar pitch.
+TITLE, TICK, LAB = 7.5, 6.5, 7
+SUB, LEG, FOOT, SUMTICK = 6.5, 7.5, 6.5, 6.0
 
 def cost_to(pts, thr, b):
     for x, y in pts:
@@ -53,7 +57,7 @@ T = pd.DataFrame(rows); T.to_csv(f"{OUT}/fig1_attainment_values.csv", index=Fals
 print(T.pivot(index="model", columns="pool", values="n").loc[MODELS, POOLS].to_string(), file=sys.stderr)
 
 # ---------------------------------------------------------------- figure
-fig, axes = plt.subplots(3, 5, figsize=(7.2, 5.0))
+fig, axes = plt.subplots(3, 5, figsize=(7.2, 5.7))          # 5.7 in tall (was 5.0): room for the 6.5 pt row labels, the legend line and the footnote
 ax = axes.ravel()
 letters = "bcdefghijklmnop"
 for i, p in enumerate(POOLS):
@@ -64,8 +68,8 @@ for i, p in enumerate(POOLS):
            error_kw=dict(lw=0.5, capsize=1.2, capthick=0.5, ecolor="#333333"))
     a.set_yticks(y); a.set_yticklabels(t.abbr, fontsize=TICK)
     a.set_xlim(0, 1.0); a.set_xticks([0, 0.5, 1.0]); a.set_xticklabels(["0", "0.5", "1"], fontsize=TICK)
-    a.text(0.0, 1.13, f"{letters[i]}  {LABEL.get(p, p)}", transform=a.transAxes, ha="left", va="bottom", fontsize=6.8)
-    a.text(0.0, 1.02, f"B = {BUDGET[p]}", transform=a.transAxes, ha="left", va="bottom", fontsize=5.3, color="#555555")
+    a.text(0.0, 1.15, f"{letters[i]}  {LABEL.get(p, p)}", transform=a.transAxes, ha="left", va="bottom", fontsize=TITLE)
+    a.text(0.0, 1.02, f"B = {BUDGET[p]}", transform=a.transAxes, ha="left", va="bottom", fontsize=SUB, color="#555555")
     a.grid(axis="x", lw=0.4, alpha=0.35); a.set_axisbelow(True)
     for sp in ("top", "right"): a.spines[sp].set_visible(False)
     a.tick_params(axis="y", length=0, pad=1.5); a.tick_params(axis="x", labelsize=TICK, pad=1.5)
@@ -87,15 +91,15 @@ def summary_panel(a, letter, pools, title, subtitle, ylabel, bold=False):
     x = np.arange(len(M))
     a.bar(x, M["mean"], yerr=M["se"], color=[GP_COLOR if m in GP else TL_COLOR for m in M.index], width=0.72, edgecolor="none",
           error_kw=dict(lw=0.5, capsize=1.2, capthick=0.5, ecolor="#333333"))
-    a.set_xticks(x); a.set_xticklabels([ABBR[m] for m in M.index], fontsize=4.9, rotation=60, ha="right", rotation_mode="anchor")
+    a.set_xticks(x); a.set_xticklabels([ABBR[m] for m in M.index], fontsize=SUMTICK, rotation=90)   # vertical labels: 6 pt is the largest size that clears the 12-bar pitch
     if bold:
         bestTL = next(m for m in M.index if m not in GP); bestGP = next(m for m in M.index if m in GP)
         for lab, m in zip(a.get_xticklabels(), M.index):
             if m in (bestTL, bestGP): lab.set_fontweight("bold")
     a.set_ylim(0, 1.0); a.set_yticks([0, 0.5, 1.0]); a.set_yticklabels(["0", "0.5", "1"], fontsize=TICK)
     a.set_ylabel(ylabel, fontsize=LAB, labelpad=1.5)
-    a.text(0.0, 1.13, f"{letter}  {title}", transform=a.transAxes, ha="left", va="bottom", fontsize=6.8)
-    a.text(0.0, 1.02, subtitle, transform=a.transAxes, ha="left", va="bottom", fontsize=5.3, color="#555555")
+    a.text(0.0, 1.15, f"{letter}  {title}", transform=a.transAxes, ha="left", va="bottom", fontsize=TITLE)
+    a.text(0.0, 1.02, subtitle, transform=a.transAxes, ha="left", va="bottom", fontsize=SUB, color="#555555")
     a.grid(axis="y", lw=0.4, alpha=0.35); a.set_axisbelow(True)
     for sp in ("top", "right"): a.spines[sp].set_visible(False)
     a.tick_params(axis="x", length=0, pad=1.5); a.tick_params(axis="y", pad=1.5)
@@ -104,16 +108,17 @@ ylab = "Mean attainment" if SUMMARY == "mean" else "Normalised score"
 Mo = summary_panel(ax[13], letters[13], POOLS, "All benchmarks", "13 benchmarks", ylab)
 Mp = summary_panel(ax[14], letters[14], CHEM, "Chem & Mat", "9 benchmarks", ylab, bold=False)
 Mo.to_csv(f"{OUT}/fig1_attainment_summary_{SUMMARY}.csv"); Mp.to_csv(f"{OUT}/fig1_attainment_summary_{SUMMARY}_chem.csv")
-# colour legend at the footnote level
+# colour legend (7.5 pt = 7.1 pt in print) on its own line below the panels, above the abbreviation footnote
 h = [Patch(facecolor=TL_COLOR, label="Transfer-learning (TL) surrogates"), Patch(facecolor=GP_COLOR, label="Gaussian-process (GP) family")]
-fig.legend(handles=h, loc="lower left", bbox_to_anchor=(0.065, -0.002), fontsize=5.2, frameon=False, handlelength=1.1, handleheight=0.8, borderaxespad=0, ncol=2, columnspacing=1.2)
+fig.legend(handles=h, loc="lower left", bbox_to_anchor=(0.065, 0.073), fontsize=LEG, frameon=False, handlelength=1.1, handleheight=0.8, borderaxespad=0, ncol=2, columnspacing=1.5)
 
-fig.subplots_adjust(left=0.065, right=0.982, top=0.94, bottom=0.13, wspace=0.62, hspace=0.62)
-# abbreviation footnote (as in the manuscript's Fig. 1)
-fig.text(0.982, 0.040, "TL: Seq = Sequential · FET = Feature-extraction transfer · E2E = End-to-End Joint · Prog = Progressive · PtJ = Pretrain-then-Joint · SGJ = Stop-Gradient Joint",
-         ha="right", va="bottom", fontsize=5.0, color="#333333")
-fig.text(0.982, 0.025, "MMD = Domain Adaptation (MMD) · SPS = Soft Parameter Sharing · Adpt = Adapter   GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP",
-         ha="right", va="bottom", fontsize=5.0, color="#333333")
+fig.subplots_adjust(left=0.065, right=0.982, top=0.935, bottom=0.175, wspace=0.5, hspace=0.45)
+# abbreviation footnote (as in the manuscript's Fig. 1), 6.5 pt, wrapped over three lines so that it fits the 7.2 in width
+FOOTNOTE = ["TL: Seq = Sequential · FET = Feature-extraction transfer · E2E = End-to-End Joint · Prog = Progressive · PtJ = Pretrain-then-Joint",
+            "SGJ = Stop-Gradient Joint · MMD = Domain Adaptation (MMD) · SPS = Soft Parameter Sharing · Adpt = Adapter",
+            "GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP"]
+for k, line in enumerate(FOOTNOTE):
+    fig.text(0.065, 0.051 - 0.0195 * k, line, ha="left", va="bottom", fontsize=FOOT, color="#333333")
 STEM = "fig1_attainment" if SUMMARY == "score" else f"fig1_attainment_{SUMMARY}"
 for ext in ("pdf", "png", "svg"):
     fig.savefig(f"{OUT}/{STEM}.{ext}", dpi=400 if ext == "png" else None)

@@ -22,9 +22,11 @@ BFIG1 = {"Branin-Fav": 50, "Branin-Unfav": 50, "Park-Fav": 50, "Park-Unfav": 50,
 LABEL = {"Matbench-Gap": "Matbench-gap"}
 MODELS = D["models"]; GP = [m for m in MODELS if m in set(D["gp"])]; TL = [m for m in MODELS if m not in set(D["gp"])]; ABBR = D["abbr"]
 LARGE = POOLS[9:]
-plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 6.5, "axes.linewidth": 0.5, "xtick.major.width": 0.5, "ytick.major.width": 0.5,
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "axes.linewidth": 0.5, "xtick.major.width": 0.5, "ytick.major.width": 0.5,
                      "xtick.major.size": 2, "ytick.major.size": 2, "pdf.fonttype": 42, "ps.fonttype": 42, "svg.fonttype": "none"})
-TICK, LAB = 6, 6.5
+# Type sizes (2026-09-14 legibility pass): printed at \textwidth = 174 mm = 0.951 x the 7.2 in width, so 7.5 pt here = 7.1 pt in print
+# (legends, panel titles) and 6.5 pt here = 6.2 pt in print (tick labels, subtitles, footnotes); nothing below 6.5 pt.
+TITLE, TICK, LAB, SUB, LEG, FOOT = 7.5, 6.5, 7, 6.5, 7.5, 6.5
 # two hues: GP oranges (solid), TL blues (dashed variants)
 STYLE = {
     "MFGP": ("#b5532e", "-", 1.35), "Sparse MFGP": ("#f2aa84", "-", 1.35), "DKL": ("#e07b4f", "-", 1.35),
@@ -41,7 +43,7 @@ def reg_at(pts, grid):
     return np.where(idx >= 0, ys[np.clip(idx, 0, len(ys) - 1)], ys[0])
 
 rows = []
-fig, axes = plt.subplots(3, 5, figsize=(7.2, 5.0)); ax = axes.ravel()
+fig, axes = plt.subplots(3, 5, figsize=(7.2, 5.6)); ax = axes.ravel()          # 5.6 in tall (was 5.0): room for the 7.5 pt legends and the footnote
 letters = "abcdefghijklm"
 for i, p in enumerate(POOLS):
     a = ax[i]; P = D["pools"][p]; xmax = XMAX[p]; grid = np.round(np.arange(0.0, xmax + 1e-9, 0.25), 3)
@@ -68,8 +70,8 @@ for i, p in enumerate(POOLS):
         a.set_yscale("symlog", linthresh=1e-3, linscale=0.35); a.set_ylim(bottom=0)
     a.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     a.set_xlim(0, xmax)
-    a.text(0.0, 1.13, f"{letters[i]}  {LABEL.get(p, p)}", transform=a.transAxes, ha="left", va="bottom", fontsize=6.8)
-    a.text(0.0, 1.02, f"B = {xmax}", transform=a.transAxes, ha="left", va="bottom", fontsize=5.3, color="#555555")
+    a.text(0.0, 1.15, f"{letters[i]}  {LABEL.get(p, p)}", transform=a.transAxes, ha="left", va="bottom", fontsize=TITLE)
+    a.text(0.0, 1.02, f"B = {xmax}", transform=a.transAxes, ha="left", va="bottom", fontsize=SUB, color="#555555")
     a.grid(lw=0.4, alpha=0.3); a.set_axisbelow(True); a.tick_params(labelsize=TICK, pad=1.5)
     for sp in ("top", "right"): a.spines[sp].set_visible(False)
     if i >= 10 or i == 8 or i == 9: a.set_xlabel("Budget", fontsize=LAB, labelpad=1.5)
@@ -78,12 +80,20 @@ for i, p in enumerate(POOLS):
 for k in (13, 14): ax[k].axis("off")
 hg = [Line2D([0], [0], color=STYLE[m][0], ls=STYLE[m][1], lw=STYLE[m][2], label=ABBR[m]) for m in GP]
 ht = [Line2D([0], [0], color=STYLE[m][0], ls=STYLE[m][1], lw=STYLE[m][2], label=ABBR[m]) for m in TL]
-ax[13].legend(handles=hg, loc="upper left", fontsize=5.8, frameon=False, title="GP family (solid)", title_fontsize=6.0, handlelength=2.4, labelspacing=0.45, borderaxespad=0)
-ax[14].legend(handles=ht, loc="upper left", fontsize=5.8, frameon=False, title="TL surrogates", title_fontsize=6.0, handlelength=2.4, labelspacing=0.45, borderaxespad=0, ncol=1)
-fig.subplots_adjust(left=0.065, right=0.982, top=0.94, bottom=0.125, wspace=0.55, hspace=0.62)
-fig.text(0.5, 0.036, "Mean ± s.e. over seeds; budget in HF-equivalent cost.", ha="center", va="bottom", fontsize=5.0, color="#333333")
-fig.text(0.5, 0.020, "TL: Seq = Sequential · FET = Feature-extraction transfer · E2E = End-to-End Joint · Prog = Progressive · PtJ = Pretrain-then-Joint · SGJ = Stop-Gradient Joint", ha="center", va="bottom", fontsize=5.0, color="#333333")
-fig.text(0.5, 0.004, "MMD = Domain Adaptation (MMD) · SPS = Soft Parameter Sharing · Adpt = Adapter    GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP", ha="center", va="bottom", fontsize=5.0, color="#333333")
+# both legends at 7.5 pt (7.1 pt in print): the GP legend in the first spare slot, the TL legend in two columns anchored next to it so that
+# it spans the second slot (a single 9-row column would run below the panel row)
+LEGKW = dict(fontsize=LEG, frameon=False, title_fontsize=LEG, labelspacing=0.4, borderaxespad=0, handlelength=2.2, handletextpad=0.6)
+ax[13].legend(handles=hg, loc="upper left", title="GP family (solid)", **LEGKW)
+ax[13].add_artist(ax[13].get_legend())
+ax[13].legend(handles=ht, loc="upper left", bbox_to_anchor=(0.98, 1.0), title="TL surrogates", ncol=2, columnspacing=1.2, **LEGKW)
+fig.subplots_adjust(left=0.065, right=0.982, top=0.935, bottom=0.15, wspace=0.55, hspace=0.55)
+# footnote at 6.5 pt (6.2 pt in print); the abbreviation key is wrapped over three lines so that it fits the 7.2 in width
+FOOTNOTE = ["Mean ± s.e. over seeds; budget in HF-equivalent cost.",
+            "TL: Seq = Sequential · FET = Feature-extraction transfer · E2E = End-to-End Joint · Prog = Progressive · PtJ = Pretrain-then-Joint",
+            "SGJ = Stop-Gradient Joint · MMD = Domain Adaptation (MMD) · SPS = Soft Parameter Sharing · Adpt = Adapter",
+            "GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP"]
+for k, line in enumerate(FOOTNOTE):
+    fig.text(0.5, 0.069 - 0.0198 * k, line, ha="center", va="bottom", fontsize=FOOT, color="#333333")
 for ext in ("pdf", "png", "svg"): fig.savefig(f"{OUT}/fig2_trajectories.{ext}", dpi=400 if ext == "png" else None)
 plt.close(fig)
 pd.DataFrame(rows).to_csv(f"{OUT}/fig2_trajectories_values.csv", index=False)
