@@ -48,7 +48,7 @@ MFGP & BoTorch \texttt{Single\-Task\-Multi\-Fidelity\-GP}; exact marginal likeli
 DKL & GPyTorch \texttt{ExactGP}; exact marginal likelihood, Adam & 500 steps & $10^{-3}$ network; $10^{-2}$ GP parameters & none & none; none & network $d \to 64 \to 64 \to 16$ ($\tanh$), rescaled to $[-1, 1]$; fidelity as task index & RBF ARD over the 16 features $\times$ index kernel (2 levels, rank 1); constant mean; Gaussian likelihood; no priors; s.d. includes the noise & none (exact); float32 \\
 SV-MFGP & GPyTorch \texttt{ApproximateGP}; variational ELBO over the full training set, Adam & 500 steps & $10^{-2}$ & none & none; none & the $d$ inputs; fidelity as task index & RBF ARD $\times$ index kernel (2 levels, rank 1); constant mean; Gaussian likelihood; Cholesky variational distribution; no priors; s.d. includes the noise & $\min(100,$ $N)$; a random subset of the training inputs, learned; float32 \\
 \midrule
-\multicolumn{9}{@{}p{15.54cm}}{\emph{Transfer-learning family.} All five: backbone LF network $d \to 64 \to 64 \to 1$ ($\tanh$) and a residual network $[x, g^{(L)}(x)] \to 64 \to 64 \to 1$ of the same form, trained in every configuration but not used for prediction; full-batch Adam on the mean squared error; HF prediction from the BLR head on $[\,g^{(L)}, \varphi^{(L)}, 1\,]$ (Supplementary Note~\ref{suppnote:blr}), LF predictive distribution for calibration from the LF BLR head with $\alpha = \beta = 1$; no inducing points; networks in float32, BLR heads in float64.} \\
+\multicolumn{9}{@{}p{15.54cm}}{\emph{Transfer-learning family.} All five: backbone LF network $d \to 64 \to 64 \to 1$ ($\tanh$) and a residual network $[x, g^{(L)}(x)] \to 64 \to 64 \to 1$ of the same form, trained in every configuration as an auxiliary loss branch; full-batch Adam on the mean squared error; HF prediction from the BLR head on $[\,g^{(L)}, \varphi^{(L)}, 1\,]$ (Supplementary Note~\ref{suppnote:blr}), LF predictive distribution for calibration from the LF BLR head with $\alpha = \beta = 1$; no inducing points; networks in float32, BLR heads in float64.} \\
 Frozen-repre\-sentation transfer & both networks from scratch on $0.5\,\mathcal{L}_{\mathrm{LF}} + 0.5\,\mathcal{L}_{\mathrm{HF}}$; the LF prediction entering the residual network is detached, so no HF gradient reaches the LF network & 300 joint & $10^{-3}$ & $10^{-4}$ & pooled; pooled & LF network trained by $\mathcal{L}_{\mathrm{LF}}$ only; HF data enter only through the BLR head$^{b}$ & BLR head on the LF representation & --; float32 \\
 Pretrain-then-Joint & LF network on $\mathcal{L}_{\mathrm{LF}}$; then both networks on $0.3\,\mathcal{L}_{\mathrm{LF}} + 0.7\,\mathcal{L}_{\mathrm{HF}}$ & 100 LF + 100 joint & $10^{-3}$; $10^{-4}$ & none & pooled; pooled & LF network updated in the joint stage by both losses & BLR head on the LF representation after joint training & --; float32 \\
 End-to-End Joint & both networks from scratch on $\mathcal{L}_{\mathrm{LF}} + \mathcal{L}_{\mathrm{HF}}$; full gradient flow & 300 joint & $10^{-3}$ LF; $5 \times 10^{-4}$ HF & $10^{-4}$ & pooled; pooled & LF network trained by both losses & BLR head on the LF representation & --; float32 \\
@@ -75,7 +75,7 @@ The sparse variational MFGP is a GPyTorch approximate GP with a Cholesky variati
 
 
 \suppnote{Uncertainty quantification via Bayesian linear regression}{suppnote:blr}
-The HF prediction of the transfer-learning surrogates, its uncertainty and the LF predictive distribution are obtained from a Bayesian linear regression (BLR) head on the low-fidelity (LF) network's last-layer features, an adaptive-basis construction in the spirit of DNGO~\citep{snoek2015scalable}, with the difference that the basis is the representation of the LF network, learned from the abundant LF data, rather than that of a network trained on the target data; the residual network of Methods Eq.~(\ref{eq:residual}) enters the training loss only, because a 64-unit two-layer network fitted to two to a few tens of HF residuals is heavily over-parameterized and a point-estimate network gives the acquisition functions no predictive variance. Let $\varphi(x) \in \mathbb{R}^D$
+The HF prediction of the transfer-learning surrogates, its uncertainty and the LF predictive distribution are obtained from a Bayesian linear regression (BLR) head on the low-fidelity (LF) network's last-layer features, an adaptive-basis construction in the spirit of DNGO~\citep{snoek2015scalable}, with the difference that the basis is the representation of the LF network, learned from the abundant LF data, rather than that of a network trained on the target data; the residual network of Methods Eq.~(\ref{eq:residual}) enters the training loss only, and the closed-form head supplies the predictive mean and variance that the acquisition functions use. Let $\varphi(x) \in \mathbb{R}^D$
 denote the penultimate-layer representation and $\tilde{\varphi}(x) = [\varphi(x), 1]$ the
 augmented feature vector, with a Gaussian prior over the weights $w$:
 \begin{equation}
@@ -289,12 +289,166 @@ with a greedy policy that selects by its posterior mean, all other settings held
 \paragraph{Calibration.} For every surrogate we computed the LF expected
 calibration error, negative log-likelihood, and sharpness on held-out candidates and
 related them to the attainment of Fig.~\ref{fig:final_regret}; the resulting correlation is reported in
-the main text (Fig.~\ref{fig:calibration}a--m). ECE is averaged over the refits recorded in each source run, whose horizon can differ from the attainment budget. For TL models this assesses the separate LF BLR head, not the HF head driving acquisition.
+the main text (Fig.~\ref{fig:calibration}a--m). ECE is averaged over the refits recorded in each source run, whose horizon can differ from the attainment budget. The held-out LF calibration error is averaged over 34--40 seeds per cell; 11 of the 104 cells have fewer than 40 (the sparse variational MFGP on Branin-Fav and Branin-Unfav, the baseline MFGP on FreeSolv, and the baseline MFGP and deep-kernel GP on the four large materials pools, whose resumed runs do not record the calibration error). For TL models this assesses the separate LF BLR head, not the HF head driving acquisition.
 
 
 
 
 
+
+\suppnote{Feature ablation, HF-only baselines and pick logs}{suppnote:controls}
+
+\paragraph{Feature and head-path ablations.} Supplementary Tables~\ref{supptab:feature_ablation} and~\ref{supptab:head_path} report the ablations referred to in the main text. All were run on the nine chemistry and materials pools under the protocol of Fig.~\ref{fig:final_regret} (40 seeds, $B = 30$, the same initial designs, fidelity schedule and greedy policy), changing only what the HF head receives. In the feature ablation each of the five transfer-learning surrogates was run with its reported head on $[\,g^{(L)}, \varphi^{(L)}, 1\,]$; with $\varphi^{(L)}$ replaced by the second-hidden-layer features of an untrained network of the same architecture, the scalar LF prediction $g^{(L)}$ retained; and with the head reduced to $[\,g^{(L)}, 1\,]$. A reference network of the same architecture and training length fitted to the HF observations alone, with the same head, the same two initial HF points and the whole budget spent on HF evaluations, is listed once because it contains no LF network. The head-path ablation was run for Frozen-representation transfer: the LF prediction enters the head both as the additive offset of $\mu^{(H)}$ and as a regression column, and each entry point was removed in turn, with learned and with random features.
+
+\paragraph{HF-only baselines.} Supplementary Table~\ref{supptab:hf_only_baselines} places the multi-fidelity surrogates of Fig.~\ref{fig:final_regret} next to two HF-only baselines started from the same two initial HF points, a single-fidelity GP with expected improvement and a random HF sampler, both spending the whole budget on HF evaluations (definitions in the table footnotes). Attainment is computed over each arm's own window, so the HF-only arms, whose initial design costs 2 HF-equivalent units, are scored from that point.
+
+\paragraph{Pick logs.} Supplementary Table~\ref{supptab:hopv15_picklog} summarizes the HF pick logs of the HOPV15 runs of Fig.~\ref{fig:regret_trajectory}h. For each surrogate it gives the share of seeds whose final regret equals that of the candidate ranked first by the LF proxy, the share of seeds whose best-so-far regret still improved after 15 HF-equivalent units, the number of seeds reaching zero regret, the share of second-half HF picks whose candidate had already been evaluated at LF, and the mean final regret.
+
+\begin{table}[p]
+\centering
+\scriptsize
+\caption{Feature ablation of the five transfer-learning surrogates on the nine chemistry and materials pools (mean attainment over 40 seeds at $B = 30$; targets and window as in Fig.~\ref{fig:final_regret}). Learned: the reported surrogate. Random features: the 64-dimensional representation in the head replaced by the features of an untrained network of the same architecture, the scalar LF prediction retained. Scalar head: the head reads only the scalar LF prediction. HF-only network: a network of the same architecture and training cost fitted to the HF observations alone, with the same head and the same initial HF points, spending the whole budget on HF evaluations; it contains no LF network and is therefore one reference run, listed once (--, not applicable).}
+\label{supptab:feature_ablation}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Pool & Learned & Random features & Scalar head & HF-only network \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Frozen-representation transfer}} \\
+COFs & 0.92 & 0.92 & 0.92 & 0.72 \\
+FreeSolv & 0.93 & 0.93 & 0.93 & 0.77 \\
+Polarizability & 0.96 & 0.96 & 0.96 & 0.92 \\
+HOPV15 & 0.38 & 0.40 & 0.34 & 0.32 \\
+Matbench-gap & 0.41 & 0.35 & 0.44 & 0.17 \\
+ExptGap-PBE & 0.41 & 0.38 & 0.36 & 0.32 \\
+Elastic-CHGNet & 0.62 & 0.60 & 0.50 & 0.39 \\
+Elastic-SevenNet & 0.69 & 0.74 & 0.68 & 0.41 \\
+Elastic-MatterSim & 0.87 & 0.88 & 0.88 & 0.39 \\
+\addlinespace
+\multicolumn{5}{@{}l}{\emph{Pretrain-then-Joint}} \\
+COFs & 0.91 & 0.91 & 0.91 & -- \\
+FreeSolv & 0.93 & 0.93 & 0.93 & -- \\
+Polarizability & 0.96 & 0.96 & 0.96 & -- \\
+HOPV15 & 0.29 & 0.26 & 0.22 & -- \\
+Matbench-gap & 0.42 & 0.40 & 0.39 & -- \\
+ExptGap-PBE & 0.38 & 0.40 & 0.35 & -- \\
+Elastic-CHGNet & 0.38 & 0.35 & 0.42 & -- \\
+Elastic-SevenNet & 0.70 & 0.70 & 0.67 & -- \\
+Elastic-MatterSim & 0.85 & 0.86 & 0.85 & -- \\
+\addlinespace
+\multicolumn{5}{@{}l}{\emph{End-to-End Joint}} \\
+COFs & 0.92 & 0.92 & 0.92 & -- \\
+FreeSolv & 0.94 & 0.93 & 0.93 & -- \\
+Polarizability & 0.96 & 0.96 & 0.96 & -- \\
+HOPV15 & 0.33 & 0.41 & 0.38 & -- \\
+Matbench-gap & 0.38 & 0.37 & 0.40 & -- \\
+ExptGap-PBE & 0.36 & 0.39 & 0.41 & -- \\
+Elastic-CHGNet & 0.51 & 0.52 & 0.54 & -- \\
+Elastic-SevenNet & 0.73 & 0.75 & 0.71 & -- \\
+Elastic-MatterSim & 0.88 & 0.88 & 0.88 & -- \\
+\addlinespace
+\multicolumn{5}{@{}l}{\emph{Soft Parameter Sharing}} \\
+COFs & 0.90 & 0.90 & 0.90 & -- \\
+FreeSolv & 0.94 & 0.94 & 0.94 & -- \\
+Polarizability & 0.96 & 0.96 & 0.96 & -- \\
+HOPV15 & 0.25 & 0.26 & 0.16 & -- \\
+Matbench-gap & 0.43 & 0.45 & 0.39 & -- \\
+ExptGap-PBE & 0.41 & 0.41 & 0.47 & -- \\
+Elastic-CHGNet & 0.33 & 0.34 & 0.32 & -- \\
+Elastic-SevenNet & 0.73 & 0.73 & 0.67 & -- \\
+Elastic-MatterSim & 0.86 & 0.85 & 0.86 & -- \\
+\addlinespace
+\multicolumn{5}{@{}l}{\emph{Domain Adaptation (MMD)}} \\
+COFs & 0.93 & 0.94 & 0.93 & -- \\
+FreeSolv & 0.93 & 0.93 & 0.92 & -- \\
+Polarizability & 0.96 & 0.96 & 0.96 & -- \\
+HOPV15 & 0.33 & 0.36 & 0.39 & -- \\
+Matbench-gap & 0.37 & 0.42 & 0.42 & -- \\
+ExptGap-PBE & 0.40 & 0.36 & 0.41 & -- \\
+Elastic-CHGNet & 0.55 & 0.51 & 0.58 & -- \\
+Elastic-SevenNet & 0.75 & 0.75 & 0.75 & -- \\
+Elastic-MatterSim & 0.87 & 0.87 & 0.87 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[p]
+\centering
+\scriptsize
+\caption{Head-path ablation of Frozen-representation transfer on the nine chemistry and materials pools (mean attainment over 40 seeds at $B = 30$; targets and window as in Fig.~\ref{fig:final_regret}). The head predicts $\mu^{(H)} = g^{(L)} + w^{\top}[\,g^{(L)}, \varphi^{(L)}, 1\,]$: `offset' is the additive $g^{(L)}$ term, `input' is the $g^{(L)}$ regression column, and `removed' zeroes both. (1) Learned features, offset and input (the reported head). (2) Learned features, offset only. (3) Learned features, input only. (4) Learned features, $g^{(L)}$ removed from the head. (5) Random features (an untrained network of the same architecture), $g^{(L)}$ as offset and input. (6) Random features, $g^{(L)}$ removed. Columns (1) and (5) are the Learned and Random-features configurations of Supplementary Table~\ref{supptab:feature_ablation}.}
+\label{supptab:head_path}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Pool & (1) Learned, offset and input & (2) Learned, offset only & (3) Learned, input only & (4) Learned, removed & (5) Random, offset and input & (6) Random, removed \\
+\midrule
+COFs & 0.92 & 0.92 & 0.90 & 0.69 & 0.92 & 0.63 \\
+FreeSolv & 0.93 & 0.94 & 0.90 & 0.70 & 0.93 & 0.51 \\
+Polarizability & 0.96 & 0.96 & 0.95 & 0.92 & 0.96 & 0.73 \\
+HOPV15 & 0.38 & 0.38 & 0.17 & 0.14 & 0.40 & 0.16 \\
+Matbench-gap & 0.41 & 0.39 & 0.26 & 0.05 & 0.35 & 0.06 \\
+ExptGap-PBE & 0.41 & 0.35 & 0.28 & 0.16 & 0.38 & 0.14 \\
+Elastic-CHGNet & 0.62 & 0.63 & 0.32 & 0.20 & 0.60 & 0.19 \\
+Elastic-SevenNet & 0.69 & 0.68 & 0.59 & 0.21 & 0.74 & 0.24 \\
+Elastic-MatterSim & 0.87 & 0.88 & 0.78 & 0.30 & 0.88 & 0.15 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[p]
+\centering
+\scriptsize
+\caption{HF-only baselines and the multi-fidelity surrogates on the thirteen benchmarks (mean over 40 seeds). SF-GP EI: a single-fidelity GP fitted to the HF observations only and driven by expected improvement; Random HF: uniformly random HF queries; both start from the same two initial HF points as the multi-fidelity runs and spend the whole budget on HF evaluations$^{b}$. The baseline MFGP and the transfer-learning surrogate with the highest attainment on each pool (abbreviation in parentheses) are the runs of Fig.~\ref{fig:final_regret}. Attainment is computed over each arm's own window, from the end of its own initial design to $B$$^{a}$; final regret is the best HF regret at $B$, in each pool's objective units (GPa on the elastic-modulus pools). Exact-optimum counts are given in footnote $c$.}
+\label{supptab:hf_only_baselines}
+\begin{tabular}{@{}lc cccc cccc@{}}
+\toprule
+& & \multicolumn{4}{c}{Attainment} & \multicolumn{4}{c}{Final regret at $B$} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-10}
+Pool & $B$ & SF-GP EI & Random HF & Baseline MFGP & best TL & SF-GP EI & Random HF & Baseline MFGP & best TL \\
+\midrule
+Branin-Fav & 50 & 0.84 & 0.39 & 0.91 & 0.69 (E2E) & 0.00 & 0.97 & 0.02 & 0.10 (E2E) \\
+Branin-Unfav & 50 & 0.86 & 0.35 & 0.76 & 0.36 (E2E) & 0.00 & 0.91 & 0.05 & 1.23 (E2E) \\
+Park-Fav & 10 & 0.21 & 0.09 & 0.09 & 0.54 (SPS) & 1.02 & 1.39 & 0.02 & 0.00 (SPS) \\
+Park-Unfav & 10 & 0.32 & 0.22 & 0.31 & 0.45 (SPS) & 0.45 & 0.88 & 0.02 & 0.00 (SPS) \\
+COFs & 30 & 0.49 & 0.46 & 0.90 & 0.93 (MMD) & 5.48 & 4.24 & 0.00 & 0.00 (MMD) \\
+FreeSolv & 50 & 0.37 & 0.42 & 0.97 & 0.97 (SPS) & 1.38 & 0.69 & 0.02 & 0.00 (SPS) \\
+Polarizability & 30 & 0.61 & 0.54 & 0.95 & 0.96 (all five) & 0.11 & 0.22 & 0.00 & 0.00 (all five) \\
+HOPV15 & 30 & 0.25 & 0.36 & 0.32 & 0.38 (Frozen) & 2.37 & 2.03 & 2.31 & 1.27 (Frozen) \\
+Matbench-gap & 30 & 0.21 & 0.29 & 0.25 & 0.43 (SPS) & 0.49 & 0.16 & 0.12 & 0.05 (SPS) \\
+ExptGap-PBE & 30 & 0.43 & 0.24 & 0.33 & 0.41 (SPS) & 0.22 & 0.20 & 0.11 & 0.07 (SPS) \\
+Elastic-CHGNet & 30 & 0.24 & 0.28 & 0.49 & 0.62 (Frozen) & 369 & 364 & 279 & 278 (Frozen) \\
+Elastic-SevenNet & 30 & 0.19 & 0.18 & 0.57 & 0.75 (MMD) & 229 & 229 & 155 & 115 (MMD) \\
+Elastic-MatterSim & 30 & 0.21 & 0.25 & 0.76 & 0.88 (E2E) & 371 & 360 & 250 & 246 (E2E) \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+{\scriptsize
+$^{a}$Windows: $B = 50$ on the Branin functions, $10$ on the Park functions and $30$ on the chemistry and materials pools, except FreeSolv, evaluated at $50$; the Park and FreeSolv windows therefore differ from those of Fig.~\ref{fig:final_regret}. The HF-only arms start their window at 2 HF-equivalent units (two farthest-point-sampled HF points), the multi-fidelity arms at the end of their LF-inclusive initial design (3 to 4.5 units). On polarizability the five transfer-learning surrogates have identical attainment and final regret.
+$^{b}$SF-GP EI is a BoTorch \texttt{SingleTaskGP} (Mat\'{e}rn-5/2 ARD kernel, standardized targets, library defaults) refitted to all HF observations at every step, with the next HF query chosen by expected improvement over the pool; Random HF follows the same protocol with the HF query drawn uniformly at random from the unevaluated candidates. Neither arm queries the LF source.
+$^{c}$Seeds (of 40) whose regret reached exactly zero within the window: HOPV15, Random HF 5, SF-GP EI 7, Frozen-representation transfer 25; Matbench-gap, SF-GP EI 11, Random HF 4, baseline MFGP 6, sparse variational MFGP 5, deep-kernel GP 9, Frozen-representation transfer 10, Pretrain-then-Joint 8, End-to-End Joint 9, Soft Parameter Sharing 6, Domain Adaptation (MMD) 1.
+}
+\end{table}
+
+\begin{table}[p]
+\centering
+\scriptsize
+\caption{Pick-log summary on HOPV15 (40 seeds, budget 30; mid-budget, 15 HF-equivalent units). LF-top-ranked candidate: the candidate ranked first by the LF proxy, whose HF regret is $3.90$. Columns: share of seeds whose final regret equals that of the LF-top-ranked candidate; share of seeds whose best-so-far regret still improved after mid-budget; seeds (of 40) reaching exactly zero regret by $B = 30$; share of second-half HF picks that had already been evaluated at LF$^{a}$; mean final regret at $B = 30$.}
+\label{supptab:hopv15_picklog}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Surrogate & Final = LF-argmin & Improved after half & Reached zero & Promoted 2nd half & Mean final regret \\
+\midrule
+Baseline MFGP & 0.45 & 0.30 & 14/40 & 1.00 & 2.31 \\
+Sparse variational MFGP & 0.50 & 0.38 & 3/40 & 1.00 & 3.32 \\
+Deep-kernel GP & 0.15 & 0.47 & 8/40 & 0.84 & 2.61 \\
+Frozen-representation transfer & 0.23 & 0.62 & 25/40 & 0.99 & 1.27 \\
+Pretrain-then-Joint & 0.00 & 0.62 & 20/40 & 1.00 & 1.66 \\
+End-to-End Joint & 0.23 & 0.75 & 27/40 & 1.00 & 1.20 \\
+Soft Parameter Sharing & 0.00 & 0.50 & 13/40 & 1.00 & 2.44 \\
+Domain Adaptation (MMD) & 0.15 & 0.55 & 22/40 & 1.00 & 1.47 \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+{\scriptsize $^{a}$Second-half picks are the HF queries issued after 15 HF-equivalent units; a pick is promoted when its candidate had already been queried at LF earlier in the same run.}
+\end{table}
 
 \suppnote{Computational cost: absolute FLOPs and compute ranking}{suppnote:computational_cost}
 
