@@ -1,5 +1,5 @@
 %% Standalone Supplementary Information for the NCS submission. Build order matters (cross-references
-%% through xr): see build.sh. Redline macros as in main.tex; si_clean.tex builds the clean version.
+%% through xr): see build.sh; si_clean.tex is the wrapper used by ./build.sh clean.
 \documentclass[pdflatex,sn-nature]{sn-jnl}% single-column Supplementary Information
 
 
@@ -16,12 +16,6 @@
 \usepackage{array}%
 \usepackage{microtype}%
 \usepackage[title]{appendix}%
-%% [2026-09-11] Redline macros, identical to main.tex (needed for the standalone SI build).
-\usepackage[normalem]{ulem}%
-\newif\ifredline\redlinetrue
-\ifdefined\cleanversion\redlinefalse\fi % si_clean.tex defines \cleanversion: clean build, current text only
-\DeclareRobustCommand{\del}[1]{\ifredline\sout{#1}\fi}
-\DeclareRobustCommand{\new}[1]{\ifredline\textcolor{blue}{#1}\else#1\fi}
 
 %% Tighten Springer Nature's default page margins (the class leaves a very
 %% large bottom margin and ~24mm sides). This widens the two-column text block
@@ -76,7 +70,7 @@ Architectures for Scalable Multi-Fidelity Bayesian Optimization''}
 \affil{\orgdiv{Department of Engineering}, \orgname{King's College London},
 \orgaddress{\city{London}, \postcode{WC2R 2LS}, \country{United Kingdom}}}
 
-\abstract{This file contains \del{Supplementary Notes 1--9, Supplementary Figures 1--3 and Supplementary Tables 1--8}\new{Supplementary Notes 1--6, Supplementary Figures 1--3 and Supplementary Tables 1--\del{4}\new{5}}, which are referred to from the main text. Figure and table
+\abstract{This file contains Supplementary Notes 1--6, Supplementary Figures 1--3 and Supplementary Tables 1--5, which are referred to from the main text. Figure and table
 numbers without the ``Supplementary'' prefix refer to the main text.}
 
 \maketitle
