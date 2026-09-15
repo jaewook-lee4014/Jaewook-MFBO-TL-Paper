@@ -1,0 +1,14 @@
+pool,n,rho,r2_pool,budget_cfg,negate,csv,r2_1000uniform,csv_regenerates_from_src,alpha,lattice_points_per_axis,pool_min_HF
+Branin-Fav,2500,0.1,0.9688,50,False,synthetic_branin_fav.csv,0.9665,True,0.8,50.0,0.4044926977871608
+Branin-Unfav,2500,0.5,0.5802,50,False,synthetic_branin_unfav.csv,0.5615,True,0.1,50.0,0.4044926977871608
+Park-Fav,256,0.1,0.9649,50,False,synthetic_park_fav.csv,0.9651,True,0.6,4.0,1.087312731383618e-07
+Park-Unfav,256,0.5,0.7171,50,False,synthetic_park_unfav.csv,0.7241,True,0.0,4.0,1.087312731383618e-07
+COFs,608,0.065,0.9582,30,True,cofs.csv,,,,,
+FreeSolv,640,0.1,0.8676,50,False,freesolv.csv,,,,,
+Polarizability,1134,0.167,0.9878,30,True,polarizability.csv,,,,,
+HOPV15,240,0.1,0.0153,30,True,hopv15.csv,,,,,
+Matbench-Gap,3347,0.05,0.4563,20,False,matbench_gap.csv,,,,,
+ExptGap-PBE,3508,0.05,0.41,20,False,expt_gap_pbe.csv,,,,,
+Elastic-CHGNet,10819,0.05,0.2907,20,False,elastic_chgnet_shear.csv,,,,,
+Elastic-SevenNet,10460,0.05,0.4054,20,False,elastic_sevennet_shear.csv,,,,,
+Elastic-MatterSim,10946,0.05,0.7954,20,False,elastic_mattersim_shear.csv,,,,,

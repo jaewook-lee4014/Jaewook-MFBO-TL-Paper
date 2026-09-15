@@ -1,0 +1,1461 @@
+pool,model,seed,prefix_match,n_compared,orig_final,ext_at_Borig,orig_src,ext_src
+FreeSolv,Adapter,42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,46,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Progressive,52,True,169,0.02,0.02,refig42_tl,ext100
+Matbench-Gap,Progressive,53,True,169,0.02,0.02,refig42_tl,ext100
+Matbench-Gap,Progressive,54,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Progressive,55,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Progressive,56,True,169,0.4000000000000001,0.4000000000000001,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,52,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,53,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,54,True,169,0.03,0.03,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,55,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,56,True,169,0.24,0.24,refig42_tl,ext100
+FreeSolv,Stop-Gradient Joint,52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,56,True,248,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,42,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,End-to-End Joint,43,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,End-to-End Joint,44,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,45,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,46,True,143,4.299999999999999,4.299999999999999,refig42_tl,ext
+Matbench-Gap,Adapter,42,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Adapter,43,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Adapter,44,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Adapter,45,True,169,0.3999999999999999,0.3999999999999999,refig42_tl,ext100
+Matbench-Gap,Adapter,46,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,47,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,48,True,169,0.2000000000000001,0.2000000000000001,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,49,True,169,0.2000000000000001,0.2000000000000001,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,50,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,51,True,169,0.01,0.01,refig42_tl,ext100
+HOPV15,End-to-End Joint,47,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,End-to-End Joint,48,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,49,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,End-to-End Joint,50,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,End-to-End Joint,51,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,47,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,48,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,49,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,50,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,51,True,143,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Sequential,47,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Sequential,48,True,169,0.2000000000000001,0.2000000000000001,refig42_tl,ext100
+Matbench-Gap,Sequential,49,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Sequential,50,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Sequential,51,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,52,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,53,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,54,True,169,0.2999999999999998,0.2999999999999998,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,55,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,56,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Sequential,57,True,169,0.07,0.07,refig42_tl,ext100
+Matbench-Gap,Sequential,58,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Sequential,59,True,169,0.2999999999999998,0.2999999999999998,refig42_tl,ext100
+Matbench-Gap,Sequential,60,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Sequential,61,True,169,0.1500000000000001,0.1500000000000001,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,47,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,48,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,49,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,50,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,51,True,169,0.49,0.49,refig42_tl,ext100
+FreeSolv,End-to-End Joint,57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,61,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,51,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,46,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Progressive,42,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Progressive,43,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Progressive,44,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Progressive,45,True,169,0.3999999999999999,0.3999999999999999,refig42_tl,ext100
+Matbench-Gap,Progressive,46,True,169,0.1,0.1,refig42_tl,ext100
+Polarizability,End-to-End Joint,52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,56,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),46,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,61,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,42,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,43,True,143,3.999999999999999,3.999999999999999,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,44,True,143,2.8999999999999995,2.8999999999999995,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,45,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,46,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,46,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),61,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),51,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,56,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,47,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,48,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,49,True,143,4.299999999999999,4.299999999999999,refig42_tl,ext
+HOPV15,Feature-extraction transfer,50,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,51,True,143,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,56,True,84,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),56,True,248,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,52,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Adapter,53,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,54,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,55,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Adapter,56,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),47,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),48,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),49,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),50,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),51,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,47,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Adapter,48,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Adapter,49,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Adapter,50,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Adapter,51,True,143,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,56,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,52,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Sequential,53,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,54,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,55,True,143,2.8999999999999995,2.8999999999999995,refig42_tl,ext
+HOPV15,Sequential,56,True,143,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),61,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,51,True,248,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,46,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,47,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,48,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,49,True,143,2.619999999999999,2.619999999999999,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,50,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,51,True,143,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,61,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Domain Adaptation (MMD),56,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Progressive,42,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Progressive,43,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Progressive,44,True,143,2.8999999999999995,2.8999999999999995,refig42_tl,ext
+HOPV15,Progressive,45,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Progressive,46,True,143,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Domain Adaptation (MMD),42,True,169,0.1899999999999999,0.1899999999999999,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),43,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),44,True,169,0.2999999999999998,0.2999999999999998,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),45,True,169,0.25,0.25,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),46,True,169,0.1,0.1,refig42_tl,ext100
+HOPV15,Sequential,57,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,58,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,59,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,60,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,61,True,143,0.0,0.0,refig42_tl,ext
+Matbench-Gap,End-to-End Joint,57,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,58,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,59,True,169,0.3800000000000001,0.3800000000000001,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,60,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,61,True,169,0.6000000000000001,0.6000000000000001,refig42_tl,ext100
+FreeSolv,End-to-End Joint,47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,51,True,248,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,61,True,84,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,51,True,248,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,56,True,84,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,61,True,248,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,56,True,84,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Soft Parameter Sharing,52,True,169,0.32,0.32,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,53,True,169,0.2000000000000001,0.2000000000000001,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,54,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,55,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,56,True,169,0.2000000000000001,0.2000000000000001,refig42_tl,ext100
+Polarizability,Progressive,47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,51,True,84,0.0,0.0,refig42_tl,ext
+Matbench-Gap,End-to-End Joint,52,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,53,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,54,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,55,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,56,True,169,0.2199999999999999,0.2199999999999999,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),52,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),53,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),54,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),55,True,169,0.02,0.02,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),56,True,169,0.24,0.24,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,47,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,48,True,169,0.2000000000000001,0.2000000000000001,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,49,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,50,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,51,True,169,0.1,0.1,refig42_tl,ext100
+HOPV15,Soft Parameter Sharing,52,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,53,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,54,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,55,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,56,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+Matbench-Gap,Progressive,57,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Progressive,58,True,169,0.7600000000000002,0.7600000000000002,refig42_tl,ext100
+Matbench-Gap,Progressive,59,True,169,0.4699999999999998,0.4699999999999998,refig42_tl,ext100
+Matbench-Gap,Progressive,60,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Progressive,61,True,169,0.02,0.02,refig42_tl,ext100
+Polarizability,Feature-extraction transfer,47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,51,True,84,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,46,True,248,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,52,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,53,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,54,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,55,True,143,2.8999999999999995,2.8999999999999995,refig42_tl,ext
+HOPV15,Feature-extraction transfer,56,True,143,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,46,True,84,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,61,True,248,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,46,True,84,0.0,0.0,refig42_tl,ext
+Matbench-Gap,End-to-End Joint,47,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,48,True,169,0.02,0.02,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,49,True,169,0.54,0.54,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,50,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,51,True,169,0.1,0.1,refig42_tl,ext100
+HOPV15,End-to-End Joint,52,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,53,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,54,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,55,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,56,True,143,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,61,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,51,True,248,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Feature-extraction transfer,61,True,84,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Pretrain-then-Joint,42,True,169,0.1199999999999998,0.1199999999999998,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,43,True,169,0.1500000000000001,0.1500000000000001,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,44,True,169,0.0399999999999998,0.0399999999999998,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,45,True,169,0.4000000000000001,0.4000000000000001,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,46,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,52,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,53,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,54,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,55,True,169,0.1500000000000001,0.1500000000000001,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,56,True,169,0.2999999999999998,0.2999999999999998,refig42_tl,ext100
+Polarizability,Progressive,42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,46,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Progressive,47,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Progressive,48,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Progressive,49,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Progressive,50,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Progressive,51,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Progressive,52,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Progressive,53,True,143,4.629999999999999,4.629999999999999,refig42_tl,ext
+HOPV15,Progressive,54,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Progressive,55,True,143,3.6,3.6,refig42_tl,ext
+HOPV15,Progressive,56,True,143,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Adapter,52,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Adapter,53,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Adapter,54,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Adapter,55,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Adapter,56,True,169,0.01,0.01,refig42_tl,ext100
+Polarizability,End-to-End Joint,57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,61,True,84,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),51,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Adapter,57,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Adapter,58,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Adapter,59,True,169,0.0699999999999998,0.0699999999999998,refig42_tl,ext100
+Matbench-Gap,Adapter,60,True,169,0.2999999999999998,0.2999999999999998,refig42_tl,ext100
+Matbench-Gap,Adapter,61,True,169,0.1,0.1,refig42_tl,ext100
+FreeSolv,Sequential,52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,56,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Feature-extraction transfer,42,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,43,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,44,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,45,True,169,0.3999999999999999,0.3999999999999999,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,46,True,169,0.4300000000000001,0.4300000000000001,refig42_tl,ext100
+HOPV15,Feature-extraction transfer,57,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Feature-extraction transfer,58,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,59,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,60,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,61,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Adapter,57,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,58,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Adapter,59,True,143,2.8999999999999995,2.8999999999999995,refig42_tl,ext
+HOPV15,Adapter,60,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,61,True,143,4.299999999999999,4.299999999999999,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Pretrain-then-Joint,51,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,57,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,58,True,143,4.109999999999999,4.109999999999999,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,59,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,60,True,143,4.02,4.02,refig42_tl,ext
+HOPV15,Soft Parameter Sharing,61,True,143,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Domain Adaptation (MMD),47,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),48,True,169,0.24,0.24,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),49,True,169,0.6600000000000001,0.6600000000000001,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),50,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),51,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Sequential,42,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Sequential,43,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Sequential,44,True,169,0.1500000000000001,0.1500000000000001,refig42_tl,ext100
+Matbench-Gap,Sequential,45,True,169,0.3999999999999999,0.3999999999999999,refig42_tl,ext100
+Matbench-Gap,Sequential,46,True,169,0.0,0.0,refig42_tl,ext100
+FreeSolv,Feature-extraction transfer,52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,56,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,56,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,61,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Soft Parameter Sharing,57,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,58,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,59,True,169,0.03,0.03,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,60,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,61,True,169,0.2000000000000001,0.2000000000000001,refig42_tl,ext100
+HOPV15,Pretrain-then-Joint,42,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,43,True,143,2.8999999999999995,2.8999999999999995,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,44,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,45,True,143,2.8999999999999995,2.8999999999999995,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,46,True,143,4.02,4.02,refig42_tl,ext
+FreeSolv,Adapter,52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,56,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Adapter,47,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Adapter,48,True,169,0.24,0.24,refig42_tl,ext100
+Matbench-Gap,Adapter,49,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Adapter,50,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Adapter,51,True,169,0.01,0.01,refig42_tl,ext100
+FreeSolv,End-to-End Joint,42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,46,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Sequential,46,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,46,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,End-to-End Joint,42,True,169,0.48,0.48,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,43,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,44,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,45,True,169,0.7600000000000002,0.7600000000000002,refig42_tl,ext100
+Matbench-Gap,End-to-End Joint,46,True,169,0.3999999999999999,0.3999999999999999,refig42_tl,ext100
+FreeSolv,Pretrain-then-Joint,57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,61,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Pretrain-then-Joint,57,True,169,0.02,0.02,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,58,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,59,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,60,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,61,True,169,0.0399999999999998,0.0399999999999998,refig42_tl,ext100
+FreeSolv,Domain Adaptation (MMD),42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Domain Adaptation (MMD),46,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Feature-extraction transfer,57,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,58,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,59,True,169,0.2999999999999998,0.2999999999999998,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,60,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Feature-extraction transfer,61,True,169,0.2999999999999998,0.2999999999999998,refig42_tl,ext100
+FreeSolv,Soft Parameter Sharing,52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Soft Parameter Sharing,56,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,51,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Domain Adaptation (MMD),57,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),58,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),59,True,169,0.3999999999999999,0.3999999999999999,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),60,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),61,True,169,0.1,0.1,refig42_tl,ext100
+Polarizability,Soft Parameter Sharing,42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,46,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,47,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,48,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,49,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Sequential,50,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,51,True,143,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Feature-extraction transfer,46,True,248,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),52,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),53,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),54,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),55,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),56,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,52,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,53,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,54,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,55,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,56,True,143,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Progressive,47,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Progressive,48,True,169,0.02,0.02,refig42_tl,ext100
+Matbench-Gap,Progressive,49,True,169,0.02,0.02,refig42_tl,ext100
+Matbench-Gap,Progressive,50,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Progressive,51,True,169,0.01,0.01,refig42_tl,ext100
+Polarizability,End-to-End Joint,47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,End-to-End Joint,51,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,61,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,46,True,84,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,61,True,248,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,42,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,43,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,44,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,45,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,46,True,143,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,42,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,43,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,44,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,45,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,46,True,84,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Sequential,52,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Sequential,53,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Sequential,54,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Sequential,55,True,169,0.1500000000000001,0.1500000000000001,refig42_tl,ext100
+Matbench-Gap,Sequential,56,True,169,0.52,0.52,refig42_tl,ext100
+Polarizability,Soft Parameter Sharing,52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,56,True,84,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Stop-Gradient Joint,42,True,169,0.1899999999999999,0.1899999999999999,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,43,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,44,True,169,0.1500000000000001,0.1500000000000001,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,45,True,169,0.1899999999999999,0.1899999999999999,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,46,True,169,0.0,0.0,refig42_tl,ext100
+HOPV15,End-to-End Joint,57,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,58,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,End-to-End Joint,59,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,End-to-End Joint,60,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,End-to-End Joint,61,True,143,3.9,3.9,refig42_tl,ext
+Polarizability,Adapter,52,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,53,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,54,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,55,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,56,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,42,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,43,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Adapter,44,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,45,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Adapter,46,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,57,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,58,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,59,True,143,2.8999999999999995,2.8999999999999995,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,60,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Stop-Gradient Joint,61,True,143,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Progressive,61,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,47,True,143,4.499999999999999,4.499999999999999,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,48,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,49,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,50,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,51,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,42,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,43,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,44,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,45,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Sequential,46,True,143,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Pretrain-then-Joint,56,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Progressive,51,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Soft Parameter Sharing,42,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,43,True,169,0.1,0.1,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,44,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,45,True,169,0.2000000000000001,0.2000000000000001,refig42_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,46,True,169,0.1,0.1,refig42_tl,ext100
+FreeSolv,Adapter,57,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,58,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,59,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,60,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,61,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,42,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,43,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,44,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,45,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Stop-Gradient Joint,46,True,248,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),42,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),43,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),44,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),45,True,143,3.9,3.9,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),46,True,143,3.9,3.9,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Soft Parameter Sharing,51,True,84,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Stop-Gradient Joint,47,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,48,True,169,0.24,0.24,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,49,True,169,0.53,0.53,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,50,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,51,True,169,0.1,0.1,refig42_tl,ext100
+FreeSolv,Adapter,47,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,48,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,49,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,50,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,Adapter,51,True,248,0.0,0.0,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,52,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,53,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,54,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,55,True,143,4.299999999999999,4.299999999999999,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,56,True,143,1.5999999999999996,1.5999999999999996,refig42_tl,ext
+FreeSolv,End-to-End Joint,52,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,53,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,54,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,55,True,248,0.0,0.0,refig42_tl,ext
+FreeSolv,End-to-End Joint,56,True,248,0.0,0.0,refig42_tl,ext
+Matbench-Gap,Stop-Gradient Joint,57,True,169,0.01,0.01,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,58,True,169,0.0999999999999998,0.0999999999999998,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,59,True,169,0.3800000000000001,0.3800000000000001,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,60,True,169,0.0,0.0,refig42_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,61,True,169,0.1,0.1,refig42_tl,ext100
+HOPV15,Pretrain-then-Joint,57,True,143,5.199999999999999,5.199999999999999,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,58,True,143,3.499999999999999,3.499999999999999,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,59,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,60,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Pretrain-then-Joint,61,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,42,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,43,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,44,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,45,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Feature-extraction transfer,46,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),57,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),58,True,143,3.2,3.1999999999999997,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),59,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),60,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Domain Adaptation (MMD),61,True,143,3.9,3.9,refig42_tl,ext
+Polarizability,Sequential,47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,51,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,57,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,58,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,59,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,60,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Sequential,61,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Adapter,51,True,84,0.0,0.0,refig42_tl,ext
+HOPV15,Progressive,57,True,143,0.0,0.0,refig42_tl,ext
+HOPV15,Progressive,58,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Progressive,59,True,143,4.02,4.02,refig42_tl,ext
+HOPV15,Progressive,60,True,143,4.699999999999999,4.699999999999999,refig42_tl,ext
+HOPV15,Progressive,61,True,143,4.629999999999999,4.629999999999999,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,47,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,48,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,49,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,50,True,84,0.0,0.0,refig42_tl,ext
+Polarizability,Stop-Gradient Joint,51,True,84,0.0,0.0,refig42_tl,ext
+FreeSolv,MFGP,47,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,48,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,49,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,50,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,51,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,52,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,53,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,54,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,55,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,56,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,42,True,248,0.27,0.27,refig42_gp,ext
+FreeSolv,MFGP,43,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,44,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,45,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,46,True,248,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,57,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,58,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,59,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,60,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,61,True,84,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,42,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,43,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,44,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,45,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,46,True,143,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,42,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,43,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,44,True,84,0.0891943734015343,0.0891943734015343,refig42_gp,ext
+Polarizability,MFGP,45,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,46,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,42,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,43,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,44,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,45,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,46,True,84,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,57,False,248,0.27,0.27,refig42_gp,ext
+FreeSolv,Sparse MFGP,58,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,59,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,60,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,61,True,248,0.0,0.0,refig42_gp,ext
+Matbench-Gap,MFGP,52,True,169,0.27,0.27,refig42_gp,ext100
+Matbench-Gap,MFGP,53,True,169,0.0,0.0,refig42_gp,ext100
+Matbench-Gap,MFGP,54,True,169,0.0499999999999998,0.0499999999999998,refig42_gp,ext100
+Matbench-Gap,MFGP,55,True,169,0.02,0.02,refig42_gp,ext100
+Matbench-Gap,MFGP,56,True,169,0.2000000000000001,0.2000000000000001,refig42_gp,ext100
+FreeSolv,Sparse MFGP,47,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,48,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,49,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,50,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,51,True,248,0.0,0.0,refig42_gp,ext
+Matbench-Gap,Sparse MFGP,42,False,169,0.0499999999999998,0.4000000000000001,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,43,True,169,0.1500000000000001,0.1500000000000001,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,44,False,169,0.0,0.2999999999999998,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,45,False,169,0.02,0.07,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,46,False,169,0.08,0.52,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,52,True,169,0.2000000000000001,0.1999999999999999,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,53,True,169,1.4,1.4,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,54,True,169,0.0,0.0,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,55,False,169,0.4000000000000001,0.1899999999999999,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,56,False,169,0.07,0.07,refig42_gp,ext100
+Polarizability,MFGP,47,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,48,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,49,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,50,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,51,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,57,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,58,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,59,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,60,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,61,True,84,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,52,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,53,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,54,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,55,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,56,True,143,3.9,3.9,refig42_gp,ext
+Matbench-Gap,MFGP,57,True,169,0.0999999999999998,0.0999999999999998,refig42_gp,ext100
+Matbench-Gap,MFGP,58,True,169,0.07,0.07,refig42_gp,ext100
+Matbench-Gap,MFGP,59,True,169,0.2299999999999999,0.2299999999999999,refig42_gp,ext100
+Matbench-Gap,MFGP,60,True,169,0.0899999999999998,0.0899999999999998,refig42_gp,ext100
+Matbench-Gap,MFGP,61,True,169,0.1300000000000001,0.1300000000000001,refig42_gp,ext100
+FreeSolv,MFGP,52,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,53,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,54,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,55,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,56,True,248,0.0,0.0,refig42_gp,ext
+HOPV15,Sparse MFGP,42,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,43,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,44,True,143,3.6,3.6,refig42_gp,ext
+HOPV15,Sparse MFGP,45,True,143,3.6,3.6,refig42_gp,ext
+HOPV15,Sparse MFGP,46,True,143,3.6,3.6,refig42_gp,ext
+Matbench-Gap,MFGP,47,True,169,0.0999999999999998,0.0999999999999998,refig42_gp,ext100
+Matbench-Gap,MFGP,48,True,169,0.1600000000000001,0.1600000000000001,refig42_gp,ext100
+Matbench-Gap,MFGP,49,True,169,0.1500000000000001,0.1500000000000001,refig42_gp,ext100
+Matbench-Gap,MFGP,50,True,169,0.2999999999999998,0.2999999999999998,refig42_gp,ext100
+Matbench-Gap,MFGP,51,True,169,0.2999999999999998,0.2999999999999998,refig42_gp,ext100
+Matbench-Gap,MFGP,42,True,169,0.2999999999999998,0.2999999999999998,refig42_gp,ext100
+Matbench-Gap,MFGP,43,True,169,0.1500000000000001,0.1500000000000001,refig42_gp,ext100
+Matbench-Gap,MFGP,44,True,169,0.1,0.1,refig42_gp,ext100
+Matbench-Gap,MFGP,45,True,169,0.02,0.02,refig42_gp,ext100
+Matbench-Gap,MFGP,46,True,169,0.0899999999999998,0.0899999999999998,refig42_gp,ext100
+FreeSolv,Sparse MFGP,42,False,248,0.0,0.27,refig42_gp,ext
+FreeSolv,Sparse MFGP,43,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,44,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,45,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,Sparse MFGP,46,True,248,0.0,0.0,refig42_gp,ext
+Matbench-Gap,Sparse MFGP,47,False,169,0.55,0.02,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,48,False,169,0.1600000000000001,0.2000000000000001,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,49,True,169,0.48,0.48,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,50,True,169,0.1,0.1,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,51,True,169,0.02,0.02,refig42_gp,ext100
+FreeSolv,MFGP,57,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,58,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,59,True,248,0.0,0.0,refig42_gp,ext
+FreeSolv,MFGP,61,True,248,0.0,0.0,refig42_gp,ext
+HOPV15,Sparse MFGP,47,False,143,3.6,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,48,True,143,3.9,3.6,refig42_gp,ext
+HOPV15,Sparse MFGP,49,False,143,3.6,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,50,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,51,True,143,3.499999999999999,3.499999999999999,refig42_gp,ext
+HOPV15,Sparse MFGP,57,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,58,False,143,3.6,0.0,refig42_gp,ext
+HOPV15,Sparse MFGP,59,True,143,3.9,3.6,refig42_gp,ext
+HOPV15,Sparse MFGP,60,False,143,0.0,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,61,False,143,3.9,3.6,refig42_gp,ext
+HOPV15,MFGP,57,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,58,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,59,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,60,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,61,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,47,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,48,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,49,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,MFGP,50,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,MFGP,51,True,143,3.499999999999999,3.499999999999999,refig42_gp,ext
+HOPV15,Sparse MFGP,52,True,143,3.499999999999999,3.499999999999999,refig42_gp,ext
+HOPV15,Sparse MFGP,53,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,54,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,55,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,Sparse MFGP,56,True,143,3.9,3.9,refig42_gp,ext
+Polarizability,Sparse MFGP,52,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,53,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,54,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,55,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,56,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,52,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,53,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,54,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,55,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,MFGP,56,True,84,0.0,0.0,refig42_gp,ext
+Matbench-Gap,Sparse MFGP,57,False,169,0.1,0.02,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,58,True,169,0.1399999999999999,0.1399999999999999,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,59,False,169,0.2200000000000002,0.52,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,60,False,169,0.02,0.02,refig42_gp,ext100
+Matbench-Gap,Sparse MFGP,61,False,169,0.5399999999999999,0.1,refig42_gp,ext100
+Polarizability,Sparse MFGP,47,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,48,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,49,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,50,True,84,0.0,0.0,refig42_gp,ext
+Polarizability,Sparse MFGP,51,True,84,0.0,0.0,refig42_gp,ext
+HOPV15,DKL,42,True,143,3.6,3.6,refig42_gp,ext
+HOPV15,DKL,43,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,DKL,44,True,143,1.5999999999999996,1.5999999999999996,refig42_gp,ext
+HOPV15,DKL,45,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,DKL,46,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,DKL,57,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,DKL,58,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,DKL,59,True,143,2.799999999999999,2.799999999999999,refig42_gp,ext
+HOPV15,DKL,60,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,DKL,61,True,143,2.8999999999999995,2.8999999999999995,refig42_gp,ext
+Matbench-Gap,DKL,52,True,169,0.0,0.0,refig42_gp,ext100
+Matbench-Gap,DKL,53,True,169,1.4,1.4,refig42_gp,ext100
+Matbench-Gap,DKL,54,True,169,0.0299999999999998,0.0299999999999998,refig42_gp,ext100
+Matbench-Gap,DKL,55,True,169,0.0,0.0,refig42_gp,ext100
+Matbench-Gap,DKL,56,True,169,0.0,0.0,refig42_gp,ext100
+Matbench-Gap,DKL,42,True,169,0.1,0.1,refig42_gp,ext100
+Matbench-Gap,DKL,43,True,169,0.1500000000000001,0.1500000000000001,refig42_gp,ext100
+Matbench-Gap,DKL,44,True,169,0.1,0.1,refig42_gp,ext100
+Matbench-Gap,DKL,45,True,169,0.0,0.0,refig42_gp,ext100
+Matbench-Gap,DKL,46,True,169,0.6000000000000001,0.6000000000000001,refig42_gp,ext100
+Matbench-Gap,DKL,57,True,169,0.05,0.05,refig42_gp,ext100
+Matbench-Gap,DKL,58,True,169,0.2999999999999998,0.2999999999999998,refig42_gp,ext100
+Matbench-Gap,DKL,59,True,169,0.2999999999999998,0.2999999999999998,refig42_gp,ext100
+Matbench-Gap,DKL,60,True,169,0.7800000000000002,0.7800000000000002,refig42_gp,ext100
+Matbench-Gap,DKL,61,True,169,0.8499999999999999,0.8499999999999999,refig42_gp,ext100
+HOPV15,DKL,47,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,DKL,48,True,143,3.6,3.6,refig42_gp,ext
+HOPV15,DKL,49,True,143,2.8999999999999995,2.8999999999999995,refig42_gp,ext
+HOPV15,DKL,50,True,143,4.699999999999999,4.699999999999999,refig42_gp,ext
+HOPV15,DKL,51,True,143,3.499999999999999,3.499999999999999,refig42_gp,ext
+Matbench-Gap,DKL,47,True,169,0.3600000000000001,0.3600000000000001,refig42_gp,ext100
+Matbench-Gap,DKL,48,True,169,0.54,0.54,refig42_gp,ext100
+Matbench-Gap,DKL,49,True,169,0.0299999999999998,0.0299999999999998,refig42_gp,ext100
+Matbench-Gap,DKL,50,True,169,0.1,0.1,refig42_gp,ext100
+Matbench-Gap,DKL,51,True,169,0.1,0.1,refig42_gp,ext100
+HOPV15,DKL,52,True,143,3.499999999999999,3.499999999999999,refig42_gp,ext
+HOPV15,DKL,53,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,DKL,54,True,143,3.9,3.9,refig42_gp,ext
+HOPV15,DKL,55,True,143,0.0,0.0,refig42_gp,ext
+HOPV15,DKL,56,True,143,3.9,3.9,refig42_gp,ext
+FreeSolv,MFGP,60,True,248,0.0,0.0,refig42_gp,ext
+Matbench-Gap,Sequential,67,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Sequential,68,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Sequential,69,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Sequential,70,True,169,0.7200000000000002,0.7200000000000002,conf62_tl,ext100
+Matbench-Gap,Sequential,71,True,169,0.2999999999999998,0.2999999999999998,conf62_tl,ext100
+HOPV15,End-to-End Joint,62,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,63,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,64,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,65,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,End-to-End Joint,66,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,67,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,68,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,69,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,70,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,71,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),62,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),63,True,143,2.8999999999999995,2.8999999999999995,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),64,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),65,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),66,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Feature-extraction transfer,62,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Feature-extraction transfer,63,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,64,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,65,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,66,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Progressive,72,True,143,4.699999999999999,4.699999999999999,conf62_tl,ext
+HOPV15,Progressive,73,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Progressive,74,True,143,2.8999999999999995,2.8999999999999995,conf62_tl,ext
+HOPV15,Progressive,75,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Progressive,76,True,143,4.699999999999999,4.699999999999999,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),67,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),68,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),69,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),70,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),71,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,67,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Feature-extraction transfer,68,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Feature-extraction transfer,69,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Feature-extraction transfer,70,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Feature-extraction transfer,71,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,72,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,73,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,74,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,75,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,76,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Domain Adaptation (MMD),72,True,169,0.07,0.07,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),73,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),74,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),75,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),76,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Sequential,72,True,169,0.28,0.28,conf62_tl,ext100
+Matbench-Gap,Sequential,73,True,169,0.24,0.24,conf62_tl,ext100
+Matbench-Gap,Sequential,74,True,169,0.4500000000000002,0.4500000000000002,conf62_tl,ext100
+Matbench-Gap,Sequential,75,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Sequential,76,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Feature-extraction transfer,77,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,78,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,79,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,80,True,143,4.299999999999999,4.299999999999999,conf62_tl,ext
+HOPV15,Feature-extraction transfer,81,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+Matbench-Gap,Soft Parameter Sharing,77,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,78,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,79,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,80,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,81,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Pretrain-then-Joint,62,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,63,True,143,3.2,3.1999999999999997,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,64,True,143,2.8999999999999995,2.8999999999999995,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,65,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,66,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,67,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,68,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,End-to-End Joint,69,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,70,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,71,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Domain Adaptation (MMD),77,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),78,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),79,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),80,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),81,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Progressive,62,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Progressive,63,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Progressive,64,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Progressive,65,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Progressive,66,True,169,0.5199999999999999,0.5199999999999999,conf62_tl,ext100
+HOPV15,Adapter,67,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Adapter,68,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Adapter,69,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Adapter,70,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Adapter,71,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Stop-Gradient Joint,62,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,63,True,169,0.1399999999999999,0.1399999999999999,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,64,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,65,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,66,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,72,True,169,0.4699999999999998,0.4699999999999998,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,73,True,169,0.24,0.24,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,74,True,169,0.2000000000000001,0.2000000000000001,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,75,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,76,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,72,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,73,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,74,True,169,0.55,0.55,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,75,True,169,0.0399999999999998,0.0399999999999998,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,76,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Stop-Gradient Joint,62,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,63,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,64,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,65,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,66,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,67,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Sequential,68,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Sequential,69,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Sequential,70,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Sequential,71,True,143,3.9,3.9,conf62_tl,ext
+Matbench-Gap,Pretrain-then-Joint,77,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,78,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,79,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,80,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,81,True,169,0.2999999999999998,0.2999999999999998,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,62,True,169,0.27,0.27,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,63,True,169,0.27,0.27,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,64,True,169,0.24,0.24,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,65,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,66,True,169,0.2000000000000001,0.2000000000000001,conf62_tl,ext100
+Matbench-Gap,Sequential,62,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Sequential,63,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Sequential,64,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,Sequential,65,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Sequential,66,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,77,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,78,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,79,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,80,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,81,True,169,0.1899999999999999,0.1899999999999999,conf62_tl,ext100
+HOPV15,Pretrain-then-Joint,67,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,68,True,143,2.8999999999999995,2.8999999999999995,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,69,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,70,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,71,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Stop-Gradient Joint,67,True,169,1.4,1.4,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,68,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,69,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,70,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,71,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Feature-extraction transfer,72,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,73,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,74,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Feature-extraction transfer,75,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Feature-extraction transfer,76,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Soft Parameter Sharing,67,True,169,0.07,0.07,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,68,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,69,True,169,1.4,1.4,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,70,True,169,0.24,0.24,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,71,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Adapter,62,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Adapter,63,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Adapter,64,True,169,0.24,0.24,conf62_tl,ext100
+Matbench-Gap,Adapter,65,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Adapter,66,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Domain Adaptation (MMD),72,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),73,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),74,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),75,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),76,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,77,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,78,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Sequential,79,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,80,True,143,4.299999999999999,4.299999999999999,conf62_tl,ext
+HOPV15,Sequential,81,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Adapter,62,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Adapter,63,True,143,4.299999999999999,4.299999999999999,conf62_tl,ext
+HOPV15,Adapter,64,True,143,4.109999999999999,4.109999999999999,conf62_tl,ext
+HOPV15,Adapter,65,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Adapter,66,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,End-to-End Joint,77,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,78,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,79,True,169,0.52,0.52,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,80,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,81,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,67,True,169,1.4,1.4,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,68,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,69,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,70,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,71,True,169,0.2199999999999999,0.2199999999999999,conf62_tl,ext100
+Matbench-Gap,Progressive,72,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Progressive,73,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Progressive,74,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Progressive,75,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Progressive,76,True,169,0.2999999999999998,0.2999999999999998,conf62_tl,ext100
+HOPV15,Progressive,77,True,143,4.699999999999999,4.699999999999999,conf62_tl,ext
+HOPV15,Progressive,78,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Progressive,79,True,143,4.699999999999999,4.699999999999999,conf62_tl,ext
+HOPV15,Progressive,80,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Progressive,81,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+Matbench-Gap,End-to-End Joint,67,True,169,0.6000000000000001,0.6000000000000001,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,68,True,169,0.1600000000000001,0.1600000000000001,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,69,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,70,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,71,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Progressive,62,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Progressive,63,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Progressive,64,True,143,4.02,4.02,conf62_tl,ext
+HOPV15,Progressive,65,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Progressive,66,True,143,3.6,3.6,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,62,True,143,2.8999999999999995,2.8999999999999995,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,63,True,143,3.2,3.1999999999999997,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,64,True,143,3.2,3.1999999999999997,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,65,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,66,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Domain Adaptation (MMD),62,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),63,True,169,0.1100000000000001,0.1100000000000001,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),64,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),65,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),66,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,72,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,73,True,169,0.3400000000000001,0.3400000000000001,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,74,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,75,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,76,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Adapter,77,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Adapter,78,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Adapter,79,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Adapter,80,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Adapter,81,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,77,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,78,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,79,True,143,4.699999999999999,4.699999999999999,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,80,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,81,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+Matbench-Gap,Feature-extraction transfer,77,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,78,True,169,0.4699999999999998,0.4699999999999998,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,79,True,169,0.2199999999999999,0.2199999999999999,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,80,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,81,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Soft Parameter Sharing,67,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,68,True,143,2.8999999999999995,2.8999999999999995,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,69,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,70,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,71,True,143,4.699999999999999,4.699999999999999,conf62_tl,ext
+Matbench-Gap,Sequential,77,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Sequential,78,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Sequential,79,True,169,0.48,0.48,conf62_tl,ext100
+Matbench-Gap,Sequential,80,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,Sequential,81,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Pretrain-then-Joint,77,True,143,3.2,3.1999999999999997,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,78,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,79,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,80,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Pretrain-then-Joint,81,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,77,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,78,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,79,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,80,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,81,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,End-to-End Joint,72,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,73,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,74,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,75,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,End-to-End Joint,76,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Progressive,77,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Progressive,78,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Progressive,79,True,169,0.4000000000000001,0.4000000000000001,conf62_tl,ext100
+Matbench-Gap,Progressive,80,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Progressive,81,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Sequential,72,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,73,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,74,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,75,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,76,True,143,3.9,3.9,conf62_tl,ext
+Matbench-Gap,Feature-extraction transfer,62,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,63,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,64,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,65,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Feature-extraction transfer,66,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Adapter,72,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Adapter,73,True,169,0.1399999999999999,0.1399999999999999,conf62_tl,ext100
+Matbench-Gap,Adapter,74,True,169,1.4,1.4,conf62_tl,ext100
+Matbench-Gap,Adapter,75,True,169,0.1700000000000001,0.1700000000000001,conf62_tl,ext100
+Matbench-Gap,Adapter,76,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Domain Adaptation (MMD),77,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),78,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),79,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),80,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Domain Adaptation (MMD),81,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,End-to-End Joint,77,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,78,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,79,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,80,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,End-to-End Joint,81,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Progressive,67,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Progressive,68,True,143,4.02,4.02,conf62_tl,ext
+HOPV15,Progressive,69,True,143,2.8999999999999995,2.8999999999999995,conf62_tl,ext
+HOPV15,Progressive,70,True,143,1.5999999999999996,1.5999999999999996,conf62_tl,ext
+HOPV15,Progressive,71,True,143,4.699999999999999,4.699999999999999,conf62_tl,ext
+Matbench-Gap,Soft Parameter Sharing,62,True,169,0.27,0.27,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,63,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,64,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,65,True,169,0.2000000000000001,0.2000000000000001,conf62_tl,ext100
+Matbench-Gap,Soft Parameter Sharing,66,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,72,True,169,0.2999999999999998,0.2999999999999998,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,73,True,169,0.2199999999999999,0.2199999999999999,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,74,True,169,1.4,1.4,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,75,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Stop-Gradient Joint,76,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),67,True,169,1.4,1.4,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),68,True,169,0.24,0.24,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),69,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),70,True,169,0.2999999999999998,0.2999999999999998,conf62_tl,ext100
+Matbench-Gap,Domain Adaptation (MMD),71,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,62,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,63,True,169,0.1399999999999999,0.1399999999999999,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,64,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,65,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,66,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Progressive,67,True,169,1.4,1.4,conf62_tl,ext100
+Matbench-Gap,Progressive,68,True,169,0.2999999999999998,0.2999999999999998,conf62_tl,ext100
+Matbench-Gap,Progressive,69,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,Progressive,70,True,169,0.1199999999999998,0.1199999999999998,conf62_tl,ext100
+Matbench-Gap,Progressive,71,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,72,True,169,0.24,0.24,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,73,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,74,True,169,0.5,0.5,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,75,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,End-to-End Joint,76,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Soft Parameter Sharing,72,True,143,2.8999999999999995,2.8999999999999995,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,73,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,74,True,143,4.699999999999999,4.699999999999999,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,75,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Soft Parameter Sharing,76,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,72,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,73,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,74,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,75,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Stop-Gradient Joint,76,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,62,True,143,3.9,3.9,conf62_tl,ext
+HOPV15,Sequential,63,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,64,True,143,3.6,3.6,conf62_tl,ext
+HOPV15,Sequential,65,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Sequential,66,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Adapter,67,True,169,0.2999999999999998,0.2999999999999998,conf62_tl,ext100
+Matbench-Gap,Adapter,68,True,169,0.01,0.01,conf62_tl,ext100
+Matbench-Gap,Adapter,69,True,169,0.0399999999999998,0.0399999999999998,conf62_tl,ext100
+Matbench-Gap,Adapter,70,True,169,0.2299999999999999,0.2299999999999999,conf62_tl,ext100
+Matbench-Gap,Adapter,71,True,169,0.1,0.1,conf62_tl,ext100
+HOPV15,Adapter,72,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Adapter,73,True,143,3.499999999999999,3.499999999999999,conf62_tl,ext
+HOPV15,Adapter,74,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Adapter,75,True,143,0.0,0.0,conf62_tl,ext
+HOPV15,Adapter,76,True,143,0.0,0.0,conf62_tl,ext
+Matbench-Gap,Pretrain-then-Joint,67,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,68,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,69,True,169,0.1500000000000001,0.1500000000000001,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,70,True,169,0.02,0.02,conf62_tl,ext100
+Matbench-Gap,Pretrain-then-Joint,71,True,169,0.0,0.0,conf62_tl,ext100
+Matbench-Gap,Adapter,77,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Adapter,78,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Adapter,79,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Adapter,80,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Adapter,81,True,169,0.1,0.1,conf62_tl,ext100
+Matbench-Gap,Sparse MFGP,77,True,169,0.02,0.02,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,78,True,169,0.7800000000000002,0.7800000000000002,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,79,True,169,0.52,0.52,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,80,True,169,0.02,0.02,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,81,True,169,0.02,0.02,conf62_gp,ext100
+Matbench-Gap,DKL,77,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,DKL,78,True,169,0.7,0.7,conf62_gp,ext100
+Matbench-Gap,DKL,79,True,169,0.55,0.55,conf62_gp,ext100
+Matbench-Gap,DKL,80,True,169,0.32,0.32,conf62_gp,ext100
+Matbench-Gap,DKL,81,True,169,0.0,0.0,conf62_gp,ext100
+HOPV15,MFGP,62,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,MFGP,63,True,143,0.0,0.0,conf62_gp,ext
+HOPV15,MFGP,64,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,MFGP,65,True,143,0.0,0.0,conf62_gp,ext
+HOPV15,MFGP,66,True,143,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,72,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,73,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,74,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,75,True,248,0.27,0.27,conf62_gp,ext
+FreeSolv,Sparse MFGP,76,True,248,0.0,0.0,conf62_gp,ext
+HOPV15,Sparse MFGP,67,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext
+HOPV15,Sparse MFGP,68,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,69,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,70,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext
+HOPV15,Sparse MFGP,71,True,143,3.6,3.6,conf62_gp,ext
+Matbench-Gap,MFGP,77,True,169,0.4000000000000001,0.4000000000000001,conf62_gp,ext100
+Matbench-Gap,MFGP,78,True,169,0.6000000000000001,0.6000000000000001,conf62_gp,ext100
+Matbench-Gap,MFGP,79,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,MFGP,80,True,169,0.1500000000000001,0.1500000000000001,conf62_gp,ext100
+Matbench-Gap,MFGP,81,True,169,0.27,0.27,conf62_gp,ext100
+Matbench-Gap,MFGP,72,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+Matbench-Gap,MFGP,73,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,MFGP,74,True,169,0.0,0.0,conf62_gp,ext100
+Matbench-Gap,MFGP,75,True,169,0.27,0.27,conf62_gp,ext100
+Matbench-Gap,MFGP,76,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+HOPV15,MFGP,67,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext
+HOPV15,MFGP,68,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,MFGP,69,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,MFGP,70,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext
+HOPV15,MFGP,71,True,143,3.9,3.9,conf62_gp,ext
+Matbench-Gap,Sparse MFGP,62,True,169,0.0,0.0,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,63,True,169,0.7800000000000002,0.7800000000000002,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,64,True,169,0.07,0.07,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,65,True,169,0.0,0.0,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,66,True,169,0.1899999999999999,0.1899999999999999,conf62_gp,ext100
+Polarizability,Sparse MFGP,72,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,73,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,74,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,75,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,76,True,84,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,62,True,248,0.27,0.27,conf62_gp,ext
+FreeSolv,MFGP,63,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,64,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,65,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,66,True,248,0.0,0.0,conf62_gp,ext
+Matbench-Gap,DKL,72,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,DKL,73,True,169,1.4,1.4,conf62_gp,ext100
+Matbench-Gap,DKL,74,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,DKL,75,True,169,0.7800000000000002,0.7800000000000002,conf62_gp,ext100
+Matbench-Gap,DKL,76,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+Polarizability,Sparse MFGP,62,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,63,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,64,True,84,0.0891943734015343,0.0891943734015343,conf62_gp,ext
+Polarizability,Sparse MFGP,65,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,66,True,84,0.0891943734015343,0.0891943734015343,conf62_gp,ext
+FreeSolv,MFGP,67,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,68,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,69,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,70,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,71,True,248,0.0,0.0,conf62_gp,ext
+HOPV15,MFGP,72,True,143,3.499999999999999,3.499999999999999,conf62_gp,ext
+HOPV15,MFGP,73,True,143,3.499999999999999,3.499999999999999,conf62_gp,ext
+HOPV15,MFGP,74,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,MFGP,75,True,143,0.0,0.0,conf62_gp,ext
+HOPV15,MFGP,76,True,143,3.499999999999999,3.499999999999999,conf62_gp,ext
+FreeSolv,Sparse MFGP,67,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,68,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,69,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,70,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,71,True,248,0.0,0.0,conf62_gp,ext
+HOPV15,DKL,77,True,143,3.6,3.6,conf62_gp,ext
+HOPV15,DKL,78,True,143,0.0,0.0,conf62_gp,ext
+HOPV15,DKL,79,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,DKL,80,True,143,3.789999999999999,3.789999999999999,conf62_gp,ext
+HOPV15,DKL,81,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext
+Polarizability,Sparse MFGP,77,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,78,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,79,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,80,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,81,True,84,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,77,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,78,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,79,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,80,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,81,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,62,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,63,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,64,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,65,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,66,True,248,0.0,0.0,conf62_gp,ext
+Matbench-Gap,MFGP,67,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+Matbench-Gap,MFGP,68,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+Matbench-Gap,MFGP,69,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+Matbench-Gap,MFGP,70,True,169,0.0,0.0,conf62_gp,ext100
+Matbench-Gap,MFGP,71,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+Matbench-Gap,DKL,62,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,DKL,63,True,169,0.7599999999999999,0.7599999999999999,conf62_gp,ext100
+Matbench-Gap,DKL,64,True,169,1.3400000000000003,1.3400000000000003,conf62_gp,ext100
+Matbench-Gap,DKL,65,True,169,0.0,0.0,conf62_gp,ext100
+Matbench-Gap,DKL,66,True,169,0.1,0.1,conf62_gp,ext100
+Polarizability,Sparse MFGP,67,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,68,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,69,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,70,True,84,0.0,0.0,conf62_gp,ext
+Polarizability,Sparse MFGP,71,True,84,0.0,0.0,conf62_gp,ext
+Matbench-Gap,DKL,67,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,DKL,68,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+Matbench-Gap,DKL,69,True,169,0.08,0.08,conf62_gp,ext100
+Matbench-Gap,DKL,70,True,169,0.2200000000000002,0.2200000000000002,conf62_gp,ext100
+Matbench-Gap,DKL,71,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,MFGP,62,True,169,0.1,0.1,conf62_gp,ext100
+Matbench-Gap,MFGP,63,True,169,0.3700000000000001,0.3700000000000001,conf62_gp,ext100
+Matbench-Gap,MFGP,64,True,169,0.27,0.27,conf62_gp,ext100
+Matbench-Gap,MFGP,65,True,169,0.6800000000000002,0.6800000000000002,conf62_gp,ext100
+Matbench-Gap,MFGP,66,True,169,0.27,0.27,conf62_gp,ext100
+HOPV15,DKL,72,True,143,3.6,3.6,conf62_gp,ext
+HOPV15,DKL,73,True,143,2.8999999999999995,2.8999999999999995,conf62_gp,ext
+HOPV15,DKL,74,True,143,4.129999999999999,4.129999999999999,conf62_gp,ext
+HOPV15,DKL,75,True,143,3.499999999999999,3.499999999999999,conf62_gp,ext
+HOPV15,DKL,76,True,143,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,72,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,73,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,74,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,MFGP,75,True,248,0.27,0.27,conf62_gp,ext
+FreeSolv,MFGP,76,True,248,0.0,0.0,conf62_gp,ext
+HOPV15,DKL,62,True,143,4.699999999999999,4.699999999999999,conf62_gp,ext
+HOPV15,DKL,63,True,143,2.6099999999999994,2.6099999999999994,conf62_gp,ext
+HOPV15,DKL,64,True,143,2.999999999999999,2.999999999999999,conf62_gp,ext
+HOPV15,DKL,65,True,143,3.499999999999999,3.499999999999999,conf62_gp,ext
+HOPV15,DKL,66,True,143,2.8999999999999995,2.8999999999999995,conf62_gp,ext
+Matbench-Gap,Sparse MFGP,67,True,169,0.07,0.07,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,68,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,69,True,169,0.0499999999999998,0.0499999999999998,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,70,True,169,0.6200000000000001,0.6200000000000001,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,71,True,169,0.0499999999999998,0.0499999999999998,conf62_gp,ext100
+HOPV15,Sparse MFGP,72,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,73,True,143,3.499999999999999,3.499999999999999,conf62_gp,ext
+HOPV15,Sparse MFGP,74,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,75,True,143,3.499999999999999,3.499999999999999,conf62_gp,ext
+HOPV15,Sparse MFGP,76,True,143,3.6,3.6,conf62_gp,ext
+HOPV15,Sparse MFGP,77,True,143,0.0,0.0,conf62_gp,ext
+HOPV15,Sparse MFGP,78,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,79,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,80,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,81,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext
+Matbench-Gap,Sparse MFGP,72,True,169,0.02,0.02,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,73,True,169,0.1399999999999999,0.1399999999999999,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,74,True,169,0.0,0.0,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,75,True,169,0.7800000000000002,0.7800000000000002,conf62_gp,ext100
+Matbench-Gap,Sparse MFGP,76,True,169,0.2999999999999998,0.2999999999999998,conf62_gp,ext100
+FreeSolv,Sparse MFGP,77,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,78,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,79,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,80,True,248,0.0,0.0,conf62_gp,ext
+FreeSolv,Sparse MFGP,81,True,248,0.0,0.0,conf62_gp,ext
+HOPV15,Sparse MFGP,62,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,63,True,143,3.6,3.6,conf62_gp,ext
+HOPV15,Sparse MFGP,64,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,Sparse MFGP,65,True,143,0.0,0.0,conf62_gp,ext
+HOPV15,Sparse MFGP,66,True,143,3.6,3.6,conf62_gp,ext
+HOPV15,DKL,67,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext
+HOPV15,DKL,68,True,143,3.6,3.6,conf62_gp,ext
+HOPV15,DKL,69,True,143,2.7,2.6999999999999997,conf62_gp,ext
+HOPV15,DKL,70,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext
+HOPV15,DKL,71,True,143,2.6999999999999997,2.6999999999999997,conf62_gp,ext
+HOPV15,MFGP,77,True,143,3.499999999999999,3.499999999999999,conf62_gp,ext
+HOPV15,MFGP,78,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,MFGP,79,True,143,0.0,0.0,conf62_gp,ext
+HOPV15,MFGP,80,True,143,3.9,3.9,conf62_gp,ext
+HOPV15,MFGP,81,True,143,1.5999999999999996,1.5999999999999996,conf62_gp,ext

@@ -2,7 +2,7 @@
 %%   si.tex   -> standalone SI file for submission (own title page and reference list;
 %%               \ref to main-text figures resolved from main.aux via the xr package), and
 %%   main.tex -> combined working PDF when built with \def\withSI{1} (see build.sh).
-%% Numbering: Supplementary Notes 1-6, Supplementary Figures 1-3, Supplementary Tables 1-4 (2026-09-14: the earlier Notes 6, 8 and 9, Figs. 3-4 and Tables 5-8 were removed; struck markers show where).
+%% Numbering: Supplementary Notes 1-6, Supplementary Figures 1-3, Supplementary Tables 1-5 (2026-09-14: the earlier Notes 6, 8 and 9, Figs. 3-4 and Tables 5-8 were removed; struck markers show where; Table 1 is now the configuration of all eight surrogates (3 GP + 5 transfer-learning), replacing the MFGP-only table; Note 4 renamed Benchmark definitions and Supplementary Table 4, benchmark definitions, added, so the synthetic-scenario table is now Table 5).
 % ---------------------------------------------------------------------------
 % Supplementary Information
 % Replace the previous \begin{appendices}...\end{appendices} block with this block.
@@ -29,43 +29,61 @@
 \renewcommand{\figurename}{Supplementary Figure}
 \renewcommand{\tablename}{Supplementary Table}
 
-\suppnote{MFGP baseline implementation details}{suppnote:mfgp}
+\suppnote{\del{MFGP baseline implementation details}\new{Surrogate configurations}}{suppnote:mfgp}
 
-We provide implementation details for the multi-fidelity Gaussian process (MFGP) baseline.
+\del{We provide implementation details for the multi-fidelity Gaussian process (MFGP) baseline.}\new{Supplementary Table~\ref{supptab:surrogate_config} lists, for each of the eight surrogates as run, the fitting procedure, training length, learning rates, weight decay, input and target scaling, the representation on which the predictive model acts, the kernel and likelihood or the predictive head, the inducing points and the floating-point precision. The factors held fixed across all eight are the candidate pool and its standardized feature representation (Methods), the budget, cost ratio and fidelity schedule, the initial design (farthest-point sampling from the same seed), the retraining of the surrogate from scratch at every refit and the seeds. The five transfer-learning surrogates further share the backbone (two hidden layers of 64 $\tanh$ units), the optimizer (full-batch Adam, fixed epoch budgets, no early stopping), the pooled standardization of inputs and targets and the predictive head. The three GP baselines are the off-the-shelf configurations of their libraries (BoTorch 0.10.0, GPyTorch 1.11) and differ from the transfer-learning surrogates, and from one another, in fitting procedure, training length, scaling and precision; these differences are reported here rather than removed.}
 
-\subsection{Model configuration}
+\subsection{\del{Model configuration}\new{Baseline MFGP}}
 
-We use \texttt{SingleTaskMultiFidelityGP} from BoTorch~\citep{balandat2020botorch}, which
+We use \texttt{SingleTaskMultiFidelityGP} from BoTorch~\citep{balandat2020botorch}\new{ 0.10.0}, which
 internally employs a Mat\'{e}rn 5/2 kernel with automatic relevance determination (ARD)
-for the input dimensions and a linear truncated kernel for the fidelity dimension.
-Supplementary Table~\ref{supptab:mfgp_config} summarizes the key configuration.
+for the input dimensions and a linear truncated kernel for the fidelity dimension\new{, with the library's default priors: Gamma(3, 6) and Gamma(6, 2) on the lengthscales of the unbiased and biased Mat\'{e}rn components of the fidelity kernel, Gamma(3, 3) on its power, Gamma(2, 0.15) on the output scale and Gamma(1.1, 0.05) on the noise variance, which is constrained to at least $10^{-4}$; the mean is a learned constant. The inputs enter as they are, with the fidelity appended as a 0/1 column, and the targets of both fidelities are standardized together by the \texttt{Standardize} outcome transform; no input transform is applied}.
+\del{Supplementary Table~1 summarizes the key configuration.}
 
-\begin{table}[h]
-\centering
-\caption{MFGP baseline configuration.}
-\label{supptab:mfgp_config}
-\begin{tabular}{ll}
+\del{[The former Supplementary Table~1 (MFGP baseline configuration) is replaced by Supplementary Table~\ref{supptab:surrogate_config}, which covers all twelve surrogates.]}
+
+\begin{table}[p]
+\ifredline\color{blue}\fi% added table: blue in the redline build, black in the clean build
+\caption{Configuration of the eight surrogates as run; shared settings are given in the text of this Note. `Pooled': a \texttt{StandardScaler} fitted at each refit to the sampled LF and HF inputs (or targets) together. $d$: input dimension; $N$: sampled points of both fidelities; $\mathcal{L}_{\mathrm{LF}}$, $\mathcal{L}_{\mathrm{HF}}$: mean squared errors on the standardized targets; $g^{(L)}$, $\varphi^{(L)}$: output and second-hidden-layer representation of the LF network.}
+\label{supptab:surrogate_config}
+{\fontsize{6.6bp}{7.4bp}\selectfont\setlength{\tabcolsep}{1.5pt}%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.45cm}>{\raggedright\arraybackslash}p{2.75cm}>{\raggedright\arraybackslash}p{1.15cm}>{\raggedright\arraybackslash}p{1.4cm}>{\raggedright\arraybackslash}p{0.85cm}>{\raggedright\arraybackslash}p{1.35cm}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{2.55cm}>{\raggedright\arraybackslash}p{1.45cm}@{}}
 \toprule
-\textbf{Component} & \textbf{Specification} \\
+Surrogate & Fitting procedure & Training length & Learning rate & Weight decay & Scaling (inputs; targets) & Representation entering the predictive model & Predictive model (kernel and likelihood, or head) & Inducing points; precision \\
 \midrule
-GP class & \texttt{SingleTaskMultiFidelityGP} \\
-Input kernel & Mat\'{e}rn 5/2 + ARD \\
-Fidelity kernel & Linear truncated kernel \\
-Outcome transform & \texttt{Standardize(m=1)} \\
-Hyperparameter optimization & Exact marginal log-likelihood via L-BFGS-B \\
-Fidelity encoding & Last column: 0 = LF, 1 = HF \\
+\multicolumn{9}{@{}l}{\emph{Gaussian-process family}} \\
+MFGP & BoTorch \texttt{Single\-Task\-Multi\-Fidelity\-GP}; exact marginal likelihood with the library priors$^{a}$, L-BFGS-B & to convergence & -- & none & none; \texttt{Standard\-ize} on the pooled LF and HF targets & the $d$ inputs and a 0/1 fidelity column & Mat\'{e}rn-5/2 ARD in a linear truncated fidelity kernel; constant mean; Gaussian likelihood (noise $\ge 10^{-4}$); s.d. of the latent function & none (exact); float64 \\
+DKL & GPyTorch \texttt{ExactGP}; exact marginal likelihood, Adam & 500 steps & $10^{-3}$ network; $10^{-2}$ GP parameters & none & none; none & network $d \to 64 \to 64 \to 16$ ($\tanh$), rescaled to $[-1, 1]$; fidelity as task index & RBF ARD over the 16 features $\times$ index kernel (2 levels, rank 1); constant mean; Gaussian likelihood; no priors; s.d. includes the noise & none (exact); float32 \\
+SV-MFGP & GPyTorch \texttt{ApproximateGP}; variational ELBO over the full training set, Adam & 500 steps & $10^{-2}$ & none & none; none & the $d$ inputs; fidelity as task index & RBF ARD $\times$ index kernel (2 levels, rank 1); constant mean; Gaussian likelihood; Cholesky variational distribution; no priors; s.d. includes the noise & $\min(100,$ $N)$; a random subset of the training inputs, learned; float32 \\
+\midrule
+\multicolumn{9}{@{}p{15.54cm}}{\emph{Transfer-learning family.} All five: backbone LF network $d \to 64 \to 64 \to 1$ ($\tanh$) and a residual network $[x, g^{(L)}(x)] \to 64 \to 64 \to 1$ of the same form, trained in every configuration but not used for prediction; full-batch Adam on the mean squared error; HF prediction from the BLR head on $[\,g^{(L)}, \varphi^{(L)}, 1\,]$ (Supplementary Note~\ref{suppnote:blr}), LF predictive distribution for calibration from the LF BLR head with $\alpha = \beta = 1$; no inducing points; networks in float32, BLR heads in float64.} \\
+Frozen-repre\-sentation transfer & both networks from scratch on $0.5\,\mathcal{L}_{\mathrm{LF}} + 0.5\,\mathcal{L}_{\mathrm{HF}}$; the LF prediction entering the residual network is detached, so no HF gradient reaches the LF network & 300 joint & $10^{-3}$ & $10^{-4}$ & pooled; pooled & LF network trained by $\mathcal{L}_{\mathrm{LF}}$ only; HF data enter only through the BLR head$^{b}$ & BLR head on the LF representation & --; float32 \\
+Pretrain-then-Joint & LF network on $\mathcal{L}_{\mathrm{LF}}$; then both networks on $0.3\,\mathcal{L}_{\mathrm{LF}} + 0.7\,\mathcal{L}_{\mathrm{HF}}$ & 100 LF + 100 joint & $10^{-3}$; $10^{-4}$ & none & pooled; pooled & LF network updated in the joint stage by both losses & BLR head on the LF representation after joint training & --; float32 \\
+End-to-End Joint & both networks from scratch on $\mathcal{L}_{\mathrm{LF}} + \mathcal{L}_{\mathrm{HF}}$; full gradient flow & 300 joint & $10^{-3}$ LF; $5 \times 10^{-4}$ HF & $10^{-4}$ & pooled; pooled & LF network trained by both losses & BLR head on the LF representation & --; float32 \\
+Soft Parameter Sharing & both networks from scratch on $0.5\,\mathcal{L}_{\mathrm{LF}} + 0.5\,\mathcal{L}_{\mathrm{HF}} + 0.01\,\Omega$; $\Omega$: squared distance of the first-layer weights over the $d$ shared inputs & 200 joint & $10^{-3}$ & none & pooled; pooled & LF network trained by both losses and $\Omega$ & BLR head on the LF representation & --; float32 \\
+Domain Adaptation (MMD) & LF network on $\mathcal{L}_{\mathrm{LF}}$; then both networks on $\mathcal{L}_{\mathrm{HF}} + 0.1\,\mathrm{MMD}$ (RBF, bandwidth 1) between the LF-network features of the LF data and the residual-network features of the HF data & 200 LF + 100 HF & $10^{-3}$; $10^{-4}$ & none & pooled; pooled & LF network moved in the HF stage by the MMD term only & BLR head on the LF representation after the HF stage & --; float32 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
+\par\smallskip
+{\fontsize{6.6bp}{7.4bp}\selectfont $^{a}$Gamma(3, 6) and Gamma(6, 2) on the lengthscales of the unbiased and biased Mat\'{e}rn components, Gamma(3, 3) on the fidelity power, Gamma(2, 0.15) on the output scale, Gamma(1.1, 0.05) on the noise variance. $^{b}$Because the prediction is made by the BLR head on the representation of the LF network, what distinguishes the transfer mechanisms at prediction time is whether the HF data reach that representation. Frozen-representation transfer is the only configuration in which they do not: the LF prediction entering the residual network is detached, so the representation is shaped by the LF loss alone and the HF data enter the prediction only through the BLR head. Pretrain-then-Joint, End-to-End Joint and Soft Parameter Sharing update the LF network through the HF loss, and Domain Adaptation (MMD) only through the alignment penalty, which sees the HF inputs but not the HF values.}
 \end{table}
 
 At each iteration the GP was retrained from scratch by maximizing the exact marginal
-log-likelihood with L-BFGS-B via \texttt{fit\_gpytorch\_mll}, and predictions were taken
-from the posterior at the high-fidelity (HF) level $s=1$. The multi-fidelity GP uses this
-single cross-fidelity posterior for EI at the LF step and greedy selection by the mean at the HF step.
+log-likelihood \new{(the posterior density under these priors) }with L-BFGS-B via \texttt{fit\_gpytorch\_mll}\new{ in double precision}, and predictions were taken
+from the posterior at the high-fidelity (HF) level $s=1$\new{, whose standard deviation is that of the latent function}. The multi-fidelity GP uses this
+single cross-fidelity posterior for acquisition at both fidelity steps\new{: EI with the HF incumbent selects the LF query and the lowest posterior mean selects the HF query (Methods)}.
+
+\subsection{\new{Deep-kernel GP}}
+
+\new{The deep-kernel GP is a GPyTorch exact GP whose kernel acts on the output of a feature network with layers of widths 64, 64 and 16 and $\tanh$ hidden activations, rescaled to $[-1, 1]$ by \texttt{ScaleToBounds}; the covariance is an RBF kernel with ARD over the 16 features multiplied by a two-level index kernel of rank 1 that carries the fidelity, with a constant mean and a Gaussian likelihood, all without priors. Feature network, kernel, mean, index kernel and likelihood are optimized jointly on the exact marginal likelihood by 500 full-batch Adam steps (learning rate $10^{-3}$ for the feature network and $10^{-2}$ for the GP parameters) in single precision, without weight decay. Inputs and targets enter as they are, and the predictive distribution includes the learned observation noise.}
+
+\subsection{\new{Sparse variational MFGP}}
+
+\new{The sparse variational MFGP is a GPyTorch approximate GP with a Cholesky variational distribution over $\min(100, N)$ inducing points, initialized as a random subset of the $N$ training inputs of both fidelities and optimized together with the hyperparameters; the covariance is an RBF kernel with ARD over the $d$ inputs multiplied by the same two-level index kernel, with a constant mean and a Gaussian likelihood, without priors. All parameters are optimized on the variational evidence lower bound over the full training set (no mini-batching) by 500 Adam steps at learning rate $10^{-2}$ in single precision, without weight decay. The number of inducing points equals the training-set size until it reaches 100 and stays at 100 thereafter. Inputs and targets enter as they are, and the predictive distribution includes the learned observation noise. Repeated fits of this model with the same seed are not bit-identical (Methods).}
 
 
 \suppnote{Uncertainty quantification via Bayesian linear regression}{suppnote:blr}
-Uncertainty for the transfer-learning surrogates is obtained from a Bayesian linear regression (BLR) head on the low-fidelity (LF) network's last-layer features, following DNGO~\citep{snoek2015scalable}. Let $\varphi(x) \in \mathbb{R}^D$
+\del{Uncertainty for the transfer-learning surrogates is obtained}\new{The HF prediction of the transfer-learning surrogates, its uncertainty and the LF predictive distribution are obtained} from a Bayesian linear regression (BLR) head on the low-fidelity (LF) network's last-layer features, \del{following DNGO~\citep{snoek2015scalable}}\new{an adaptive-basis construction in the spirit of DNGO~\citep{snoek2015scalable}, with the difference that the basis is the representation of the LF network, learned from the abundant LF data, rather than that of a network trained on the target data; the residual network of Methods Eq.~(\ref{eq:residual}) enters the training loss only, because a 64-unit two-layer network fitted to two to a few tens of HF residuals is heavily over-parameterized and a point-estimate network gives the acquisition functions no predictive variance}. Let $\varphi(x) \in \mathbb{R}^D$
 denote the penultimate-layer representation and $\tilde{\varphi}(x) = [\varphi(x), 1]$ the
 augmented feature vector, with a Gaussian prior over the weights $w$:
 \begin{equation}
@@ -76,7 +94,7 @@ yields predictive moments
 \begin{equation}
 \mu(x) = \tilde{\varphi}(x)^\top m_N, \qquad \sigma^2(x) = \beta^{-1} + \tilde{\varphi}(x)^\top S_N\, \tilde{\varphi}(x),
 \end{equation}
-where $(m_N, S_N)$ are the posterior mean and covariance\del{ and we set $\alpha = \beta = 1$}. \del{In the primary configuration the LF expected improvement (EI) uses a constant predictive standard deviation, so the BLR head contributes a regularized posterior mean and the acquisition reduces to greedy selection; the five-acquisition uncertainty-driven portfolio that instead uses the BLR predictive standard deviation, and an optional HF BLR head with EI on both fidelities, are evaluated in Supplementary Note~5.}\new{Two such heads are used. The LF head, with $\alpha = \beta = 1$, gives the LF predictive distribution on which the calibration analysis of Fig.~\ref{fig:calibration} is based. The HF head supplies the HF prediction (Methods): it regresses the HF residuals $y^{(H)} - g^{(L)}_{\theta}(x)$ on $[\,g^{(L)}_{\theta}(x),\, \varphi^{(L)}(x),\, 1\,]$, with the ratio of prior to noise precision of the representation block chosen, for at least four HF observations, by leave-one-out error over $\{10, 30, 100, 300, 1000\}$, ratios of $10$ and $1$ for the $g^{(L)}_{\theta}$ coefficient and the bias, and the noise precision set to the inverse of the leave-one-out mean squared error, clipped to $[1, 100]$. With fewer than four HF observations, the noise precision is fixed at $10$, and prior precisions are $10$ for the LF output, $100$ for each representation coefficient and $1$ for the bias. In the primary configuration both fidelities are queried greedily by the HF predictive mean $\mu^{(H)}$; the five-acquisition portfolio of Supplementary Note~\ref{suppnote:acquisition_variants} instead selects the LF query from the HF predictive mean and standard deviation of this head, using the HF incumbent.}
+where $(m_N, S_N)$ are the posterior mean and covariance\del{ and we set $\alpha = \beta = 1$}. \del{In the primary configuration the LF expected improvement (EI) uses a constant predictive standard deviation, so the BLR head contributes a regularized posterior mean and the acquisition reduces to greedy selection; the five-acquisition uncertainty-driven portfolio that instead uses the BLR predictive standard deviation, and an optional HF BLR head with EI on both fidelities, are evaluated in Supplementary Note~5.}\new{Two such heads are used. The LF head, with $\alpha = \beta = 1$, gives the LF predictive distribution on which the calibration analysis of Fig.~\ref{fig:calibration} is based. The HF head supplies the HF prediction (Methods): it regresses the HF residuals $y^{(H)} - g^{(L)}_{\theta}(x)$ on $[\,g^{(L)}_{\theta}(x),\, \varphi^{(L)}(x),\, 1\,]$, with the ratio of prior to noise precision of the representation block chosen, for at least four HF observations, by leave-one-out error over $\{10, 30, 100, 300, 1000\}$, ratios of $10$ and $1$ for the $g^{(L)}_{\theta}$ coefficient and the bias, and the noise precision set to the inverse of the leave-one-out mean squared error, clipped to $[1, 100]$; with fewer than four HF observations the leave-one-out selection is skipped and the representation block keeps a prior precision of 100 with $\beta = 10$. Under the primary greedy policy both fidelities are queried by the HF predictive mean $\mu^{(H)}$; the five-acquisition portfolio of Supplementary Note~\ref{suppnote:acquisition_variants} instead selects the LF query from the HF predictive mean and standard deviation of this head, using the HF incumbent. The head treats the representation as a fixed basis. In Pretrain-then-Joint, End-to-End Joint and Soft Parameter Sharing the HF loss also reaches the LF network, so the representation has been trained on the same HF values the head is then fitted to, and neither the leave-one-out rule nor the posterior covariance of the head accounts for that first fit; the HF predictive standard deviation of these three surrogates is therefore optimistic relative to the configurations whose representation the HF values never reach (in Domain Adaptation the alignment penalty passes the HF inputs, not the HF values, to the LF network). This concerns only the acquisition portfolio of Supplementary Note~\ref{suppnote:acquisition_variants}: the primary greedy policy uses the HF predictive mean alone, and the calibration analysis uses the LF head.}
 
 
 \suppnote{Implementation details}{suppnote:implementation}
@@ -100,8 +118,12 @@ surrogates.
 Hidden dimension & 64 \\
 Number of layers & 2 (for each of LF and HF networks) \\
 Activation & Tanh \\
-Optimizer & Adam \\
-$\ell_2$ weight decay & \del{1e-4}\new{1e-4 for Sequential, Stop-Gradient Joint and End-to-End Joint; none otherwise} \\
+Optimizer & Adam\new{, full batch, on the mean squared error of the standardized targets} \\
+\new{Input and target scaling} & \new{\texttt{StandardScaler} fitted at every refit to the sampled LF and HF inputs together and to the sampled LF and HF targets together} \\
+\new{Re-initialization} & \new{networks and scalers re-initialized and retrained from scratch at every refit} \\
+\new{Precision} & \new{float32 (networks); float64 (BLR heads)} \\
+\new{Representation entering the heads} & \new{the 64 units of the second hidden layer of the LF network, $\varphi^{(L)}$; the HF head regresses on $[g^{(L)}, \varphi^{(L)}, 1]$ (66 coefficients)} \\
+$\ell_2$ weight decay & \del{1e-4}\new{1e-4 for Frozen-representation transfer and End-to-End Joint; none otherwise} \\
 \del{BLR prior precision $\alpha$}\new{LF BLR head (calibration)} & \del{1.0}\new{$\alpha = \beta = 1$} \\
 \del{BLR noise precision $\beta$}\new{HF BLR head (prediction)} & \del{1.0}\new{For $n_H \ge 4$, prior-to-noise precision ratio of the representation block chosen by leave-one-out error over $\{10, 30, 100, 300, 1000\}$; $\beta = 1/\mathrm{MSE}_{\mathrm{LOO}}$, clipped to $[1, 100]$. For $n_H < 4$, fixed precisions as in Supplementary Note~\ref{suppnote:blr}} \\
 \bottomrule
@@ -112,56 +134,99 @@ $\ell_2$ weight decay & \del{1e-4}\new{1e-4 for Sequential, Stop-Gradient Joint 
 \label{suppsec:model_settings}
 Supplementary Table~\ref{supptab:model_hyperparams} presents the training hyperparameters for each transfer-learning
 method. \del{Sequential methods use 200 LF epochs followed by 100 HF epochs, while
-joint training methods use 300 epochs for simultaneous LF and HF optimization.}\new{Most sequential methods use 200 LF epochs followed by 100 HF epochs (Progressive and Pretrain-then-Joint pretrain for 100), and the joint methods train for 300 epochs (Soft Parameter Sharing for 200).}
+joint training methods use 300 epochs for simultaneous LF and HF optimization.}\new{Pretrain-then-Joint pretrains the LF network for 100 epochs and Domain Adaptation (MMD) for 200, each followed by 100 HF epochs; Frozen-representation transfer and End-to-End Joint train for 300 joint epochs and Soft Parameter Sharing for 200.}
 
 \begin{table}[h]
 \centering
-\caption{Training hyperparameters for each transfer-learning method. LR denotes learning rate.\new{ Weight decay ($\ell_2$, 1e-4) is used only where stated; the HF-network settings of the three configurations reported as feature-extraction transfer are given in the footnote.}}
+\caption{Training hyperparameters for each transfer-learning method. LR denotes learning rate.\new{ Weight decay ($\ell_2$, 1e-4) is used only where stated. The residual (HF) network is trained in every configuration but does not enter the prediction (Supplementary Note~\ref{suppnote:blr}).}}
 \label{supptab:model_hyperparams}
 {\footnotesize%
-\begin{tabular}{@{}lcccc>{\raggedright\arraybackslash}p{5.0cm}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.3cm}cccc>{\raggedright\arraybackslash}p{5.0cm}@{}}
 \toprule
 \textbf{Model} & \textbf{LF LR} & \textbf{HF LR} & \textbf{LF Epochs} & \textbf{HF Epochs} & \textbf{Method-Specific Parameters} \\
 \midrule
-Sequential & 1e-3 & 1e-3 & 200 & 100 & LF frozen during HF training\new{; weight decay 1e-4} \\
-Progressive & 1e-3 & 1e-3 $\rightarrow$ 1e-4 & \del{200}\new{100} & 50+50 & Residual network: output only, then last hidden layer + output; LF frozen \\
-\del{Curriculum}\new{Feature-extraction transfer$^{*}$} & 1e-3 & \del{1e-3}\new{--} & 200 & \del{100}\new{--} & \del{HF samples added gradually}\new{LF network frozen; HF prediction from the BLR head} \\
-Pretrain-then-Joint & 1e-3 & 1e-4 & \del{200}\new{100} & 100 & Stage 1: LF only; Stage 2: joint training \\
-Stop-Gradient Joint & 1e-3 & 1e-3 & 300 & (joint) & $\alpha_{\text{loss}}$=0.5; stop-gradient on LF$\rightarrow$HF\new{; weight decay 1e-4} \\
-End-to-End Joint & 1e-3 & \del{1e-3}\new{5e-4} & 300 & (joint) & Full gradient flow\new{; weight decay 1e-4} \\
-Soft Parameter Sharing & 1e-3 & 1e-3 & \del{300}\new{200} & (joint) & $\lambda_{\text{soft}}$=0.01 \\
-\ifredline\del{Knowledge Distillation} & \del{1e-3} & \del{1e-3} & \del{200} & \del{100} & \del{$\alpha_{\text{KD}}$=0.3; $T$=3.0} \\ \fi
-Domain Adaptation (MMD) & 1e-3 & \del{1e-3}\new{1e-4} & 200 & 100 & $\lambda_{\text{MMD}}$=0.1\new{; both networks updated in the HF stage} \\
-\ifredline\del{Pseudo-Labelling} & \del{1e-3} & \del{1e-3} & \del{200} & \del{100} & \del{$w_{\text{pseudo}}$=0.5} \\ \fi
-Adapter & 1e-3 & 1e-3 & 200 & 100 & $d_{\text{bottleneck}}$=16; backbone frozen \\
+\del{Stop-Gradient Joint}\new{Frozen-repre\-sentation transfer} & 1e-3 & 1e-3 & 300 & (joint) & $\alpha_{\text{loss}}$=0.5; \del{stop-gradient on LF$\rightarrow$HF}\new{the LF prediction entering the HF network is detached, so no HF gradient reaches the LF network; weight decay 1e-4} \\
+Pretrain-then-Joint & 1e-3 & 1e-4 & \del{200}\new{100} & 100 & Stage 1: LF only; Stage 2: joint training\new{ on $0.3\,\mathcal{L}_{\text{LF}} + 0.7\,\mathcal{L}_{\text{HF}}$} \\
+End-to-End Joint & 1e-3 & \del{1e-3}\new{5e-4} & 300 & (joint) & Full gradient flow\new{; loss $\mathcal{L}_{\text{LF}} + \mathcal{L}_{\text{HF}}$; weight decay 1e-4} \\
+Soft Parameter Sharing & 1e-3 & 1e-3 & \del{300}\new{200} & (joint) & $\lambda_{\text{soft}}$=0.01\new{, on the first-layer weights over the $d$ shared inputs; loss $0.5\,\mathcal{L}_{\text{LF}} + 0.5\,\mathcal{L}_{\text{HF}} + \lambda_{\text{soft}}\Omega$} \\
+Domain Adaptation (MMD) & 1e-3 & \del{1e-3}\new{1e-4} & 200 & 100 & $\lambda_{\text{MMD}}$=0.1\new{; RBF kernel, bandwidth 1; both networks updated in the HF stage} \\
 \bottomrule
 \end{tabular}%
-\par\smallskip
-\new{$^{*}$Run as the Curriculum, Knowledge Distillation and Pseudo-Labelling configurations, whose HF (residual) networks are trained for 200 epochs at lr 1e-3 with HF samples added gradually, for 100 epochs at lr 1e-4 with $\alpha_{\text{KD}}$=0.3 and $T$=3.0, and for 100 epochs at lr 1e-4 with $w_{\text{pseudo}}$=0.5, respectively; the residual network does not enter the prediction, so the three give identical results.}%
 }
 \end{table}
 
 \subsection{Training procedures and method-specific parameters}
 \label{suppsec:training_procedures}
-\del{All models use $\ell_2$ weight decay (WD=1e-4).}\new{Weight decay ($\ell_2$, 1e-4) is applied by Sequential, Stop-Gradient Joint and End-to-End Joint; the other configurations use none.} \emph{Sequential}: the LF network is
+\del{All models use $\ell_2$ weight decay (WD=1e-4).}\new{Weight decay ($\ell_2$, 1e-4) is applied by Frozen-representation transfer and End-to-End Joint; the other three configurations use none.} \del{\emph{Sequential}: the LF network is
 trained first and frozen, then the HF residual network is trained on top.
-\emph{Progressive}: Stage 1 trains only the residual network's output layer; Stage 2
-unfreezes its last hidden layer at a reduced learning rate. The LF network remains frozen. \del{\emph{Curriculum}: at epoch $e$ the
-number of HF samples used is $n_{\text{use}} = \min(n, \max(2, e/200 \cdot n))$.}\new{\emph{Feature-extraction transfer}: the LF network is pretrained for 200 epochs and frozen, and the HF prediction is the BLR correction of Supplementary Note~\ref{suppnote:blr}; it was run as the Curriculum (HF samples added gradually, $n_{\text{use}} = \min(n, \max(2, e/200 \cdot n))$ at epoch $e$), Knowledge Distillation ($\alpha_{\text{KD}}=0.3$, $T=3.0$) and Pseudo-Labelling ($w_{\text{pseudo}}=0.5$) configurations, which differ only in the training of the residual network and give identical predictions.}
-\emph{Pretrain-then-Joint}: Stage 1 pretrains on LF data; Stage 2 jointly trains on both
-fidelities at a reduced learning rate. \emph{Stop-Gradient Joint}: joint training with
+\emph{Progressive}: Stage 1 trains only the HF output layer with the backbone frozen; Stage 2
+unfreezes the second hidden layer of the HF network and trains it with the output layer at a reduced learning rate; the LF network stays frozen in both stages.} \del{\emph{Curriculum}: at epoch $e$ the
+number of HF samples used is $n_{\text{use}} = \min(n, \max(2, e/200 \cdot n))$.}
+\del{\emph{Stop-Gradient Joint}: joint training with
 stop-gradient on the LF network and loss weighting $\mathcal{L} = \alpha_{\text{loss}}
 \mathcal{L}_{\text{LF}} + (1-\alpha_{\text{loss}})\mathcal{L}_{\text{HF}}$,
-$\alpha_{\text{loss}}=0.5$. \emph{End-to-End Joint}: joint training with full gradient flow\new{ (learning rates 1e-3 for the LF and 5e-4 for the HF network)}. \emph{Soft Parameter Sharing}: penalty
-$\lambda_{\text{soft}}\|\theta^{(L)}-\theta^{(H)}\|_2^2$, $\lambda_{\text{soft}}=0.01$.
+$\alpha_{\text{loss}}=0.5$.}\new{\emph{Frozen-representation transfer}: both networks are trained from scratch for 300 joint epochs on $0.5\,\mathcal{L}_{\text{LF}} + 0.5\,\mathcal{L}_{\text{HF}}$ (Adam, learning rate 1e-3, weight decay 1e-4), with the LF prediction that enters the residual network detached, so that no HF gradient reaches the LF network; the representation is shaped by the LF data alone and the HF data enter the prediction only through the BLR head of Supplementary Note~\ref{suppnote:blr}. For reproducibility, this is the \texttt{DNGOJoint} configuration of the released code, with the residual network trained but unused.}
+\emph{Pretrain-then-Joint}: Stage 1 pretrains on LF data; Stage 2 jointly trains on both
+fidelities at a reduced learning rate\new{ with loss $0.3\,\mathcal{L}_{\text{LF}} + 0.7\,\mathcal{L}_{\text{HF}}$}. \emph{End-to-End Joint}: joint training with full gradient flow\new{ (loss $\mathcal{L}_{\text{LF}} + \mathcal{L}_{\text{HF}}$; learning rates 1e-3 for the LF and 5e-4 for the HF network)}. \emph{Soft Parameter Sharing}: \del{penalty
+$\lambda_{\text{soft}}\|\theta^{(L)}-\theta^{(H)}\|_2^2$}\new{joint training on $0.5\,\mathcal{L}_{\text{LF}} + 0.5\,\mathcal{L}_{\text{HF}} + \lambda_{\text{soft}}\,\Omega$ with $\Omega = \bigl\|W^{(L)}_{1} - W^{(H)}_{1,\,\cdot\,,\,1:d}\bigr\|_F^2$, the squared Frobenius distance between the first-layer weight matrices of the two networks over the $d$ shared input columns; the column of the HF network that receives the LF prediction, the biases and the second and output layers are not penalized}, $\lambda_{\text{soft}}=0.01$.
 \del{\emph{Knowledge Distillation}: HF student trained with task loss plus distillation loss,
-$\alpha_{\text{KD}}=0.3$, $T=3.0$.} \emph{Domain Adaptation (MMD)}: maximum-mean-discrepancy penalty $\lambda_{\text{MMD}}=0.1$ aligning LF and HF features\new{, with both networks updated at learning rate 1e-4 in the HF stage}. \del{\emph{Pseudo-Labelling}: LF
-pseudo-labels weighted $w_{\text{pseudo}}=0.5$.} \emph{Adapter}: frozen LF backbone with a
-bottleneck adapter ($d_{\text{bottleneck}}=16$) and HF head during training. In the reported BLR configuration, predictions use the frozen LF backbone and LF output, bypassing the adapters and their HF output layer. Likewise, Progressive's residual-network updates do not enter its BLR prediction.
+$\alpha_{\text{KD}}=0.3$, $T=3.0$.} \emph{Domain Adaptation (MMD)}: maximum-mean-discrepancy penalty $\lambda_{\text{MMD}}=0.1$ aligning LF and HF features\new{ (RBF kernel of bandwidth 1 between the hidden features of the LF network on the LF training inputs and of the HF network on the HF training inputs, the LF set truncated to its first $n_{\text{HF}}$ points), with both networks updated at learning rate 1e-4 in the HF stage; the LF loss is not part of this stage, so the LF network moves only through the penalty}. \del{\emph{Pseudo-Labelling}: LF
+pseudo-labels weighted $w_{\text{pseudo}}=0.5$.} \del{\emph{Adapter}: frozen LF backbone with two bottleneck adapters ($d_{\text{bottleneck}}=16$, ReLU, one after each hidden layer) and a linear HF head; under the BLR head of Supplementary Note~\ref{suppnote:blr} the prediction uses the frozen backbone representation, so the adapters and the HF head, like the residual networks above, are trained but do not enter the prediction.}\new{Under the BLR head of Supplementary Note~\ref{suppnote:blr} the residual networks above are trained but do not enter the prediction, so what separates the five surrogates at prediction time is whether the HF data reach the representation of the LF network. Frozen-representation transfer predicts from a representation shaped by the LF data alone, its LF prediction being detached before it reaches the residual network; Pretrain-then-Joint, End-to-End Joint and Soft Parameter Sharing update that representation through the HF loss; and Domain Adaptation (MMD) updates it only through the alignment penalty, which sees the HF inputs but not the HF values. Supplementary Table~\ref{supptab:surrogate_config} summarizes these settings for all eight surrogates.}
 
-\suppnote{Synthetic function definitions}{suppnote:synthetic_functions}
+\suppnote{\texorpdfstring{\del{Synthetic function definitions}\new{Benchmark definitions}}{Benchmark definitions}}{suppnote:synthetic_functions}
 
-The synthetic functions follow the Branin and Park benchmark families used in multi-fidelity Bayesian optimization (MFBO) by Sabanza-Gil et
+\subsection{Objectives, sources, transformations and cost ratios}
+\new{Supplementary Table~\ref{supptab:benchmark_definitions} states, for each of the thirteen benchmarks, the physical quantity sought and its original unit, the HF and LF sources, the scalar $y$ minimized over the candidate pool, the native representation and the model input dimension, and the provenance of the cost ratio $\rho$. The LF source is always transformed exactly like the HF source, so the squared LF--HF correlation $R^2$ of Table~\ref{tab:benchmarks} is invariant to the sign convention and, for the two band-gap pools, refers to the target-transformed values. Cost is charged per query in HF-equivalent units ($c_H = 1$, $c_L = \rho$), so $\rho$ acts only through the round-robin schedule ($\lfloor 1/\rho \rfloor$ LF queries per HF query) and the LF share of the initial design.}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{\new{Benchmark definitions. Objective: the physical quantity sought, its direction and original unit (--: dimensionless); $y$: the scalar minimized by every surrogate, with the construction of the candidate pool; representation: the native descriptors and the transformation to the model input, native dimension $\to$ input dimension; $\rho$: cost ratio and its provenance. $^{\dagger}$: cost ratio set in this work as a schedule parameter, not taken from a cost measurement (see text).}}
+\label{supptab:benchmark_definitions}
+\setlength{\tabcolsep}{4pt}%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.125\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.165\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}@{}}
+\toprule
+\new{\textbf{Benchmark}} & \new{\textbf{Objective (unit); HF source; LF source}} & \new{\textbf{Minimized quantity $y$; pool construction}} & \new{\textbf{Representation (native $\to$ model input)}} & \new{$\boldsymbol{\rho}$ \textbf{(provenance)}} \\
+\midrule
+\new{Branin-Fav / Branin-Unfav} & \new{min Branin function (--); HF $f^{(H)}$, LF $f^{(L)}$ with $\alpha = 0.8$ / $0.1$ (definitions below)} & \new{$y = f^{(H)}(x)$ on a $50^2$ lattice of the domain; regret relative to the lattice minimum $0.4045$} & \new{lattice coordinates, standardized, $2 \to 2$} & \new{$0.1$ / $0.5$; ref.~\citep{sabanza2025best}} \\
+\addlinespace
+\new{Park-Fav / Park-Unfav} & \new{min Park function (--); HF $f^{(H)}$, LF $f^{(L)}$ with $\alpha = 0.6$ / $0.0$ (definitions below)} & \new{$y = f^{(H)}(x)$ on a $4^4$ lattice of the domain; regret relative to the lattice minimum $1.1\times10^{-7}$} & \new{lattice coordinates, standardized, $4 \to 4$} & \new{$0.1$ / $0.5$; ref.~\citep{sabanza2025best}} \\
+\addlinespace
+\new{COFs} & \new{max Xe/Kr selectivity (--); HF grand-canonical Monte Carlo mixture selectivity, LF Henry's-law selectivity~\citep{gantzler2023multifidelity}} & \new{$y = -S_{\mathrm{Xe/Kr}}$; 608 frameworks as released with ref.~\citep{sabanza2025best}} & \new{14 structural and compositional descriptors (pore diameter, void fraction, surface area, crystal density, elemental fractions), standardized, $14 \to 14$ (no PCA)} & \new{$0.065$; refs.~\citep{gantzler2023multifidelity,sabanza2025best}} \\
+\addlinespace
+\new{FreeSolv} & \new{max hydration free energy $\Delta G_{\mathrm{hyd}}$ (kcal\,mol$^{-1}$), i.e.\ the most positive value, the least hydrophilic molecule; HF experimental, LF computed (alchemical free-energy calculation)~\citep{mobley2014freesolv}} & \new{$y = -\Delta G_{\mathrm{hyd}}$ (the released pool stores $-\Delta G_{\mathrm{hyd}}$ for both fidelities and is minimized as stored); optimum $+3.43$~kcal\,mol$^{-1}$ (octafluorocyclobutane); the opposite direction from ref.~\citep{sabanza2025best}, which seeks the most negative $\Delta G_{\mathrm{hyd}}$; 640 molecules as released} & \new{RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$} & \new{$0.1$; ref.~\citep{sabanza2025best}} \\
+\addlinespace
+\new{Polarizability} & \new{max molecular polarizability (min--max normalised to $[0,1]$ in the released pool; original units not retained); HF experimental, LF Hartree--Fock~\citep{ghahremanpour2018alexandria,fare2022multi}} & \new{$y = -\tilde{\alpha}$ (normalised value); 1,134 molecules as released} & \new{RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$} & \new{$0.167$; refs.~\citep{fare2022multi,sabanza2025best}} \\
+\addlinespace
+\new{HOPV15} & \new{max experimental power conversion efficiency PCE (\%); HF reported device PCE, LF Scharber-model PCE from the reported HOMO level and optical gap (below)~\citep{lopez2016harvard,scharber2006design}} & \new{$y = -\mathrm{PCE}$; 240 of the 350 molecules of the experimental set (entries lacking HOMO, gap or PCE dropped)} & \new{RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$} & \new{$0.1^{\dagger}$; set in this work, equal to FreeSolv} \\
+\addlinespace
+\new{Matbench-gap} & \new{band gap nearest $1.4$~eV (eV); HF experimental gap (\texttt{matbench\_expt\_gap}), LF PBE gap from the Materials Project (\texttt{matbench\_mp\_gap})~\citep{dunn2020benchmarking,jain2013commentary}} & \new{$y = |E_g^{\mathrm{expt}} - 1.4~\mathrm{eV}|$, LF likewise; PBE gap averaged over the polymorphs of a reduced formula, duplicate experimental entries averaged, matched by formula; 3,347 compositions, 66\% metals ($E_g = 0$, $y = 1.4$)} & \new{Magpie composition descriptors (132) $\to$ standardize $\to$ PCA $\to$ standardize, $132 \to 10$} & \new{$0.05^{\dagger}$; set in this work (20 LF queries per HF query)} \\
+\addlinespace
+\new{ExptGap-PBE} & \new{same objective; HF matminer \texttt{expt\_gap}~\citep{zhuo2018predicting,ward2018matminer}, LF Materials Project PBE gap~\citep{jain2013commentary}} & \new{same transformation; 3,508 compositions, 70\% metals} & \new{Magpie composition descriptors (132) $\to$ standardize $\to$ PCA $\to$ standardize, $132 \to 10$} & \new{$0.05^{\dagger}$; as Matbench-gap} \\
+\addlinespace
+\new{Elastic-CHGNet / -SevenNet / -MatterSim} & \new{max Voigt--Reuss--Hill shear modulus $G_{\mathrm{VRH}}$ (GPa); HF DFT value of the Matbench \texttt{log\_gvrh} task~\citep{dunn2020benchmarking,dejong2015charting}, LF matcalc elasticity workflow~\citep{matcalc} with CHGNet / SevenNet / MatterSim after relaxation} & \new{$y = -G_{\mathrm{VRH}}$ (linear GPa); compounds with a finite, positive modulus at both fidelities; 10,819 / 10,460 / 10,946; PCA fitted per pool} & \new{Magpie composition descriptors (132) $\to$ standardize $\to$ PCA $\to$ standardize, $132 \to 10$} & \new{$0.05^{\dagger}$; set in this work (the MLIP-to-DFT cost ratio is of order $10^{-3}$)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Scharber proxy for HOPV15.}
+\new{The LF value of each donor is the Scharber-model power conversion efficiency~\citep{scharber2006design},
+\begin{equation}
+\begin{aligned}
+V_{\mathrm{OC}} &= \max\{0,\; -E_{\mathrm{HOMO}} - E^{\mathrm{acc}}_{\mathrm{LUMO}} - \Delta\}, &\quad E^{\mathrm{acc}}_{\mathrm{LUMO}} &= 4.3~\mathrm{eV}~(\mathrm{PC}_{61}\mathrm{BM}),\; \Delta = 0.3~\mathrm{V},\\
+J_{\mathrm{SC}} &= \mathrm{EQE}\cdot J_{\max}(E_g), &\quad \mathrm{EQE} &= 0.65,\\
+\mathrm{PCE}\,(\%) &= 100\, V_{\mathrm{OC}}\, J_{\mathrm{SC}}\,\mathrm{FF}/P_{\mathrm{in}}, &\quad \mathrm{FF} &= 0.65,\; P_{\mathrm{in}} = 100~\mathrm{mW\,cm^{-2}},
+\end{aligned}
+\end{equation}
+where $J_{\max}(E_g)$ is the short-circuit current density available from the AM1.5G spectrum for photon energies above $E_g$, tabulated at 19 gap values between $0.5$ and $3.0$~eV ($65$ to $1.8$~mA\,cm$^{-2}$) and interpolated linearly (clamped outside the table). $E_{\mathrm{HOMO}}$ and $E_g$ are the experimentally reported values of the HOPV15 experimental block (electrochemical HOMO level; optical gap), not computed orbital energies; the gap is taken from, in order, the optical gap ($194$ molecules), the electrochemical gap ($46$) and the LUMO--HOMO difference ($0$). Molecules lacking a HOMO level, any gap or a PCE were dropped ($350 \to 240$; no SMILES failed to parse). The PC$_{61}$BM acceptor level is applied to every donor although the reported devices used PC$_{71}$BM ($123$ molecules), PC$_{61}$BM ($101$) or other acceptors ($16$). The clamp at $V_{\mathrm{OC}} = 0$ is never active (LF minimum $0.42\%$); the LF ranges from $0.42$ to $14.43\%$ and the HF from $0.008$ to $10.2\%$.}
+
+\paragraph{Band-gap target and elastic-modulus pools.}
+\new{Both fidelities of the two band-gap pools are replaced by $|E_g - 1.4~\mathrm{eV}|$ before optimization, so that the $R^2$ of Table~\ref{tab:benchmarks} is computed on the transformed values. The elastic-modulus pools are used on the linear GPa scale, negated, after removing the compounds without a finite, positive modulus at either fidelity.}
+
+\paragraph{Cost ratios.}
+\new{The cost ratios of the synthetic functions ($0.1$ / $0.5$), COFs ($0.065$), FreeSolv ($0.1$) and polarizability ($0.167$) are inherited from the studies that introduced the pools~\citep{sabanza2025best,gantzler2023multifidelity,fare2022multi}. The remaining values are assumptions of this work: HOPV15 uses $0.1$ by analogy with FreeSolv, because the Scharber proxy is a closed-form estimate from measured quantities rather than a calculation; Matbench-gap uses $0.05$, chosen so that the round-robin schedule issues $20$ LF queries per HF query, whereas a literal PBE-to-experiment cost ratio would be far smaller and would give hundreds of LF queries per HF query; ExptGap-PBE and the three elastic-modulus pools use $0.05$ by the same convention, although an MLIP elastic calculation costs roughly $10^{-3}$ of a DFT one. Because cost is charged per query, $\rho$ is a schedule parameter rather than a measured cost.}
+
+\new{The remaining subsections of this note define the two synthetic functions and their scenarios. }The synthetic functions follow the Branin and Park benchmark families used in multi-fidelity Bayesian optimization (MFBO) by Sabanza-Gil et
 al.~\citep{sabanza2025best}; the implemented definitions are given below.
 
 \subsection{Branin function}
@@ -179,15 +244,16 @@ The HF Park function is
 \begin{equation}
 f^{(H)}(x_1, x_2, x_3, x_4) = \frac{\tilde{x}_1}{2}\sqrt{\frac{(x_2 + x_3^2)\tilde{x}_4}{\tilde{x}_1^2 + \epsilon}} + (\tilde{x}_1 + 3\tilde{x}_4)\exp\!\left(1 + \sin(x_3)\right),
 \end{equation}
-with $x_i \in [0,1]$, $\epsilon = 10^{-8}$ and $\tilde{x}_j = \max(x_j,\epsilon)$ for $j=1,4$. The unregularized function has global minimum $f^* = 0$. The LF approximation modifies
-the $x_4$ coefficient ($3 \rightarrow 3 - 1.5(1-\alpha)$) and scales the sine term in the exponent by $\alpha$, giving $\exp(1+\alpha\sin(x_3))$.
+with $x_i \in [0,1]$, $\epsilon = 10^{-8}$ and $\tilde{x}_j = \max(x_j,\epsilon)$ for $j=1,4$. The unregularized function has global minimum $f^* = 0$\new{, approached as $x_1, x_4 \to 0$. This is the form implemented in the released code and used to generate the candidate lattice; it differs from the classical Park function, $\tfrac{x_1}{2}\bigl[\sqrt{1 + (x_2 + x_3^2)x_4/x_1^2} - 1\bigr] + (x_1 + 3x_4)\exp(1 + \sin x_3)$, in the first term, and the guards on $x_1$ and $x_4$ and the denominator regularization use $\epsilon = 10^{-8}$}. The LF approximation modifies
+the $x_4$ coefficient ($3 \rightarrow 3 - 1.5(1-\alpha)$) and scales the \del{exponential
+argument}\new{sine term of the exponent} by $\alpha$\new{, $\exp(1 + \alpha\sin(x_3))$}.
 
 \subsection{Scenario configurations}
 Supplementary Table~\ref{supptab:synthetic_scenarios} lists the $\alpha$ values and resulting
 characteristics. The $R^2$ values were computed by sampling 1,000 uniform points,
-evaluating both fidelities, and fitting a linear regression from LF to HF. Candidate pools
+evaluating both fidelities, and fitting a linear regression from LF to HF\new{, whose $R^2$ is the squared LF--HF Pearson correlation of Methods}. Candidate pools
 were constructed by uniform grid discretization ($50^2 = 2{,}500$ for Branin; $4^4 = 256$
-for Park). Regret is measured relative to the candidate-pool minima, approximately $0.4045$ for Branin and $1.09\times10^{-7}$ for Park, rather than the continuous minima listed in Supplementary Table~\ref{supptab:synthetic_scenarios}.
+for Park). \new{The lattices include the domain boundaries, and regret is measured relative to the best candidate of the lattice rather than the analytical minimum: the best Branin lattice point has $f^{(H)} = 0.4045$ (analytical $f^* = 0.3979$) and the best Park lattice point $1.1 \times 10^{-7}$.}
 
 \begin{table}[h]
 \centering
@@ -217,11 +283,11 @@ improvement~\citep{kushner1964new}; the optimistic Gaussian-process lower confid
 bound~\citep{srinivas2012information} ($\beta=2$); the information-theoretic max-value
 entropy search~\citep{wang2017max} (Gumbel approximation, ten max-value samples); and
 sampling-based Thompson sampling~\citep{russo2018tutorial}. Each replaces only the LF acquisition\del{, using the BLR predictive standard deviation}\new{, evaluated on the HF predictive mean and BLR standard deviation of the HF head (Supplementary Note~\ref{suppnote:blr}) with the HF incumbent,} with the surrogate, round-robin schedule, HF step, and seeds held fixed, and was run across all
-\del{eleven}\new{nine} transfer-learning surrogates and nine benchmarks (\del{$11\times 9\times 20$}\new{$9\times 9\times 20$} seeds per
+\del{eleven}\new{five} transfer-learning surrogates and nine benchmarks (\del{$11\times 9\times 20$}\new{$5\times 9\times 20$} seeds per
 acquisition\new{, seeds 42--61}). For each acquisition and benchmark we report the fraction of surrogates on
 which it beats the greedy policy\new{ and the mean paired difference in attainment}\del{: the greedy policy beat all five acquisitions on COFs on ten of the
 eleven surrogates, whereas Thompson sampling beat the greedy policy on every surrogate on FreeSolv and
-polarizability, and the improvement-based acquisitions ranked weakest overall}\new{: no acquisition raises the mean attainment by more than about $0.05$ on any benchmark (probability of improvement on Branin-Fav, Thompson sampling on Branin-Unfav), Thompson sampling lowers it by $0.11$ on HOPV15 and $0.13$ on Matbench-gap, and the lower confidence bound and max-value entropy search lower it by $0.06$--$0.10$ on the Branin functions}
+polarizability, and the improvement-based acquisitions ranked weakest overall}\new{: no acquisition raises the mean attainment by more than \del{$0.05$}\new{about $0.07$ ($+0.069$)} on any benchmark (Thompson sampling on Branin-Unfav; the next largest gains are probability of improvement on HOPV15, $+0.048$, and on Branin-Fav, $+0.047$), Thompson sampling lowers it by $0.09$ on HOPV15 and $0.14$ on Matbench-gap, and the lower confidence bound and max-value entropy search lower it by $0.03$--$0.11$ on the Branin functions}
 (\del{Fig.~5}\new{Supplementary Fig.~\ref{suppfig:portfolio}}). \del{We additionally evaluated a fully uncertainty-aware variant
 that adds a second BLR head on the HF network and applies EI at both fidelities.}
 As a matched control for the surrogate-versus-acquisition question, the baseline MFGP was also run
@@ -231,14 +297,14 @@ with a greedy policy that selects by its posterior mean, all other settings held
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{paper_figures/supp_acq_matrix.pdf}
-\caption{\new{Surrogate $\times$ acquisition comparison under attainment. \textbf{a--i,} Attainment (the Fig.~\ref{fig:final_regret} rule: the mean over the pool's top 5, 2, 1 and 0.5\% targets of the share of the budget window spent at or below the target) for the baseline MFGP with its default expected-improvement (EI) acquisition and with the greedy policy, and for the End-to-End Joint Training surrogate with its default greedy policy and with EI driven by its BLR predictive standard deviation; bars, mean $\pm$ s.e.\ over 40 seeds (42--81; FreeSolv MFGP with EI, $n = 39$, one failed fit). Budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap, evaluated at a budget of 20. \textbf{j,} Attainment with EI minus attainment with the greedy policy, paired per seed and averaged, for the baseline MFGP (40 paired seeds; 39 for FreeSolv) and each of the nine transfer-learning surrogates (seeds 42--61); positive values mean that EI attains more.}}
+\caption{\new{Surrogate $\times$ acquisition comparison under attainment. \textbf{a--i,} Attainment (the Fig.~\ref{fig:final_regret} rule: the mean over the pool's top 5, 2, 1 and 0.5\% targets of the share of the budget window spent at or below the target) for the baseline MFGP with its default expected-improvement (EI) acquisition and with the greedy policy, and for the End-to-End Joint Training surrogate with its default greedy policy and with EI driven by its BLR predictive standard deviation; bars, mean $\pm$ s.e.\ over 40 seeds (42--81; FreeSolv MFGP with EI, $n = 39$, one failed fit). Budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap, evaluated at a budget of 20. \textbf{j,} Attainment with EI minus attainment with the greedy policy, paired per seed and averaged, for the baseline MFGP (40 paired seeds; 39 for FreeSolv) and each of the five transfer-learning surrogates (seeds 42--61); positive values mean that EI attains more.}}
 \label{suppfig:acquisition}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{paper_figures/supp_acq_portfolio.pdf}
-\caption{\new{Acquisition portfolio under attainment. \textbf{a,} Share of the nine transfer-learning surrogates for which the uncertainty-driven acquisition (EI, probability of improvement, the GP lower confidence bound, max-value entropy search or Thompson sampling, each using the BLR predictive standard deviation) attains more than the greedy policy on each benchmark. \textbf{b,} Mean paired difference in attainment (acquisition minus greedy) over the nine surrogates. \textbf{c--k,} Attainment per acquisition, mean $\pm$ s.e.\ over the nine surrogates of each surrogate's mean over 20 seeds (42--61); budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap at a budget of 20.}}
+\caption{\new{Acquisition portfolio under attainment. \textbf{a,} Share of the five transfer-learning surrogates for which the uncertainty-driven acquisition (EI, probability of improvement, the GP lower confidence bound, max-value entropy search or Thompson sampling, each using the BLR predictive standard deviation) achieves higher attainment than the greedy policy on each benchmark. \textbf{b,} Mean paired difference in attainment (acquisition minus greedy) over the five surrogates. \textbf{c--k,} Attainment per acquisition, mean $\pm$ s.e.\ over the five surrogates of each surrogate's mean over 20 seeds (42--61); budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap at a budget of 20.}}
 \label{suppfig:portfolio}
 \end{figure*}
 
@@ -263,7 +329,7 @@ here we report the absolute cost that underlies those laws. Each profile uses th
 MFBO loop (one surrogate fit plus one pool-wide prediction per iteration,
 interpolated from five profiled training-set sizes and summed over the loop) are shown per surrogate and benchmark, \del{confirming that the
 $\mathcal{O}(N^3)$ Gaussian processes dominate the budget while the $\mathcal{O}(N)$
-transfer-learning surrogates stay one to two orders of magnitude cheaper}\new{profiled for the surrogates of Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory} (BLR head included): the sparse variational and deep-kernel GPs cost up to $43\times$ and $28\times$ the cheapest transfer-learning surrogate and the baseline MFGP up to $11\times$, whereas on the two smallest pools and budgets (Park-Unfav and HOPV15) the baseline MFGP is the cheapest surrogate of all. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20}.
+transfer-learning surrogates stay one to two orders of magnitude cheaper}\new{profiled for the surrogates of Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory} (BLR head included): the sparse variational and deep-kernel GPs cost up to $22\times$ and $15\times$ the cheapest transfer-learning surrogate and the baseline MFGP up to $5.6\times$, whereas on Park-Unfav, polarizability and HOPV15 the baseline MFGP is the cheapest surrogate of all. The cheapest transfer-learning surrogate on every benchmark is Pretrain-then-Joint, and the average compute rank over the nine benchmarks (lower is cheaper) is Pretrain-then-Joint $1.3$, Soft Parameter Sharing $2.3$, Domain Adaptation $3.3$, Frozen-representation transfer and the baseline MFGP $4.3$, End-to-End Joint Training $5.3$, the deep-kernel GP $7.0$ and the sparse variational MFGP $8.0$. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20}.
 
 \begin{figure*}[t]
 \centering
@@ -273,12 +339,12 @@ transfer-learning surrogates stay one to two orders of magnitude cheaper}\new{pr
 loop (one surrogate fit plus one pool-wide prediction per iteration, interpolated from the profiled training-set sizes and summed over the loop),
 with the Gaussian-process family in salmon and the transfer-learning surrogates in blue.
 The sparse variational (\del{Sparse MFGP}\new{SV-MFGP}) and deep-kernel (DKL) GPs are the most expensive on
-every benchmark, up to roughly \del{$45\times$ and $30\times$}\new{$43\times$ and $28\times$} the fastest transfer-learning surrogate; the
+every benchmark, up to roughly \del{$45\times$ and $30\times$}\new{$22\times$ and $15\times$} the fastest transfer-learning surrogate; the
 baseline MFGP \del{and NARGP }scale\new{s} as $\mathcal{O}(N^3)$ in the number of observations (measured
 fit-FLOP exponent $k = 3.0$) against $\mathcal{O}(N)$ for the transfer-learning surrogates (\del{$k = 1.0$}\new{$k = 0.9$--$1.0$}),
 so the gap widens with the evaluation budget. Panel \textbf{j} summarizes these costs as
 the average compute rank across all nine benchmarks (lower is cheaper), with the colour
-split repeated in a shared legend below the panels.\new{ FLOPs are profiled for the surrogates of the main text (BLR head and the unused residual network included) and the three-member GP family; the transfer-learning configurations are listed individually, so Curriculum (Curr), Knowledge Distillation (KD) and Pseudo-Labelling (PL), reported as feature-extraction transfer in the main text, appear separately; the other abbreviations are those of Fig.~\ref{fig:final_regret}. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20. On Park-Unfav and HOPV15 the baseline MFGP is the cheapest surrogate of all.}}
+split repeated in a shared legend below the panels.\new{ FLOPs are profiled for the surrogates of the main text (BLR head and the unused residual network included), that is, the five transfer-learning surrogates and the three-member GP family; the abbreviations are those of Fig.~\ref{fig:final_regret}. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20. On Park-Unfav, polarizability and HOPV15 the baseline MFGP is the cheapest surrogate of all.}}
 \label{suppfig:computing_time}
 \end{figure*}
 

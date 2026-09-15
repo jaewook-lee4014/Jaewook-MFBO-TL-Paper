@@ -1,0 +1,127 @@
+benchmark,model,family,tflops
+Branin-Fav,Adapter,TL,0.2144932649005
+Branin-Fav,Curriculum,TL,0.2180857881005
+Branin-Fav,DKL Multi-Fidelity,GP,3.3638587864
+Branin-Fav,DNGO-Gradient,TL,0.3516357167405
+Branin-Fav,DNGO-Joint,TL,0.3341785967405
+Branin-Fav,Domain Adaptation (MMD),TL,0.3185171402285
+Branin-Fav,Knowledge Distillation,TL,0.2181822895405
+Branin-Fav,MFGP,GP,0.94119609987
+Branin-Fav,Progressive,TL,0.1210008783405
+Branin-Fav,Pseudo-Labeling,TL,0.3436254654765
+Branin-Fav,Sequential,TL,0.2181822895405
+Branin-Fav,Soft Parameter Sharing,TL,0.2413722415405
+Branin-Fav,Sparse MFGP,GP,4.655422499676
+Branin-Fav,Two-Stage Joint,TL,0.2243094154285
+Branin-Unfav,Adapter,TL,0.0178795868555
+Branin-Unfav,Curriculum,TL,0.0188611019275
+Branin-Unfav,DKL Multi-Fidelity,GP,0.11953767308
+Branin-Unfav,DNGO-Gradient,TL,0.0349889166475
+Branin-Unfav,DNGO-Joint,TL,0.030237780647499993
+Branin-Unfav,Domain Adaptation (MMD),TL,0.0262130754955
+Branin-Unfav,Knowledge Distillation,TL,0.0188847502475
+Branin-Unfav,MFGP,GP,0.040638245066
+Branin-Unfav,Progressive,TL,0.0126523886475
+Branin-Unfav,Pseudo-Labeling,TL,0.025731013927499997
+Branin-Unfav,Sequential,TL,0.0188847502475
+Branin-Unfav,Soft Parameter Sharing,TL,0.0251961358475
+Branin-Unfav,Sparse MFGP,GP,0.125375083308
+Branin-Unfav,Two-Stage Joint,TL,0.0204852610955
+Park-Fav,Adapter,TL,0.203798037631
+Park-Fav,Curriculum,TL,0.202715441407
+Park-Fav,DKL Multi-Fidelity,GP,2.437529617664
+Park-Fav,DNGO-Gradient,TL,0.336634872959
+Park-Fav,DNGO-Joint,TL,0.318844652159
+Park-Fav,Domain Adaptation (MMD),TL,0.303024591487
+Park-Fav,Knowledge Distillation,TL,0.202814508159
+Park-Fav,MFGP,GP,0.49011201028
+Park-Fav,Progressive,TL,0.105833125759
+Park-Fav,Pseudo-Labeling,TL,0.328215098239
+Park-Fav,Sequential,TL,0.202814508159
+Park-Fav,Soft Parameter Sharing,TL,0.226364152959
+Park-Fav,Sparse MFGP,GP,4.485451085648
+Park-Fav,Two-Stage Joint,TL,0.209054940287
+Park-Unfav,Adapter,TL,0.0153546205355
+Park-Unfav,Curriculum,TL,0.0150603999275
+Park-Unfav,DKL Multi-Fidelity,GP,0.06485468136
+Park-Unfav,DNGO-Gradient,TL,0.0315720454315
+Park-Unfav,DNGO-Joint,TL,0.0266801350315
+Park-Unfav,Domain Adaptation (MMD),TL,0.0225620893355
+Park-Unfav,Knowledge Distillation,TL,0.0150845190315
+Park-Unfav,MFGP,GP,0.006191910848
+Park-Unfav,Progressive,TL,0.0087268838315
+Park-Unfav,Pseudo-Labeling,TL,0.0220842431915
+Park-Unfav,Sequential,TL,0.0150845190315
+Park-Unfav,Soft Parameter Sharing,TL,0.0215601414315
+Park-Unfav,Sparse MFGP,GP,0.12233235496
+Park-Unfav,Two-Stage Joint,TL,0.0167324637355
+COFs,Adapter,TL,0.1734584458665
+COFs,Curriculum,TL,0.1745458065705
+COFs,DKL Multi-Fidelity,GP,1.796630886896
+COFs,DNGO-Gradient,TL,0.27955061802650005
+COFs,DNGO-Joint,TL,0.2685025348265
+COFs,Domain Adaptation (MMD),TL,0.2587657846185
+COFs,Knowledge Distillation,TL,0.1744242948265
+COFs,MFGP,GP,0.636255349853
+COFs,Progressive,TL,0.0918457892265
+COFs,Pseudo-Labeling,TL,0.2837788119465
+COFs,Sequential,TL,0.1744242948265
+COFs,Soft Parameter Sharing,TL,0.1888308100265
+COFs,Sparse MFGP,GP,3.843163158374
+COFs,Two-Stage Joint,TL,0.1783867958185
+FreeSolv,Adapter,TL,0.2215936510045
+FreeSolv,Curriculum,TL,0.2220016212445
+FreeSolv,DKL Multi-Fidelity,GP,2.868448292448
+FreeSolv,DNGO-Gradient,TL,0.3671660625245
+FreeSolv,DNGO-Joint,TL,0.3476399505245
+FreeSolv,Domain Adaptation (MMD),TL,0.3306365097565
+FreeSolv,Knowledge Distillation,TL,0.2221059025245
+FreeSolv,MFGP,GP,1.2912234641999998
+FreeSolv,Progressive,TL,0.1171109105245
+FreeSolv,Pseudo-Labeling,TL,0.3587929937245
+FreeSolv,Sequential,TL,0.2221059025245
+FreeSolv,Soft Parameter Sharing,TL,0.2477096785245
+FreeSolv,Sparse MFGP,GP,5.045451218036
+FreeSolv,Two-Stage Joint,TL,0.2289600361565
+Polarizability,Adapter,TL,0.029084678681499995
+Polarizability,Curriculum,TL,0.0298273849215
+Polarizability,DKL Multi-Fidelity,GP,0.1459254687
+Polarizability,DNGO-Gradient,TL,0.0516626477055
+Polarizability,DNGO-Joint,TL,0.0470558189055
+Polarizability,Domain Adaptation (MMD),TL,0.0431741583615
+Polarizability,Knowledge Distillation,TL,0.0298046765055
+Polarizability,MFGP,GP,0.025686821154
+Polarizability,Progressive,TL,0.0173993485055
+Polarizability,Pseudo-Labeling,TL,0.04521516930550001
+Polarizability,Sequential,TL,0.0298046765055
+Polarizability,Soft Parameter Sharing,TL,0.0358454189055
+Polarizability,Sparse MFGP,GP,0.37022784426
+Polarizability,Two-Stage Joint,TL,0.0313792207615
+HOPV15,Adapter,TL,0.0748714663565
+HOPV15,Curriculum,TL,0.0749079155725
+HOPV15,DKL Multi-Fidelity,GP,0.507659900912
+HOPV15,DNGO-Gradient,TL,0.1244797578125
+HOPV15,DNGO-Joint,TL,0.1174318026125
+HOPV15,Domain Adaptation (MMD),TL,0.11132289496450001
+HOPV15,Knowledge Distillation,TL,0.0748304650125
+HOPV15,MFGP,GP,0.035988680945
+HOPV15,Progressive,TL,0.0396427050125
+HOPV15,Pseudo-Labeling,TL,0.1204774090125
+HOPV15,Sequential,TL,0.0748304650125
+HOPV15,Soft Parameter Sharing,TL,0.0840721546125
+HOPV15,Sparse MFGP,GP,1.492346074236
+HOPV15,Two-Stage Joint,TL,0.0772951381645
+Matbench-Gap,Adapter,TL,0.132543752362
+Matbench-Gap,Curriculum,TL,0.13847515793
+Matbench-Gap,DKL Multi-Fidelity,GP,1.637716339608
+Matbench-Gap,DNGO-Gradient,TL,0.20906411793
+Matbench-Gap,DNGO-Joint,TL,0.20292941073
+Matbench-Gap,Domain Adaptation (MMD),TL,0.19732118596199996
+Matbench-Gap,Knowledge Distillation,TL,0.13817533713
+Matbench-Gap,MFGP,GP,0.584133839829
+Matbench-Gap,Progressive,TL,0.07987421713
+Matbench-Gap,Pseudo-Labeling,TL,0.21558765713
+Matbench-Gap,Sequential,TL,0.13817533713
+Matbench-Gap,Soft Parameter Sharing,TL,0.14621952273
+Matbench-Gap,Sparse MFGP,GP,2.718979269359
+Matbench-Gap,Two-Stage Joint,TL,0.140415893162

@@ -1,0 +1,239 @@
+pool,model,src,n,hz_min,hz_max
+Branin-Fav,Adapter,conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Adapter,refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,DKL,conf62_gp,20,49.90000000000023,49.90000000000023
+Branin-Fav,DKL,refig42_gp,20,49.90000000000023,49.90000000000023
+Branin-Fav,Domain Adaptation (MMD),conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Domain Adaptation (MMD),refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,End-to-End Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,End-to-End Joint,refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Feature-extraction transfer,conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Feature-extraction transfer,refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,MFGP,conf62_gp,20,49.90000000000023,49.90000000000023
+Branin-Fav,MFGP,refig42_gp,20,49.90000000000023,49.90000000000023
+Branin-Fav,Pretrain-then-Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Pretrain-then-Joint,refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Progressive,conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Progressive,refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Sequential,conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Sequential,refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Soft Parameter Sharing,conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Soft Parameter Sharing,refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Sparse MFGP,conf62_gp,16,49.90000000000023,49.90000000000023
+Branin-Fav,Sparse MFGP,refig42_gp,20,49.90000000000023,49.90000000000023
+Branin-Fav,Stop-Gradient Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+Branin-Fav,Stop-Gradient Joint,refig42_tl,20,49.90000000000023,49.90000000000023
+Branin-Unfav,Adapter,conf62_tl,20,50.0,50.0
+Branin-Unfav,Adapter,refig42_tl,20,50.0,50.0
+Branin-Unfav,DKL,conf62_gp,20,50.0,50.0
+Branin-Unfav,DKL,refig42_gp,20,50.0,50.0
+Branin-Unfav,Domain Adaptation (MMD),conf62_tl,20,50.0,50.0
+Branin-Unfav,Domain Adaptation (MMD),refig42_tl,20,50.0,50.0
+Branin-Unfav,End-to-End Joint,conf62_tl,20,50.0,50.0
+Branin-Unfav,End-to-End Joint,refig42_tl,20,50.0,50.0
+Branin-Unfav,Feature-extraction transfer,conf62_tl,20,50.0,50.0
+Branin-Unfav,Feature-extraction transfer,refig42_tl,20,50.0,50.0
+Branin-Unfav,MFGP,conf62_gp,20,50.0,50.0
+Branin-Unfav,MFGP,refig42_gp,20,50.0,50.0
+Branin-Unfav,Pretrain-then-Joint,conf62_tl,20,50.0,50.0
+Branin-Unfav,Pretrain-then-Joint,refig42_tl,20,50.0,50.0
+Branin-Unfav,Progressive,conf62_tl,20,50.0,50.0
+Branin-Unfav,Progressive,refig42_tl,20,50.0,50.0
+Branin-Unfav,Sequential,conf62_tl,20,50.0,50.0
+Branin-Unfav,Sequential,refig42_tl,20,50.0,50.0
+Branin-Unfav,Soft Parameter Sharing,conf62_tl,20,50.0,50.0
+Branin-Unfav,Soft Parameter Sharing,refig42_tl,20,50.0,50.0
+Branin-Unfav,Sparse MFGP,conf62_gp,19,50.0,50.0
+Branin-Unfav,Sparse MFGP,refig42_gp,20,50.0,50.0
+Branin-Unfav,Stop-Gradient Joint,conf62_tl,20,50.0,50.0
+Branin-Unfav,Stop-Gradient Joint,refig42_tl,20,50.0,50.0
+COFs,Adapter,conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,Adapter,refig42_tl,20,29.95000000000012,29.95000000000012
+COFs,DKL,conf62_gp,20,29.95000000000012,29.95000000000012
+COFs,DKL,refig42_gp,20,29.95000000000012,29.95000000000012
+COFs,Domain Adaptation (MMD),conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,Domain Adaptation (MMD),refig42_tl,20,29.95000000000012,29.95000000000012
+COFs,End-to-End Joint,conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,End-to-End Joint,refig42_tl,20,29.95000000000012,29.95000000000012
+COFs,Feature-extraction transfer,conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,Feature-extraction transfer,refig42_tl,20,29.95000000000012,29.95000000000012
+COFs,MFGP,conf62_gp,20,29.95000000000012,29.95000000000012
+COFs,MFGP,refig42_gp,20,29.95000000000012,29.95000000000012
+COFs,Pretrain-then-Joint,conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,Pretrain-then-Joint,refig42_tl,20,29.95000000000012,29.95000000000012
+COFs,Progressive,conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,Progressive,refig42_tl,20,29.95000000000012,29.95000000000012
+COFs,Sequential,conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,Sequential,refig42_tl,20,29.95000000000012,29.95000000000012
+COFs,Soft Parameter Sharing,conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,Soft Parameter Sharing,refig42_tl,20,29.95000000000012,29.95000000000012
+COFs,Sparse MFGP,conf62_gp,20,29.95000000000012,29.95000000000012
+COFs,Sparse MFGP,refig42_gp,20,29.95000000000012,29.95000000000012
+COFs,Stop-Gradient Joint,conf62_tl,20,29.95000000000012,29.95000000000012
+COFs,Stop-Gradient Joint,refig42_tl,20,29.95000000000012,29.95000000000012
+Elastic-CHGNet,Adapter,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-CHGNet,DKL,confirm_ext,40,30.95000000000016,59.99999999999936
+Elastic-CHGNet,Domain Adaptation (MMD),confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-CHGNet,End-to-End Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-CHGNet,Feature-extraction transfer,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-CHGNet,MFGP,confirm_ext,40,30.95000000000016,59.99999999999936
+Elastic-CHGNet,Pretrain-then-Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-CHGNet,Progressive,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-CHGNet,Sequential,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-CHGNet,Soft Parameter Sharing,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-CHGNet,Sparse MFGP,confirm_ext,40,30.95000000000016,30.95000000000016
+Elastic-CHGNet,Stop-Gradient Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,Adapter,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,DKL,confirm_ext,40,30.95000000000016,41.049999999999926
+Elastic-MatterSim,Domain Adaptation (MMD),confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,End-to-End Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,Feature-extraction transfer,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,MFGP,confirm_ext,40,30.95000000000016,59.99999999999936
+Elastic-MatterSim,Pretrain-then-Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,Progressive,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,Sequential,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,Soft Parameter Sharing,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-MatterSim,Sparse MFGP,confirm_ext,40,30.95000000000016,30.95000000000016
+Elastic-MatterSim,Stop-Gradient Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,Adapter,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,DKL,confirm_ext,40,30.95000000000016,41.049999999999926
+Elastic-SevenNet,Domain Adaptation (MMD),confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,End-to-End Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,Feature-extraction transfer,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,MFGP,confirm_ext,40,30.95000000000016,59.99999999999936
+Elastic-SevenNet,Pretrain-then-Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,Progressive,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,Sequential,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,Soft Parameter Sharing,confirm_ext,40,59.99999999999936,59.99999999999936
+Elastic-SevenNet,Sparse MFGP,confirm_ext,40,30.95000000000016,30.95000000000016
+Elastic-SevenNet,Stop-Gradient Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,Adapter,confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,DKL,confirm_ext,40,30.95000000000016,59.99999999999936
+ExptGap-PBE,Domain Adaptation (MMD),confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,End-to-End Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,Feature-extraction transfer,confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,MFGP,confirm_ext,40,30.95000000000016,59.99999999999936
+ExptGap-PBE,Pretrain-then-Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,Progressive,confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,Sequential,confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,Soft Parameter Sharing,confirm_ext,40,59.99999999999936,59.99999999999936
+ExptGap-PBE,Sparse MFGP,confirm_ext,40,30.95000000000016,30.95000000000016
+ExptGap-PBE,Stop-Gradient Joint,confirm_ext,40,59.99999999999936,59.99999999999936
+FreeSolv,Adapter,conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,Adapter,ext,20,99.99999999999926,99.99999999999926
+FreeSolv,DKL,conf62_gp,20,49.90000000000023,49.90000000000023
+FreeSolv,DKL,refig42_gp,20,49.90000000000023,49.90000000000023
+FreeSolv,Domain Adaptation (MMD),conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,Domain Adaptation (MMD),ext,20,99.99999999999926,99.99999999999926
+FreeSolv,End-to-End Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,End-to-End Joint,ext,20,99.99999999999926,99.99999999999926
+FreeSolv,Feature-extraction transfer,conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,Feature-extraction transfer,ext,20,99.99999999999926,99.99999999999926
+FreeSolv,MFGP,ext,39,55.30000000000026,99.99999999999926
+FreeSolv,MFGP,refig42_gp,1,49.90000000000023,49.90000000000023
+FreeSolv,Pretrain-then-Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,Pretrain-then-Joint,ext,20,99.99999999999926,99.99999999999926
+FreeSolv,Progressive,conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,Progressive,ext,20,99.99999999999926,99.99999999999926
+FreeSolv,Sequential,conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,Sequential,ext,20,99.99999999999926,99.99999999999926
+FreeSolv,Soft Parameter Sharing,conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,Soft Parameter Sharing,ext,20,99.99999999999926,99.99999999999926
+FreeSolv,Sparse MFGP,ext,40,99.99999999999926,99.99999999999926
+FreeSolv,Stop-Gradient Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+FreeSolv,Stop-Gradient Joint,ext,20,99.99999999999926,99.99999999999926
+HOPV15,Adapter,ext,40,44.90000000000019,44.90000000000019
+HOPV15,DKL,ext,40,44.90000000000019,44.90000000000019
+HOPV15,Domain Adaptation (MMD),ext,40,44.90000000000019,44.90000000000019
+HOPV15,End-to-End Joint,ext,40,44.90000000000019,44.90000000000019
+HOPV15,Feature-extraction transfer,ext,40,44.90000000000019,44.90000000000019
+HOPV15,MFGP,ext,40,44.90000000000019,44.90000000000019
+HOPV15,Pretrain-then-Joint,ext,40,44.90000000000019,44.90000000000019
+HOPV15,Progressive,ext,40,44.90000000000019,44.90000000000019
+HOPV15,Sequential,ext,40,44.90000000000019,44.90000000000019
+HOPV15,Soft Parameter Sharing,ext,40,44.90000000000019,44.90000000000019
+HOPV15,Sparse MFGP,ext,40,44.90000000000019,44.90000000000019
+HOPV15,Stop-Gradient Joint,ext,40,44.90000000000019,44.90000000000019
+Matbench-Gap,Adapter,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,DKL,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,Domain Adaptation (MMD),ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,End-to-End Joint,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,Feature-extraction transfer,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,MFGP,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,Pretrain-then-Joint,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,Progressive,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,Sequential,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,Soft Parameter Sharing,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,Sparse MFGP,ext,40,39.99999999999993,39.99999999999993
+Matbench-Gap,Stop-Gradient Joint,ext,40,39.99999999999993,39.99999999999993
+Park-Fav,Adapter,conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Adapter,refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,DKL,conf62_gp,20,49.90000000000023,49.90000000000023
+Park-Fav,DKL,refig42_gp,20,49.90000000000023,49.90000000000023
+Park-Fav,Domain Adaptation (MMD),conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Domain Adaptation (MMD),refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,End-to-End Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,End-to-End Joint,refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Feature-extraction transfer,conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Feature-extraction transfer,refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,MFGP,conf62_gp,20,49.90000000000023,49.90000000000023
+Park-Fav,MFGP,refig42_gp,20,49.90000000000023,49.90000000000023
+Park-Fav,Pretrain-then-Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Pretrain-then-Joint,refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Progressive,conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Progressive,refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Sequential,conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Sequential,refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Soft Parameter Sharing,conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Soft Parameter Sharing,refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Sparse MFGP,conf62_gp,20,49.90000000000023,49.90000000000023
+Park-Fav,Sparse MFGP,refig42_gp,20,49.90000000000023,49.90000000000023
+Park-Fav,Stop-Gradient Joint,conf62_tl,20,49.90000000000023,49.90000000000023
+Park-Fav,Stop-Gradient Joint,refig42_tl,20,49.90000000000023,49.90000000000023
+Park-Unfav,Adapter,conf62_tl,20,50.0,50.0
+Park-Unfav,Adapter,refig42_tl,20,50.0,50.0
+Park-Unfav,DKL,conf62_gp,20,50.0,50.0
+Park-Unfav,DKL,refig42_gp,20,50.0,50.0
+Park-Unfav,Domain Adaptation (MMD),conf62_tl,20,50.0,50.0
+Park-Unfav,Domain Adaptation (MMD),refig42_tl,20,50.0,50.0
+Park-Unfav,End-to-End Joint,conf62_tl,20,50.0,50.0
+Park-Unfav,End-to-End Joint,refig42_tl,20,50.0,50.0
+Park-Unfav,Feature-extraction transfer,conf62_tl,20,50.0,50.0
+Park-Unfav,Feature-extraction transfer,refig42_tl,20,50.0,50.0
+Park-Unfav,MFGP,conf62_gp,20,50.0,50.0
+Park-Unfav,MFGP,refig42_gp,20,50.0,50.0
+Park-Unfav,Pretrain-then-Joint,conf62_tl,20,50.0,50.0
+Park-Unfav,Pretrain-then-Joint,refig42_tl,20,50.0,50.0
+Park-Unfav,Progressive,conf62_tl,20,50.0,50.0
+Park-Unfav,Progressive,refig42_tl,20,50.0,50.0
+Park-Unfav,Sequential,conf62_tl,20,50.0,50.0
+Park-Unfav,Sequential,refig42_tl,20,50.0,50.0
+Park-Unfav,Soft Parameter Sharing,conf62_tl,20,50.0,50.0
+Park-Unfav,Soft Parameter Sharing,refig42_tl,20,50.0,50.0
+Park-Unfav,Sparse MFGP,conf62_gp,20,50.0,50.0
+Park-Unfav,Sparse MFGP,refig42_gp,20,50.0,50.0
+Park-Unfav,Stop-Gradient Joint,conf62_tl,20,50.0,50.0
+Park-Unfav,Stop-Gradient Joint,refig42_tl,20,50.0,50.0
+Polarizability,Adapter,conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,Adapter,ext,20,59.8890000000002,59.8890000000002
+Polarizability,DKL,conf62_gp,20,29.861000000000057,29.861000000000057
+Polarizability,DKL,refig42_gp,20,29.861000000000057,29.861000000000057
+Polarizability,Domain Adaptation (MMD),conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,Domain Adaptation (MMD),ext,20,59.8890000000002,59.8890000000002
+Polarizability,End-to-End Joint,conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,End-to-End Joint,ext,20,59.8890000000002,59.8890000000002
+Polarizability,Feature-extraction transfer,conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,Feature-extraction transfer,ext,20,59.8890000000002,59.8890000000002
+Polarizability,MFGP,conf62_gp,20,29.861000000000057,29.861000000000057
+Polarizability,MFGP,ext,20,59.8890000000002,59.8890000000002
+Polarizability,Pretrain-then-Joint,conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,Pretrain-then-Joint,ext,20,59.8890000000002,59.8890000000002
+Polarizability,Progressive,conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,Progressive,ext,20,59.8890000000002,59.8890000000002
+Polarizability,Sequential,conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,Sequential,ext,20,59.8890000000002,59.8890000000002
+Polarizability,Soft Parameter Sharing,conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,Soft Parameter Sharing,ext,20,59.8890000000002,59.8890000000002
+Polarizability,Sparse MFGP,ext,40,59.8890000000002,59.8890000000002
+Polarizability,Stop-Gradient Joint,conf62_tl,20,29.861000000000057,29.861000000000057
+Polarizability,Stop-Gradient Joint,ext,20,59.8890000000002,59.8890000000002
