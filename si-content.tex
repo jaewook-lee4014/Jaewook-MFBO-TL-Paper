@@ -177,7 +177,7 @@ COFs & max Xe/Kr selectivity (--); HF grand-canonical Monte Carlo mixture select
 \addlinespace
 FreeSolv & max hydration free energy $\Delta G_{\mathrm{hyd}}$ (kcal\,mol$^{-1}$), i.e.\ the most positive value, the least hydrophilic molecule; HF experimental, LF computed (alchemical free-energy calculation)~\citep{mobley2014freesolv} & $y = -\Delta G_{\mathrm{hyd}}$ (the released pool stores $-\Delta G_{\mathrm{hyd}}$ for both fidelities and is minimized as stored); optimum $+3.43$~kcal\,mol$^{-1}$ (octafluorocyclobutane); the opposite direction from ref.~\citep{sabanza2025best}, which seeks the most negative $\Delta G_{\mathrm{hyd}}$; 640 molecules as released & RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$ & $0.1$; ref.~\citep{sabanza2025best} \\
 \addlinespace
-Polarizability & max molecular polarizability (min--max normalised to $[0,1]$ in the released pool; original units not retained); HF experimental, LF Hartree--Fock~\citep{ghahremanpour2018alexandria,fare2022multi} & $y = -\tilde{\alpha}$ (normalised value); 1,134 molecules as released & RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$ & $0.167$; refs.~\citep{fare2022multi,sabanza2025best} \\
+Polarizability & max molecular polarizability (min--max normalized to $[0,1]$ in the released pool; original units not retained); HF experimental, LF Hartree--Fock~\citep{ghahremanpour2018alexandria,fare2022multi} & $y = -\tilde{\alpha}$ (normalized value); 1,134 molecules as released & RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$ & $0.167$; refs.~\citep{fare2022multi,sabanza2025best} \\
 \addlinespace
 HOPV15 & max experimental power conversion efficiency PCE (\%); HF reported device PCE, LF Scharber-model PCE from the reported HOMO level and optical gap (below)~\citep{lopez2016harvard,scharber2006design} & $y = -\mathrm{PCE}$; 240 of the 350 molecules of the experimental set (entries lacking HOMO, gap or PCE dropped) & RDKit 2D descriptors (210) $\to$ standardize $\to$ PCA $\to$ standardize, $210 \to 10$ & $0.1^{\dagger}$; set in this work, equal to FreeSolv \\
 \addlinespace
@@ -269,12 +269,12 @@ which it beats the greedy policy and the mean paired difference in attainment: n
 (Supplementary Fig.~\ref{suppfig:portfolio}). 
 As a matched control for the surrogate-versus-acquisition question, the baseline MFGP was also run
 with a greedy policy that selects by its posterior mean, all other settings held fixed
-(Supplementary Fig.~\ref{suppfig:acquisition}).
+(Supplementary Fig.~\ref{suppfig:acquisition}). Its attainment under the greedy policy was within $0.03$ of that under EI on eight of the nine benchmarks, and on HOPV15 the greedy policy lowered it ($0.23$ against $0.32$) rather than raising it. Conversely, End-to-End Joint run with EI driven by its BLR predictive standard deviation attained within $0.01$ of its greedy value on seven benchmarks, $0.04$ less on Branin-Fav and $0.07$ more on HOPV15 (Supplementary Fig.~\ref{suppfig:acquisition}a--i); across the five transfer-learning surrogates the sign of the EI effect on HOPV15 depends on the surrogate (Supplementary Fig.~\ref{suppfig:acquisition}j). On COFs, FreeSolv and polarizability no acquisition of the portfolio improved mean attainment over the greedy policy by more than a small margin: when the transfer-learned mean already provides a useful ranking, exploration has little to add.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{paper_figures/supp_acq_matrix.pdf}
-\caption{Surrogate $\times$ acquisition comparison under attainment. \textbf{a--i,} Attainment (the Fig.~\ref{fig:final_regret} rule: the mean over the pool's top 5, 2, 1 and 0.5\% targets of the share of the budget window spent at or below the target) for the baseline MFGP with its default expected-improvement (EI) acquisition and with the greedy policy, and for the End-to-End Joint Training surrogate with its default greedy policy and with EI driven by its BLR predictive standard deviation; bars, mean $\pm$ s.e.\ over 40 seeds (42--81; FreeSolv MFGP with EI, $n = 39$, one failed fit). Budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap, evaluated at a budget of 20. \textbf{j,} Attainment with EI minus attainment with the greedy policy, paired per seed and averaged, for the baseline MFGP (40 paired seeds; 39 for FreeSolv) and each of the five transfer-learning surrogates (seeds 42--61); positive values mean that EI attains more.}
+\caption{Surrogate $\times$ acquisition comparison under attainment. \textbf{a--i,} Attainment (the Fig.~\ref{fig:final_regret} rule: the mean over the pool's top 5, 2, 1 and 0.5\% targets of the share of the budget window spent at or below the target) for the baseline MFGP with its default expected-improvement (EI) acquisition and with the greedy policy, and for the End-to-End Joint surrogate with its default greedy policy and with EI driven by its BLR predictive standard deviation; bars, mean $\pm$ s.e.\ over 40 seeds (42--81; FreeSolv MFGP with EI, $n = 39$, one failed fit). Budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap, evaluated at a budget of 20. \textbf{j,} Attainment with EI minus attainment with the greedy policy, paired per seed and averaged, for the baseline MFGP (40 paired seeds; 39 for FreeSolv) and each of the five transfer-learning surrogates (seeds 42--61); positive values mean that EI attains more.}
 \label{suppfig:acquisition}
 \end{figure*}
 
@@ -289,7 +289,7 @@ with a greedy policy that selects by its posterior mean, all other settings held
 \paragraph{Calibration.} For every surrogate we computed the LF expected
 calibration error, negative log-likelihood, and sharpness on held-out candidates and
 related them to the attainment of Fig.~\ref{fig:final_regret}; the resulting correlation is reported in
-the main text (Fig.~\ref{fig:calibration}a--m). ECE is averaged over the refits recorded in each source run, whose horizon can differ from the attainment budget. The held-out LF calibration error is averaged over 34--40 seeds per cell; 11 of the 104 cells have fewer than 40 (the sparse variational MFGP on Branin-Fav and Branin-Unfav, the baseline MFGP on FreeSolv, and the baseline MFGP and deep-kernel GP on the four large materials pools, for which not every run records the calibration error). For TL models this assesses the separate LF BLR head, not the HF head driving acquisition.
+the main text (Fig.~\ref{fig:calibration}a--m). Across the eight surrogates and thirteen benchmarks the correlation between the loop-mean held-out LF calibration error and attainment has no consistent sign and exceeds $|r| = 0.5$ only on Matbench-gap and ExptGap-PBE ($r = -0.67$ and $-0.90$), where the three GP surrogates are both the worst-calibrated LF models (calibration error $0.15$--$0.36$ against $0.08$--$0.12$ for the transfer-learning surrogates) and the weakest optimizers; on COFs, where every surrogate attains $0.90$--$0.93$, the small attainment range limits interpretation of the correlation ($r = -0.48$). Good calibration does not mark the best optimizers either: the baseline MFGP has the lowest LF calibration error on seven of the thirteen benchmarks yet ranks in the lower half of the eight surrogates by attainment on seven of the nine chemistry and materials pools, whereas the deep-kernel GP, the worst-calibrated on eight benchmarks, is among the best optimizers on the Branin functions. ECE is averaged over the refits recorded in each source run, whose horizon can differ from the attainment budget. The held-out LF calibration error is averaged over 34--40 seeds per cell; 11 of the 104 cells have fewer than 40 (the sparse variational MFGP on Branin-Fav and Branin-Unfav, the baseline MFGP on FreeSolv, and the baseline MFGP and deep-kernel GP on the four large materials pools, for which not every run records the calibration error). For TL models this assesses the separate LF BLR head, not the HF head driving acquisition.
 
 
 
@@ -376,9 +376,12 @@ Elastic-MatterSim & 0.87 & 0.87 & 0.87 & -- \\
 \scriptsize
 \caption{Head-path ablation of Frozen-representation transfer on the nine chemistry and materials pools (mean attainment over 40 seeds at $B = 30$; targets and window as in Fig.~\ref{fig:final_regret}). The head predicts $\mu^{(H)} = g^{(L)} + w^{\top}[\,g^{(L)}, \varphi^{(L)}, 1\,]$: `offset' is the additive $g^{(L)}$ term, `input' is the $g^{(L)}$ regression column, and `removed' zeroes both. (1) Learned features, offset and input (the reported head). (2) Learned features, offset only. (3) Learned features, input only. (4) Learned features, $g^{(L)}$ removed from the head. (5) Random features (an untrained network of the same architecture), $g^{(L)}$ as offset and input. (6) Random features, $g^{(L)}$ removed. Columns (1) and (5) are the Learned and Random-features configurations of Supplementary Table~\ref{supptab:feature_ablation}.}
 \label{supptab:head_path}
+\setlength{\tabcolsep}{3pt}%
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
-Pool & (1) Learned, offset and input & (2) Learned, offset only & (3) Learned, input only & (4) Learned, removed & (5) Random, offset and input & (6) Random, removed \\
+ & \multicolumn{4}{c}{Learned features} & \multicolumn{2}{c}{Random features} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-7}
+Pool & (1) offset + input & (2) offset only & (3) input only & (4) removed & (5) offset + input & (6) removed \\
 \midrule
 COFs & 0.92 & 0.92 & 0.90 & 0.69 & 0.92 & 0.63 \\
 FreeSolv & 0.93 & 0.94 & 0.90 & 0.70 & 0.93 & 0.51 \\
@@ -396,13 +399,14 @@ Elastic-MatterSim & 0.87 & 0.88 & 0.78 & 0.30 & 0.88 & 0.15 \\
 \begin{table}[p]
 \centering
 \scriptsize
-\caption{HF-only baselines and the multi-fidelity surrogates on the thirteen benchmarks (mean over 40 seeds). SF-GP EI: a single-fidelity GP fitted to the HF observations only and driven by expected improvement; Random HF: uniformly random HF queries; both start from the same two initial HF points as the multi-fidelity runs and spend the whole budget on HF evaluations$^{b}$. The baseline MFGP and the transfer-learning surrogate with the highest attainment on each pool (abbreviation in parentheses) are the runs of Fig.~\ref{fig:final_regret}. Attainment is computed over each arm's own window, from the end of its own initial design to $B$$^{a}$; final regret is the best HF regret at $B$, in each pool's objective units (GPa on the elastic-modulus pools). Exact-optimum counts are given in footnote $c$.}
+\caption{HF-only baselines and the multi-fidelity surrogates on the thirteen benchmarks (mean over 40 seeds). SF-GP EI: a single-fidelity GP fitted to the HF observations only and driven by expected improvement; Random HF: uniformly random HF queries; both start from the same two initial HF points as the multi-fidelity runs and spend the whole budget on HF evaluations$^{b}$. MFGP, the baseline MFGP, and best TL, the transfer-learning surrogate with the highest attainment on each pool (abbreviation in parentheses), are the runs of Fig.~\ref{fig:final_regret}. Attainment is computed over each arm's own window, from the end of its own initial design to $B$$^{a}$; final regret is the best HF regret at $B$, in each pool's objective units (GPa on the elastic-modulus pools). Exact-optimum counts are given in footnote $c$.}
 \label{supptab:hf_only_baselines}
+\setlength{\tabcolsep}{3.2pt}%
 \begin{tabular}{@{}lc cccc cccc@{}}
 \toprule
 & & \multicolumn{4}{c}{Attainment} & \multicolumn{4}{c}{Final regret at $B$} \\
 \cmidrule(lr){3-6}\cmidrule(lr){7-10}
-Pool & $B$ & SF-GP EI & Random HF & Baseline MFGP & best TL & SF-GP EI & Random HF & Baseline MFGP & best TL \\
+Pool & $B$ & SF-GP EI & Random HF & MFGP & best TL & SF-GP EI & Random HF & MFGP & best TL \\
 \midrule
 Branin-Fav & 50 & 0.84 & 0.39 & 0.91 & 0.69 (E2E) & 0.00 & 0.97 & 0.02 & 0.10 (E2E) \\
 Branin-Unfav & 50 & 0.86 & 0.35 & 0.76 & 0.36 (E2E) & 0.00 & 0.91 & 0.05 & 1.23 (E2E) \\
@@ -430,11 +434,11 @@ $^{c}$Seeds (of 40) whose regret reached exactly zero within the window: HOPV15,
 \begin{table}[p]
 \centering
 \scriptsize
-\caption{Pick-log summary on HOPV15 (40 seeds, budget 30; mid-budget, 15 HF-equivalent units). LF-top-ranked candidate: the candidate ranked first by the LF proxy, whose HF regret is $3.90$. Columns: share of seeds whose final regret equals that of the LF-top-ranked candidate; share of seeds whose best-so-far regret still improved after mid-budget; seeds (of 40) reaching exactly zero regret by $B = 30$; share of second-half HF picks that had already been evaluated at LF$^{a}$; mean final regret at $B = 30$.}
+\caption{Pick-log summary on HOPV15 (40 seeds, budget 30; mid-budget, 15 HF-equivalent units). LF-top-ranked candidate: the candidate ranked first by the LF proxy, whose HF regret is $3.90$. Final at LF top: share of seeds whose final regret equals that of the LF-top-ranked candidate; Improved after 15: share of seeds whose best-so-far regret still improved after mid-budget; Reached zero: seeds (of 40) reaching exactly zero regret by $B = 30$; Promoted: share of second-half HF picks that had already been evaluated at LF$^{a}$; Final regret: mean final regret at $B = 30$.}
 \label{supptab:hopv15_picklog}
 \begin{tabular}{@{}lccccc@{}}
 \toprule
-Surrogate & Final = LF-argmin & Improved after half & Reached zero & Promoted 2nd half & Mean final regret \\
+Surrogate & Final at LF top & Improved after 15 & Reached zero & Promoted & Final regret \\
 \midrule
 Baseline MFGP & 0.45 & 0.30 & 14/40 & 1.00 & 2.31 \\
 Sparse variational MFGP & 0.50 & 0.38 & 3/40 & 1.00 & 3.32 \\
@@ -450,12 +454,16 @@ Domain Adaptation (MMD) & 0.15 & 0.55 & 22/40 & 1.00 & 1.47 \\
 {\scriptsize $^{a}$Second-half picks are the HF queries issued after 15 HF-equivalent units; a pick is promoted when its candidate had already been queried at LF earlier in the same run.}
 \end{table}
 
+\suppnote{Surrogate-free LF screen and screening regimes}{suppnote:screen}
+
+The surrogate-free screen of Fig.~\ref{fig:topk}a,b ranks the candidate pool by the LF value and evaluates the single top-ranked candidate at HF; its screening regret is $f_H(\arg\min f_L) - \min f_H$ in the pool's objective units, with ties resolved by first index. It is a reference for whether the LF proxy alone identifies a good candidate, not a budget-matched optimization baseline. The benchmarks are split descriptively at a screening regret of $0.3$ (Regime~A at or below, Regime~B above); this is not a common accuracy tolerance across tasks. In Regime~A, represented by Park-Fav and polarizability, the top-1\% overlap between the LF and HF rankings is approximately $1$ and the screening regret is no greater than $0.09$, so the screen already identifies a near-optimal candidate. In Regime~B a high global LF--HF correlation conceals poor agreement among the top-ranked candidates: COFs has a Spearman rank correlation of $0.998$ but a screening regret of $4.52$, and although COFs and polarizability both have $R^2 \ge 0.96$ their screening outcomes differ. HOPV15 and Matbench-gap fall in Regime~B with screening regrets of $3.90$ and $0.91$, as do the four larger materials pools: on ExptGap-PBE the screen misses the optimum by $1.15$~eV (the first indexed HF optimum sits at LF rank $1{,}033$ of $3{,}508$), and on the three elastic-modulus pools the screening regret is $384$~GPa with the CHGNet source and $369$~GPa with SevenNet ($74\%$ and $97\%$ of the respective HF ranges) but $3$~GPa with MatterSim ($0.6\%$ of the range, the HF optimum at LF rank 2), so these three related pools span the whole range from a useless to a nearly sufficient screen. The best transfer-learning surrogates reach similarly low regret where the screen is near-optimal and improve on it where the LF ranking is less useful; on COFs every surrogate reaches zero regret within the budget (Fig.~\ref{fig:regret_trajectory}e).
+
 \suppnote{Computational cost: absolute FLOPs and compute ranking}{suppnote:computational_cost}
 
 Fig.~\ref{fig:scaling_law} establishes how surrogate compute scales with problem size;
 here we report the absolute cost that underlies those laws. Each profile uses the median over seeds 42--43 at training-set fractions $0.1$, $0.3$, $0.5$, $0.7$ and $1.0$. The total floating-point operations (FLOPs) of the
 MFBO loop (one surrogate fit plus one pool-wide prediction per iteration,
-interpolated from five profiled training-set sizes and summed over the loop) are shown per surrogate and benchmark, profiled for the surrogates of Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory} (BLR head included): the sparse variational and deep-kernel GPs cost up to $22\times$ and $15\times$ the cheapest transfer-learning surrogate and the baseline MFGP up to $5.6\times$, whereas on Park-Unfav, polarizability and HOPV15 the baseline MFGP is the cheapest surrogate of all. The cheapest transfer-learning surrogate on every benchmark is Pretrain-then-Joint, and the average compute rank over the nine benchmarks (lower is cheaper) is Pretrain-then-Joint $1.3$, Soft Parameter Sharing $2.3$, Domain Adaptation $3.3$, Frozen-representation transfer and the baseline MFGP $4.3$, End-to-End Joint Training $5.3$, the deep-kernel GP $7.0$ and the sparse variational MFGP $8.0$. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20.
+interpolated from five profiled training-set sizes and summed over the loop) are shown per surrogate and benchmark, profiled for the surrogates of Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory} (BLR head included): the sparse variational and deep-kernel GPs cost up to $22\times$ and $15\times$ the cheapest transfer-learning surrogate and the baseline MFGP up to $5.6\times$, whereas on Park-Unfav, polarizability and HOPV15 the baseline MFGP is the cheapest surrogate of all. The cheapest transfer-learning surrogate on every benchmark is Pretrain-then-Joint, and the average compute rank over the nine benchmarks (lower is cheaper) is Pretrain-then-Joint $1.3$, Soft Parameter Sharing $2.3$, Domain Adaptation $3.3$, Frozen-representation transfer and the baseline MFGP $4.3$, End-to-End Joint $5.3$, the deep-kernel GP $7.0$ and the sparse variational MFGP $8.0$. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20.
 
 \begin{figure*}[t]
 \centering
