@@ -3,8 +3,8 @@
   "conditions": [
    "MFGP EI",
    "MFGP greedy",
-   "E2E greedy",
-   "E2E EI"
+   "TL-E2E greedy",
+   "TL-E2E EI"
   ],
   "values": {
    "Branin-Fav|MFGP EI": [
@@ -17,12 +17,12 @@
     0.0067,
     40
    ],
-   "Branin-Fav|E2E greedy": [
+   "Branin-Fav|TL-E2E greedy": [
     0.6878,
     0.0331,
     40
    ],
-   "Branin-Fav|E2E EI": [
+   "Branin-Fav|TL-E2E EI": [
     0.651,
     0.0291,
     40
@@ -37,12 +37,12 @@
     0.0167,
     40
    ],
-   "Branin-Unfav|E2E greedy": [
+   "Branin-Unfav|TL-E2E greedy": [
     0.3578,
     0.0508,
     40
    ],
-   "Branin-Unfav|E2E EI": [
+   "Branin-Unfav|TL-E2E EI": [
     0.3652,
     0.0521,
     40
@@ -57,12 +57,12 @@
     0.0192,
     40
    ],
-   "Park-Fav|E2E greedy": [
+   "Park-Fav|TL-E2E greedy": [
     0.836,
     0.015,
     40
    ],
-   "Park-Fav|E2E EI": [
+   "Park-Fav|TL-E2E EI": [
     0.8352,
     0.0143,
     40
@@ -77,12 +77,12 @@
     0.0208,
     40
    ],
-   "Park-Unfav|E2E greedy": [
+   "Park-Unfav|TL-E2E greedy": [
     0.8599,
     0.0177,
     40
    ],
-   "Park-Unfav|E2E EI": [
+   "Park-Unfav|TL-E2E EI": [
     0.8613,
     0.0175,
     40
@@ -97,12 +97,12 @@
     0.0079,
     40
    ],
-   "COFs|E2E greedy": [
+   "COFs|TL-E2E greedy": [
     0.9199,
     0.0061,
     40
    ],
-   "COFs|E2E EI": [
+   "COFs|TL-E2E EI": [
     0.9176,
     0.0055,
     40
@@ -117,12 +117,12 @@
     0.0045,
     40
    ],
-   "FreeSolv|E2E greedy": [
+   "FreeSolv|TL-E2E greedy": [
     0.9368,
     0.0047,
     40
    ],
-   "FreeSolv|E2E EI": [
+   "FreeSolv|TL-E2E EI": [
     0.9368,
     0.0047,
     40
@@ -137,12 +137,12 @@
     0.0131,
     40
    ],
-   "Polarizability|E2E greedy": [
+   "Polarizability|TL-E2E greedy": [
     0.9626,
     0.0054,
     40
    ],
-   "Polarizability|E2E EI": [
+   "Polarizability|TL-E2E EI": [
     0.9626,
     0.0054,
     40
@@ -157,12 +157,12 @@
     0.0592,
     40
    ],
-   "HOPV15|E2E greedy": [
+   "HOPV15|TL-E2E greedy": [
     0.3321,
     0.0541,
     40
    ],
-   "HOPV15|E2E EI": [
+   "HOPV15|TL-E2E EI": [
     0.3991,
     0.0522,
     40
@@ -177,12 +177,12 @@
     0.0309,
     40
    ],
-   "Matbench-Gap|E2E greedy": [
+   "Matbench-Gap|TL-E2E greedy": [
     0.2875,
     0.0372,
     40
    ],
-   "Matbench-Gap|E2E EI": [
+   "Matbench-Gap|TL-E2E EI": [
     0.2875,
     0.0378,
     40
@@ -190,11 +190,11 @@
   },
   "delta_rows": [
    "MFGP",
-   "Frozen",
-   "PtJ",
-   "E2E",
-   "SPS",
-   "MMD"
+   "TL-base",
+   "TL-PtJ",
+   "TL-E2E",
+   "TL-SPS",
+   "TL-MMD"
   ],
   "delta": [
    [
@@ -590,392 +590,392 @@
   "coverage": {
    "Greedy": {
     "Branin-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Branin-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "COFs": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "FreeSolv": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Polarizability": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "HOPV15": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Matbench-Gap": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     }
    },
    "EI": {
     "Branin-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Branin-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "COFs": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "FreeSolv": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Polarizability": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "HOPV15": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Matbench-Gap": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     }
    },
    "PI": {
     "Branin-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Branin-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "COFs": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "FreeSolv": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Polarizability": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "HOPV15": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Matbench-Gap": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     }
    },
    "GP-UCB": {
     "Branin-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Branin-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "COFs": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "FreeSolv": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Polarizability": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "HOPV15": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Matbench-Gap": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     }
    },
    "MES": {
     "Branin-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Branin-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "COFs": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "FreeSolv": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Polarizability": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "HOPV15": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Matbench-Gap": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     }
    },
    "Thompson": {
     "Branin-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Branin-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Fav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Park-Unfav": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "COFs": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "FreeSolv": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Polarizability": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "HOPV15": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     },
     "Matbench-Gap": {
-     "Frozen": 20,
-     "PtJ": 20,
-     "E2E": 20,
-     "SPS": 20,
-     "MMD": 20
+     "TL-base": 20,
+     "TL-PtJ": 20,
+     "TL-E2E": 20,
+     "TL-SPS": 20,
+     "TL-MMD": 20
     }
    }
   }
