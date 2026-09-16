@@ -26,11 +26,11 @@
 
 \suppnote{Surrogate configurations}{suppnote:mfgp}
 
-Supplementary Table~\ref{supptab:surrogate_config} lists, for each of the eight surrogates, the fitting procedure, training length, learning rates, weight decay, input and target scaling, the representation on which the predictive model acts, the kernel and likelihood or the predictive head, the inducing points and the floating-point precision. The factors held fixed across all eight are the candidate pool and its standardized feature representation (Methods), the budget, cost ratio and fidelity schedule, the initial design (farthest-point sampling from the same seed), the retraining of the surrogate from scratch at every refit and the seeds. The five transfer-learning surrogates further share the backbone (two hidden layers of 64 $\tanh$ units), the optimizer (full-batch Adam, fixed epoch budgets, no early stopping), the pooled standardization of inputs and targets and the predictive head. The three GP baselines are the off-the-shelf configurations of their libraries (BoTorch 0.10.0, GPyTorch 1.11) and differ from the transfer-learning surrogates, and from one another, in fitting procedure, training length, scaling and precision; these differences are reported here rather than removed.
+Supplementary Table~\ref{supptab:surrogate_config} lists, for each of the eight surrogates, the fitting procedure, training length, learning rates, weight decay, input and target scaling, the representation on which the predictive model acts, the kernel and likelihood or the predictive head, the inducing points and the floating-point precision. The factors held fixed across all eight are the candidate pool and its standardized feature representation (Methods), the budget, cost ratio and fidelity schedule, the initial design (farthest-point sampling from the same seed), the retraining of the surrogate from scratch at every refit and the seeds. The five transfer-learning surrogates further share the backbone (two hidden layers of 64 $\tanh$ units), the optimizer (full-batch Adam, fixed epoch budgets, no early stopping), the pooled standardization of inputs and targets and the predictive head. The three GPs are the off-the-shelf configurations of their libraries (BoTorch 0.10.0, GPyTorch 1.11) and differ from the transfer-learning surrogates, and from one another, in fitting procedure, training length, scaling and precision; these differences are reported here rather than removed.
 
-\subsection{Baseline MFGP}
+\subsection{GP-base}
 
-We use \texttt{SingleTaskMultiFidelityGP} from BoTorch~\citep{balandat2020botorch} 0.10.0, which
+GP-base is the autoregressive multi-fidelity GP (MFGP)~\citep{kennedy2000predicting}, implemented as \texttt{SingleTaskMultiFidelityGP} from BoTorch~\citep{balandat2020botorch} 0.10.0, which
 internally employs a Mat\'{e}rn 5/2 kernel with automatic relevance determination (ARD)
 for the input dimensions and a linear truncated kernel for the fidelity dimension, with the library's default priors: Gamma(3, 6) and Gamma(6, 2) on the lengthscales of the unbiased and biased Mat\'{e}rn components of the fidelity kernel, Gamma(3, 3) on its power, Gamma(2, 0.15) on the output scale and Gamma(1.1, 0.05) on the noise variance, which is constrained to at least $10^{-4}$; the mean is a learned constant. The inputs enter as they are, with the fidelity appended as a 0/1 column, and the targets of both fidelities are standardized together by the \texttt{Standardize} outcome transform; no input transform is applied.
 
@@ -44,9 +44,9 @@ for the input dimensions and a linear truncated kernel for the fidelity dimensio
 Surrogate & Fitting procedure & Training length & Learning rate & Weight decay & Scaling (inputs; targets) & Representation entering the predictive model & Predictive model (kernel and likelihood, or head) & Inducing points; precision \\
 \midrule
 \multicolumn{9}{@{}l}{\emph{Gaussian-process family}} \\
-MFGP & BoTorch \texttt{Single\-Task\-Multi\-Fidelity\-GP}; exact marginal likelihood with the library priors$^{a}$, L-BFGS-B & to convergence & -- & none & none; \texttt{Standard\-ize} on the pooled LF and HF targets & the $d$ inputs and a 0/1 fidelity column & Mat\'{e}rn-5/2 ARD in a linear truncated fidelity kernel; constant mean; Gaussian likelihood (noise $\ge 10^{-4}$); s.d. of the latent function & none (exact); float64 \\
-DKL & GPyTorch \texttt{ExactGP}; exact marginal likelihood, Adam & 500 steps & $10^{-3}$ network; $10^{-2}$ GP parameters & none & none; none & network $d \to 64 \to 64 \to 16$ ($\tanh$), rescaled to $[-1, 1]$; fidelity as task index & RBF ARD over the 16 features $\times$ index kernel (2 levels, rank 1); constant mean; Gaussian likelihood; no priors; s.d. includes the noise & none (exact); float32 \\
-SV-MFGP & GPyTorch \texttt{ApproximateGP}; variational ELBO over the full training set, Adam & 500 steps & $10^{-2}$ & none & none; none & the $d$ inputs; fidelity as task index & RBF ARD $\times$ index kernel (2 levels, rank 1); constant mean; Gaussian likelihood; Cholesky variational distribution; no priors; s.d. includes the noise & $\min(100,$ $N)$; a random subset of the training inputs, learned; float32 \\
+GP-base & BoTorch \texttt{Single\-Task\-Multi\-Fidelity\-GP}; exact marginal likelihood with the library priors$^{a}$, L-BFGS-B & to convergence & -- & none & none; \texttt{Standard\-ize} on the pooled LF and HF targets & the $d$ inputs and a 0/1 fidelity column & Mat\'{e}rn-5/2 ARD in a linear truncated fidelity kernel; constant mean; Gaussian likelihood (noise $\ge 10^{-4}$); s.d. of the latent function & none (exact); float64 \\
+GP-DKL & GPyTorch \texttt{ExactGP}; exact marginal likelihood, Adam & 500 steps & $10^{-3}$ network; $10^{-2}$ GP parameters & none & none; none & network $d \to 64 \to 64 \to 16$ ($\tanh$), rescaled to $[-1, 1]$; fidelity as task index & RBF ARD over the 16 features $\times$ index kernel (2 levels, rank 1); constant mean; Gaussian likelihood; no priors; s.d. includes the noise & none (exact); float32 \\
+GP-SV & GPyTorch \texttt{ApproximateGP}; variational ELBO over the full training set, Adam & 500 steps & $10^{-2}$ & none & none; none & the $d$ inputs; fidelity as task index & RBF ARD $\times$ index kernel (2 levels, rank 1); constant mean; Gaussian likelihood; Cholesky variational distribution; no priors; s.d. includes the noise & $\min(100,$ $N)$; a random subset of the training inputs, learned; float32 \\
 \midrule
 \multicolumn{9}{@{}p{15.54cm}}{\emph{Transfer-learning family: the base surrogate TL-base and the variants TL-PtJ (pretrain-then-joint), TL-E2E (end-to-end joint), TL-SPS (soft parameter sharing) and TL-MMD (domain adaptation, MMD penalty).} All five: backbone LF network $d \to 64 \to 64 \to 1$ ($\tanh$) and a residual network $[x, g^{(L)}(x)] \to 64 \to 64 \to 1$ of the same form, trained in every configuration as an auxiliary loss branch; full-batch Adam on the mean squared error; HF prediction from the BLR head on $[\,g^{(L)}, \varphi^{(L)}, 1\,]$ (Supplementary Note~\ref{suppnote:blr}), LF predictive distribution for calibration from the LF BLR head with $\alpha = \beta = 1$; no inducing points; networks in float32, BLR heads in float64.} \\
 TL-base & both networks from scratch on $0.5\,\mathcal{L}_{\mathrm{LF}} + 0.5\,\mathcal{L}_{\mathrm{HF}}$; the LF prediction entering the residual network is detached, so no HF gradient reaches the LF network & 300 joint & $10^{-3}$ & $10^{-4}$ & pooled; pooled & LF network trained by $\mathcal{L}_{\mathrm{LF}}$ only; HF data enter only through the BLR head$^{b}$ & BLR head on the LF representation & --; float32 \\
@@ -65,13 +65,13 @@ log-likelihood (the posterior density under these priors) with L-BFGS-B via \tex
 from the posterior at the high-fidelity (HF) level $s=1$, whose standard deviation is that of the latent function. The multi-fidelity GP uses this
 single cross-fidelity posterior for acquisition at both fidelity steps: EI with the HF incumbent selects the LF query and the lowest posterior mean selects the HF query (Methods).
 
-\subsection{Deep-kernel GP}
+\subsection{GP-DKL}
 
-The deep-kernel GP is a GPyTorch exact GP whose kernel acts on the output of a feature network with layers of widths 64, 64 and 16 and $\tanh$ hidden activations, rescaled to $[-1, 1]$ by \texttt{ScaleToBounds}; the covariance is an RBF kernel with ARD over the 16 features multiplied by a two-level index kernel of rank 1 that carries the fidelity, with a constant mean and a Gaussian likelihood, all without priors. Feature network, kernel, mean, index kernel and likelihood are optimized jointly on the exact marginal likelihood by 500 full-batch Adam steps (learning rate $10^{-3}$ for the feature network and $10^{-2}$ for the GP parameters) in single precision, without weight decay. Inputs and targets enter as they are, and the predictive distribution includes the learned observation noise.
+GP-DKL, the deep-kernel GP~\citep{wilson2016deep}, is a GPyTorch exact GP whose kernel acts on the output of a feature network with layers of widths 64, 64 and 16 and $\tanh$ hidden activations, rescaled to $[-1, 1]$ by \texttt{ScaleToBounds}; the covariance is an RBF kernel with ARD over the 16 features multiplied by a two-level index kernel of rank 1 that carries the fidelity, with a constant mean and a Gaussian likelihood, all without priors. Feature network, kernel, mean, index kernel and likelihood are optimized jointly on the exact marginal likelihood by 500 full-batch Adam steps (learning rate $10^{-3}$ for the feature network and $10^{-2}$ for the GP parameters) in single precision, without weight decay. Inputs and targets enter as they are, and the predictive distribution includes the learned observation noise.
 
-\subsection{Sparse variational MFGP}
+\subsection{GP-SV}
 
-The sparse variational MFGP is a GPyTorch approximate GP with a Cholesky variational distribution over $\min(100, N)$ inducing points, initialized as a random subset of the $N$ training inputs of both fidelities and optimized together with the hyperparameters; the covariance is an RBF kernel with ARD over the $d$ inputs multiplied by the same two-level index kernel, with a constant mean and a Gaussian likelihood, without priors. All parameters are optimized on the variational evidence lower bound over the full training set (no mini-batching) by 500 Adam steps at learning rate $10^{-2}$ in single precision, without weight decay. The number of inducing points equals the training-set size until it reaches 100 and stays at 100 thereafter. Inputs and targets enter as they are, and the predictive distribution includes the learned observation noise. Repeated fits of this model with the same seed are not bit-identical (Methods).
+GP-SV, the sparse variational MFGP~\citep{titsias2009variational,hensman2013gaussian}, is a GPyTorch approximate GP with a Cholesky variational distribution over $\min(100, N)$ inducing points, initialized as a random subset of the $N$ training inputs of both fidelities and optimized together with the hyperparameters; the covariance is an RBF kernel with ARD over the $d$ inputs multiplied by the same two-level index kernel, with a constant mean and a Gaussian likelihood, without priors. All parameters are optimized on the variational evidence lower bound over the full training set (no mini-batching) by 500 Adam steps at learning rate $10^{-2}$ in single precision, without weight decay. The number of inducing points equals the training-set size until it reaches 100 and stays at 100 thereafter. Inputs and targets enter as they are, and the predictive distribution includes the learned observation noise. Repeated fits of this model with the same seed are not bit-identical (Methods).
 
 
 \suppnote{Uncertainty quantification via Bayesian linear regression}{suppnote:blr}
@@ -267,14 +267,14 @@ five transfer-learning surrogates and nine benchmarks ($5\times 9\times 20$ seed
 acquisition, seeds 42--61). For each acquisition and benchmark we report the fraction of surrogates on
 which it beats the greedy policy and the mean paired difference in attainment: no acquisition raises the mean attainment by more than about $0.07$ ($+0.069$) on any benchmark (Thompson sampling on Branin-Unfav; the next largest gains are probability of improvement on HOPV15, $+0.048$, and on Branin-Fav, $+0.047$), Thompson sampling lowers it by $0.09$ on HOPV15 and $0.14$ on Matbench-gap, and the lower confidence bound and max-value entropy search lower it by $0.03$--$0.11$ on the Branin functions
 (Supplementary Fig.~\ref{suppfig:portfolio}). 
-As a matched control for the surrogate-versus-acquisition question, the baseline MFGP was also run
+As a matched control for the surrogate-versus-acquisition question, GP-base was also run
 with a greedy policy that selects by its posterior mean, all other settings held fixed
 (Supplementary Fig.~\ref{suppfig:acquisition}). Its attainment under the greedy policy was within $0.03$ of that under EI on eight of the nine benchmarks, and on HOPV15 the greedy policy lowered it ($0.23$ against $0.32$) rather than raising it. Conversely, TL-E2E run with EI driven by its BLR predictive standard deviation attained within $0.01$ of its greedy value on seven benchmarks, $0.04$ less on Branin-Fav and $0.07$ more on HOPV15 (Supplementary Fig.~\ref{suppfig:acquisition}a--i); across the five transfer-learning surrogates the sign of the EI effect on HOPV15 depends on the surrogate (Supplementary Fig.~\ref{suppfig:acquisition}j). On COFs, FreeSolv and polarizability no acquisition of the portfolio improved mean attainment over the greedy policy by more than a small margin: when the transfer-learned mean already provides a useful ranking, exploration has little to add.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{paper_figures/supp_acq_matrix.pdf}
-\caption{Surrogate $\times$ acquisition comparison under attainment. \textbf{a--i,} Attainment (the Fig.~\ref{fig:final_regret} rule: the mean over the pool's top 5, 2, 1 and 0.5\% targets of the share of the budget window spent at or below the target) for the baseline MFGP with its default expected-improvement (EI) acquisition and with the greedy policy, and for the TL-E2E surrogate with its default greedy policy and with EI driven by its BLR predictive standard deviation; bars, mean $\pm$ s.e.\ over 40 seeds (42--81; FreeSolv MFGP with EI, $n = 39$, one failed fit). Budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap, evaluated at a budget of 20. \textbf{j,} Attainment with EI minus attainment with the greedy policy, paired per seed and averaged, for the baseline MFGP (40 paired seeds; 39 for FreeSolv) and each of the five transfer-learning surrogates (seeds 42--61); positive values mean that EI attains more.}
+\caption{Surrogate $\times$ acquisition comparison under attainment. \textbf{a--i,} Attainment (the Fig.~\ref{fig:final_regret} rule: the mean over the pool's top 5, 2, 1 and 0.5\% targets of the share of the budget window spent at or below the target) for GP-base with its default expected-improvement (EI) acquisition and with the greedy policy, and for the TL-E2E surrogate with its default greedy policy and with EI driven by its BLR predictive standard deviation; bars, mean $\pm$ s.e.\ over 40 seeds (42--81; FreeSolv GP-base with EI, $n = 39$, one failed fit). Budgets as in Fig.~\ref{fig:final_regret} except Matbench-gap, evaluated at a budget of 20. \textbf{j,} Attainment with EI minus attainment with the greedy policy, paired per seed and averaged, for GP-base (40 paired seeds; 39 for FreeSolv) and each of the five transfer-learning surrogates (seeds 42--61); positive values mean that EI attains more.}
 \label{suppfig:acquisition}
 \end{figure*}
 
@@ -289,20 +289,20 @@ with a greedy policy that selects by its posterior mean, all other settings held
 \paragraph{Calibration.} For every surrogate we computed the LF expected
 calibration error, negative log-likelihood, and sharpness on held-out candidates and
 related them to the attainment of Fig.~\ref{fig:final_regret}; the resulting correlation is reported in
-the main text (Fig.~\ref{fig:calibration}a--m). Across the eight surrogates and thirteen benchmarks the correlation between the loop-mean held-out LF calibration error and attainment has no consistent sign and exceeds $|r| = 0.5$ only on Matbench-gap and ExptGap-PBE ($r = -0.67$ and $-0.90$), where the three GP surrogates are both the worst-calibrated LF models (calibration error $0.15$--$0.36$ against $0.08$--$0.12$ for the transfer-learning surrogates) and the weakest optimizers; on COFs, where every surrogate attains $0.90$--$0.93$, the small attainment range limits interpretation of the correlation ($r = -0.48$). Good calibration does not mark the best optimizers either: the baseline MFGP has the lowest LF calibration error on seven of the thirteen benchmarks yet ranks in the lower half of the eight surrogates by attainment on seven of the nine chemistry and materials pools, whereas the deep-kernel GP, the worst-calibrated on eight benchmarks, is among the best optimizers on the Branin functions. ECE is averaged over the refits recorded in each source run, whose horizon can differ from the attainment budget. The held-out LF calibration error is averaged over 34--40 seeds per cell; 11 of the 104 cells have fewer than 40 (the sparse variational MFGP on Branin-Fav and Branin-Unfav, the baseline MFGP on FreeSolv, and the baseline MFGP and deep-kernel GP on the four large materials pools, for which not every run records the calibration error). For TL models this assesses the separate LF BLR head, not the HF head driving acquisition.
+the main text (Fig.~\ref{fig:calibration}a--m). Across the eight surrogates and thirteen benchmarks the correlation between the loop-mean held-out LF calibration error and attainment has no consistent sign and exceeds $|r| = 0.5$ only on Matbench-gap and ExptGap-PBE ($r = -0.67$ and $-0.90$), where the three GP surrogates are both the worst-calibrated LF models (calibration error $0.15$--$0.36$ against $0.08$--$0.12$ for the transfer-learning surrogates) and the weakest optimizers; on COFs, where every surrogate attains $0.90$--$0.93$, the small attainment range limits interpretation of the correlation ($r = -0.48$). Good calibration does not mark the best optimizers either: GP-base has the lowest LF calibration error on seven of the thirteen benchmarks yet ranks in the lower half of the eight surrogates by attainment on seven of the nine chemistry and materials pools, whereas GP-DKL, the worst-calibrated on eight benchmarks, is among the best optimizers on the Branin functions. ECE is averaged over the refits recorded in each source run, whose horizon can differ from the attainment budget. The held-out LF calibration error is averaged over 34--40 seeds per cell; 11 of the 104 cells have fewer than 40 (GP-SV on Branin-Fav and Branin-Unfav, GP-base on FreeSolv, and GP-base and GP-DKL on the four large materials pools, for which not every run records the calibration error). For TL models this assesses the separate LF BLR head, not the HF head driving acquisition.
 
 
 
 
 
 
-\suppnote{Feature ablation, HF-only baselines and pick logs}{suppnote:controls}
+\suppnote{Feature ablation, HF-only controls and pick logs}{suppnote:controls}
 
 \paragraph{Feature and head-path ablations.} Supplementary Tables~\ref{supptab:feature_ablation} and~\ref{supptab:head_path} report the ablations referred to in the main text. All were run on the nine chemistry and materials pools under the protocol of Fig.~\ref{fig:final_regret} (40 seeds, $B = 30$, the same initial designs, fidelity schedule and greedy policy), changing only what the HF head receives. In the feature ablation each of the five transfer-learning surrogates was run with its reported head on $[\,g^{(L)}, \varphi^{(L)}, 1\,]$; with $\varphi^{(L)}$ replaced by the second-hidden-layer features of an untrained network of the same architecture, the scalar LF prediction $g^{(L)}$ retained; and with the head reduced to $[\,g^{(L)}, 1\,]$. A reference network of the same architecture and training length fitted to the HF observations alone, with the same head, the same two initial HF points and the whole budget spent on HF evaluations, is listed once because it contains no LF network. The head-path ablation was run for TL-base: the LF prediction enters the head both as the additive offset of $\mu^{(H)}$ and as a regression column, and each entry point was removed in turn, with learned and with random features.
 
-\paragraph{HF-only baselines.} Supplementary Table~\ref{supptab:hf_only_baselines} places the multi-fidelity surrogates of Fig.~\ref{fig:final_regret} next to two HF-only baselines started from the same two initial HF points, a single-fidelity GP with expected improvement and a random HF sampler, both spending the whole budget on HF evaluations (definitions in the table footnotes). Attainment is computed over each arm's own window, so the HF-only arms, whose initial design costs 2 HF-equivalent units, are scored from that point.
+\paragraph{HF-only controls.} Supplementary Table~\ref{supptab:hf_only_baselines} places the multi-fidelity surrogates of Fig.~\ref{fig:final_regret} next to two HF-only controls started from the same two initial HF points, SF-GP, a single-fidelity GP with expected improvement, and a random HF sampler, both spending the whole budget on HF evaluations (definitions in the table footnotes). Attainment is computed over each arm's own window, so the HF-only arms, whose initial design costs 2 HF-equivalent units, are scored from that point.
 
-\paragraph{TL-base against the GPs.} Supplementary Table~\ref{supptab:tlbase_vs_gp} lists, for every benchmark, the attainment of TL-base next to that of the baseline MFGP and of the best-performing GP on that benchmark, with the differences quoted in the main text.
+\paragraph{TL-base against the GPs.} Supplementary Table~\ref{supptab:tlbase_vs_gp} lists, for every benchmark, the attainment of TL-base next to that of GP-base and of the best-performing GP on that benchmark, with the differences quoted in the main text.
 
 \paragraph{Pick logs.} Supplementary Table~\ref{supptab:hopv15_picklog} summarizes the HF pick logs of the HOPV15 runs of Fig.~\ref{fig:regret_trajectory}h. For each surrogate it gives the share of seeds whose final regret equals that of the candidate ranked first by the LF proxy, the share of seeds whose best-so-far regret still improved after 15 HF-equivalent units, the number of seeds reaching zero regret, the share of second-half HF picks whose candidate had already been evaluated at LF, and the mean final regret.
 
@@ -401,14 +401,16 @@ Elastic-MatterSim & 0.87 & 0.88 & 0.78 & 0.30 & 0.88 & 0.15 \\
 \begin{table}[p]
 \centering
 \scriptsize
-\caption{HF-only baselines and the multi-fidelity surrogates on the thirteen benchmarks (mean over 40 seeds). SF-GP EI: a single-fidelity GP fitted to the HF observations only and driven by expected improvement; Random HF: uniformly random HF queries; both start from the same two initial HF points as the multi-fidelity runs and spend the whole budget on HF evaluations$^{b}$. MFGP, the baseline MFGP, and TL-base, the base transfer-learning surrogate, are the runs of Fig.~\ref{fig:final_regret}. Attainment is computed over each arm's own window, from the end of its own initial design to $B$$^{a}$; final regret is the best HF regret at $B$, in each pool's objective units (GPa on the elastic-modulus pools). Exact-optimum counts are given in footnote $c$.}
+\caption{HF-only controls and the multi-fidelity surrogates on the thirteen benchmarks (mean over 40 seeds). SF-GP EI: a single-fidelity GP fitted to the HF observations only and driven by expected improvement; Random HF: uniformly random HF queries; both start from the same two initial HF points as the multi-fidelity runs and spend the whole budget on HF evaluations$^{b}$. GP-base and TL-base are the multi-fidelity surrogates of Fig.~\ref{fig:final_regret}. Attainment is computed over each arm's own window, from the end of its own initial design to $B$$^{a}$; final regret is the best HF regret at $B$, in each pool's objective units (GPa on the elastic-modulus pools). Exact-optimum counts are given in footnote $c$.}
 \label{supptab:hf_only_baselines}
 \setlength{\tabcolsep}{3.2pt}%
 \begin{tabular}{@{}lc cccc cccc@{}}
 \toprule
 & & \multicolumn{4}{c}{Attainment} & \multicolumn{4}{c}{Final regret at $B$} \\
 \cmidrule(lr){3-6}\cmidrule(lr){7-10}
-Pool & $B$ & SF-GP EI & Random HF & MFGP & TL-base & SF-GP EI & Random HF & MFGP & TL-base \\
+& & \multicolumn{2}{c}{HF-only controls} & \multicolumn{2}{c}{Multi-fidelity} & \multicolumn{2}{c}{HF-only controls} & \multicolumn{2}{c}{Multi-fidelity} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+Pool & $B$ & SF-GP EI & Random HF & GP-base & TL-base & SF-GP EI & Random HF & GP-base & TL-base \\
 \midrule
 Branin-Fav & 50 & 0.84 & 0.39 & 0.91 & 0.59 & 0.00 & 0.97 & 0.02 & 0.13 \\
 Branin-Unfav & 50 & 0.86 & 0.35 & 0.76 & 0.35 & 0.00 & 0.91 & 0.05 & 1.16 \\
@@ -429,35 +431,35 @@ Elastic-MatterSim & 30 & 0.21 & 0.25 & 0.76 & 0.87 & 371 & 360 & 250 & 244 \\
 {\scriptsize
 $^{a}$Windows: $B = 50$ on the Branin functions, $10$ on the Park functions and $30$ on the chemistry and materials pools, except FreeSolv, evaluated at $50$; the Park and FreeSolv windows therefore differ from those of Fig.~\ref{fig:final_regret}. The HF-only arms start their window at 2 HF-equivalent units (two farthest-point-sampled HF points), the multi-fidelity arms at the end of their LF-inclusive initial design (3 to 4.5 units). On polarizability the five transfer-learning surrogates have identical attainment and final regret.
 $^{b}$SF-GP EI is a BoTorch \texttt{SingleTaskGP} (Mat\'{e}rn-5/2 ARD kernel, standardized targets, library defaults) refitted to all HF observations at every step, with the next HF query chosen by expected improvement over the pool; Random HF follows the same protocol with the HF query drawn uniformly at random from the unevaluated candidates. Neither arm queries the LF source.
-$^{c}$Seeds (of 40) whose regret reached exactly zero within the window: HOPV15, Random HF 5, SF-GP EI 7, TL-base 25; Matbench-gap, SF-GP EI 11, Random HF 4, baseline MFGP 6, sparse variational MFGP 5, deep-kernel GP 9, TL-base 10, TL-PtJ 8, TL-E2E 9, TL-SPS 6, TL-MMD 1.
+$^{c}$Seeds (of 40) whose regret reached exactly zero within the window: HOPV15, Random HF 5, SF-GP EI 7, TL-base 25; Matbench-gap, SF-GP EI 11, Random HF 4, GP-base 6, GP-SV 5, GP-DKL 9, TL-base 10, TL-PtJ 8, TL-E2E 9, TL-SPS 6, TL-MMD 1.
 }
 \end{table}
 
 \begin{table}[p]
 \centering
 \scriptsize
-\caption{TL-base against the baseline MFGP and against the best-performing GP on the thirteen benchmarks. Attainment as in Fig.~\ref{fig:final_regret} (mean $\pm$ s.e.\ over 40 seeds at the budgets of Fig.~\ref{fig:final_regret}; 36 and 39 seeds for the sparse variational MFGP on Branin-Fav and Branin-Unfav). Best-performing GP: the Gaussian-process surrogate with the highest mean attainment on that pool. $\Delta$: TL-base minus the GP named in the preceding columns. Abbreviations as in Fig.~\ref{fig:final_regret}.}
+\caption{TL-base against GP-base and against the best-performing GP on the thirteen benchmarks. Attainment as in Fig.~\ref{fig:final_regret} (mean $\pm$ s.e.\ over 40 seeds at the budgets of Fig.~\ref{fig:final_regret}; 36 and 39 seeds for GP-SV on Branin-Fav and Branin-Unfav). Best-performing GP: the Gaussian-process surrogate with the highest mean attainment on that pool. $\Delta$: TL-base minus the GP named in the preceding columns. Abbreviations as in Fig.~\ref{fig:final_regret}.}
 \label{supptab:tlbase_vs_gp}
 \setlength{\tabcolsep}{4pt}%
 \begin{tabular}{@{}l ccc lcc@{}}
 \toprule
 & & & & \multicolumn{3}{c}{Best-performing GP} \\
 \cmidrule(lr){5-7}
-Pool & TL-base & MFGP & $\Delta$ & Surrogate & Attainment & $\Delta$ \\
+Pool & TL-base & GP-base & $\Delta$ & Surrogate & Attainment & $\Delta$ \\
 \midrule
-Branin-Fav & 0.586 $\pm$ 0.039 & 0.912 $\pm$ 0.008 & $-0.326$ & DKL & 0.913 $\pm$ 0.007 & $-0.327$ \\
-Branin-Unfav & 0.348 $\pm$ 0.049 & 0.756 $\pm$ 0.023 & $-0.408$ & MFGP & 0.756 $\pm$ 0.023 & $-0.408$ \\
-Park-Fav & 0.737 $\pm$ 0.022 & 0.615 $\pm$ 0.018 & $+0.122$ & DKL & 0.854 $\pm$ 0.010 & $-0.117$ \\
-Park-Unfav & 0.855 $\pm$ 0.019 & 0.774 $\pm$ 0.024 & $+0.081$ & SV-MFGP & 0.888 $\pm$ 0.012 & $-0.032$ \\
-COFs & 0.923 $\pm$ 0.006 & 0.902 $\pm$ 0.008 & $+0.021$ & SV-MFGP & 0.923 $\pm$ 0.006 & $0.000$ \\
-FreeSolv & 0.934 $\pm$ 0.005 & 0.938 $\pm$ 0.005 & $-0.004$ & MFGP & 0.938 $\pm$ 0.005 & $-0.004$ \\
-Polarizability & 0.963 $\pm$ 0.005 & 0.954 $\pm$ 0.011 & $+0.009$ & MFGP & 0.954 $\pm$ 0.011 & $+0.009$ \\
-HOPV15 & 0.376 $\pm$ 0.056 & 0.317 $\pm$ 0.063 & $+0.058$ & MFGP & 0.317 $\pm$ 0.063 & $+0.058$ \\
-Matbench-gap & 0.409 $\pm$ 0.039 & 0.245 $\pm$ 0.036 & $+0.164$ & SV-MFGP & 0.322 $\pm$ 0.040 & $+0.088$ \\
-ExptGap-PBE & 0.406 $\pm$ 0.027 & 0.333 $\pm$ 0.031 & $+0.073$ & SV-MFGP & 0.337 $\pm$ 0.028 & $+0.068$ \\
-Elastic-CHGNet & 0.622 $\pm$ 0.041 & 0.493 $\pm$ 0.044 & $+0.129$ & DKL & 0.604 $\pm$ 0.042 & $+0.018$ \\
-Elastic-SevenNet & 0.691 $\pm$ 0.037 & 0.568 $\pm$ 0.039 & $+0.123$ & SV-MFGP & 0.725 $\pm$ 0.030 & $-0.034$ \\
-Elastic-MatterSim & 0.872 $\pm$ 0.011 & 0.757 $\pm$ 0.025 & $+0.115$ & SV-MFGP & 0.863 $\pm$ 0.009 & $+0.009$ \\
+Branin-Fav & 0.586 $\pm$ 0.039 & 0.912 $\pm$ 0.008 & $-0.326$ & GP-DKL & 0.913 $\pm$ 0.007 & $-0.327$ \\
+Branin-Unfav & 0.348 $\pm$ 0.049 & 0.756 $\pm$ 0.023 & $-0.408$ & GP-base & 0.756 $\pm$ 0.023 & $-0.408$ \\
+Park-Fav & 0.737 $\pm$ 0.022 & 0.615 $\pm$ 0.018 & $+0.122$ & GP-DKL & 0.854 $\pm$ 0.010 & $-0.117$ \\
+Park-Unfav & 0.855 $\pm$ 0.019 & 0.774 $\pm$ 0.024 & $+0.081$ & GP-SV & 0.888 $\pm$ 0.012 & $-0.032$ \\
+COFs & 0.923 $\pm$ 0.006 & 0.902 $\pm$ 0.008 & $+0.021$ & GP-SV & 0.923 $\pm$ 0.006 & $0.000$ \\
+FreeSolv & 0.934 $\pm$ 0.005 & 0.938 $\pm$ 0.005 & $-0.004$ & GP-base & 0.938 $\pm$ 0.005 & $-0.004$ \\
+Polarizability & 0.963 $\pm$ 0.005 & 0.954 $\pm$ 0.011 & $+0.009$ & GP-base & 0.954 $\pm$ 0.011 & $+0.009$ \\
+HOPV15 & 0.376 $\pm$ 0.056 & 0.317 $\pm$ 0.063 & $+0.058$ & GP-base & 0.317 $\pm$ 0.063 & $+0.058$ \\
+Matbench-gap & 0.409 $\pm$ 0.039 & 0.245 $\pm$ 0.036 & $+0.164$ & GP-SV & 0.322 $\pm$ 0.040 & $+0.088$ \\
+ExptGap-PBE & 0.406 $\pm$ 0.027 & 0.333 $\pm$ 0.031 & $+0.073$ & GP-SV & 0.337 $\pm$ 0.028 & $+0.068$ \\
+Elastic-CHGNet & 0.622 $\pm$ 0.041 & 0.493 $\pm$ 0.044 & $+0.129$ & GP-DKL & 0.604 $\pm$ 0.042 & $+0.018$ \\
+Elastic-SevenNet & 0.691 $\pm$ 0.037 & 0.568 $\pm$ 0.039 & $+0.123$ & GP-SV & 0.725 $\pm$ 0.030 & $-0.034$ \\
+Elastic-MatterSim & 0.872 $\pm$ 0.011 & 0.757 $\pm$ 0.025 & $+0.115$ & GP-SV & 0.863 $\pm$ 0.009 & $+0.009$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -465,26 +467,26 @@ Elastic-MatterSim & 0.872 $\pm$ 0.011 & 0.757 $\pm$ 0.025 & $+0.115$ & SV-MFGP &
 \begin{table}[p]
 \centering
 \scriptsize
-\caption{Cross-benchmark summary of Fig.~1o,p. Mean attainment over benchmarks and mean deficit to the best surrogate of each benchmark (highest mean attainment in the benchmark minus the surrogate's mean attainment), with the s.e.\ over benchmarks, for all thirteen benchmarks and for the nine chemistry and materials benchmarks. Differences between surrogates are identical in the two columns of each block; the deficit re-anchors the mean at the per-benchmark best.}
-\label{supptab:op_summary}
-\setlength{\tabcolsep}{4pt}%
+\caption{Summary of Fig.~\ref{fig:final_regret}o,p. For each surrogate, the mean attainment over the benchmarks and the mean deficit to the best surrogate of each benchmark (the highest mean attainment in that benchmark minus the surrogate's mean attainment; 0, best on every benchmark; lower is better; mean $\pm$ s.e.\ over benchmarks), over the thirteen benchmarks (Fig.~\ref{fig:final_regret}o) and over the nine chemistry and materials benchmarks (Fig.~\ref{fig:final_regret}p). Surrogates sorted by the nine-benchmark deficit. Abbreviations as in Fig.~\ref{fig:final_regret}.}
+\label{supptab:fig1_summary}
 \begin{tabular}{@{}l cc cc@{}}
 \toprule
-& \multicolumn{2}{c}{Thirteen benchmarks} & \multicolumn{2}{c}{Nine chemistry and materials} \\
+& \multicolumn{2}{c}{Thirteen benchmarks} & \multicolumn{2}{c}{Nine chemistry and materials benchmarks} \\
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-Surrogate & Mean attainment & Deficit $\pm$ s.e. & Mean attainment & Deficit $\pm$ s.e. \\
+Surrogate & Mean attainment & Mean deficit & Mean attainment & Mean deficit \\
 \midrule
-DKL & 0.686 & 0.069 $\pm$ 0.016 & 0.631 & 0.070 $\pm$ 0.021 \\
-TL-E2E & 0.673 & 0.081 $\pm$ 0.032 & 0.668 & 0.033 $\pm$ 0.012 \\
 TL-base & 0.671 & 0.084 $\pm$ 0.038 & 0.688 & 0.013 $\pm$ 0.007 \\
-MFGP & 0.659 & 0.096 $\pm$ 0.027 & 0.612 & 0.089 $\pm$ 0.024 \\
-TL-SPS & 0.631 & 0.124 $\pm$ 0.058 & 0.647 & 0.055 $\pm$ 0.032 \\
 TL-MMD & 0.629 & 0.126 $\pm$ 0.060 & 0.678 & 0.023 $\pm$ 0.009 \\
+TL-E2E & 0.673 & 0.081 $\pm$ 0.032 & 0.668 & 0.033 $\pm$ 0.012 \\
 TL-PtJ & 0.625 & 0.130 $\pm$ 0.061 & 0.649 & 0.053 $\pm$ 0.025 \\
-SV-MFGP & 0.623 & 0.131 $\pm$ 0.044 & 0.619 & 0.083 $\pm$ 0.030 \\
+TL-SPS & 0.631 & 0.124 $\pm$ 0.058 & 0.647 & 0.055 $\pm$ 0.032 \\
+GP-DKL & 0.686 & 0.069 $\pm$ 0.016 & 0.631 & 0.070 $\pm$ 0.021 \\
+GP-SV & 0.623 & 0.131 $\pm$ 0.044 & 0.619 & 0.083 $\pm$ 0.030 \\
+GP-base & 0.659 & 0.096 $\pm$ 0.027 & 0.612 & 0.089 $\pm$ 0.024 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
 
 \begin{table}[p]
 \centering
@@ -495,9 +497,9 @@ SV-MFGP & 0.623 & 0.131 $\pm$ 0.044 & 0.619 & 0.083 $\pm$ 0.030 \\
 \toprule
 Surrogate & Final at LF top & Improved after 15 & Reached zero & Promoted & Final regret \\
 \midrule
-Baseline MFGP & 0.45 & 0.30 & 14/40 & 1.00 & 2.31 \\
-Sparse variational MFGP & 0.50 & 0.38 & 3/40 & 1.00 & 3.32 \\
-Deep-kernel GP & 0.15 & 0.47 & 8/40 & 0.84 & 2.61 \\
+GP-base & 0.45 & 0.30 & 14/40 & 1.00 & 2.31 \\
+GP-SV & 0.50 & 0.38 & 3/40 & 1.00 & 3.32 \\
+GP-DKL & 0.15 & 0.47 & 8/40 & 0.84 & 2.61 \\
 TL-base & 0.23 & 0.62 & 25/40 & 0.99 & 1.27 \\
 TL-PtJ & 0.00 & 0.62 & 20/40 & 1.00 & 1.66 \\
 TL-E2E & 0.23 & 0.75 & 27/40 & 1.00 & 1.20 \\
@@ -518,7 +520,7 @@ The surrogate-free screen of Fig.~\ref{fig:topk}a,b ranks the candidate pool by 
 Fig.~\ref{fig:scaling_law} establishes how surrogate compute scales with problem size;
 here we report the absolute cost that underlies those laws. Each profile uses the median over seeds 42--43 at training-set fractions $0.1$, $0.3$, $0.5$, $0.7$ and $1.0$. The total floating-point operations (FLOPs) of the
 MFBO loop (one surrogate fit plus one pool-wide prediction per iteration,
-interpolated from five profiled training-set sizes and summed over the loop) are shown per surrogate and benchmark, profiled for the surrogates of Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory} (BLR head included): the sparse variational and deep-kernel GPs cost up to $22\times$ and $15\times$ the cheapest transfer-learning surrogate and the baseline MFGP up to $5.6\times$, whereas on Park-Unfav, polarizability and HOPV15 the baseline MFGP is the cheapest surrogate of all. The cheapest transfer-learning surrogate on every benchmark is TL-PtJ, and the average compute rank over the nine benchmarks (lower is cheaper) is TL-PtJ $1.3$, TL-SPS $2.3$, TL-MMD $3.3$, TL-base and the baseline MFGP $4.3$, TL-E2E $5.3$, the deep-kernel GP $7.0$ and the sparse variational MFGP $8.0$. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20.
+interpolated from five profiled training-set sizes and summed over the loop) are shown per surrogate and benchmark, profiled for the surrogates of Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory} (BLR head included): GP-SV and GP-DKL cost up to $22\times$ and $15\times$ the cheapest transfer-learning surrogate and GP-base up to $5.6\times$, whereas on Park-Unfav, polarizability and HOPV15 GP-base is the cheapest surrogate of all. The cheapest transfer-learning surrogate on every benchmark is TL-PtJ, and the average compute rank over the nine benchmarks (lower is cheaper) is TL-PtJ $1.3$, TL-SPS $2.3$, TL-MMD $3.3$, TL-base and GP-base $4.3$, TL-E2E $5.3$, GP-DKL $7.0$ and GP-SV $8.0$. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20.
 
 \begin{figure*}[t]
 \centering
@@ -527,13 +529,13 @@ interpolated from five profiled training-set sizes and summed over the loop) are
 \caption{Absolute computational cost across nine of the thirteen benchmarks, in floating-point operations (FLOPs), a hardware-independent measure: total FLOPs of the MFBO
 loop (one surrogate fit plus one pool-wide prediction per iteration, interpolated from the profiled training-set sizes and summed over the loop),
 with the Gaussian-process family in salmon and the transfer-learning surrogates in blue.
-The sparse variational (SV-MFGP) and deep-kernel (DKL) GPs are the most expensive on
+The sparse variational (GP-SV) and deep-kernel (GP-DKL) GPs are the most expensive on
 every benchmark, up to roughly $22\times$ and $15\times$ the fastest transfer-learning surrogate; the
-baseline MFGP scales as $\mathcal{O}(N^3)$ in the number of observations (measured
+GP-base scales as $\mathcal{O}(N^3)$ in the number of observations (measured
 fit-FLOP exponent $k = 3.0$) against $\mathcal{O}(N)$ for the transfer-learning surrogates ($k = 0.9$--$1.0$),
 so the gap widens with the evaluation budget. Panel \textbf{j} summarizes these costs as
 the average compute rank across all nine benchmarks (lower is cheaper), with the colour
-split repeated in a shared legend below the panels. FLOPs are profiled for the surrogates of the main text (BLR head and residual network included), that is, the five transfer-learning surrogates and the three-member GP family; the abbreviations are those of Fig.~\ref{fig:final_regret}. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20. On Park-Unfav, polarizability and HOPV15 the baseline MFGP is the cheapest surrogate of all.}
+split repeated in a shared legend below the panels. FLOPs are profiled for the surrogates of the main text (BLR head and residual network included), that is, the five transfer-learning surrogates and the three-member GP family; the abbreviations are those of Fig.~\ref{fig:final_regret}. FLOPs are accumulated over the budgets of Fig.~\ref{fig:final_regret}, except that FreeSolv is profiled over a budget of 50 and Matbench-gap over 20. On Park-Unfav, polarizability and HOPV15 GP-base is the cheapest surrogate of all.}
 \label{suppfig:computing_time}
 \end{figure*}
 

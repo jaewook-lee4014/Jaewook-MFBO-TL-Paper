@@ -201,7 +201,7 @@ log(f'  TL rows above every GP: o {REPORT["panel_o_TL_above_every_GP"]}/5, p {RE
 
 # panels o/p as published since 2026-09-16: mean deficit to the best surrogate of each benchmark. The score block above is the
 # superseded reference implementation (min-max normalised score), kept as a cross-check of the summary_score csvs.
-ABBR16 = {'MFGP': 'MFGP', 'Sparse MFGP': 'SV-MFGP', 'DKL': 'DKL', 'Frozen-representation transfer': 'TL-base',
+ABBR16 = {'MFGP': 'GP-base', 'Sparse MFGP': 'GP-SV', 'DKL': 'GP-DKL', 'Frozen-representation transfer': 'TL-base',
           'Pretrain-then-Joint': 'TL-PtJ', 'End-to-End Joint': 'TL-E2E', 'Soft Parameter Sharing': 'TL-SPS',
           'Domain Adaptation (MMD)': 'TL-MMD'}                 # the abbreviations printed in Fig. 1 (2026-09-16 label set)
 def deficit_summary(A, pools):
