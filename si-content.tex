@@ -465,6 +465,30 @@ Elastic-MatterSim & 0.872 $\pm$ 0.011 & 0.757 $\pm$ 0.025 & $+0.115$ & SV-MFGP &
 \begin{table}[p]
 \centering
 \scriptsize
+\caption{Cross-benchmark summary of Fig.~1o,p. Mean attainment over benchmarks and mean deficit to the best surrogate of each benchmark (highest mean attainment in the benchmark minus the surrogate's mean attainment), with the s.e.\ over benchmarks, for all thirteen benchmarks and for the nine chemistry and materials benchmarks. Differences between surrogates are identical in the two columns of each block; the deficit re-anchors the mean at the per-benchmark best.}
+\label{supptab:op_summary}
+\setlength{\tabcolsep}{4pt}%
+\begin{tabular}{@{}l cc cc@{}}
+\toprule
+& \multicolumn{2}{c}{Thirteen benchmarks} & \multicolumn{2}{c}{Nine chemistry and materials} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Surrogate & Mean attainment & Deficit $\pm$ s.e. & Mean attainment & Deficit $\pm$ s.e. \\
+\midrule
+DKL & 0.686 & 0.069 $\pm$ 0.016 & 0.631 & 0.070 $\pm$ 0.021 \\
+TL-E2E & 0.673 & 0.081 $\pm$ 0.032 & 0.668 & 0.033 $\pm$ 0.012 \\
+TL-base & 0.671 & 0.084 $\pm$ 0.038 & 0.688 & 0.013 $\pm$ 0.007 \\
+MFGP & 0.659 & 0.096 $\pm$ 0.027 & 0.612 & 0.089 $\pm$ 0.024 \\
+TL-SPS & 0.631 & 0.124 $\pm$ 0.058 & 0.647 & 0.055 $\pm$ 0.032 \\
+TL-MMD & 0.629 & 0.126 $\pm$ 0.060 & 0.678 & 0.023 $\pm$ 0.009 \\
+TL-PtJ & 0.625 & 0.130 $\pm$ 0.061 & 0.649 & 0.053 $\pm$ 0.025 \\
+SV-MFGP & 0.623 & 0.131 $\pm$ 0.044 & 0.619 & 0.083 $\pm$ 0.030 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[p]
+\centering
+\scriptsize
 \caption{Pick-log summary on HOPV15 (40 seeds, budget 30; mid-budget, 15 HF-equivalent units). LF-top-ranked candidate: the candidate ranked first by the LF proxy, whose HF regret is $3.90$. Final at LF top: share of seeds whose final regret equals that of the LF-top-ranked candidate; Improved after 15: share of seeds whose best-so-far regret still improved after mid-budget; Reached zero: seeds (of 40) reaching exactly zero regret by $B = 30$; Promoted: share of second-half HF picks that had already been evaluated at LF$^{a}$; Final regret: mean final regret at $B = 30$.}
 \label{supptab:hopv15_picklog}
 \begin{tabular}{@{}lccccc@{}}

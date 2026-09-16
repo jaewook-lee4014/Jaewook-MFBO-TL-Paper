@@ -181,6 +181,7 @@ chem = BEST[BEST.pool.isin(CHEM9)]
 REPORT['chem9_wins_ties'] = dict(TL=int((chem.verdict == 'TL').sum()), tie=int(chem.verdict.str.startswith('tie').sum()), GP=int((chem.verdict == 'GP').sum()))
 log(f'  chem/materials 9 pools: {REPORT["chem9_wins_ties"]}')
 
+# superseded reference (panels o/p before 2026-09-16): per-benchmark min-max normalised score, 0 = worst and 1 = best surrogate in that benchmark
 def score_summary(A, pools):
     t = A[A.pool.isin(pools)].copy()
     for p in pools:
@@ -188,8 +189,8 @@ def score_summary(A, pools):
     s = t.groupby('model').agg(score=('score', 'mean'), attain=('mean', 'mean'), n=('score', 'size')).reindex(M12).sort_values('score', ascending=False)
     return s
 So = score_summary(A, POOLS13); Sp = score_summary(A, CHEM9)
-log('  panel o (13 pools) normalised score:'); log(So.round(3).to_string())
-log('  panel p (9 chem/mat) normalised score:'); log(Sp.round(3).to_string())
+log('  panel o (13 pools) normalised score (superseded reference):'); log(So.round(3).to_string())
+log('  panel p (9 chem/mat) normalised score (superseded reference):'); log(Sp.round(3).to_string())
 refo = pd.read_csv(f'{R}/figcand2_20260914_5tl/fig1_attainment_summary_score.csv', index_col=0); refp = pd.read_csv(f'{R}/figcand2_20260914_5tl/fig1_attainment_summary_score_chem.csv', index_col=0)
 REPORT['panel_o_max_diff'] = float((So['score'] - refo['mean'].reindex(So.index)).abs().max()); REPORT['panel_p_max_diff'] = float((Sp['score'] - refp['mean'].reindex(Sp.index)).abs().max())
 log(f'  panel o/p max |diff| vs summary csvs: {REPORT["panel_o_max_diff"]:.3g} / {REPORT["panel_p_max_diff"]:.3g}')
@@ -197,6 +198,43 @@ REPORT['panel_o'] = So['score'].round(4).to_dict(); REPORT['panel_p'] = Sp['scor
 gpmax_o = So.loc[GP3, 'score'].max(); REPORT['panel_o_TL_above_every_GP'] = int((So.loc[TL9, 'score'] > gpmax_o).sum())
 gpmax_p = Sp.loc[GP3, 'score'].max(); REPORT['panel_p_TL_above_every_GP'] = int((Sp.loc[TL9, 'score'] > gpmax_p).sum())
 log(f'  TL rows above every GP: o {REPORT["panel_o_TL_above_every_GP"]}/5, p {REPORT["panel_p_TL_above_every_GP"]}/5; TL score range o {So.loc[TL9,"score"].min():.2f}-{So.loc[TL9,"score"].max():.2f}')
+
+# panels o/p as published since 2026-09-16: mean deficit to the best surrogate of each benchmark. The score block above is the
+# superseded reference implementation (min-max normalised score), kept as a cross-check of the summary_score csvs.
+ABBR16 = {'MFGP': 'MFGP', 'Sparse MFGP': 'SV-MFGP', 'DKL': 'DKL', 'Frozen-representation transfer': 'TL-base',
+          'Pretrain-then-Joint': 'TL-PtJ', 'End-to-End Joint': 'TL-E2E', 'Soft Parameter Sharing': 'TL-SPS',
+          'Domain Adaptation (MMD)': 'TL-MMD'}                 # the abbreviations printed in Fig. 1 (2026-09-16 label set)
+def deficit_summary(A, pools):
+    piv = A.pivot(index='model', columns='pool', values='mean').loc[M12, pools]
+    dfc = piv.rsub(piv.max(axis=0), axis=1)                    # per benchmark: highest mean attainment - this surrogate's mean attainment
+    return pd.DataFrame(dict(deficit=dfc.mean(axis=1), se=dfc.std(axis=1, ddof=1) / np.sqrt(dfc.shape[1]),
+                             attain=piv.mean(axis=1), n=dfc.shape[1])).sort_values('deficit')
+Do = deficit_summary(A, POOLS13); Dp = deficit_summary(A, CHEM9)
+Do.index = [ABBR16[m] for m in Do.index]; Dp.index = [ABBR16[m] for m in Dp.index]
+log('  panel o (13 benchmarks) mean deficit to the per-benchmark best:'); log(Do.round(4).to_string())
+log('  panel p (9 chem/mat) mean deficit to the per-benchmark best:'); log(Dp.round(4).to_string())
+rdo = pd.read_csv(f'{R}/figcand2_20260914_5tl/fig1_attainment_summary_deficit.csv', index_col=0)
+rdp = pd.read_csv(f'{R}/figcand2_20260914_5tl/fig1_attainment_summary_deficit_chem.csv', index_col=0)
+def dcmp(S, ref):
+    return max(float((S['deficit'] - ref['mean'].reindex(S.index)).abs().max()), float((S['se'] - ref['se'].reindex(S.index)).abs().max()),
+               float((S['attain'] - ref['raw_mean'].reindex(S.index)).abs().max()))
+REPORT['panel_o_deficit_max_diff'] = dcmp(Do, rdo); REPORT['panel_p_deficit_max_diff'] = dcmp(Dp, rdp)
+log(f'  panel o/p max |diff| vs the deficit summary csvs (mean, s.e., raw mean): {REPORT["panel_o_deficit_max_diff"]:.3g} / '
+    f'{REPORT["panel_p_deficit_max_diff"]:.3g}; both < 1e-9: {max(REPORT["panel_o_deficit_max_diff"], REPORT["panel_p_deficit_max_diff"]) < 1e-9}')
+REPORT['panel_o_deficit'] = Do['deficit'].round(4).to_dict(); REPORT['panel_p_deficit'] = Dp['deficit'].round(4).to_dict()
+REPORT['panel_o_raw_mean'] = Do['attain'].round(4).to_dict(); REPORT['panel_p_raw_mean'] = Dp['attain'].round(4).to_dict()
+REPORT['panel_o_deficit_order'] = list(Do.index); REPORT['panel_p_deficit_order'] = list(Dp.index)
+log('  panel o bar order (smallest deficit first): ' + ' < '.join(Do.index))
+log('  panel p bar order (smallest deficit first): ' + ' < '.join(Dp.index))
+TLA = [ABBR16[m] for m in TL9]; GPA = [ABBR16[m] for m in GP3]
+REPORT['panel_p_all_TL_below_every_GP'] = bool(Dp.loc[TLA, 'deficit'].max() < Dp.loc[GPA, 'deficit'].min())
+log(f'  p (9 chem/mat): all five TL deficits below all three GP deficits: {REPORT["panel_p_all_TL_below_every_GP"]} '
+    f'(TL {Dp.loc[TLA,"deficit"].min():.3f}-{Dp.loc[TLA,"deficit"].max():.3f}, GP {Dp.loc[GPA,"deficit"].min():.3f}-{Dp.loc[GPA,"deficit"].max():.3f})')
+REPORT['panel_o_raw_mean_range'] = float(Do['attain'].max() - Do['attain'].min())
+REPORT['panel_o_raw_mean_range_le_0.07'] = bool(REPORT['panel_o_raw_mean_range'] <= 0.07)
+REPORT['panel_o_smallest_deficit'] = Do.index[0]
+log(f'  o (13 benchmarks): raw mean attainment range {REPORT["panel_o_raw_mean_range"]:.4f} (<= 0.07: {REPORT["panel_o_raw_mean_range_le_0.07"]}); '
+    f'smallest deficit {Do.index[0]} {Do["deficit"].iloc[0]:.3f}; deficit range {Do["deficit"].min():.3f}-{Do["deficit"].max():.3f}')
 
 # ----------------------------------------------------------------------------------------------------------------------- Fig. 2 endpoints
 log('# 3. Fig. 2 trajectories: mean regret at budget points (recomputed)')
