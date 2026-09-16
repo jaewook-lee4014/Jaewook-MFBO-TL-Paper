@@ -1,4 +1,4 @@
-# Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian Optimization (manuscript repository)
+# Transfer-Learning Surrogates for Scalable Multi-Fidelity Bayesian Optimization in Molecular and Materials Discovery (manuscript repository)
 
 Submission to Nature Computational Science. `main.tex` is the main text, `si-content.tex` the Supplementary Information
 (built standalone by `si.tex`); `bash build.sh clean` builds the redline PDFs (`main.pdf`, `si.pdf`: struck = superseded text,
