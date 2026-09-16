@@ -150,7 +150,7 @@ Together, these experiments show that the relative performance of transfer-learn
 \section{Results}\label{sec:results}
 
 \storyline{How to read Fig.~1: attainment rewards reaching good candidates early and keeping them.}
-We evaluated eight surrogates on thirteen benchmarks (Table~\ref{tab:benchmarks}) under one fixed protocol (Methods). Fig.~\ref{fig:final_regret} summarizes each run by its attainment. This measures the fraction of the budget window spent at or below the pool's top 5, 2, 1 and 0.5\% regret thresholds. Values are averaged over the four targets and 40 seeds (Methods). A surrogate therefore scores highly only if it reaches good candidates early and keeps them. Fig.~\ref{fig:regret_trajectory} shows the underlying regret trajectories.
+We evaluated eight surrogates on thirteen benchmarks (Table~\ref{tab:benchmarks}) under a fixed optimization protocol (Methods, Section~\ref{sec:meth-loop}). Fig.~\ref{fig:final_regret} summarizes each run by its attainment. This measures the fraction of the budget window spent at or below the pool's top 5, 2, 1 and 0.5\% regret thresholds. Values are averaged over the four targets and 40 seeds (Methods, Section~\ref{sec:meth-impl}). A surrogate therefore scores highly only if it reaches good candidates early and keeps them. Fig.~\ref{fig:regret_trajectory} shows the underlying regret trajectories.
 
 \subsection{Gaussian-process performance on smooth synthetic functions}\label{sec:res-branin}
 
