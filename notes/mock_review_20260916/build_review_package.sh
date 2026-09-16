@@ -3,11 +3,14 @@
 #
 #   notes/mock_review_20260916/build_review_package.sh [REF] [--pdf-dir DIR --pdf-prefix P] [--out DIR]
 #
-# REF          git ref to review (default: main). Text and figures are exported from the ref,
-#              never from the working tree.
+# REF          git ref to review (default: the newest main commit — `git fetch origin` is run and
+#              origin/main is used when it is ahead of the local main). Text and figures are
+#              exported from the ref, never from the working tree. A package is never reused:
+#              every run exports the ref as it resolves at that moment.
 # --pdf-dir    use existing PDFs <DIR>/<P>main_clean.pdf and <DIR>/<P>si_clean.pdf instead of
 #              building (default: build ./build.sh clean from the exported ref).
-# --out        package directory (default: ~/mock_review/<YYYYMMDD>_<ref>). Must be OUTSIDE the repo.
+# --out        package directory (default: ~/mock_review/<YYYYMMDD>_<short-hash>). Must be OUTSIDE
+#              the repo. The hash in the name keeps packages of different commits apart.
 #
 # The package contains only: manuscript/{main,si}.pdf, {main,si}.txt, comment-stripped tex,
 # references.bib, figures/, criteria/, PROMPT.filled.ko.md, MANIFEST.txt, out/.
@@ -16,7 +19,7 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && git rev-parse --show-toplevel)"
-REF="main"; PDF_DIR=""; PDF_PREFIX=""; OUT=""
+REF=""; PDF_DIR=""; PDF_PREFIX=""; OUT=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --pdf-dir) PDF_DIR="$2"; shift 2;;
@@ -28,12 +31,25 @@ while [[ $# -gt 0 ]]; do
 done
 
 cd "$REPO"
+# ---- default ref: the latest main commit, local or remote ------------------------------------
+if [[ -z "$REF" ]]; then
+  git fetch -q origin main 2>/dev/null || echo "WARNING: git fetch origin failed; using local refs only"
+  REF="main"
+  if git rev-parse -q --verify origin/main >/dev/null \
+     && git merge-base --is-ancestor main origin/main \
+     && [[ "$(git rev-parse main)" != "$(git rev-parse origin/main)" ]]; then
+    REF="origin/main"
+    echo "NOTE: origin/main is ahead of local main ($(git rev-list --count main..origin/main) commit(s)); reviewing origin/main"
+  elif git rev-parse -q --verify origin/main >/dev/null \
+     && ! git merge-base --is-ancestor origin/main main; then
+    echo "WARNING: local main and origin/main have diverged; reviewing local main. Pass a ref to override."
+  fi
+fi
 REF_HASH="$(git rev-parse --verify "${REF}^{commit}")"
 REF_SHORT="${REF_HASH:0:7}"
 REF_DATE="$(git log -1 --format=%cd --date=format:'%Y-%m-%d %H:%M' "$REF_HASH")"
 DATE="$(date +%Y-%m-%d)"
-SAFE_REF="$(echo "$REF" | tr '/' '_')"
-OUT="${OUT:-$HOME/mock_review/$(date +%Y%m%d)_${SAFE_REF}}"
+OUT="${OUT:-$HOME/mock_review/$(date +%Y%m%d)_${REF_SHORT}}"
 
 # ---- isolation checks on the target location -------------------------------------------------
 case "$OUT" in "$REPO"/*) echo "ERROR: package dir must be outside the repo ($REPO)"; exit 1;; esac

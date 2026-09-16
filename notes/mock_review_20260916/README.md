@@ -19,13 +19,14 @@
 ## 사용 순서
 
 ```bash
-# 1. 패키지 만들기 (기본 ref = main, PDF는 ref에서 새로 빌드)
-notes/mock_review_20260916/build_review_package.sh main
-#    기존 PDF를 쓰려면:  ... main --pdf-dir review_ncs_final --pdf-prefix 09_final_
-#    출력 위치:          ~/mock_review/<날짜>_<ref>/
+# 1. 패키지 만들기 (인수 없음 = 최신 main 커밋; PDF는 그 커밋에서 새로 빌드)
+notes/mock_review_20260916/build_review_package.sh
+#    특정 ref를 평가하려면:  ... <ref>
+#    기존 PDF를 쓰려면:      ... --pdf-dir review_ncs_final --pdf-prefix 09_final_
+#    출력 위치:              ~/mock_review/<날짜>_<커밋 해시 7자리>/
 
 # 2. 새 터미널에서, 패키지 디렉터리로 이동해 평가 세션을 시작
-cd ~/mock_review/<날짜>_<ref>
+cd ~/mock_review/<날짜>_<해시>
 claude            # 또는: codex --sandbox workspace-write
 #    PROMPT.filled.ko.md 내용을 그대로 붙여 넣는다.
 #    패키지 밖 경로 읽기 권한 요청이 뜨면 거부한다.
@@ -56,6 +57,10 @@ tex(주석 제거본)는 정확한 인용, 단어 수, 라벨 확인용이다. �
 
 ## 어느 ref를 평가하는가
 
-기본은 `main`(09-15 19:52, 3ee34cf). 진행 중인 브랜치(예: item1-tlbase-20260916)를
-평가하려면 그 ref를 넘긴다. 빌더가 ref에서 PDF를 새로 빌드하므로 루트의 오래된 PDF를
-읽는 사고는 재발하지 않는다.
+인수를 주지 않으면 **실행 시점의 최신 `main` 커밋**이다. 빌더가 `git fetch origin main`을
+먼저 실행하고, `origin/main`이 로컬 `main`보다 앞서 있으면 `origin/main`을 쓴다(둘이
+갈라져 있으면 로컬 `main`을 쓰고 경고한다). 특정 커밋에 고정되지 않으므로, 원고를 고친 뒤
+다시 실행하면 새 패키지가 새 해시 이름으로 만들어진다. 진행 중인 브랜치(예:
+item1-tlbase-20260916)나 과거 커밋을 평가하려면 그 ref를 인수로 넘긴다. 빌더가 ref에서
+PDF를 새로 빌드하므로 루트의 오래된 PDF를 읽는 사고는 재발하지 않는다. 평가한 커밋은
+`MANIFEST.txt`의 `manuscript ref:` 줄에 기록된다.
