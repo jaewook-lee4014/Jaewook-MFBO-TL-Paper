@@ -7,6 +7,13 @@
 \providecommand{\doi}[1]{\url{https://doi.org/#1}}
 \bibcommenthead
 
+\bibitem{kennedy2000predicting}
+\bibinfo{author}{Kennedy, M.~C.} \& \bibinfo{author}{O'Hagan, A.}
+\newblock \bibinfo{title}{Predicting the output from a complex computer code
+  when fast approximations are available}.
+\newblock \emph{\bibinfo{journal}{Biometrika}} \textbf{\bibinfo{volume}{87}},
+  \bibinfo{pages}{1--13} (\bibinfo{year}{2000}).
+
 \bibitem{balandat2020botorch}
 \bibinfo{author}{Balandat, M.} \emph{et~al.}
 \newblock \bibinfo{title}{Botorch: A framework for efficient monte-carlo
@@ -14,6 +21,36 @@
 \newblock \emph{\bibinfo{journal}{Advances in neural information processing
   systems}} \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{21524--21538}
   (\bibinfo{year}{2020}).
+
+\bibitem{wilson2016deep}
+\bibinfo{author}{Wilson, A.~G.}, \bibinfo{author}{Hu, Z.},
+  \bibinfo{author}{Salakhutdinov, R.} \& \bibinfo{author}{Xing, E.~P.}
+\newblock \bibinfo{editor}{Gretton, A.} \& \bibinfo{editor}{Robert, C.~C.}
+  (eds) \emph{\bibinfo{title}{Deep kernel learning}}.
+\newblock (eds \bibinfo{editor}{Gretton, A.} \& \bibinfo{editor}{Robert,
+  C.~C.}) \emph{\bibinfo{booktitle}{Artificial intelligence and statistics}},
+  \bibinfo{pages}{370--378} (\bibinfo{organization}{PMLR},
+  \bibinfo{year}{2016}).
+
+\bibitem{titsias2009variational}
+\bibinfo{author}{Titsias, M.}
+\newblock \bibinfo{editor}{van Dyk, D.} \& \bibinfo{editor}{Welling, M.} (eds)
+  \emph{\bibinfo{title}{Variational learning of inducing variables in sparse
+  {Gaussian} processes}}.
+\newblock (eds \bibinfo{editor}{van Dyk, D.} \& \bibinfo{editor}{Welling, M.})
+  \emph{\bibinfo{booktitle}{Proceedings of the Twelfth International Conference
+  on Artificial Intelligence and Statistics}}, \bibinfo{pages}{567--574}
+  (\bibinfo{organization}{PMLR}, \bibinfo{year}{2009}).
+
+\bibitem{hensman2013gaussian}
+\bibinfo{author}{Hensman, J.}, \bibinfo{author}{Fusi, N.} \&
+  \bibinfo{author}{Lawrence, N.~D.}
+\newblock \bibinfo{editor}{Nicholson, A.} \& \bibinfo{editor}{Smyth, P.} (eds)
+  \emph{\bibinfo{title}{Gaussian processes for big data}}.
+\newblock (eds \bibinfo{editor}{Nicholson, A.} \& \bibinfo{editor}{Smyth, P.})
+  \emph{\bibinfo{booktitle}{Proceedings of the Twenty-Ninth Conference on
+  Uncertainty in Artificial Intelligence}}, \bibinfo{pages}{282--290}
+  (\bibinfo{year}{2013}).
 
 \bibitem{snoek2015scalable}
 \bibinfo{author}{Snoek, J.} \emph{et~al.}
