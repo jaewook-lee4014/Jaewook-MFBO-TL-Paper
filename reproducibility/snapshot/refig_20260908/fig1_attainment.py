@@ -106,7 +106,7 @@ def summary_panel(a, letter, pools, title, subtitle, ylabel, bold=False):
     return M
 ylab = "Mean attainment" if SUMMARY == "mean" else "Normalised score"
 Mo = summary_panel(ax[13], letters[13], POOLS, "All benchmarks", "13 benchmarks", ylab)
-Mp = summary_panel(ax[14], letters[14], CHEM, "Chem & Mat", "9 benchmarks", ylab, bold=False)
+Mp = summary_panel(ax[14], letters[14], CHEM, "Mol & Mat", "9 benchmarks", ylab, bold=False)
 Mo.to_csv(f"{OUT}/fig1_attainment_summary_{SUMMARY}.csv"); Mp.to_csv(f"{OUT}/fig1_attainment_summary_{SUMMARY}_chem.csv")
 # colour legend (7.5 pt = 7.1 pt in print) on its own line below the panels, above the abbreviation footnote
 h = [Patch(facecolor=TL_COLOR, label="Transfer-learning (TL) surrogates"), Patch(facecolor=GP_COLOR, label="Gaussian-process (GP) family")]

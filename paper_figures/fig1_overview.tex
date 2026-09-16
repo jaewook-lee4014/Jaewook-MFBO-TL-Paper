@@ -6,7 +6,7 @@
 %% Counts updated 2026-09-14 to the final data basis (13 benchmarks; 3 GP + 5 TL surrogates: NARGP excluded;
 %% Sequential, Progressive, feature-extraction transfer (Curriculum/KD/Pseudo-labelling) and Adapter dropped, leaving
 %% Frozen-representation transfer, Pretrain-then-Joint, End-to-End Joint, Soft Parameter Sharing and Domain Adaptation
-%% (MMD)) and to the Fig. 1b-p attainment result (TL-base at or above GP-base on all 9 chemistry & materials pools).
+%% (MMD)) and to the Fig. 1b-p attainment result (TL-base at or above GP-base on all 9 molecular & materials pools).
 %% Helvetica, colour-blind-safe blue/orange palette (matches graphical_abstract.tex / Figs 2-4).
 %% Build:  pdflatex fig1_overview.tex  ->  fig1_overview.pdf (auto-cropped)
 \documentclass[border=6pt]{standalone}
@@ -62,7 +62,7 @@
 \node[text=ink, font=\small, draw=pline, line width=0.7pt, rounded corners=3pt, fill=white,
       inner sep=5pt, anchor=north] at (\Ac,\yb-1.30) {candidate pool $\mathcal{X}_{\mathrm{cand}}$};
 \node[text=sub, font=\scriptsize, anchor=north, align=center] at (\Ac,\yb-2.12)
-     {13 benchmarks: 4 synthetic $\cdot$ 9 chemistry \& materials};
+     {13 benchmarks: 4 synthetic $\cdot$ 9 molecular \& materials};
 
 % --- monitor icon (LF) ---
 \pgfmathsetmacro\mx{1.55}\pgfmathsetmacro\my{2.75}
@@ -122,7 +122,7 @@
 % ===================== PANEL C : transfer-learning wins =====================
 \node[panelbox, fit={(\Cl,\ya) (\Cr,\yb)}] (PC) {};
 \node[hdr, anchor=north] at (\Cc,\yb-0.20) {Transfer-learning wins};
-\node[slab, anchor=north] at (\Cc,\yb-0.82) {on chemistry \& materials benchmarks};
+\node[slab, anchor=north] at (\Cc,\yb-0.82) {on molecular \& materials benchmarks};
 
 % ---- zone 1 : better solutions ----
 \node[text=ink, font=\bfseries\small, anchor=north west] at (\Cl+0.35,\yb-1.30) {Better solutions};
@@ -136,7 +136,7 @@
   \node[text=gpbox, font=\footnotesize\bfseries, anchor=west] at (4.28,0.68) {GP};
   \node[text=tlbox, font=\footnotesize\bfseries, anchor=west] at (4.28,0.12) {TL};
 \end{scope}
-\node[text=sub, font=\footnotesize, anchor=north] at (\Cc,2.62) {TL-base $\geq$ GP-base on all 9 chemistry \& materials pools};
+\node[text=sub, font=\footnotesize, anchor=north] at (\Cc,2.62) {TL-base $\geq$ GP-base on all 9 molecular \& materials pools};
 
 % ---- divider ----
 \draw[pline, line width=0.8pt, dashed] (\Cl+0.35,2.2) -- (\Cr-0.35,2.2);
