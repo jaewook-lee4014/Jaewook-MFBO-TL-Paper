@@ -16,51 +16,45 @@
 
 \bibitem{balandat2020botorch}
 \bibinfo{author}{Balandat, M.} \emph{et~al.}
-\newblock \bibinfo{title}{Botorch: A framework for efficient monte-carlo
-  bayesian optimization}.
-\newblock \emph{\bibinfo{journal}{Advances in neural information processing
-  systems}} \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{21524--21538}
+\newblock \bibinfo{title}{{BoTorch}: A framework for efficient {Monte-Carlo}
+  {Bayesian} optimization}.
+\newblock \emph{\bibinfo{journal}{Advances in Neural Information Processing
+  Systems}} \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{21524--21538}
   (\bibinfo{year}{2020}).
 
 \bibitem{wilson2016deep}
 \bibinfo{author}{Wilson, A.~G.}, \bibinfo{author}{Hu, Z.},
   \bibinfo{author}{Salakhutdinov, R.} \& \bibinfo{author}{Xing, E.~P.}
-\newblock \bibinfo{editor}{Gretton, A.} \& \bibinfo{editor}{Robert, C.~C.}
-  (eds) \emph{\bibinfo{title}{Deep kernel learning}}.
-\newblock (eds \bibinfo{editor}{Gretton, A.} \& \bibinfo{editor}{Robert,
-  C.~C.}) \emph{\bibinfo{booktitle}{Artificial intelligence and statistics}},
-  \bibinfo{pages}{370--378} (\bibinfo{organization}{PMLR},
-  \bibinfo{year}{2016}).
+\newblock \bibinfo{title}{Deep kernel learning}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the 19th International
+  Conference on Artificial Intelligence and Statistics, PMLR}}
+  \textbf{\bibinfo{volume}{51}}, \bibinfo{pages}{370--378}
+  (\bibinfo{year}{2016}).
 
 \bibitem{titsias2009variational}
 \bibinfo{author}{Titsias, M.}
-\newblock \bibinfo{editor}{van Dyk, D.} \& \bibinfo{editor}{Welling, M.} (eds)
-  \emph{\bibinfo{title}{Variational learning of inducing variables in sparse
-  {Gaussian} processes}}.
-\newblock (eds \bibinfo{editor}{van Dyk, D.} \& \bibinfo{editor}{Welling, M.})
-  \emph{\bibinfo{booktitle}{Proceedings of the Twelfth International Conference
-  on Artificial Intelligence and Statistics}}, \bibinfo{pages}{567--574}
-  (\bibinfo{organization}{PMLR}, \bibinfo{year}{2009}).
+\newblock \bibinfo{title}{Variational learning of inducing variables in sparse
+  {Gaussian} processes}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the Twelfth International
+  Conference on Artificial Intelligence and Statistics, PMLR}}
+  \textbf{\bibinfo{volume}{5}}, \bibinfo{pages}{567--574}
+  (\bibinfo{year}{2009}).
 
 \bibitem{hensman2013gaussian}
 \bibinfo{author}{Hensman, J.}, \bibinfo{author}{Fusi, N.} \&
   \bibinfo{author}{Lawrence, N.~D.}
-\newblock \bibinfo{editor}{Nicholson, A.} \& \bibinfo{editor}{Smyth, P.} (eds)
-  \emph{\bibinfo{title}{Gaussian processes for big data}}.
-\newblock (eds \bibinfo{editor}{Nicholson, A.} \& \bibinfo{editor}{Smyth, P.})
-  \emph{\bibinfo{booktitle}{Proceedings of the Twenty-Ninth Conference on
-  Uncertainty in Artificial Intelligence}}, \bibinfo{pages}{282--290}
+\newblock \bibinfo{title}{Gaussian processes for big data}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the Twenty-Ninth Conference on
+  Uncertainty in Artificial Intelligence}} \bibinfo{pages}{282--290}
   (\bibinfo{year}{2013}).
 
 \bibitem{snoek2015scalable}
 \bibinfo{author}{Snoek, J.} \emph{et~al.}
-\newblock \bibinfo{editor}{Bach, F.} \& \bibinfo{editor}{Blei, D.} (eds)
-  \emph{\bibinfo{title}{Scalable bayesian optimization using deep neural
-  networks}}.
-\newblock (eds \bibinfo{editor}{Bach, F.} \& \bibinfo{editor}{Blei, D.})
-  \emph{\bibinfo{booktitle}{International conference on machine learning}},
-  \bibinfo{pages}{2171--2180} (\bibinfo{organization}{PMLR},
-  \bibinfo{year}{2015}).
+\newblock \bibinfo{title}{Scalable {Bayesian} optimization using deep neural
+  networks}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the 32nd International
+  Conference on Machine Learning, PMLR}} \textbf{\bibinfo{volume}{37}},
+  \bibinfo{pages}{2171--2180} (\bibinfo{year}{2015}).
 
 \bibitem{sabanza2025best}
 \bibinfo{author}{Sabanza-Gil, V.} \emph{et~al.}
@@ -106,7 +100,7 @@
 
 \bibitem{lopez2016harvard}
 \bibinfo{author}{Lopez, S.~A.} \emph{et~al.}
-\newblock \bibinfo{title}{The harvard organic photovoltaic dataset}.
+\newblock \bibinfo{title}{The {Harvard} organic photovoltaic dataset}.
 \newblock \emph{\bibinfo{journal}{Scientific Data}}
   \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{160086} (\bibinfo{year}{2016}).
 
@@ -159,11 +153,11 @@
   \textbf{\bibinfo{volume}{2}}, \bibinfo{pages}{150009} (\bibinfo{year}{2015}).
 
 \bibitem{matcalc}
-\bibinfo{author}{Ong, S.~P.} \emph{et~al.}
+\bibinfo{author}{Liu, R.} \emph{et~al.}
 \newblock \bibinfo{title}{matcalc: A {Python} library for calculating materials
   properties from the potential energy surface}.
 \newblock
-  \bibinfo{howpublished}{\url{https://github.com/materialsvirtuallab/matcalc}}
+  \bibinfo{howpublished}{\url{https://github.com/materialyzeai/matcalc}}
   (\bibinfo{year}{2024}).
 
 \bibitem{jones1998efficient}
@@ -171,7 +165,7 @@
   \bibinfo{author}{Welch, W.~J.}
 \newblock \bibinfo{title}{Efficient global optimization of expensive black-box
   functions}.
-\newblock \emph{\bibinfo{journal}{Journal of Global optimization}}
+\newblock \emph{\bibinfo{journal}{Journal of Global Optimization}}
   \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{455--492}
   (\bibinfo{year}{1998}).
 
@@ -194,13 +188,11 @@
 
 \bibitem{wang2017max}
 \bibinfo{author}{Wang, Z.} \& \bibinfo{author}{Jegelka, S.}
-\newblock \bibinfo{editor}{Precup, D.} \& \bibinfo{editor}{Teh, Y.~W.} (eds)
-  \emph{\bibinfo{title}{Max-value entropy search for efficient {Bayesian}
-  optimization}}.
-\newblock (eds \bibinfo{editor}{Precup, D.} \& \bibinfo{editor}{Teh, Y.~W.})
-  \emph{\bibinfo{booktitle}{Proceedings of the 34th International Conference on
-  Machine Learning}}, \bibinfo{pages}{3627--3635}
-  (\bibinfo{organization}{PMLR}, \bibinfo{year}{2017}).
+\newblock \bibinfo{title}{Max-value entropy search for efficient {Bayesian}
+  optimization}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the 34th International
+  Conference on Machine Learning, PMLR}} \textbf{\bibinfo{volume}{70}},
+  \bibinfo{pages}{3627--3635} (\bibinfo{year}{2017}).
 
 \bibitem{russo2018tutorial}
 \bibinfo{author}{Russo, D.~J.}, \bibinfo{author}{Van~Roy, B.},
