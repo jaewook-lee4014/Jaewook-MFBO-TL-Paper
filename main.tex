@@ -80,6 +80,10 @@
 %% numbers (no \ref, no hyperlink); keep them in step with si-content.tex by hand.
 %% Define \withSI to build one combined PDF.
 
+%% At most one double-column float at the top of a page, so that Figs. 4 and 5 land on separate pages
+%% instead of stacking on one (2026-09-17).
+\setcounter{dbltopnumber}{1}
+
 \begin{document}
 
 \title[Transfer-Learning Surrogates for Scalable Multi-Fidelity Bayesian
