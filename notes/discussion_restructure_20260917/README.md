@@ -55,3 +55,15 @@ The former closing sentence ("the surrogate ranking requires confirmation in dep
 directly before "Within these limits, we recommend TL-base as the default" and read as self-negation. The paragraph now
 ends on the sentence that anchors the generalization in the nine pools, which is the population the recommendation
 addresses. "err" was replaced by "biased" (more common academic usage).
+
+## Addendum 2 (2026-09-17, later): recommendation paragraph trimmed to two sentences
+
+Removed as repetition or overreach: "It is specific to TL-base, because outcomes depended on the transfer mechanism:
+TL-SPS and TL-PtJ fell below GP-base on HOPV15" (evidence already in Results 2.2; the recommendation names TL-base
+explicitly), "GPs remain preferable for smooth, low-dimensional analytic objectives such as Branin" (stated in
+Results 2.1 and Discussion P1; the recommendation is already scoped to molecular and materials pools), and
+"Surrogate development should first improve the transferred mean, with uncertainty-driven exploration a secondary
+concern" (conflicts with P4's "limited value of exploration is specific to this construction" and generalizes beyond
+the evidence; P3's scoped mainclaim already carries the finding). The closing sentence now pairs the two practical
+properties: near-linear fitting cost (Results 2.6) and adoption without changing the acquisition policy (acquisition
+swaps left the pattern unchanged). Body words: Discussion 731, main text 3,467.
