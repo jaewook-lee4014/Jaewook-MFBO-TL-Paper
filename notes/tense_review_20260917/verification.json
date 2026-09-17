@@ -1,0 +1,26 @@
+[
+  {
+    "file": "main.tex",
+    "scope": "64 recorded tense edits, excluding separately added Methods reference",
+    "preserved": {
+      "numbers": true,
+      "math": true,
+      "references": true,
+      "commands": true,
+      "braces": true
+    },
+    "all_edits_present_in_current_file": true
+  },
+  {
+    "file": "si-content.tex",
+    "scope": "64 recorded tense edits, excluding separately added Methods reference",
+    "preserved": {
+      "numbers": true,
+      "math": true,
+      "references": true,
+      "commands": true,
+      "braces": true
+    },
+    "all_edits_present_in_current_file": true
+  }
+]
