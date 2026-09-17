@@ -9,7 +9,8 @@ cd "$(dirname "$0")"
 PDFLATEX="pdflatex -interaction=nonstopmode -halt-on-error"
 build_pair () {   # $1 = main-text job, $2 = SI job
   write_offset () {  # SI references continue the main-text numbering: offset = entries in $1.bbl
-    [ -f $1.bbl ] && printf '\\def\\SIrefoffset{%s}\n' "$(grep -c '\\bibitem' $1.bbl)" > si_refoffset.tex
+    # explicit if: under set -e a failing "[ -f ] && ..." as the last command aborts the script on a fresh checkout
+    if [ -f $1.bbl ]; then printf '\\def\\SIrefoffset{%s}\n' "$(grep -c '^\\bibitem' $1.bbl)" > si_refoffset.tex; fi
   }
   write_offset $1
   $PDFLATEX $1.tex >/dev/null || true      # first pass: $1.aux for the SI

@@ -1,6 +1,6 @@
 %% Supplementary Information content, shared by
 %%   si.tex   -> standalone SI file for submission (own title page and reference list;
-%%               \ref to main-text figures resolved from main.aux via the xr package), and
+%%               main-text figures, tables and Methods are cited by plain numbers), and
 %%   main.tex -> combined working PDF when built with \def\withSI{1} (see build.sh).
 
 \ifdefined\withSI\section*{Supplementary Information}\fi
@@ -193,7 +193,7 @@ For GP-base, attainment stayed within $0.03$ of EI on eight of the nine benchmar
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{paper_figures/supp_acq_matrix.pdf}
-\caption{Matched-acquisition comparison for GP-base and TL-base. \textbf{a--i,} Attainment under expected improvement (EI, solid bars) and greedy selection (hatched bars) for LF queries. HF queries use greedy selection in every arm. Orange denotes GP-base and blue denotes TL-base. Attainment follows Fig.~1, averaging the share of the budget window spent at or below the pool's top 5, 2, 1 and 0.5\% targets. Bars show mean $\pm$ s.e.\ over 20 seeds (42--61) for both surrogates, using the same seed set for both policies. Budgets match Fig.~1, except Matbench-gap at 20. TL-base values use the same runs as the EI and greedy arms in Supplementary Fig.~\ref{suppfig:portfolio}.}
+\caption{Matched-acquisition comparison for GP-base and TL-base. \textbf{a--i,} Attainment under expected improvement (EI, solid bars) and greedy selection (hatched bars) for LF queries. HF queries use greedy selection in every arm. Orange denotes GP-base and blue denotes TL-base. Attainment follows Fig.~1, averaging the share of the budget window spent at or below the pool's top 5, 2, 1 and 0.5\% targets. Bars show mean $\pm$ s.e.\ over 40 seeds (42--81) for GP-base (39 for FreeSolv under EI) and 20 seeds (42--61) for TL-base, using the same seed set for both policies within each surrogate. Budgets match Fig.~1, except Matbench-gap at 20. TL-base values use the same runs as the EI and greedy arms in Supplementary Fig.~\ref{suppfig:portfolio}.}
 \label{suppfig:acquisition}
 \end{figure*}
 
