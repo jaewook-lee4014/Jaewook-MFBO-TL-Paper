@@ -1,5 +1,5 @@
-%% Standalone Supplementary Information for the NCS submission. Build order matters (cross-references
-%% through xr): see build.sh; si_clean.tex is the wrapper used by ./build.sh clean.
+%% Standalone Supplementary Information for the NCS submission (separate file, so references to
+%% main-text figures/tables are plain numbers): see build.sh; si_clean.tex is the wrapper used by ./build.sh clean.
 \documentclass[pdflatex,sn-nature]{sn-jnl}% single-column Supplementary Information
 
 
@@ -45,13 +45,6 @@
     \global\let\sep\@empty\global\let\@corref\@empty%
   }}%
 \makeatother
-
-\usepackage{xr}
-%% Import only the labels of the other file: natbib's \bibcite entries in its .aux
-%% must not override this document's own citation numbers.
-\makeatletter\let\XR@savedbibcite\bibcite\let\bibcite\@gobbletwo
-\externaldocument{main}
-\let\bibcite\XR@savedbibcite\makeatother
 
 \begin{document}
 

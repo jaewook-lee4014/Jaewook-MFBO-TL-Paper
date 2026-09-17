@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Build the submission PDFs. main.tex and si.tex cross-reference each other's labels
-# through the xr package, so each is compiled twice around the other's .aux.
+# Build the submission PDFs. main.tex and si.tex are independent documents (references across
+# them are plain numbers); build_pair simply runs the usual pdflatex/bibtex passes for both.
 #   ./build.sh            -> main.pdf and si.pdf (redline: struck superseded text, blue replacement text)
 #   ./build.sh clean      -> main_clean.pdf and si_clean.pdf (current text only; wrappers main_clean.tex / si_clean.tex)
 #   ./build.sh combined   -> main_with_si.pdf (single working PDF, SI appended, redline)
