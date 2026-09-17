@@ -38,9 +38,9 @@ assert set(att.model) == set(MODELS), set(att.model) ^ set(MODELS)
 T = ece.merge(att[['benchmark', 'model', 'attainment', 'n_att', 'se']], on=['benchmark', 'model'])
 # ---------------------------------------------------------------- figure (Fig. 1/2 rule set, 2026-09-14)
 LABEL = {'Matbench-Gap': 'Matbench-gap'}
-ABBR = {'MFGP': 'MFGP', 'Sparse MFGP': 'SV-MFGP', 'DKL': 'DKL', 'Frozen-representation transfer': 'Frozen',
-        'Pretrain-then-Joint': 'PtJ', 'End-to-End Joint': 'E2E', 'Domain Adaptation (MMD)': 'MMD',
-        'Soft Parameter Sharing': 'SPS'}
+ABBR = {'MFGP': 'GP-base', 'Sparse MFGP': 'GP-SV', 'DKL': 'GP-DKL', 'Frozen-representation transfer': 'TL-base',
+        'Pretrain-then-Joint': 'TL-PtJ', 'End-to-End Joint': 'TL-E2E', 'Domain Adaptation (MMD)': 'TL-MMD',
+        'Soft Parameter Sharing': 'TL-SPS'}
 # colour = family hue (GP oranges / TL blues of Fig. 2), marker = model; Frozen keeps the colour and marker of the former Stop-Gradient Joint
 STYLE = {'MFGP': ('#b5532e', 'o'), 'Sparse MFGP': ('#f2aa84', 's'), 'DKL': ('#e07b4f', 'D'),
          'Frozen-representation transfer': ('#4e95d9', 'P'), 'Pretrain-then-Joint': ('#0b3d7a', 'D'),
@@ -51,6 +51,19 @@ plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 6.5, 'axes.linew
                      'xtick.major.size': 2, 'ytick.major.size': 2, 'pdf.fonttype': 42, 'ps.fonttype': 42})
 TITLE, TICK, LAB = 6.8, 6, 6.5
 XLAB = 'LF calibration error\n(held-out, loop mean)' if XCOL == 'ece_lf_mean' else 'LF calibration error\n(held-out, final refit)'
+
+def _panel_title(a, letter, label, x, y, fs, letter_fs=None, **kw):
+    """Nature Portfolio panel title (2026-09-17): bold lowercase letter, then the label in regular weight."""
+    lfs = letter_fs if letter_fs is not None else fs + 0.9
+    t = a.text(x, y, letter, transform=a.transAxes, ha="left", va="baseline", fontsize=lfs, fontweight="bold", **kw)
+    fig = a.figure
+    bb = t.get_window_extent(renderer=fig.canvas.get_renderer())
+    w_pt = bb.width * 72.0 / fig.dpi
+    if label:
+        a.annotate(label, xy=(x, y), xycoords="axes fraction", xytext=(w_pt + 0.5 * fs, 0), textcoords="offset points",
+                   ha="left", va="baseline", fontsize=fs, annotation_clip=False, **kw)
+    return t
+
 LETTERS = list(os.environ.get('CAL_LETTERS', 'efghijklmnopq'))
 fig, axes = plt.subplots(3, 5, figsize=(7.2, 5.0)); axes = axes.ravel(); rows = []
 for i, b in enumerate(POOLS):
@@ -66,7 +79,7 @@ for i, b in enumerate(POOLS):
             bbox=dict(boxstyle='round,pad=0.25', facecolor='white', edgecolor='#bbbbbb', linewidth=0.4, alpha=0.9))
     ax.set_ylim(-0.03, 1.03); ax.set_yticks([0, 0.5, 1.0]); ax.set_yticklabels(['0', '0.5', '1'], fontsize=TICK)
     ax.xaxis.set_major_locator(MaxNLocator(3)); ax.tick_params(axis='x', labelsize=TICK, pad=1.5); ax.tick_params(axis='y', labelsize=TICK, pad=1.5)
-    ax.text(0.0, 1.13, f'{LETTERS[i]}  {LABEL.get(b, b)}', transform=ax.transAxes, ha='left', va='bottom', fontsize=TITLE)
+    _panel_title(ax, LETTERS[i], LABEL.get(b, b), 0.0, 1.13, TITLE, letter_fs=8.4)
     ax.text(0.0, 1.02, f'B = {BUDGET[b]}', transform=ax.transAxes, ha='left', va='bottom', fontsize=5.3, color='#555555')
     ax.grid(lw=0.4, alpha=0.35); ax.set_axisbelow(True)
     for sp in ('top', 'right'): ax.spines[sp].set_visible(False)
@@ -80,8 +93,8 @@ axes[13].legend(handles=[_h(m) for m in GP], loc='upper left', fontsize=5.8, fra
 axes[14].legend(handles=[_h(m) for m in TL], loc='upper left', fontsize=5.8, frameon=False, title='TL surrogates', title_fontsize=6.0, labelspacing=0.45, borderaxespad=0, handletextpad=0.5)
 fig.subplots_adjust(left=0.065, right=0.982, top=0.94, bottom=0.13, wspace=0.55, hspace=0.62)
 fig.text(0.5, 0.032, 'Each point is one surrogate: mean attainment ± s.e. over seeds (Fig. 1) against its held-out LF calibration error averaged over the refits of the loop.', ha='center', va='bottom', fontsize=5.0, color='#333333')
-fig.text(0.5, 0.016, 'TL: Frozen = Frozen-representation transfer · PtJ = Pretrain-then-Joint · E2E = End-to-End Joint · SPS = Soft Parameter Sharing · MMD = Domain Adaptation (MMD)', ha='center', va='bottom', fontsize=5.0, color='#333333')
-fig.text(0.5, 0.000, 'GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP', ha='center', va='bottom', fontsize=5.0, color='#333333')
+fig.text(0.5, 0.016, 'TL: TL-base = base transfer-learning surrogate · TL-PtJ = pretrain-then-joint · TL-E2E = end-to-end joint · TL-SPS = soft parameter sharing · TL-MMD = domain adaptation (MMD)', ha='center', va='bottom', fontsize=5.0, color='#333333')
+fig.text(0.5, 0.000, 'GP: GP-base = autoregressive multi-fidelity GP (MFGP) · GP-SV = sparse variational MFGP · GP-DKL = deep-kernel GP', ha='center', va='bottom', fontsize=5.0, color='#333333')
 tag = 'mean' if XCOL == 'ece_lf_mean' else 'final'
 STEM = os.environ.get('CAL_STEM', f'A1_calibration_13_attain_{tag}')
 fig.savefig(OUT / f'{STEM}.pdf'); fig.savefig(OUT / f'{STEM}.png', dpi=110)

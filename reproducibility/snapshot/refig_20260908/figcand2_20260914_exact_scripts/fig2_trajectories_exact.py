@@ -50,6 +50,19 @@ def reg_at(pts, grid):
 
 rows = []
 fig, axes = plt.subplots(3, 5, figsize=(7.2, 5.6)); ax = axes.ravel()          # 5.6 in tall (was 5.0): room for the 7.5 pt legends and the footnote
+
+def _panel_title(a, letter, label, x, y, fs, letter_fs=None, **kw):
+    """Nature Portfolio panel title (2026-09-17): bold lowercase letter, then the label in regular weight."""
+    lfs = letter_fs if letter_fs is not None else fs + 0.9
+    t = a.text(x, y, letter, transform=a.transAxes, ha="left", va="baseline", fontsize=lfs, fontweight="bold", **kw)
+    fig = a.figure
+    bb = t.get_window_extent(renderer=fig.canvas.get_renderer())
+    w_pt = bb.width * 72.0 / fig.dpi
+    if label:
+        a.annotate(label, xy=(x, y), xycoords="axes fraction", xytext=(w_pt + 0.5 * fs, 0), textcoords="offset points",
+                   ha="left", va="baseline", fontsize=fs, annotation_clip=False, **kw)
+    return t
+
 letters = "abcdefghijklm"
 for i, p in enumerate(POOLS):
     a = ax[i]; P = D["pools"][p]; xmax = XMAX[p]; grid = np.round(np.arange(0.0, xmax + 1e-9, 0.25), 3)
@@ -78,7 +91,7 @@ for i, p in enumerate(POOLS):
         a.set_yscale("symlog", linthresh=1e-3, linscale=0.35); a.set_ylim(bottom=0)
     a.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     a.set_xlim(0, xmax)
-    a.text(0.0, 1.15, f"{letters[i]}  {LABEL.get(p, p)}", transform=a.transAxes, ha="left", va="bottom", fontsize=TITLE)
+    _panel_title(a, letters[i], LABEL.get(p, p), 0.0, 1.15, TITLE, letter_fs=8.4)
     a.text(0.0, 1.02, f"B = {xmax}", transform=a.transAxes, ha="left", va="bottom", fontsize=SUB, color="#555555")
     a.grid(lw=0.4, alpha=0.3); a.set_axisbelow(True); a.tick_params(labelsize=TICK, pad=1.5)
     for sp in ("top", "right"): a.spines[sp].set_visible(False)

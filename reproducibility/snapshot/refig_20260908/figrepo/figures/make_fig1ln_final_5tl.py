@@ -3,7 +3,8 @@
 shared symmetric colour scale, NO significance stars, and under each map the marginal profile of the per-cell
 advantage against top-10 agreement (mean over R2) and against global R2 (mean over agreement), mean +- s.e.
 TL = the five retained transfer-learning classes, DNGOJoint (Frozen-representation transfer) / TwoStageJoint (Pretrain-then-Joint) /
-DNGOGradient (End-to-End Joint) / SoftParameterSharing / DomainAdaptationMMD (BLR head); variants = DKL + SparseMFGP (NARGP excluded).
+DNGOGradient (End-to-End Joint) / SoftParameterSharing / DomainAdaptationMMD (BLR head); GP variants = DKL + SparseMFGP (NARGP excluded).
+Map titles carry the 2026-09-16 labels: GP-base = baseline multi-fidelity GP, GP variants = its deep-kernel and sparse variational variants.
 Grid directory from $GRID_DIR (default results/grid5tl, built by merge_grid5tl.py).
 Run on the VM: cd refig_20260908/figrepo/figures && python make_fig1ln_final.py  (reads results/grid summaries only).
 """
@@ -20,8 +21,8 @@ OUT = Path(os.environ.get('FIG_OUT_DIR', REPO / 'figures' / 'out'))
 OUT.mkdir(parents=True, exist_ok=True)
 TL5 = os.environ.get('TL5', 'DNGOJoint,TwoStageJoint,DNGOGradient,SoftParameterSharing,DomainAdaptationMMD').split(',')
 FAMILIES = {'TL': TL5,
-            'MFGP baseline': ['MFGP'], 'MFGP variants': ['DKL', 'SparseMFGP']}
-COMPARISONS = [('TL', 'MFGP baseline'), ('TL', 'MFGP variants'), ('MFGP variants', 'MFGP baseline')]
+            'GP-base': ['MFGP'], 'GP variants': ['DKL', 'SparseMFGP']}
+COMPARISONS = [('TL', 'GP-base'), ('TL', 'GP variants'), ('GP variants', 'GP-base')]
 METRIC = 'final_regret'
 R2B = np.round(np.arange(0.1, 0.91, 0.1), 2)
 T10 = np.round(np.arange(0.0, 1.01, 0.1), 2)
@@ -91,7 +92,7 @@ for c, ((f1, f2), M) in enumerate(zip(COMPARISONS, mats)):
     if c == 0:
         ax.set_ylabel('top-10 optimum agreement', fontsize=LAB, labelpad=2)
     ax.set_title(f'{f1} vs {f2}', fontsize=TITLE, pad=13)
-    ax.text(-0.26 if c == 0 else -0.30, 1.12, letters[c], transform=ax.transAxes, fontsize=LETTER, va='bottom')
+    ax.text(-0.26 if c == 0 else -0.30, 1.12, letters[c], transform=ax.transAxes, fontsize=LETTER, fontweight='bold', va='bottom')
     cb = fig.colorbar(im, ax=ax, fraction=0.05, pad=0.04)
     cb.ax.tick_params(labelsize=TICK, length=2, width=0.5, pad=1.5); cb.outline.set_linewidth(0.5)
     if c == 2:
@@ -100,6 +101,8 @@ for c, ((f1, f2), M) in enumerate(zip(COMPARISONS, mats)):
     ax.text(0.5, 1.015, f'{f1} better in {pos}/{len(G)} · ties {tie}', transform=ax.transAxes,      # centred under the title (wider than the map)
             ha='center', va='bottom', fontsize=NOTE, color='#444')
     ax2 = axes[1, c]
+    if len(letters) > c + 3:   # 2026-09-17: the marginal profiles are panels d-f (FIG1LN_LETTERS=a,b,c,d,e,f)
+        ax2.text(-0.26 if c == 0 else -0.30, 1.06, letters[c + 3], transform=ax2.transAxes, fontsize=LETTER, fontweight='bold', va='bottom')
     for col, vals, colr, lab in [('ti', T10, C_AGR, 'vs top-10 agreement (mean over $R^2$)'),
                                  ('ri', R2B, C_R2, 'vs global $R^2$ (mean over agreement)')]:
         P = prof(k, col, vals)

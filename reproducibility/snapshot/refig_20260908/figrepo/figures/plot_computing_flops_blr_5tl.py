@@ -30,12 +30,12 @@ GP_FAMILY = set(_GPP)
 KEEP = set(_GPP) | set(_TL5)          # 2026-09-14: 3 GP + the five retained TL configurations only
 RENAME = dict(RENAME_5TL)
 SALMON, BLUE = '#f2aa84', '#4e95d9'
-ABC = list('abcdefghijk')            # regular-weight letters, no parentheses (2026-09-14)
+ABC = list('abcdefghijk')            # bold lowercase letters, no parentheses (2026-09-17)
 BLABEL = {'Matbench-Gap': 'Matbench-gap'}   # benchmark display names
 plt.rcParams.update({'pdf.fonttype': 42, 'ps.fonttype': 42})
 # 2026-08-18 print-size re-export: 30x11 in -> 15x7 in (~2.2x print width),
 # compact tick names from _common.short
-TITLE, LABEL, TICK = 15, 13, 12
+TITLE, LABEL, TICK = 7.5, 6.5, 6.0   # 2026-09-17: drawn at print width (7.2 in), Fig. 1/2 rule set
 TFLOP = 1e12
 
 d = pd.read_csv(PROF); d = d[d.ok == 1]; d = d[~d['model'].isin(_EXC)]   # excluded MFGP variants (env GP_VARIANTS)
@@ -76,16 +76,30 @@ for b in BENCHES:
     print(f'   {b:14s} cheapest {ch/TFLOP:5.2f}  MFGP {g[g.model=="MFGP"].flops.values[0]/TFLOP:5.2f}  '
           f'Sparse {sp/TFLOP:5.2f} TFLOP ({sp/ch:4.0f}x cheapest)')
 
-fig, axes = plt.subplots(2, 5, figsize=(15, 7.0))
+
+def _panel_title(a, letter, label, x, y, fs, letter_fs=None, **kw):
+    """Nature Portfolio panel title (2026-09-17): bold lowercase letter, then the label in regular weight."""
+    lfs = letter_fs if letter_fs is not None else fs + 0.9
+    t = a.text(x, y, letter, transform=a.transAxes, ha="left", va="baseline", fontsize=lfs, fontweight="bold", **kw)
+    fig = a.figure
+    bb = t.get_window_extent(renderer=fig.canvas.get_renderer())
+    w_pt = bb.width * 72.0 / fig.dpi
+    if label:
+        a.annotate(label, xy=(x, y), xycoords="axes fraction", xytext=(w_pt + 0.5 * fs, 0), textcoords="offset points",
+                   ha="left", va="baseline", fontsize=fs, annotation_clip=False, **kw)
+    return t
+
+plt.rcParams.update({'font.family': 'DejaVu Sans', 'axes.linewidth': 0.5, 'xtick.major.width': 0.5, 'ytick.major.width': 0.5, 'xtick.major.size': 2, 'ytick.major.size': 2})
+fig, axes = plt.subplots(2, 5, figsize=(7.2, 3.9))
 for i, b in enumerate(BENCHES):
     ax = axes[i // 5, i % 5]; g = allt[allt.benchmark == b].sort_values('flops')
     y = np.arange(len(g))
     ax.barh(y, g.flops / TFLOP, color=[SALMON if m in GP_FAMILY else BLUE for m in g.model],
             alpha=0.9, height=0.72, edgecolor='none')
     for yi, (_, r) in zip(y, g.iterrows()):
-        ax.text(r.flops / TFLOP, yi, f' {r.flops/TFLOP:.2f}', va='center', ha='left', fontsize=10, color='#333')
+        ax.text(r.flops / TFLOP, yi, f' {r.flops/TFLOP:.2f}', va='center', ha='left', fontsize=5.5, color='#333')
     ax.set_yticks(y); ax.set_yticklabels([code(m) for m in g.disp], fontsize=TICK)
-    ax.set_title(f'{ABC[i]}  {BLABEL.get(b, b)}', fontsize=TITLE, loc='left')
+    _panel_title(ax, ABC[i], BLABEL.get(b, b), 0.0, 1.03, TITLE, letter_fs=8.4)
     ax.set_xlabel('Total compute (TFLOPs)', fontsize=LABEL)
     ax.set_xlim(0, g.flops.max() / TFLOP * 1.45); ax.tick_params(labelsize=TICK)
     ax.grid(axis='x', alpha=0.3, lw=0.5)
@@ -104,21 +118,21 @@ y = np.arange(len(avg))
 ax.barh(y, avg['rank'], color=[SALMON if m in GP_FAMILY else BLUE for m in avg.model],
         alpha=0.9, height=0.72, edgecolor='none')
 for yi, r in zip(y, avg['rank']):
-    ax.text(r, yi, f' {r:.1f}', va='center', ha='left', fontsize=10, color='#333')
+    ax.text(r, yi, f' {r:.1f}', va='center', ha='left', fontsize=5.5, color='#333')
 ax.set_yticks(y); ax.set_yticklabels([code(m) for m in avg.disp], fontsize=TICK)
-ax.set_title(f'{ABC[len(BENCHES)]}  Average compute rank', fontsize=TITLE, loc='left')
+_panel_title(ax, ABC[len(BENCHES)], 'Average compute rank', 0.0, 1.03, TITLE, letter_fs=8.4)
 unmapped = sorted(set(allt.disp) - set(__import__('_common').CODE_NAMES)); assert not unmapped, f'no abbreviation for {unmapped}'
 ax.set_xlabel('Average compute rank', fontsize=LABEL)
 ax.set_xlim(0, avg['rank'].max() * 1.45); ax.tick_params(labelsize=TICK)
 ax.grid(axis='x', alpha=0.3, lw=0.5)
 fig.legend(handles=[Patch(fc=SALMON, label='Gaussian-process family'),
                     Patch(fc=BLUE, label='Transfer-learning surrogates')],
-           loc='lower center', ncol=2, fontsize=13, frameon=True, fancybox=False,
-           edgecolor='gray', handlelength=2.4, labelspacing=1.0, bbox_to_anchor=(0.5, 0.040))
-fig.text(0.5, 0.024, CODE_KEY_TL_5, ha='center', va='bottom', fontsize=10.5, color='#333333')
-fig.text(0.5, 0.006, 'GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP',
-         ha='center', va='bottom', fontsize=10.5, color='#333333')
-plt.tight_layout(w_pad=1.4, h_pad=1.4, rect=(0, 0.085, 1, 1))
+           loc='lower center', ncol=2, fontsize=6.5, frameon=True, fancybox=False,
+           edgecolor='gray', handlelength=2.0, labelspacing=0.6, bbox_to_anchor=(0.5, 0.062))
+fig.text(0.5, 0.030, CODE_KEY_TL_5, ha='center', va='bottom', fontsize=6.0, color='#333333')
+fig.text(0.5, 0.004, 'GP: GP-base = autoregressive multi-fidelity GP (MFGP) · GP-SV = sparse variational MFGP · GP-DKL = deep-kernel GP',
+         ha='center', va='bottom', fontsize=6.0, color='#333333')
+plt.tight_layout(w_pad=1.0, h_pad=1.2, rect=(0, 0.125, 1, 1))
 # regenerated figure lands in figures/out; compare against paper/paper_figures
 for stem in (OUT / 'computing_time_blr',):
     fig.savefig(f'{stem}.pdf', bbox_inches='tight', facecolor='white')
