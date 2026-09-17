@@ -312,7 +312,7 @@
   },
   {
    "experiment_id": "E12_acq_arms_42-61",
-   "role_in_paper": "SI Fig. 1 (TL EI arm), SI Fig. 2 (EI, PI, UCB, MES, Thompson arms), Results 2.4-2.5",
+   "role_in_paper": "SI Fig. 1 (TL-base EI arm, seeds 42-61), SI Fig. 2 (five acquisitions, five TL surrogates), Results 2.4",
    "benchmarks": "Branin-Fav, Branin-Unfav, Park-Fav, Park-Unfav, COFs, FreeSolv, Polarizability, HOPV15, Matbench-Gap",
    "models": "Sequential, Curriculum, KnowledgeDistillation, PseudoLabeling, DNGOGradient (End-to-End Joint), DNGOJoint (Stop-Gradient Joint), TwoStageJoint (Pretrain-then-Joint), Progressive, DomainAdaptationMMD, SoftParameterSharing, Adapter",
    "seeds_requested": "42-61",
@@ -368,7 +368,7 @@
   },
   {
    "experiment_id": "E14_tl_ei_conf_62-81",
-   "role_in_paper": "SI Fig. 1 (End-to-End Joint EI, seeds 62-81)",
+   "role_in_paper": "Historical SI Fig. 1 TL-E2E EI control, superseded by TL-base 20-seed controls on 2026-09-17",
    "benchmarks": "Branin-Fav, Branin-Unfav, Park-Fav, Park-Unfav, COFs, FreeSolv, Polarizability, HOPV15, Matbench-Gap",
    "models": "DNGOGradient (End-to-End Joint) only",
    "seeds_requested": "62-81",
@@ -392,7 +392,7 @@
    "environment": "VM l40s bo_env: Python 3.12.3, torch 2.4.1+cu121 (CPU), botorch 0.10.0, gpytorch 1.11, numpy 2.0.2, scipy 1.13.1, scikit-learn 1.6.1, pandas 2.3.3",
    "generated": "2026-09-09 01:22-01:35",
    "provenance_status": "verified",
-   "notes": "SI Fig. 1 panel j uses seeds 42-61 for the other eight TL surrogates (no 62-81 EI runs)"
+   "notes": "Not used by current SI Fig. 1. Its former TL-E2E 40-seed values are archived in reproducibility/values/supp/archive_20260917. Current figure uses TL-base seeds 42-61 from E12 and the greedy arm. No TL-base EI seeds 62-81 in this campaign."
   },
   {
    "experiment_id": "E15_screening_topk",
