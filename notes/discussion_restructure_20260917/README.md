@@ -35,3 +35,23 @@ Introduction 777, Results 1,959, Discussion 764 (was 747); main text 3,500 again
   GPs); Notes 2 (BLR), 5 (acquisition/calibration), 7 (screen), 8 (compute).
 - "about two thirds" is retained: verified in reproducibility/claim_manifest.csv (K-152; grid mean advantage
   0.0717 -> 0.0253).
+
+## Addendum (2026-09-17, later): limitations paragraph reorganized
+
+The limitations paragraph read as a list (eight sentences, eight subjects, one connective). It now has one scope
+sentence and three groups, each with a one-line signpost:
+
+1. Scope: "rest on retrospective evaluation of fixed ... pools under a two-fidelity protocol with a deterministic
+   round-robin schedule", immediately followed by the two untested extensions that would relax those conditions
+   (hierarchical fidelities, adaptive fidelity selection). Retrospective-ness is stated here as the type of evidence,
+   not at the end as a doubt.
+2. "Within that scope, the comparison could be biased in either direction": GP representative (advantage shrinks
+   against stronger GPs; two-thirds narrowing; Park-Fav/Park-Unfav/Elastic-SevenNet) and, "Conversely", the tuning
+   asymmetry (conservative where TL wins, may inflate the Branin margin).
+3. "The mechanistic conclusions are tied to their constructions": BLR optimism -> exploration verdict is
+   construction-specific; then the grid -> "the nine empirical pools, not the grid, carry the generalization".
+
+The former closing sentence ("the surrogate ranking requires confirmation in deployment") was removed because it sat
+directly before "Within these limits, we recommend TL-base as the default" and read as self-negation. The paragraph now
+ends on the sentence that anchors the generalization in the nine pools, which is the population the recommendation
+addresses. "err" was replaced by "biased" (more common academic usage).
