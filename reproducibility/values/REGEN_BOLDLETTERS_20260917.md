@@ -74,3 +74,11 @@ Note: `vm_render.sh` passed a relative `FIG_OUT_DIR` to `make_fig1ln_final_5tl.p
   scale of fig1_attainment.pdf, so a and b-p print with the same glyph at 8.0 pt.
 - The overview is now included at \textwidth (was 0.9\textwidth), so its edges align with the attainment panels; page 2
   still holds Fig. 1 and its caption (checked in the rebuilt main_clean.pdf, 15 pages).
+
+## 6. Fig. 3 letters and Figs. 4/5 placement (same day, third author request)
+
+- Fig. 3 profile row carries ONE letter, d (the row is cited once, as Fig. 3d); re-rendered with
+  `FIG1LN_LETTERS=a,b,c,d` (md5 ebcda350 -> e72e36e2; cells csv unchanged, 7e324af1). Caption: "d, Per-condition
+  advantage for the three comparisons (left to right as in a-c) ...".
+- Figs. 4 and 5 had been packed onto one float page after Fig. 4 became shorter; Fig. 5 is now `figure*[t]` (top of
+  page only), so Fig. 4 sits on page 7 and Fig. 5 on page 8 with text below each (author preference).

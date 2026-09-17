@@ -3,7 +3,7 @@
 %% (Supplementary Table N here, Fig. N in the SI) are plain numbers, not \ref, because NCS receives the SI as a
 %% separate file. ./build.sh clean builds the same text through the wrapper files main_clean.tex / si_clean.tex.
 %% Display items (6): Fig 1 overview + attainment (a-p); Fig 2 regret trajectories (a-m); Fig 3 controlled-grid
-%% final-regret advantage maps (a-f); Fig 4 top-k overlap and LF-screening regret (a,b); Fig 5 compute scaling
+%% final-regret advantage maps (a-d); Fig 4 top-k overlap and LF-screening regret (a,b); Fig 5 compute scaling
 %% (single panel); Table 1 benchmark suite. SI: Supplementary Notes 1-7, Figs 1-4 (SI Fig 3 = calibration versus attainment, a-m), Tables 1-9.
 
 \documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Nature Portfolio two-column journal layout
@@ -80,8 +80,8 @@
 %% numbers (no \ref, no hyperlink); keep them in step with si-content.tex by hand.
 %% Define \withSI to build one combined PDF.
 
-%% At most one double-column float at the top of a page, so that Figs. 4 and 5 land on separate pages
-%% instead of stacking on one (2026-09-17).
+%% At most one double-column float at the top of a page, and Fig. 5 is [t] only (no float page), so that Figs. 4 and 5
+%% land on separate pages instead of stacking on one float page (2026-09-17; the author prefers them apart).
 \setcounter{dbltopnumber}{1}
 
 \hypersetup{pdftitle={Transfer-Learning Surrogates for Scalable Multi-Fidelity Bayesian Optimization in Molecular and Materials Discovery},
@@ -195,15 +195,15 @@ On the empirical benchmarks, global LF informativeness and reliability near the 
 
 \begin{figure*}[t]
 \centering
-%% Display item 3 of 6: controlled-grid final-regret advantage maps and marginal profiles (fig3_grid_final_regret.pdf, letters a--f baked in).
+%% Display item 3 of 6: controlled-grid final-regret advantage maps and marginal profiles (fig3_grid_final_regret.pdf, letters a--d baked in; d = the whole profile row).
 \includegraphics[width=0.95\textwidth]{paper_figures/fig3_grid_final_regret.pdf}
 \caption{Family-split advantage maps from the controlled fidelity-quality grid (Methods~\ref{sec:meth-grid}).
-\textbf{a--c,} Mean final-regret advantage of the best member of one family over the best member of another. Advantage is the second-named minus first-named family's regret, in units of the HF range. Blue favours the first-named family, and orange favours the second. Conditions are binned by global LF--HF $R^2$ (horizontal) and top-10 optimum agreement (vertical). Comparisons are TL against GP-base (\textbf{a}), TL against GP-DKL and GP-SV (\textbf{b}), and these GP variants against GP-base (\textbf{c}). All five TL surrogates and all three GP methods were run on $126$ conditions with ten seeds each. The three maps share one colour scale. Counts above each map give the conditions favouring the first-named family and the exact ties. \textbf{d--f,} Per-condition advantage for the comparison above each panel, plotted against top-10 agreement (averaged over $R^2$) and against $R^2$ (averaged over agreement). Values are mean $\pm$ s.e.\ with the Spearman rank correlation $\rho$ between the $126$ per-condition advantages and each axis.}
+\textbf{a--c,} Mean final-regret advantage of the best member of one family over the best member of another. Advantage is the second-named minus first-named family's regret, in units of the HF range. Blue favours the first-named family, and orange favours the second. Conditions are binned by global LF--HF $R^2$ (horizontal) and top-10 optimum agreement (vertical). Comparisons are TL against GP-base (\textbf{a}), TL against GP-DKL and GP-SV (\textbf{b}), and these GP variants against GP-base (\textbf{c}). All five TL surrogates and all three GP methods were run on $126$ conditions with ten seeds each. The three maps share one colour scale. Counts above each map give the conditions favouring the first-named family and the exact ties. \textbf{d,} Per-condition advantage for the three comparisons (left to right as in \textbf{a}--\textbf{c}), plotted against top-10 agreement (averaged over $R^2$) and against $R^2$ (averaged over agreement). Values are mean $\pm$ s.e.\ with the Spearman rank correlation $\rho$ between the $126$ per-condition advantages and each axis.}
 \label{fig:family_heatmap}
 \end{figure*}
 
 \storyline{Grid result: TL never loses to GP-base; its advantage tracks agreement ($\rho \approx -0.8$), not $R^2$ ($\rho \approx 0$).}
-\readabilitymark{The TL family was never worse than GP-base anywhere on the plane. It won in $81$ of $126$ conditions and tied in the remaining $45$ (Fig.~\ref{fig:family_heatmap}a). Against the GP variants, its advantage narrowed to $66$ conditions, with $60$ ties and no reversal (Fig.~\ref{fig:family_heatmap}b).} The GP representative therefore matters, because the variants themselves improved on GP-base in $81$ conditions (Fig.~\ref{fig:family_heatmap}c). The advantage is organized along the agreement axis rather than the $R^2$ axis. \readabilitymark{Its correlation with top-10 agreement was much stronger than with $R^2$ for the comparison with GP-base (Spearman $\rho = -0.81$ and $\rho = -0.09$, respectively). Against the GP variants, these correlations were $\rho = -0.78$ and $+0.11$ (Fig.~\ref{fig:family_heatmap}d--f).} \mainclaim{Within this grid, the advantage therefore tracks preservation of the best candidates more strongly than global LF--HF correlation.}
+\readabilitymark{The TL family was never worse than GP-base anywhere on the plane. It won in $81$ of $126$ conditions and tied in the remaining $45$ (Fig.~\ref{fig:family_heatmap}a). Against the GP variants, its advantage narrowed to $66$ conditions, with $60$ ties and no reversal (Fig.~\ref{fig:family_heatmap}b).} The GP representative therefore matters, because the variants themselves improved on GP-base in $81$ conditions (Fig.~\ref{fig:family_heatmap}c). The advantage is organized along the agreement axis rather than the $R^2$ axis. \readabilitymark{Its correlation with top-10 agreement was much stronger than with $R^2$ for the comparison with GP-base (Spearman $\rho = -0.81$ and $\rho = -0.09$, respectively). Against the GP variants, these correlations were $\rho = -0.78$ and $+0.11$ (Fig.~\ref{fig:family_heatmap}d).} \mainclaim{Within this grid, the advantage therefore tracks preservation of the best candidates more strongly than global LF--HF correlation.}
 
 \subsection{Source of the TL advantage}\label{sec:res-mechanism}\label{sec:res-acquisition}\label{sec:res-uq}
 
@@ -231,7 +231,7 @@ We tested whether acquisition choice could explain the TL advantage (Methods~\re
 \storyline{Surrogate-free LF screen: two regimes; the need for a surrogate follows near-optimum preservation, not global correlation.}
 We compared the optimization outcomes with a surrogate-free screen that ranks candidates by LF value and evaluates the top-ranked candidate at HF (Methods~\ref{sec:meth-screen}). Its screening regret indicates whether the LF proxy alone identifies a good candidate. It is not a budget-matched baseline (Fig.~\ref{fig:topk}a,b). The benchmarks split into two regimes at a screening regret of $0.3$ (Supplementary Note~6). In Regime~A, represented by Park-Fav and Polarizability, the top LF and HF candidates almost coincide. The screen therefore already identifies a near-optimal candidate. In Regime~B, represented by COFs and the Branin functions, high global correlation conceals poor agreement among the top-ranked candidates. For example, COFs has a Spearman rank correlation of $0.998$ but a screening regret of $4.52$. Nevertheless, every surrogate reached zero regret within the budget (Fig.~\ref{fig:regret_trajectory}e). HOPV15, Matbench-gap and the four larger materials pools also fall in Regime~B. The need for a surrogate therefore depends more on preservation of the near-optimal region than on global LF--HF correlation. On HOPV15 and Matbench-gap, the choice of surrogate matters as well (Fig.~\ref{fig:final_regret}i,j).
 
-\begin{figure*}[tp]
+\begin{figure*}[t]
 \centering
 %% Display item 5 of 6: compute scaling law, single panel, no letter (compute_scaling_law_blr.pdf,
 %% re-rendered 2026-09-17 with PANEL_LETTER unset). What a surrogate costs.

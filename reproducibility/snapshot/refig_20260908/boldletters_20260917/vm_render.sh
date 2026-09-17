@@ -21,7 +21,7 @@ echo "== Fig. 1 b-p";   cd $R && $PY $S/fig1_attainment_exact.py > $BK/log_fig1.
 echo "== Fig. 2";       cd $R && $PY $S/fig2_trajectories_exact.py > $BK/log_fig2.txt 2>&1; tail -1 $BK/log_fig2.txt
 echo "== SI Fig. 3";    cd $F && ECE_X=mean CAL_LETTERS=abcdefghijklm CAL_STEM=fig4_calibration_attain $PY ../../figcand2_20260914_5tl/scripts/make_a1_calibration_13_attain_exact.py > $BK/log_sifig3.txt 2>&1; tail -1 $BK/log_sifig3.txt
 echo "== SI Fig. 2";    cd $R && $PY supp_attain_5tl.py S2 > $BK/log_sifig2.txt 2>&1; tail -1 $BK/log_sifig2.txt
-echo "== Fig. 3";       cd $F && FIG_OUT=fig5tl_20260914 FIG_OUT_DIR=figrepo/figures/out/fig5tl_20260914 FIG1LN_LETTERS=a,b,c,d,e,f FIG_STEM=fig_grid_final $PY make_fig1ln_final_5tl.py > $BK/log_fig3.txt 2>&1; tail -1 $BK/log_fig3.txt
+echo "== Fig. 3";       cd $F && FIG_OUT=fig5tl_20260914 FIG_OUT_DIR=figrepo/figures/out/fig5tl_20260914 FIG1LN_LETTERS=a,b,c,d FIG_STEM=fig_grid_final $PY make_fig1ln_final_5tl.py > $BK/log_fig3.txt 2>&1; tail -1 $BK/log_fig3.txt
 echo "== Fig. 4";       cd $F && MPLBACKEND=Agg FIG_OUT=fig5_13 $PY make_b2_topk_13.py > $BK/log_fig4.txt 2>&1; tail -1 $BK/log_fig4.txt
 echo "== SI Fig. 4";    cd $F && FIG_OUT=fig5tl_20260914 GP_VARIANTS=DKL $PY plot_computing_flops_blr_5tl.py > $BK/log_sifig4.txt 2>&1; tail -1 $BK/log_sifig4.txt
 md5sum $OUTS $VALS > $BK/md5_AFTER.txt
