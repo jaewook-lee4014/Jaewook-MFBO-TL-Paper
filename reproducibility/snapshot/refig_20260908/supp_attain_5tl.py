@@ -9,7 +9,7 @@ the metric-sensitivity panel (S3) uses the Fig. 1 budgets (Matbench-Gap 30 from 
 explorer_data.json.
 
 Figures (paper style: 7.2 in wide, DejaVu Sans 6-7 pt, two hues TL #4e95d9 / GP #f2aa84, no bold):
-  S1  supp_acq_matrix      surrogate x acquisition (MFGP EI/greedy, E2E greedy/EI; 40 seeds) + heat-map of EI - greedy per surrogate
+  S1  supp_acq_matrix      surrogate x acquisition (GP-base EI/greedy, TL-E2E greedy/EI; 40 seeds) + heat-map of EI - greedy per surrogate
   S2  supp_acq_portfolio   acquisition portfolio (greedy, EI, PI, GP-UCB, MES, Thompson; 5 TL rows; 20 seeds)
   S3  supp_metric_sens     attainment sensitivity to the target set and to the budget (13 pools, 40 seeds)
   S4  supp_tl_design       TL design ablation: cold vs warm start, tanh vs ReLU, BLR head vs small MLP head (20 seeds)
@@ -123,8 +123,21 @@ def vlabel(a, yi, m, se):
 def compact(v):
     s = f"{v:+.2f}"; return s.replace("+0.", "+.").replace("-0.", "−.").replace("+.00", "0").replace("−.00", "0")
 
+
+def _panel_title(a, letter, label, x, y, fs, letter_fs=None, **kw):
+    """Nature Portfolio panel title (2026-09-17): bold lowercase letter, then the label in regular weight."""
+    lfs = letter_fs if letter_fs is not None else fs + 0.9
+    t = a.text(x, y, letter, transform=a.transAxes, ha="left", va="baseline", fontsize=lfs, fontweight="bold", **kw)
+    fig = a.figure
+    bb = t.get_window_extent(renderer=fig.canvas.get_renderer())
+    w_pt = bb.width * 72.0 / fig.dpi
+    if label:
+        a.annotate(label, xy=(x, y), xycoords="axes fraction", xytext=(w_pt + 0.5 * fs, 0), textcoords="offset points",
+                   ha="left", va="baseline", fontsize=fs, annotation_clip=False, **kw)
+    return t
+
 def title(a, letter, name, sub):
-    a.text(0.0, 1.13, f"{letter}  {name}", transform=a.transAxes, ha="left", va="bottom", fontsize=TITLE)
+    _panel_title(a, letter, name, 0.0, 1.13, TITLE, letter_fs=8.4)
     a.text(0.0, 1.02, sub, transform=a.transAxes, ha="left", va="bottom", fontsize=5.3, color="#555555")
 
 def heat(a, M, rows, cols, vmax=None, fmt="{:+.2f}", cmap=DIV, cb=True, fig=None, cblabel="", fs=4.6, nan_grey=False):
@@ -146,8 +159,8 @@ def heat(a, M, rows, cols, vmax=None, fmt="{:+.2f}", cmap=DIV, cb=True, fig=None
         if cblabel: c.set_label(cblabel, fontsize=5.4, labelpad=2)
     return im
 
-FOOT1 = "TL: Frozen = Frozen-representation transfer · PtJ = Pretrain-then-Joint · E2E = End-to-End Joint · SPS = Soft Parameter Sharing · MMD = Domain Adaptation (MMD)"
-FOOT2 = "GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP"
+FOOT1 = "TL: TL-base = base transfer-learning surrogate · TL-PtJ = pretrain-then-joint · TL-E2E = end-to-end joint · TL-SPS = soft parameter sharing · TL-MMD = domain adaptation (MMD)"
+FOOT2 = "GP: GP-base = autoregressive multi-fidelity GP (MFGP) · GP-SV = sparse variational MFGP · GP-DKL = deep-kernel GP"
 def footnote(fig, y1=0.040, y2=0.025):
     fig.text(0.982, y1, FOOT1, ha="right", va="bottom", fontsize=5.0, color="#333333")
     fig.text(0.982, y2, FOOT2, ha="right", va="bottom", fontsize=5.0, color="#333333")
@@ -162,8 +175,8 @@ def fig_S1():
     tl_e = pd.concat([load_traj(TL_ROOTS, "blr_replace__hf_ei"), load_traj([f"{REFIG}/results_conf"], "blr_replace__hf_ei")])
     gp_e = pd.concat([load_traj(GP_ROOTS, "gp_ei"), load_traj([f"{REFIG}/results_gp_conf"], "gp_ei")])
     gp_g = pd.concat([load_traj(GP_ROOTS, "gp_greedy"), load_traj([f"{REFIG}/results_gp_conf"], "gp_greedy")])
-    COND = [("MFGP EI", gp_e, "MFGP", GP_COLOR, None), ("MFGP greedy", gp_g, "MFGP", GP_COLOR, "////"),
-            ("E2E greedy", tl_g, "DNGOGradient", TL_COLOR, None), ("E2E EI", tl_e, "DNGOGradient", TL_COLOR, "////")]
+    COND = [("GP-base EI", gp_e, "MFGP", GP_COLOR, None), ("GP-base greedy", gp_g, "MFGP", GP_COLOR, "////"),
+            ("TL-E2E greedy", tl_g, "DNGOGradient", TL_COLOR, None), ("TL-E2E EI", tl_e, "DNGOGradient", TL_COLOR, "////")]
     rows = []; vals = {}
     for p in B9:
         b = BUD9[p]
@@ -187,11 +200,11 @@ def fig_S1():
             r.append(np.mean([a[s] - g[s] for s in common]) if common else np.nan); rn.append(len(common))
         H.append(r); hn.append(rn)
     H = np.array(H)
-    pd.DataFrame(H, index=["MFGP"] + [ABBR[m] for m in TLM], columns=B9).to_csv(f"{OUTDIR}/supp_acq_matrix_delta.csv")
-    pd.DataFrame(hn, index=["MFGP"] + [ABBR[m] for m in TLM], columns=B9).to_csv(f"{OUTDIR}/supp_acq_matrix_delta_n.csv")
+    pd.DataFrame(H, index=[ABBR["MFGP"]] + [ABBR[m] for m in TLM], columns=B9).to_csv(f"{OUTDIR}/supp_acq_matrix_delta.csv")
+    pd.DataFrame(hn, index=[ABBR["MFGP"]] + [ABBR[m] for m in TLM], columns=B9).to_csv(f"{OUTDIR}/supp_acq_matrix_delta_n.csv")
 
     fig = plt.figure(figsize=(7.2, 6.0))
-    gs = fig.add_gridspec(3, 5, left=0.085, right=0.985, top=0.93, bottom=0.11, wspace=0.55, hspace=0.80, height_ratios=[1, 1, 1.45])
+    gs = fig.add_gridspec(3, 5, left=0.095, right=0.985, top=0.93, bottom=0.11, wspace=0.80, hspace=0.80, height_ratios=[1, 1, 1.45])   # 2026-09-16: wspace 0.55 -> 0.72 (TL labels) -> 0.80 and left 0.085 -> 0.095, so that the longer GP-base greedy row labels clear both the figure edge and the value labels of the panel on their left
     letters = "abcdefghi"
     for i, p in enumerate(B9):
         a = fig.add_subplot(gs[i // 5, i % 5])
@@ -204,19 +217,19 @@ def fig_S1():
         a.set_yticks(y); a.set_yticklabels([c[0] for c in COND], fontsize=5.4)
         style(a, "Attainment" if i >= 4 else None); title(a, letters[i], LABEL.get(p, p), f"B = {BUD9[p]} · n = {vals[(p, COND[0][0])][2]}")
     a = fig.add_subplot(gs[1, 4]); a.axis("off")
-    h = [Patch(facecolor=GP_COLOR, label="MFGP · EI (default)"), Patch(facecolor=GP_COLOR, hatch="////", edgecolor="white", label="MFGP · greedy"),
-         Patch(facecolor=TL_COLOR, label="E2E · greedy (default)"), Patch(facecolor=TL_COLOR, hatch="////", edgecolor="white", label="E2E · EI")]
+    h = [Patch(facecolor=GP_COLOR, label="GP-base · EI (default)"), Patch(facecolor=GP_COLOR, hatch="////", edgecolor="white", label="GP-base · greedy"),
+         Patch(facecolor=TL_COLOR, label="TL-E2E · greedy (default)"), Patch(facecolor=TL_COLOR, hatch="////", edgecolor="white", label="TL-E2E · EI")]
     a.legend(handles=h, loc="center left", bbox_to_anchor=(-0.35, 0.5), fontsize=5.4, frameon=False, handlelength=1.4, handleheight=1.0, borderaxespad=0)
     a = fig.add_subplot(gs[2, 0:3])
-    heat(a, H, ["MFGP"] + [ABBR[m] for m in TLM], [LABEL.get(p, p) for p in B9], vmax=None, fig=fig, cblabel="EI − greedy (attainment)")
-    title(a, "j", "Attainment with EI minus attainment with greedy, per surrogate", "MFGP row: 40 seeds · TL rows: 20 seeds (42–61) · positive = EI attains more")
+    heat(a, H, [ABBR["MFGP"]] + [ABBR[m] for m in TLM], [LABEL.get(p, p) for p in B9], vmax=None, fig=fig, cblabel="EI − greedy (attainment)")
+    title(a, "j", "Attainment with EI minus attainment with greedy, per surrogate", "GP-base row: 40 seeds · TL rows: 20 seeds (42–61) · positive = EI attains more")
     a = fig.add_subplot(gs[2, 3:5]); a.axis("off")
-    a.text(0.0, 0.95, "a–i: mean ± s.e. over 40 seeds (42–81); FreeSolv\nMFGP EI n = 39 (one failed fit). Budgets as in\nFig. 1 except Matbench-gap at 20.\n\nj: paired difference per seed, then averaged;\nTL rows 20 seeds (42–61).",
+    a.text(0.0, 0.95, "a–i: mean ± s.e. over 40 seeds (42–81); FreeSolv\nGP-base EI n = 39 (one failed fit). Budgets as in\nFig. 1 except Matbench-gap at 20.\n\nj: paired difference per seed, then averaged;\nTL rows 20 seeds (42–61).",
            transform=a.transAxes, fontsize=5.4, va="top", color="#333333", linespacing=1.4)
     footnote(fig, 0.032, 0.017)
     save(fig, "supp_acq_matrix")
     SUMMARY["S1"] = {"conditions": [c[0] for c in COND], "values": {f"{p}|{c[0]}": [round(vals[(p, c[0])][0], 4), round(vals[(p, c[0])][1], 4), vals[(p, c[0])][2]] for p in B9 for c in COND},
-                     "delta_rows": ["MFGP"] + [ABBR[m] for m in TLM], "delta": [[None if not np.isfinite(x) else round(float(x), 4) for x in r] for r in H], "delta_n": hn}
+                     "delta_rows": [ABBR["MFGP"]] + [ABBR[m] for m in TLM], "delta": [[None if not np.isfinite(x) else round(float(x), 4) for x in r] for r in H], "delta_n": hn}
 
 # ================================================================== S2 acquisition portfolio
 def fig_S2():
@@ -271,7 +284,7 @@ def fig_S2():
         for j in range(9):
             if np.isfinite(W[i, j]): a1.text(j, i, f"{W[i, j]:.2f}", ha="center", va="center", fontsize=C2, color="white" if W[i, j] > 0.6 else "#222222")
     hbar(a1, im, "share of TL surrogates")
-    a1.text(0.0, 1.15, "a  Share of TL surrogates attaining more than greedy", transform=a1.transAxes, ha="left", va="bottom", fontsize=T2)
+    _panel_title(a1, "a", "Share of TL surrogates attaining more than greedy", 0.0, 1.15, T2, letter_fs=8.4)
     a1.text(0.0, 1.03, "5 surrogates · 20 seeds each", transform=a1.transAxes, ha="left", va="bottom", fontsize=S2, color="#555555")
     vmaxD = max(np.nanmax(np.abs(D)) if np.isfinite(D).any() else 1, 1e-6)
     im2 = a2.imshow(D, cmap=DIV, norm=TwoSlopeNorm(0, -vmaxD, vmaxD), aspect="auto")
@@ -282,7 +295,7 @@ def fig_S2():
         for j in range(9):
             if np.isfinite(D[i, j]): a2.text(j, i, f"{D[i, j]:+.2f}", ha="center", va="center", fontsize=C2, color="white" if abs(D[i, j]) > 0.6 * vmaxD else "#222222")
     hbar(a2, im2, "acquisition − greedy")
-    a2.text(0.0, 1.15, "b  Mean attainment difference vs greedy", transform=a2.transAxes, ha="left", va="bottom", fontsize=T2)
+    _panel_title(a2, "b", "Mean attainment difference vs greedy", 0.0, 1.15, T2, letter_fs=8.4)
     a2.text(0.0, 1.03, "mean over the 5 surrogates", transform=a2.transAxes, ha="left", va="bottom", fontsize=S2, color="#555555")
     letters = "cdefghijk"
     SH = {"greedy": TL_DARK, "ei": TL_COLOR, "pi": "#7fb3e6", "ucb": "#a9cbee", "mes": "#c9def3", "ts": "#e3eef9"}
@@ -302,13 +315,13 @@ def fig_S2():
         a.tick_params(axis="y", length=0, pad=1.5); a.tick_params(axis="x", labelsize=K2, pad=1.5)
         a.set_xlim(0, 1.3); a.set_xticks([0, 0.5, 1.0]); a.set_xticklabels(["0", "0.5", "1"], fontsize=K2)
         if i >= 4: a.set_xlabel("Attainment", fontsize=L2, labelpad=1.5)
-        a.text(0.0, 1.15, f"{letters[i]}  {LABEL.get(p, p)}", transform=a.transAxes, ha="left", va="bottom", fontsize=T2)
+        _panel_title(a, letters[i], LABEL.get(p, p), 0.0, 1.15, T2, letter_fs=8.4)
         a.text(0.0, 1.03, f"B = {BUD9[p]}", transform=a.transAxes, ha="left", va="bottom", fontsize=S2, color="#555555")
     NOTE2 = ["c–k: mean ± s.e. over the five TL surrogates of each surrogate's 20-seed mean attainment (seeds 42–61).",
              "a, b: paired per surrogate (acquisition − greedy), then the share of positive differences (a) or the mean difference (b).",
-             "TL: Frozen = Frozen-representation transfer · PtJ = Pretrain-then-Joint · E2E = End-to-End Joint",
-             "SPS = Soft Parameter Sharing · MMD = Domain Adaptation (MMD)",
-             "GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP"]
+             "TL: TL-base = base transfer-learning surrogate · TL-PtJ = pretrain-then-joint · TL-E2E = end-to-end joint",
+             "TL-SPS = soft parameter sharing · TL-MMD = domain adaptation (MMD)",
+             "GP: GP-base = autoregressive multi-fidelity GP (MFGP) · GP-SV = sparse variational MFGP · GP-DKL = deep-kernel GP"]
     for k, line in enumerate(NOTE2):
         fig.text(0.085, 0.108 - 0.0185 * k - (0.006 if k >= 2 else 0), line, ha="left", va="bottom", fontsize=F2, color="#333333")
     save(fig, "supp_acq_portfolio")

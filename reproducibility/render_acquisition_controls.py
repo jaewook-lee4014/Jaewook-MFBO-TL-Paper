@@ -24,6 +24,20 @@ POOLS = ["Branin-Fav", "Branin-Unfav", "Park-Fav", "Park-Unfav", "COFs",
 CONDITIONS = ["GP-base EI", "GP-base greedy", "TL-base EI", "TL-base greedy"]
 
 
+
+def _panel_title(a, letter, label, x, y, fs, letter_fs=None, **kw):
+    """Nature Portfolio panel title (2026-09-17): bold lowercase letter, then the label in regular weight."""
+    lfs = letter_fs if letter_fs is not None else fs + 0.9
+    t = a.text(x, y, letter, transform=a.transAxes, ha="left", va="baseline", fontsize=lfs, fontweight="bold", **kw)
+    fig = a.figure
+    bb = t.get_window_extent(renderer=fig.canvas.get_renderer())
+    w_pt = bb.width * 72.0 / fig.dpi
+    if label:
+        a.annotate(label, xy=(x, y), xycoords="axes fraction", xytext=(w_pt + 0.5 * fs, 0), textcoords="offset points",
+                   ha="left", va="baseline", fontsize=fs, annotation_clip=False, **kw)
+    return t
+
+
 def main():
     previous = pd.read_csv(ARCHIVE / "supp_acq_matrix_values.csv")
     portfolio = pd.read_csv(VALUES / "supp_acq_portfolio_values.csv")
@@ -85,7 +99,7 @@ def main():
         for side in ["top", "right"]:
             ax.spines[side].set_visible(False)
         label = pool.replace("Matbench-Gap", "Matbench-gap")
-        ax.text(0, 1.2, f"{'abcdefghi'[i]}  {label}", transform=ax.transAxes, fontsize=7)
+        _panel_title(ax, 'abcdefghi'[i], label, 0, 1.2, 7, letter_fs=8.4)
         gp_n = "39/40" if pool == "FreeSolv" else "40"
         ax.text(0, 1.04, f"B = {int(data.budget.iloc[0])} | n: GP {gp_n}, TL 20",
                 transform=ax.transAxes, fontsize=5.4, color="#555555")
