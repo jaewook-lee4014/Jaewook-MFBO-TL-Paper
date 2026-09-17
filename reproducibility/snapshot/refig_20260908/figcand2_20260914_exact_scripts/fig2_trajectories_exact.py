@@ -3,6 +3,8 @@
 (40 seeds where available, no NARGP, no reference policies, five TL surrogates, two hues: TL blues / GP oranges,
 no bold; GP-base and TL-base solid, the other six dashed or dotted). Windows: Branin 50; Park x2, COFs, FreeSolv, Polarizability 30; HOPV15 45; Matbench-gap 100; the four large pools 20.
 No reference lines (user rule).
+y axes (2026-09-17 tightening): HOPV15 (h) linear like the four large pools (its mean +/- s.e. band spans 0.92-6.0, less than one decade);
+Matbench-gap (i) log 0.03-1.5 (band 0.041-1.21; the former symlog-to-zero axis left three empty decades). Other panels unchanged.
 Input: figcand2_20260914_5tl/explorer_data.json (per-seed best-so-far change points). Output: fig2_trajectories.{pdf,png,svg} + values csv."""
 import json, os, sys, numpy as np, pandas as pd
 import matplotlib
@@ -22,6 +24,8 @@ BFIG1 = {"Branin-Fav": 50, "Branin-Unfav": 50, "Park-Fav": 50, "Park-Unfav": 50,
 LABEL = {"Matbench-Gap": "Matbench-gap"}
 MODELS = D["models"]; GP = [m for m in MODELS if m in set(D["gp"])]; TL = [m for m in MODELS if m not in set(D["gp"])]; ABBR = D["abbr"]
 LARGE = POOLS[9:]
+LINEAR = LARGE + ["HOPV15"]            # 2026-09-17: HOPV15 band 0.92-6.0 spans < 1 decade -> same linear rule as the large pools
+YLOG = {"Matbench-Gap": (0.03, 1.5)}   # 2026-09-17: band 0.041-1.21 -> plain log axis; symlog with bottom 0 wasted three decades
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "axes.linewidth": 0.5, "xtick.major.width": 0.5, "ytick.major.width": 0.5,
                      "xtick.major.size": 2, "ytick.major.size": 2, "pdf.fonttype": 42, "ps.fonttype": 42, "svg.fonttype": "none"})
 # Type sizes (2026-09-14 legibility pass): printed at \textwidth = 174 mm = 0.951 x the 7.2 in width, so 7.5 pt here = 7.1 pt in print
@@ -63,9 +67,11 @@ for i, p in enumerate(POOLS):
         a.plot(grid, mean, color=col, ls=ls, lw=lw, label=ABBR[m], solid_capstyle="butt")
         a.fill_between(grid, np.maximum(mean - se, 0), mean + se, color=col, alpha=0.07, lw=0)
         rows.append(dict(pool=p, model=m, n_min=int(n_at[n_at > 0].min()) if (n_at > 0).any() else 0, n_max=int(n_at.max()), mean_end=float(mean[~np.isnan(mean)][-1]) if (~np.isnan(mean)).any() else None))
-    if p in LARGE:
+    if p in LINEAR:
         ys = [r["mean_end"] for r in rows if r["pool"] == p and r["mean_end"]]
         ymin = min(ys); ymax = a.get_ylim()[1]; a.set_ylim(ymin - 0.12 * (ymax - ymin), ymax)   # linear: these pools span less than one decade
+    elif p in YLOG:
+        a.set_yscale("log"); a.set_ylim(*YLOG[p])
     elif p.startswith("Park"):
         a.set_yscale("symlog", linthresh=1e-9, linscale=0.35); a.set_ylim(bottom=0); a.set_yticks([0, 1e-8, 1e-6, 1e-4, 1e-2, 1e0])
     else:
