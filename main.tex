@@ -121,10 +121,11 @@ Conventional BO draws on a single source of information, which forces a trade-of
 
 \begin{figure*}[tp]
 \centering
-%% Display item 1 of 6: (a) overview (paper_figures/fig1_overview.tex; the letter is overlaid in LaTeX below) and
-%% (b--p) attainment on the 13 benchmarks (fig1_attainment.pdf, letters baked in); overview at 0.9\textwidth so the composite fits the page.
-\makebox[0.9\textwidth][l]{\fontsize{8}{9}\selectfont\textsf{\textbf{a}}}\\[1pt]
-\includegraphics[width=0.9\textwidth]{paper_figures/fig1_overview.pdf}\\[1pt]
+%% Display item 1 of 6: (a) overview (paper_figures/fig1_overview.tex; the letter a is paper_figures/fig1_letter_a.pdf, the DejaVu Sans Bold
+%% glyph of the b--p letters, included at the scale of fig1_attainment.pdf = \textwidth / 518.4 pt = 0.955) and
+%% (b--p) attainment on the 13 benchmarks (fig1_attainment.pdf, letters baked in); both at \textwidth (2026-09-17).
+\makebox[\textwidth][l]{\includegraphics[scale=0.955]{paper_figures/fig1_letter_a.pdf}}\\[2pt]
+\includegraphics[width=\textwidth]{paper_figures/fig1_overview.pdf}\\[1pt]
 \includegraphics[width=\textwidth]{paper_figures/fig1_attainment.pdf}
 \caption{Overview of the surrogate comparison and headline results.
 \textbf{a,} A self-driving laboratory queries a shared candidate pool $\mathcal{X}_{\mathrm{cand}}$ through a cheap low-fidelity (LF) source (cost $\rho \ll 1$) and a scarce, expensive high-fidelity (HF) experiment (cost $1$). Only the surrogate varies. The budget, fidelity schedule, initial design and candidate representation are fixed, and the acquisition policy is matched separately (Supplementary Fig.~1). The three-member Gaussian-process (GP) family comprises GP-base, GP-DKL and GP-SV. The five transfer-learning (TL) surrogates comprise TL-base and the variants TL-PtJ, TL-E2E, TL-SPS and TL-MMD (Methods~\ref{sec:meth-surrogates} and~\ref{sec:meth-transfer}). For the TL surrogates, a network trained on LF data, $g^{(L)}$, supplies a representation. A Bayesian linear-regression (BLR) head fitted to HF observations uses this representation to predict the HF objective. A second network trained on HF data, $g^{(H)}$, enters the training loss only (Methods~\ref{sec:meth-surrogates}).

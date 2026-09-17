@@ -6,7 +6,9 @@
 %% Counts updated 2026-09-14 to the final data basis (13 benchmarks; 3 GP + 5 TL surrogates: NARGP excluded;
 %% Sequential, Progressive, feature-extraction transfer (Curriculum/KD/Pseudo-labelling) and Adapter dropped, leaving
 %% Frozen-representation transfer, Pretrain-then-Joint, End-to-End Joint, Soft Parameter Sharing and Domain Adaptation
-%% (MMD)) and to the Fig. 1b-p attainment result (TL-base at or above GP-base on all 9 molecular & materials pools).
+%% (MMD)). 2026-09-17: the "TL-base >= GP-base on all 9 molecular & materials pools" line under the regret sketch was removed
+%% (author decision); the panel letter is no longer overlaid in LaTeX text but included as paper_figures/fig1_letter_a.pdf
+%% (DejaVu Sans Bold, the glyph of the b-p letters).
 %% Helvetica, colour-blind-safe blue/orange palette (matches graphical_abstract.tex / Figs 2-4).
 %% Build:  pdflatex fig1_overview.tex  ->  fig1_overview.pdf (auto-cropped)
 \documentclass[border=6pt]{standalone}
@@ -136,7 +138,6 @@
   \node[text=gpbox, font=\footnotesize\bfseries, anchor=west] at (4.28,0.68) {GP};
   \node[text=tlbox, font=\footnotesize\bfseries, anchor=west] at (4.28,0.12) {TL};
 \end{scope}
-\node[text=sub, font=\footnotesize, anchor=north] at (\Cc,2.62) {TL-base $\geq$ GP-base on all 9 molecular \& materials pools};
 
 % ---- divider ----
 \draw[pline, line width=0.8pt, dashed] (\Cl+0.35,2.2) -- (\Cr-0.35,2.2);

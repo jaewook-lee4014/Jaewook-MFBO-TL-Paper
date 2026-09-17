@@ -62,3 +62,15 @@ Note: `vm_render.sh` passed a relative `FIG_OUT_DIR` to `make_fig1ln_final_5tl.p
   (Fig. 1, 2, SI 3, SI 2, SI 1), 471 x 286 (Fig. 3), 515 x 291 (Fig. 4), 545 x 282 (SI Fig. 4).
 - 130 dpi renders inspected: letters bold and aligned with the labels; Fig. 3 d-f sit at the top-left of the profile
   panels; Fig. 4 legend (14 entries, 4 columns) clears the curves; SI Fig. 4 bar values legible.
+
+## 5. Fig. 1a (same day, second author request)
+
+- The "TL-base >= GP-base on all 9 molecular & materials pools" line under the regret sketch was removed from
+  `paper_figures/fig1_overview.tex` and the schematic rebuilt with `pdflatex fig1_overview.tex`
+  (md5 005c2a48 -> 8f8dbc97; 636 x 177 pt).
+- The panel letter "a" was a LaTeX-overlaid Helvetica Bold 8 pt and printed visibly smaller than the DejaVu Sans Bold
+  letters of b-p. It is now `paper_figures/fig1_letter_a.pdf` (md5 7ad43138), the DejaVu Sans Bold glyph at 8.4 pt drawn
+  by matplotlib (`patch_fig1a.py` in the boldletters_20260917 snapshot), included in main.tex at scale 0.955, i.e. the
+  scale of fig1_attainment.pdf, so a and b-p print with the same glyph at 8.0 pt.
+- The overview is now included at \textwidth (was 0.9\textwidth), so its edges align with the attainment panels; page 2
+  still holds Fig. 1 and its caption (checked in the rebuilt main_clean.pdf, 15 pages).
