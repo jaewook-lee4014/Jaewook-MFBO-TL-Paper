@@ -29,7 +29,7 @@ The machine-readable version is `reproducibility/run_manifest.csv` (experiments 
 | Fig. 3 a-c | E09 (TL grid rows; re-run 2026-09-14 for the five retained surrogates into `results_grid_5tl`) + E10 (MFGP / SV-MFGP / DKL rows = public `results/grid`, June 2026) | `refig_20260908/figrepo/results/grid5tl/cells` (new TL rows + unchanged GP rows, merged by `merge_grid5tl.py`) | `make_fig1ln_final_5tl.py` best-of-family final regret, 126 cells x 5 TL surrogates x 10 seeds |
 | SI Fig. 3 a-m | ECE from the summary CSVs of E01-E04 and E08; attainment from Fig. 1 | as above | `make_a1_calibration_13_attain.py ECE_X=mean` |
 | Fig. 4 a,b | E15 (pool statistics) | the 13 pool CSVs | `make_b2_topk_13.py` |
-| Fig. 4 c, SI Fig. 4 | E11 (FLOP profile, BLR head) | `figrepo/results/flop_profile_blr/flop_profile.csv` | `make_scaling_law_blr.py`, `plot_computing_flops_blr.py` (GP set = MFGP, SV-MFGP, DKL) |
+| Fig. 5, SI Fig. 4 | E11 (FLOP profile, BLR head) | `figrepo/results/flop_profile_blr/flop_profile.csv` | `make_scaling_law_blr.py`, `plot_computing_flops_blr.py` (GP set = MFGP, SV-MFGP, DKL) |
 | SI Fig. 1 | E01, E03 (TL greedy), E12 + E14 (TL EI), E02, E04 (MFGP EI), E13 (MFGP greedy) | `results*/blr_replace__hf_{argmin,ei}`, `results_gp*/gp_{ei,greedy}` | `supp_attain.py` S1 (40 seeds; Matbench-Gap at B = 20) |
 | SI Fig. 2 | E12 (EI, PI, UCB, MES, Thompson; seeds 42-61) + E01 | `results/`, `results_slurm/` | `supp_attain.py` S2 |
 | Table 1 | E16 (pools) | `data/*.csv` | pool sizes and `corrcoef^2`; synthetic R^2 from 1,000 uniform samples |
@@ -63,7 +63,7 @@ Verified in `refig_20260908/run_tl.py` (md5 `c89da997`) and `benchmark.py` (`24f
 
 `reproducibility/verify/verify_paper_numbers.py` was run on the VM (33 s) against the raw cells; its report is
 `reproducibility/verify/verify_out_20260914/report.md` (+ csv/json). What it does independently of the figure pipeline:
-re-implements the attainment metric and the cell-selection rule, recomputes every Fig. 1 / Fig. 2 / Fig. 3 / Fig. 4 / SI Fig. 1-4 /
+re-implements the attainment metric and the cell-selection rule, recomputes every Fig. 1 / Fig. 2 / Fig. 3 / Fig. 4 / Fig. 5 / SI Fig. 1-4 /
 Table 1 number, regenerates the synthetic pools from `src/synthetic_functions.py`, and checks the extension-run prefixes and the
 VM-versus-SLURM identity. Outcome (details per claim in `claim_manifest.csv`, 72 claims):
 
@@ -180,7 +180,7 @@ cd figrepo/figures && ECE_X=mean CAL_LETTERS=abcdefghijklm CAL_STEM=fig4_calibra
 cd figrepo/figures && FIG1LN_LETTERS=a,b,c FIG_STEM=fig_grid_final $PY make_fig1ln_final_5tl.py   # GRID_DIR=results/grid5tl, built by merge_grid5tl.py
 # Fig. 4 a,b
 cd figrepo/figures && MPLBACKEND=Agg FIG_OUT=fig5_13 $PY make_b2_topk_13.py
-# Fig. 4 c and SI Fig. 4
+# Fig. 5 and SI Fig. 4
 cd figrepo/figures && GP_VARIANTS=DKL FIG_OUT=dkl $PY make_scaling_law_blr.py && GP_VARIANTS=DKL FIG_OUT=dkl $PY plot_computing_flops_blr.py
 # SI Figs. 1-2
 $PY supp_attain.py S1 S2

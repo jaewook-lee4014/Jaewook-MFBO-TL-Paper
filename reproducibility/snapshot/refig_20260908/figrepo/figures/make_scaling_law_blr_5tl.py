@@ -19,6 +19,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import os
 from _common import NEWFIGS, RESULTS, letter_pt, save_dual
 plt.rcParams.update({'pdf.fonttype': 42, 'ps.fonttype': 42})
 
@@ -104,7 +105,9 @@ ax.set_xlabel(r'Training-set size  $N$  (high- + low-fidelity points)', fontsize
 ax.set_ylabel('Surrogate-fit compute  (FLOPs)', fontsize=LABEL)
 # suptitle removed per the npj re-lettering instruction (caption replaces it)
 # uniform 8 pt print size: tight PDF width 230.3 mm, print width 148 mm
-ax.text(-0.075, 1.01, 'c', transform=ax.transAxes, fontsize=letter_pt(230.3, 148), fontfamily='sans-serif', ha='left', va='bottom')   # regular weight (2026-09-14)
+PANEL_LETTER = os.environ.get('PANEL_LETTER', '')   # 2026-09-17: standalone Fig. 5 -> no letter; PANEL_LETTER=c reproduces the old composite panel
+if PANEL_LETTER:
+    ax.text(-0.075, 1.01, PANEL_LETTER, transform=ax.transAxes, fontsize=letter_pt(230.3, 148), fontfamily='sans-serif', ha='left', va='bottom')   # regular weight (2026-09-14)
 ax.legend(fontsize=LEG, loc='upper left', frameon=True, edgecolor='0.8')
 ax.grid(True, which='both', alpha=0.22, lw=0.5)
 ax.tick_params(labelsize=TICK)

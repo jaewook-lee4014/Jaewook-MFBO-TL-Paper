@@ -2,9 +2,9 @@
 %% Build: ./build.sh -> main.pdf and si.pdf. The two files are independent: references across them
 %% (Supplementary Table N here, Fig. N in the SI) are plain numbers, not \ref, because NCS receives the SI as a
 %% separate file. ./build.sh clean builds the same text through the wrapper files main_clean.tex / si_clean.tex.
-%% Display items (5): Fig 1 overview + attainment (a-p); Fig 2 regret trajectories (a-m); Fig 3 controlled-grid
-%% final-regret advantage maps (a-c); Fig 4 top-k overlap, LF-screening regret and compute scaling (a-c);
-%% Table 1 benchmark suite. SI: Supplementary Notes 1-8, Figs 1-4 (SI Fig 3 = calibration versus attainment, a-m), Tables 1-11.
+%% Display items (6): Fig 1 overview + attainment (a-p); Fig 2 regret trajectories (a-m); Fig 3 controlled-grid
+%% final-regret advantage maps (a-c); Fig 4 top-k overlap and LF-screening regret (a,b); Fig 5 compute scaling
+%% (single panel); Table 1 benchmark suite. SI: Supplementary Notes 1-8, Figs 1-4 (SI Fig 3 = calibration versus attainment, a-m), Tables 1-11.
 
 \documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Nature Portfolio two-column journal layout
 
@@ -114,7 +114,7 @@ Conventional BO draws on a single source of information, which forces a trade-of
 
 \begin{figure*}[tp]
 \centering
-%% Display item 1 of 5: (a) overview (paper_figures/fig1_overview.tex; the letter is overlaid in LaTeX below) and
+%% Display item 1 of 6: (a) overview (paper_figures/fig1_overview.tex; the letter is overlaid in LaTeX below) and
 %% (b--p) attainment on the 13 benchmarks (fig1_attainment.pdf, letters baked in); overview at 0.9\textwidth so the composite fits the page.
 \makebox[0.9\textwidth][l]{\fontsize{8}{9}\selectfont\textsf{\textbf{a}}}\\[1pt]
 \includegraphics[width=0.9\textwidth]{paper_figures/fig1_overview.pdf}\\[1pt]
@@ -167,7 +167,7 @@ The TL advantage nevertheless depends on how transfer is implemented, with no si
 
 \begin{figure*}[t]
 \centering
-%% Display item 2 of 5: regret trajectories on the 13 benchmarks (fig2_trajectories.pdf, letters a--m baked in).
+%% Display item 2 of 6: regret trajectories on the 13 benchmarks (fig2_trajectories.pdf, letters a--m baked in).
 \includegraphics[width=\textwidth]{paper_figures/fig2_trajectories.pdf}
 \caption{Regret trajectories as a function of cumulative budget. Curves show mean $\pm$ s.e.\ over 40 seeds, with 36 and 39 for GP-SV on Branin-Fav and Branin-Unfav. Orange denotes the GP family and blue denotes TL surrogates. GP-base and TL-base are drawn as solid lines, and the other six surrogates as dashed or dotted lines. Each panel shows one benchmark. Budget windows are 0--50 on the synthetic functions (\textbf{a}--\textbf{d}) and 0--30 on the nine molecular and materials pools (\textbf{e}--\textbf{m}), matching Fig.~\ref{fig:final_regret}. GP-base and GP-DKL lead on Branin, whereas every surrogate converges on Park. Every run reaches zero regret on COFs, but a few retain nonzero regret on FreeSolv and Polarizability. On HOPV15, TL surrogates keep improving after the GP family has flattened. On Matbench-gap, they pull ahead over the second half of the window. Regret axes are logarithmic, with zero shown at the floor, except on Matbench-gap (\textbf{i}), where no mean curve approaches zero and the axis is logarithmic without a zero floor. The panels for HOPV15 (\textbf{h}) and the four larger materials pools (\textbf{j}--\textbf{m}) use linear axes because their regrets span about one decade or less. Abbreviations are as in Fig.~\ref{fig:final_regret}.}
 \label{fig:regret_trajectory}
@@ -187,7 +187,7 @@ On the empirical benchmarks, global LF informativeness and reliability near the 
 
 \begin{figure*}[t]
 \centering
-%% Display item 3 of 5: controlled-grid final-regret advantage maps (fig3_grid_final_regret.pdf, letters a--c baked in).
+%% Display item 3 of 6: controlled-grid final-regret advantage maps (fig3_grid_final_regret.pdf, letters a--c baked in).
 \includegraphics[width=0.95\textwidth]{paper_figures/fig3_grid_final_regret.pdf}
 \caption{Family-split advantage maps from the controlled fidelity-quality grid (Methods~\ref{sec:meth-grid}).
 \textbf{a--c,} Mean final-regret advantage of the best member of one family over the best member of another. Advantage is the second-named minus first-named family's regret, in units of the HF range. Blue favours the first-named family, and orange favours the second. Conditions are binned by global LF--HF $R^2$ (horizontal) and top-10 optimum agreement (vertical). Comparisons are transfer learning (TL) against GP-base (\textbf{a}), TL against GP-DKL and GP-SV (\textbf{b}), and these GP variants against GP-base (\textbf{c}). All five TL surrogates and all three GP methods were run on $126$ conditions with ten seeds each. The three maps share one colour scale. Counts above each map give the conditions favouring the first-named family and the exact ties. The lower row plots per-condition advantage against top-10 agreement (averaged over $R^2$) and against $R^2$ (averaged over agreement). Values are mean $\pm$ s.e.\ with the Spearman rank correlation $\rho$ between the $126$ per-condition advantages and each axis.}
@@ -210,15 +210,12 @@ We tested whether acquisition choice could explain the TL advantage (Methods~\re
 
 \begin{figure*}[tp]
 \centering
-%% Display item 4 of 5 — composite: (a,b) top-k overlap and LF-only screening
-%% regret; (c) compute scaling law. Together: when a learned surrogate is
-%% needed, and what it costs. Panel letters baked into the PDFs.
-\includegraphics[width=0.92\textwidth]{paper_figures/B2_topk_13.pdf}\\[6pt]
-\includegraphics[width=0.85\textwidth]{paper_figures/compute_scaling_law_blr.pdf}
-\caption{When a surrogate is needed, and what it costs.
-\textbf{a,b,} Task difficulty and the need for a surrogate. Panel \textbf{a} shows top-$k$ overlap between the LF and HF rankings for each of the thirteen benchmarks. Panel \textbf{b} shows the resulting LF-only screening regret, $f_H(\arg\min f_L)-\min f_H$, for one LF-selected candidate. Ties are resolved by first index. Regret is in each pool's stored objective units and uses a symmetric-logarithmic axis. The dashed line marks the regime boundary at $0.3$. Regime~A identifies low screening regret under this convention, whereas Regime~B identifies failure of the single-candidate screen. High global correlation does not guarantee top-$k$ overlap. The four larger materials pools all fall in Regime~B. The screen misses the optimum by $1.15$~eV on ExptGap-PBE and by $384$, $369$ and $3$~GPa on Elastic-CHGNet, Elastic-SevenNet and Elastic-MatterSim, respectively.
-\textbf{c,} Computational scaling across nine of the thirteen benchmarks for the surrogates of Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory}, including the BLR head. The four larger materials pools are not profiled. Each point shows median surrogate-fit compute for one surrogate on one benchmark at one budget fraction. Compute is measured in hardware-independent floating-point operations (FLOPs) and plotted against training-set size $N$ (LF plus HF points). Orange denotes the GP family, and blue denotes the five TL surrogates. \readabilitymark{A shared-slope power-law fit gives $k_N = $$0.94$ (fit $R^2 = $$1.00$, close to $\mathcal{O}(N)$) for TL. The GP family gives $k_N = $$2.29$ (fit $R^2 = $$0.93$). Its exponent is below cubic because it includes GP-SV and GP-DKL.} Exact GP-base approaches the ideal $\mathcal{O}(N^3)$ scaling (faint dashed guides). The family laws cross at $N \approx $$46$ (vertical line). Below this size, GPs are cheaper to fit. Above it, TL surrogates are cheaper by a margin that grows with $N$, reaching roughly $2.9$-fold at $N = 100$ and $7.4$-fold at $N = 200$. Supplementary Fig.~4 shows absolute per-benchmark FLOPs and the average compute ranking (Supplementary Note~8).}
-\label{fig:topk}\label{fig:scaling_law}
+%% Display item 4 of 6: (a) top-k overlap and (b) LF-only screening regret on the 13 benchmarks
+%% (B2_topk_13.pdf, letters a,b baked in). When a learned surrogate is needed.
+\includegraphics[width=0.92\textwidth]{paper_figures/B2_topk_13.pdf}
+\caption{Task difficulty and the need for a surrogate.
+\textbf{a,} Top-$k$ overlap between the LF and HF rankings for each of the thirteen benchmarks. \textbf{b,} The resulting LF-only screening regret, $f_H(\arg\min f_L)-\min f_H$, for one LF-selected candidate. Ties are resolved by first index. Regret is in each pool's stored objective units and uses a symmetric-logarithmic axis. The dashed line marks the regime boundary at $0.3$. Regime~A identifies low screening regret under this convention, whereas Regime~B identifies failure of the single-candidate screen. High global correlation does not guarantee top-$k$ overlap. The four larger materials pools all fall in Regime~B. The screen misses the optimum by $1.15$~eV on ExptGap-PBE and by $384$, $369$ and $3$~GPa on Elastic-CHGNet, Elastic-SevenNet and Elastic-MatterSim, respectively.}
+\label{fig:topk}
 \end{figure*}
 
 \subsection{Surrogate benefits where LF screening fails}\label{sec:res-topk}
@@ -226,10 +223,19 @@ We tested whether acquisition choice could explain the TL advantage (Methods~\re
 \storyline{Surrogate-free LF screen: two regimes; the need for a surrogate follows near-optimum preservation, not global correlation.}
 We compared the optimization outcomes with a surrogate-free screen that ranks candidates by LF value and evaluates the top-ranked candidate at HF. Its screening regret indicates whether the LF proxy alone identifies a good candidate. It is not a budget-matched baseline (Fig.~\ref{fig:topk}a,b). The benchmarks split into two regimes at a screening regret of $0.3$ (Supplementary Note~7). In Regime~A, represented by Park-Fav and Polarizability, the top LF and HF candidates almost coincide. The screen therefore already identifies a near-optimal candidate. In Regime~B, represented by COFs and the Branin functions, high global correlation conceals poor agreement among the top-ranked candidates. For example, COFs has a Spearman rank correlation of $0.998$ but a screening regret of $4.52$. Nevertheless, every surrogate reached zero regret within the budget (Fig.~\ref{fig:regret_trajectory}e). HOPV15, Matbench-gap and the four larger materials pools also fall in Regime~B. The need for a surrogate therefore depends more on preservation of the near-optimal region than on global LF--HF correlation. On HOPV15 and Matbench-gap, the choice of surrogate matters as well (Fig.~\ref{fig:final_regret}i,j).
 
+\begin{figure*}[tp]
+\centering
+%% Display item 5 of 6: compute scaling law, single panel, no letter (compute_scaling_law_blr.pdf,
+%% re-rendered 2026-09-17 with PANEL_LETTER unset). What a surrogate costs.
+\includegraphics[width=0.85\textwidth]{paper_figures/compute_scaling_law_blr.pdf}
+\caption{Computational scaling of surrogate fitting. Scaling is shown for nine of the thirteen benchmarks and the surrogates of Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory}, including the BLR head. The four larger materials pools are not profiled. Each point shows median surrogate-fit compute for one surrogate on one benchmark at one budget fraction. Compute is measured in hardware-independent floating-point operations (FLOPs) and plotted against training-set size $N$ (LF plus HF points). Orange denotes the GP family, and blue denotes the five TL surrogates. \readabilitymark{A shared-slope power-law fit gives $k_N = $$0.94$ (fit $R^2 = $$1.00$, close to $\mathcal{O}(N)$) for TL. The GP family gives $k_N = $$2.29$ (fit $R^2 = $$0.93$). Its exponent is below cubic because it includes GP-SV and GP-DKL.} Exact GP-base approaches the ideal $\mathcal{O}(N^3)$ scaling (faint dashed guides). The family laws cross at $N \approx $$46$ (vertical line). Below this size, GPs are cheaper to fit. Above it, TL surrogates are cheaper by a margin that grows with $N$, reaching roughly $2.9$-fold at $N = 100$ and $7.4$-fold at $N = 200$. Supplementary Fig.~4 shows absolute per-benchmark FLOPs and the average compute ranking (Supplementary Note~8).}
+\label{fig:scaling_law}
+\end{figure*}
+
 \subsection{Computational cost}\label{sec:res-cost}
 
 \storyline{Compute: TL scales about linearly, GP-base cubically; TL is cheaper above $N \approx 46$ and up to 22-fold versus the GP variants.}
-We quantified computational cost in floating-point operations (FLOPs) on nine benchmarks. Each profile covered one surrogate fit and one pool-wide prediction at five training-set sizes (Supplementary Note~8). Including the BLR head and residual network, TL surrogates scaled almost linearly with observation count (fit-FLOP exponent $k = 0.9$--$1.0$). GP-base scaled cubically, whereas GP-SV and GP-DKL had intermediate exponents but the largest constant factors (Fig.~\ref{fig:scaling_law}c). The family-level cost curves crossed at $N \approx 46$. Above this size, TL surrogates were cheaper to fit by a margin that grew with $N$ (Fig.~\ref{fig:scaling_law}c). GP-SV and GP-DKL were the most expensive surrogates on every profiled benchmark. \readabilitymark{Their refit and pool-wide prediction costs, integrated over the loop, reached roughly $22$-fold and $15$-fold those of the cheapest TL surrogate, respectively (Supplementary Note~8, Supplementary Fig.~4).} \mainclaim{Every TL surrogate cost fewer FLOPs than these two GP variants on every profiled benchmark. Savings relative to GP-base depended on pool size and budget, and GP-base was the cheapest surrogate on the smallest pools.} \mainclaim{Under the fixed protocol, TL-base combined attainment matching or exceeding GP-base on every molecular and materials benchmark with more favourable computational scaling.} This matters for SDL workflows, where abundant LF data and repeated updates make retraining a major component of closed-loop cost.
+We quantified computational cost in floating-point operations (FLOPs) on nine benchmarks. Each profile covered one surrogate fit and one pool-wide prediction at five training-set sizes (Supplementary Note~8). Including the BLR head and residual network, TL surrogates scaled almost linearly with observation count (fit-FLOP exponent $k = 0.9$--$1.0$). GP-base scaled cubically, whereas GP-SV and GP-DKL had intermediate exponents but the largest constant factors (Fig.~\ref{fig:scaling_law}). The family-level cost curves crossed at $N \approx 46$. Above this size, TL surrogates were cheaper to fit by a margin that grew with $N$ (Fig.~\ref{fig:scaling_law}). GP-SV and GP-DKL were the most expensive surrogates on every profiled benchmark. \readabilitymark{Their refit and pool-wide prediction costs, integrated over the loop, reached roughly $22$-fold and $15$-fold those of the cheapest TL surrogate, respectively (Supplementary Note~8, Supplementary Fig.~4).} \mainclaim{Every TL surrogate cost fewer FLOPs than these two GP variants on every profiled benchmark. Savings relative to GP-base depended on pool size and budget, and GP-base was the cheapest surrogate on the smallest pools.} \mainclaim{Under the fixed protocol, TL-base combined attainment matching or exceeding GP-base on every molecular and materials benchmark with more favourable computational scaling.} This matters for SDL workflows, where abundant LF data and repeated updates make retraining a major component of closed-loop cost.
 
 \section{Discussion}\label{sec:discussion}
 
