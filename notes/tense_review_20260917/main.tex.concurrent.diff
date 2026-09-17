@@ -1,0 +1,11 @@
+--- tense-only/main.tex
++++ current/main.tex
+@@ -224,7 +224,7 @@
+ \subsection{Surrogate effects under matched acquisition policies}\label{sec:res-acquisition}
+ 
+ \storyline{Acquisition control: giving GP-base the greedy policy changes little, so the deficit lies in the surrogate.}
+-Under the default protocol, GP-base selected LF queries by expected improvement (EI), whereas the TL surrogates used a greedy policy (Methods). We matched the policies to test whether this difference explains the advantage. Running GP-base with the greedy policy changed attainment by at most $0.03$ on eight of the nine benchmarks and lowered it on HOPV15. \mainclaim{Where GP-base falls short, the limitation therefore lies in the surrogate rather than the acquisition policy.} We also ran TL-E2E with EI driven by its own BLR predictive standard deviation. Attainment stayed within $0.01$ of the greedy value on seven benchmarks, with Branin-Fav and HOPV15 as exceptions (Supplementary Fig.~\ref{suppfig:acquisition}, Supplementary Note~\ref{suppnote:acquisition_variants}). The GP-base posterior mean thus misranks promising regions of these descriptor spaces, whereas the TL surrogate ranks HF candidates more usefully.
++Under the default protocol, GP-base selected LF queries by expected improvement (EI), whereas the TL surrogates used a greedy policy (Methods~\ref{sec:meth-loop}). We matched the policies to test whether this difference explains the advantage. Running GP-base with the greedy policy changed attainment by at most $0.03$ on eight of the nine benchmarks and lowered it on HOPV15. \mainclaim{Where GP-base falls short, the limitation therefore lies in the surrogate rather than the acquisition policy.} We also ran TL-E2E with EI driven by its own BLR predictive standard deviation. Attainment stayed within $0.01$ of the greedy value on seven benchmarks, with Branin-Fav and HOPV15 as exceptions (Supplementary Fig.~\ref{suppfig:acquisition}, Supplementary Note~\ref{suppnote:acquisition_variants}). The GP-base posterior mean thus misranks promising regions of these descriptor spaces, whereas the TL surrogate ranks HF candidates more usefully.
+ 
+ \subsection{Limited gains from uncertainty-driven exploration}\label{sec:res-uq}
+ 
