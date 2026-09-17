@@ -26,7 +26,7 @@
 
 \suppnote{Surrogate configurations}{suppnote:mfgp}
 
-Supplementary Table~\ref{supptab:surrogate_config} documents the configuration of each of the eight surrogates. It lists fitting procedures, training lengths, learning rates, weight decay, scaling, predictive representations, kernels and likelihoods or heads, inducing points and floating-point precision. Across all eight, we fixed the candidate pool and standardized features (Methods~4.10), budget, cost ratio, fidelity schedule, initial design and seeds. Initial designs used farthest-point sampling from the same seed, and every surrogate was retrained from scratch at each refit. The five transfer-learning (TL) surrogates also share a backbone of two hidden layers with 64 $\tanh$ units. They use full-batch Adam with fixed epoch budgets and no early stopping, pooled standardization of inputs and targets, and the same predictive head. The three Gaussian processes (GPs) use off-the-shelf configurations from BoTorch 0.10.0 and GPyTorch 1.11. Their fitting procedures, training lengths, scaling and precision differ both from TL and from one another, as documented in the table.
+Supplementary Table~\ref{supptab:surrogate_config} documents the configuration of each of the eight surrogates. It lists fitting procedures, training lengths, learning rates, weight decay, scaling, predictive representations, kernels and likelihoods or heads, inducing points and floating-point precision. The settings shared by all eight surrogates (candidate pool and standardized features, budget, cost ratio, fidelity schedule, farthest-point initial design, retraining from scratch at every refit, and seeds) are those of Methods~4.2 and~4.10, and the transfer-learning (TL) backbone and head are those of Methods~4.3 and Supplementary Note~\ref{suppnote:implementation}. The three Gaussian processes (GPs) use off-the-shelf configurations from BoTorch 0.10.0 and GPyTorch 1.11, whose fitting procedures, training lengths, scaling and precision differ both from TL and from one another, as documented in the table.
 
 \subsection{GP-base}
 
@@ -58,7 +58,7 @@ TL-MMD & LF network on $\mathcal{L}_{\mathrm{LF}}$; then both networks on $\math
 {\fontsize{6.6bp}{7.4bp}\selectfont $^{a}$Gamma(3, 6) and Gamma(6, 2) on the lengthscales of the unbiased and biased Mat\'{e}rn components, Gamma(3, 3) on the fidelity power, Gamma(2, 0.15) on the output scale, Gamma(1.1, 0.05) on the noise variance. $^{b}$Because the prediction is made by the BLR head on the representation of the LF network, what distinguishes the transfer mechanisms at prediction time is whether the HF data reach that representation. TL-base is the only configuration in which they do not. Its LF prediction is detached before entering the residual network, leaving the representation shaped by the LF loss alone. HF data enter the prediction only through the BLR head. TL-PtJ, TL-E2E and TL-SPS update the LF network through the HF loss, and TL-MMD only through the alignment penalty, which sees the HF inputs but not the HF values.}
 \end{table}
 
-At each iteration, we retrained the GP from scratch by maximizing the exact marginal log-likelihood under these priors (the posterior density). Fitting used L-BFGS-B through \texttt{fit\_gpytorch\_mll} in double precision. Predictions came from the posterior at the HF level $s=1$, whose standard deviation describes the latent function. Acquisition at both fidelities uses this single cross-fidelity posterior. Expected improvement (EI) with the HF incumbent selects the LF query, and the lowest posterior mean selects the HF query (Methods~4.2).
+Fitting maximized the exact marginal log-likelihood under these priors with L-BFGS-B through \texttt{fit\_gpytorch\_mll}. Predictions came from the posterior at the HF level $s=1$, whose standard deviation describes the latent function, and this single cross-fidelity posterior served both fidelities in acquisition (Methods~4.2).
 
 \subsection{GP-DKL}
 
@@ -86,8 +86,7 @@ The primary greedy policy queries both fidelities by the HF predictive mean $\mu
 
 \suppnote{Implementation details}{suppnote:implementation}
 
-All TL surrogates share a common architectural backbone, with model-specific training
-configurations detailed below.
+All TL surrogates share the backbone and head of Methods~4.3. Supplementary Tables~\ref{supptab:common_hyperparams} and~\ref{supptab:model_hyperparams} list the shared and the method-specific training settings, and the last subsection gives the details that the tables and Methods~4.4 do not state.
 
 \subsection{Common settings}
 \label{suppsec:common_settings}
@@ -119,7 +118,7 @@ HF BLR head (prediction) & For $n_H \ge 4$, prior-to-noise precision ratio of th
 
 \subsection{Model-specific settings}
 \label{suppsec:model_settings}
-Supplementary Table~\ref{supptab:model_hyperparams} gives training hyperparameters for each TL method. TL-PtJ pretrains the LF network for 100 epochs and TL-MMD for 200, each followed by 100 HF epochs. TL-base and TL-E2E train for 300 joint epochs, and TL-SPS for 200.
+Supplementary Table~\ref{supptab:model_hyperparams} gives the training hyperparameters of each TL method.
 
 \begin{table}[h]
 \centering
@@ -140,31 +139,19 @@ TL-MMD & 1e-3 & 1e-4 & 200 & 100 & $\lambda_{\text{MMD}}$=0.1; RBF kernel, bandw
 }
 \end{table}
 
-\subsection{Training procedures and method-specific parameters}
+\subsection{Method-specific details not given in the tables}
 \label{suppsec:training_procedures}
-TL-base and TL-E2E use weight decay ($\ell_2$, 1e-4). The other three configurations use none.
-
-\emph{TL-base.} Both networks train from scratch for 300 joint epochs on $0.5\,\mathcal{L}_{\text{LF}} + 0.5\,\mathcal{L}_{\text{HF}}$. Training uses Adam with learning rate 1e-3 and weight decay 1e-4. The LF prediction entering the residual network is detached, so no HF gradient reaches the LF network. Thus, LF data alone shape the representation, and HF data enter the prediction only through the BLR head (Supplementary Note~\ref{suppnote:blr}). This is the \texttt{DNGOJoint} configuration in the code release. Its residual network enters the training loss only.
-
-\emph{TL-PtJ.} Stage 1 pretrains on LF data. Stage 2 trains jointly on both fidelities at a reduced learning rate, using $0.3\,\mathcal{L}_{\text{LF}} + 0.7\,\mathcal{L}_{\text{HF}}$.
-
-\emph{TL-E2E.} Joint training uses full gradient flow and loss $\mathcal{L}_{\text{LF}} + \mathcal{L}_{\text{HF}}$. Learning rates are 1e-3 for the LF network and 5e-4 for the HF network.
-
-\emph{TL-SPS.} Joint training uses $0.5\,\mathcal{L}_{\text{LF}} + 0.5\,\mathcal{L}_{\text{HF}} + \lambda_{\text{soft}}\,\Omega$. The penalty is $\Omega = \bigl\|W^{(L)}_{1} - W^{(H)}_{1,\,\cdot\,,\,1:d}\bigr\|_F^2$, the squared Frobenius distance between first-layer weight matrices over the $d$ shared input columns. The HF-network column receiving the LF prediction is not penalized. Neither are the biases, second layers or output layers. The penalty weight is $\lambda_{\text{soft}}=0.01$.
-
-\emph{TL-MMD.} A maximum-mean-discrepancy penalty with weight $\lambda_{\text{MMD}}=0.1$ aligns LF and HF features. An RBF kernel of bandwidth 1 compares LF-network hidden features on LF training inputs with HF-network features on HF training inputs. The LF set is truncated to its first $n_{\text{HF}}$ points. Both networks update at learning rate 1e-4 during the HF stage. This stage excludes the LF loss, so the LF network changes only through the alignment penalty.
-
-All residual networks enter the training loss only under the BLR head of Supplementary Note~\ref{suppnote:blr}. Prediction therefore differs according to whether HF data reach the LF representation. In TL-base, detaching the LF prediction before the residual network leaves the representation shaped by LF data alone. TL-PtJ, TL-E2E and TL-SPS update it through the HF loss. TL-MMD updates it only through the alignment penalty, which sees HF inputs but not HF values. Supplementary Table~\ref{supptab:surrogate_config} summarizes these settings for all eight surrogates.
+TL-base is the \texttt{DNGOJoint} configuration in the code release. In TL-SPS, the penalty is $\Omega = \bigl\|W^{(L)}_{1} - W^{(H)}_{1,\,\cdot\,,\,1:d}\bigr\|_F^2$, the squared Frobenius distance between the first-layer weight matrices over the $d$ shared input columns. The HF-network column receiving the LF prediction is not penalized, and neither are the biases, second layers or output layers. In TL-MMD, the RBF kernel of bandwidth 1 compares LF-network hidden features on the LF training inputs with HF-network features on the HF training inputs, with the LF set truncated to its first $n_{\text{HF}}$ points. The HF stage excludes the LF loss, so the LF network changes only through the alignment penalty. Footnote $b$ of Supplementary Table~\ref{supptab:surrogate_config} states, for each configuration, whether HF data reach the representation used by the head.
 
 \suppnote{\texorpdfstring{Benchmark definitions}{Benchmark definitions}}{suppnote:synthetic_functions}
 
 \subsection{Objectives, sources, transformations and cost ratios}
-Supplementary Table~\ref{supptab:benchmark_definitions} defines each of the thirteen benchmarks. It gives the physical objective and original unit, fidelity sources, minimized scalar $y$, native representation, model input dimension and cost-ratio provenance. LF and HF sources receive the same transformation, so the squared correlation $R^2$ in Table~1 is invariant to the sign convention. For the two band-gap pools, this correlation uses target-transformed values. Each query is charged in HF-equivalent units ($c_H = 1$, $c_L = \rho$). Thus, $\rho$ acts only through the round-robin schedule ($\lfloor 1/\rho \rfloor$ LF queries per HF query) and the LF share of the initial design.
+Supplementary Table~\ref{supptab:benchmark_definitions} defines each of the thirteen benchmarks. It gives the physical objective and original unit, fidelity sources, minimized scalar $y$, native representation, model input dimension and cost-ratio provenance. LF and HF sources receive the same transformation, so the squared correlation $R^2$ in Table~1 is invariant to the sign convention, and for the two band-gap pools it uses target-transformed values (Methods~4.5).
 
 \begin{table}[h]
 \centering
 \footnotesize
-\caption{Benchmark definitions. Objective gives the physical quantity sought, its direction and original unit (--, dimensionless). The minimized quantity is $y$, alongside the candidate-pool construction. Representation gives the native descriptors and their transformation to model inputs, with native dimension $\to$ input dimension. The cost ratio $\rho$ is listed with its provenance. A dagger ($^{\dagger}$) marks ratios set in this work as schedule parameters rather than measured costs (see text).}
+\caption{Benchmark definitions. Objective gives the physical quantity sought, its direction and original unit (--, dimensionless). The minimized quantity is $y$, alongside the candidate-pool construction. Representation gives the native descriptors and their transformation to model inputs, with native dimension $\to$ input dimension. The cost ratio $\rho$ is listed with its provenance. A dagger ($^{\dagger}$) marks ratios set in this work as schedule parameters rather than measured costs (Methods~4.5).}
 \label{supptab:benchmark_definitions}
 \setlength{\tabcolsep}{4pt}%
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.125\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.165\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}@{}}
@@ -192,8 +179,6 @@ Elastic-CHGNet / -SevenNet / -MatterSim & max Voigt--Reuss--Hill shear modulus $
 \end{tabular}
 \end{table}
 
-\paragraph{Molecular pools.} FreeSolv is optimized towards the largest hydration free energy, which identifies the pool's least hydrophilic molecule; the optimum is $+3.43$~kcal\,mol$^{-1}$ for octafluorocyclobutane. Sabanza-Gil et al.~\citep{sabanza2025best} instead seek the most negative value.
-
 \paragraph{Scharber proxy for HOPV15.}
 The LF value of each donor is the Scharber-model power conversion efficiency~\citep{scharber2006design},
 \begin{equation}
@@ -206,10 +191,7 @@ J_{\mathrm{SC}} &= \mathrm{EQE}\cdot J_{\max}(E_g), &\quad \mathrm{EQE} &= 0.65,
 where $J_{\max}(E_g)$ is the short-circuit current density available from AM1.5G photons above $E_g$. It is tabulated at 19 gaps between $0.5$ and $3.0$~eV, spanning $65$ to $1.8$~mA\,cm$^{-2}$. Values are interpolated linearly and clamped outside the table. The HOPV15 experimental block supplies $E_{\mathrm{HOMO}}$ and $E_g$ as measured values, rather than computed orbital energies. These are the electrochemical HOMO level and, where available, the optical gap. Gap selection used the optical gap first ($194$ molecules), then the electrochemical gap ($46$), then the LUMO--HOMO difference ($0$). Molecules lacking a HOMO level, any gap or PCE were dropped ($350 \to 240$). No SMILES failed to parse. We applied the PC$_{61}$BM acceptor level to every donor. The reported devices used PC$_{71}$BM ($123$ molecules), PC$_{61}$BM ($101$) or other acceptors ($16$). The clamp at $V_{\mathrm{OC}} = 0$ was never active, with an LF minimum of $0.42\%$. LF values range from $0.42$ to $14.43\%$, and HF values from $0.008$ to $10.2\%$.
 
 \paragraph{Band-gap target and elastic-modulus pools.}
-Both fidelities of the two band-gap pools were replaced by $|E_g - 1.4~\mathrm{eV}|$ before optimization, so that the $R^2$ of Table~1 is computed on the transformed values. Metals, with $E_g = 0$, make up $66\%$ of Matbench-gap and $70\%$ of ExptGap-PBE, and all map to $1.4$~eV. Matbench-gap PBE gaps were averaged over polymorphs sharing a reduced formula. For ExptGap-PBE, entries sharing a reduced formula were averaged within each source and then matched by formula. The elastic-modulus pools were used on the linear GPa scale, negated, after removing the compounds without a finite, positive modulus at either fidelity. They contain $10{,}819$ (CHGNet), $10{,}460$ (SevenNet) and $10{,}946$ (MatterSim) compounds; SevenNet calculations covered $10{,}560$ of the $10{,}987$ structures. Their maximum HF shear moduli are $523$, $383$ and $523$~GPa, and descriptor PCA was fitted per pool.
-
-\paragraph{Cost ratios.}
-Cost ratios for synthetic functions ($0.1$ / $0.5$), COFs ($0.065$), FreeSolv ($0.1$) and Polarizability ($0.167$) follow the studies introducing these pools~\citep{sabanza2025best,gantzler2023multifidelity,fare2022multi}. The remaining ratios are assumptions of this work. HOPV15 uses $0.1$ by analogy with FreeSolv because its Scharber proxy is a closed-form estimate from measurements rather than a calculation. Matbench-gap uses $0.05$, giving $20$ LF queries per HF query under the round-robin schedule. A literal PBE-to-experiment ratio would be much smaller and give hundreds of LF queries per HF query. ExptGap-PBE and the three elastic-modulus pools use $0.05$ by the same convention. For the latter, an MLIP elastic calculation costs roughly $10^{-3}$ of a DFT calculation. Because cost is charged per query, $\rho$ serves as a schedule parameter rather than a measured cost.
+For ExptGap-PBE, entries sharing a reduced formula were averaged within each source and then matched by formula. SevenNet calculations covered $10{,}560$ of the $10{,}987$ structures, and the maximum HF shear moduli of the three elastic-modulus pools are $523$ (CHGNet), $383$ (SevenNet) and $523$~GPa (MatterSim). The remaining construction details of these pools, including the $|E_g - 1.4~\mathrm{eV}|$ transformation, the metal fractions, the polymorph averaging and the per-pool PCA, are given in Supplementary Table~\ref{supptab:benchmark_definitions} and Methods~4.5.
 
 The remaining subsections define the two synthetic functions and their scenarios. They follow the Branin and Park benchmark families used for multi-fidelity Bayesian optimization (MFBO) by Sabanza-Gil et al.~\citep{sabanza2025best}. Their implemented definitions are given below.
 
@@ -252,13 +234,13 @@ Park-Unfav & Unfavourable & 0.0 & 0.72 & 0.5 & 256 & 0.0 \\
 
 \suppnote{Acquisition variants and calibration}{suppnote:acquisition_variants}
 
-This section specifies the protocols for the matched-acquisition and acquisition-portfolio comparisons summarized in the main text. Supplementary Figs.~\ref{suppfig:acquisition} and~\ref{suppfig:portfolio} show the results. Aggregated result files are included in the code release.
+This section gives the settings of the two acquisition controls of Methods~4.2 that the main text does not state, and reports their results. Supplementary Figs.~\ref{suppfig:acquisition} and~\ref{suppfig:portfolio} show the results, and aggregated result files are included in the code release.
 
-\paragraph{Acquisition variants.} We evaluated five uncertainty-driven acquisitions in addition to the primary greedy policy. These span the standard taxonomy of myopic acquisition functions~\citep{shahriari2015taking}. Improvement-based policies were EI~\citep{jones1998efficient} and probability of improvement~\citep{kushner1964new}. The optimistic policy was the GP lower confidence bound~\citep{srinivas2012information}, with $\beta=2$. Information-theoretic max-value entropy search~\citep{wang2017max} used a Gumbel approximation and ten max-value samples. Thompson sampling~\citep{russo2018tutorial} provided the sampling-based policy. Each replaced only the LF acquisition, leaving the surrogate, round-robin schedule, HF step and seeds fixed. Acquisition used the HF predictive mean, BLR standard deviation and HF incumbent (Supplementary Note~\ref{suppnote:blr}). All five TL surrogates ran on nine benchmarks with $5\times 9\times 20$ seeds per acquisition, using seeds 42--61.
+\paragraph{Acquisition variants.} The five uncertainty-driven LF acquisitions of the portfolio control were expected improvement (EI)~\citep{jones1998efficient}, probability of improvement~\citep{kushner1964new}, the GP lower confidence bound~\citep{srinivas2012information} with $\beta=2$, max-value entropy search~\citep{wang2017max} with a Gumbel approximation and ten max-value samples, and Thompson sampling~\citep{russo2018tutorial}. Each used the HF head of Supplementary Note~\ref{suppnote:blr}. All five TL surrogates ran on nine benchmarks with 20 seeds (42--61) per acquisition, $5 \times 9 \times 20$ runs in all.
 
 For each acquisition and benchmark, we report the fraction of surrogates beating the greedy policy and the mean paired attainment difference. No acquisition raised mean attainment by more than about $0.07$. The largest gain was $+0.069$ for Thompson sampling on Branin-Unfav. Next were probability of improvement on HOPV15 ($+0.048$) and Branin-Fav ($+0.047$). Thompson sampling lowered attainment by $0.09$ on HOPV15 and $0.14$ on Matbench-gap. The lower confidence bound and max-value entropy search lowered it by $0.03$--$0.11$ on the Branin functions (Supplementary Fig.~\ref{suppfig:portfolio}).
 
-To isolate surrogate effects, we compared GP-base and TL-base under EI and greedy LF selection while keeping HF selection greedy (Supplementary Fig.~\ref{suppfig:acquisition}). Within each surrogate, both policies used the same seed set, initial designs, budgets and fidelity schedule. Both surrogates used 20 seeds (42--61) for each policy. These TL-base values are the same EI and greedy arms used in the acquisition portfolio of Supplementary Fig.~\ref{suppfig:portfolio}. Among the GP methods, matched EI--greedy controls are available only for GP-base.
+In the matched-acquisition control (Supplementary Fig.~\ref{suppfig:acquisition}), both policies used the same seed set, initial designs, budgets and fidelity schedule within each surrogate. The TL-base values are the same EI and greedy arms as in the portfolio of Supplementary Fig.~\ref{suppfig:portfolio}. Among the GP methods, matched EI--greedy controls are available only for GP-base.
 
 For GP-base, attainment stayed within $0.03$ of EI on eight of the nine benchmarks. On HOPV15, greedy selection lowered attainment to $0.23$, compared with $0.32$ under EI. For TL-base, the mean paired EI-minus-greedy difference ranged from $-0.046$ on Matbench-gap to $+0.050$ on HOPV15. EI also lowered attainment by $0.043$ on Branin-Fav and $0.023$ on Branin-Unfav, while the other five benchmarks changed by less than $0.005$. Thus, neither changing GP-base to greedy nor changing TL-base to EI produced a consistent improvement. The broader five-surrogate acquisition comparison remains in Supplementary Fig.~\ref{suppfig:portfolio}.
 
@@ -277,7 +259,7 @@ For GP-base, attainment stayed within $0.03$ of EI on eight of the nine benchmar
 \end{figure*}
 
 
-\paragraph{Calibration.} For every surrogate, we computed LF expected calibration error (ECE), negative log-likelihood and sharpness on held-out candidates. We related these to attainment from Fig.~1, with the resulting correlation shown in Supplementary Fig.~\ref{suppfig:calibration}a--m. Across eight surrogates and thirteen benchmarks, the correlation between loop-mean held-out LF calibration error and attainment had no consistent sign. It exceeded $|r| = 0.5$ only on Matbench-gap and ExptGap-PBE ($r = -0.67$ and $-0.90$). There, the three GPs were both the worst-calibrated LF models and the weakest optimizers. Their calibration errors spanned $0.15$--$0.36$, compared with $0.08$--$0.12$ for TL surrogates. On COFs, every surrogate attained $0.90$--$0.93$, so the small range limits interpretation of the correlation ($r = -0.48$).
+\paragraph{Calibration.} The calibration analysis of Methods~4.2 relates the loop-mean held-out LF expected calibration error (ECE) of every surrogate to its attainment from Fig.~1 (Supplementary Fig.~\ref{suppfig:calibration}a--m). Across eight surrogates and thirteen benchmarks, the correlation between loop-mean held-out LF calibration error and attainment had no consistent sign. It exceeded $|r| = 0.5$ only on Matbench-gap and ExptGap-PBE ($r = -0.67$ and $-0.90$). There, the three GPs were both the worst-calibrated LF models and the weakest optimizers. Their calibration errors spanned $0.15$--$0.36$, compared with $0.08$--$0.12$ for TL surrogates. On COFs, every surrogate attained $0.90$--$0.93$, so the small range limits interpretation of the correlation ($r = -0.48$).
 
 Good calibration also did not identify the best optimizers. GP-base had the lowest LF calibration error on seven of thirteen benchmarks. Yet it ranked in the lower half of the eight surrogates by attainment on seven of nine molecular and materials pools. GP-DKL was the worst-calibrated on eight benchmarks but among the best optimizers on the Branin functions. ECE is averaged over refits recorded in each source run, whose horizon can differ from the attainment budget. The held-out LF calibration error uses 34--40 seeds per cell. Of 104 cells, 11 have fewer than 40. These are GP-SV on Branin-Fav and Branin-Unfav, GP-base on FreeSolv, and GP-base and GP-DKL on the four larger materials pools. For these larger pools, not every run recorded calibration error. For TL surrogates, calibration assesses the separate LF BLR head rather than the HF head driving acquisition.
 
@@ -297,13 +279,13 @@ Good calibration also did not identify the best optimizers. GP-base had the lowe
 
 \suppnote{Feature ablation, HF-only controls and pick logs}{suppnote:controls}
 
-\paragraph{Feature and head-path ablations.} Supplementary Tables~\ref{supptab:feature_ablation} and~\ref{supptab:head_path} report the ablations referred to in the main text. All used the nine molecular and materials pools and the protocol of Fig.~1. They ran for 40 seeds at $B = 30$, with the same initial designs, fidelity schedule and greedy policy. Only the HF head's inputs changed. Each TL surrogate was evaluated with its reported head on $[\,g^{(L)}, \varphi^{(L)}, 1\,]$. We then replaced $\varphi^{(L)}$ with second-hidden-layer features from an untrained network of the same architecture, retaining the scalar LF prediction $g^{(L)}$. A third configuration reduced the head to $[\,g^{(L)}, 1\,]$. The HF-only network used the same architecture, training length and head, but was fitted to HF observations alone. It started from the same two HF points and spent the whole budget on HF evaluations. Because it has no LF network, it is listed once. The head-path ablation used TL-base, whose LF prediction enters both as the additive offset of $\mu^{(H)}$ and as a regression column. Each entry point was removed in turn, with learned and random features.
+\paragraph{Feature and head-path ablations.} Supplementary Tables~\ref{supptab:feature_ablation} and~\ref{supptab:head_path} report the ablations of Methods~4.8. The head-path ablation used TL-base, whose LF prediction enters the head both as the additive offset of $\mu^{(H)}$ and as a regression column, and removed each entry point in turn with learned and with random features. Because the HF-only network has no LF network, it is listed once.
 
-\paragraph{HF-only controls.} Supplementary Table~\ref{supptab:hf_only_baselines} compares the multi-fidelity surrogates of Fig.~1 with two HF-only controls. The single-fidelity GP (SFGP) uses EI, and Random HF samples uniformly (definitions in the table footnotes). Both start from the same two initial HF points and spend the whole budget on HF evaluations. Attainment is computed over each arm's own window. The HF-only arms are therefore scored from the end of their initial design, at 2 HF-equivalent units.
+\paragraph{HF-only controls.} Supplementary Table~\ref{supptab:hf_only_baselines} compares the multi-fidelity surrogates of Fig.~1 with the two HF-only controls of Methods~4.8, a single-fidelity GP (SFGP) with EI and uniformly random HF sampling, each arm scored over its own window (definitions in the table footnotes).
 
 \paragraph{TL-base against the GPs.} Supplementary Table~\ref{supptab:tlbase_vs_gp} lists, for every benchmark, the attainment of TL-base next to that of GP-base and of the best-performing GP on that benchmark, with the differences quoted in the main text.
 
-\paragraph{Pick logs.} Supplementary Table~\ref{supptab:hopv15_picklog} summarizes the HF pick logs for the HOPV15 runs in Fig.~2h. It reports the share of seeds ending at the regret of the LF-top-ranked candidate and the share improving after 15 HF-equivalent units. It also gives the number reaching zero regret, the share of second-half HF picks previously evaluated at LF, and mean final regret.
+\paragraph{Pick logs.} Supplementary Table~\ref{supptab:hopv15_picklog} summarizes the HF pick logs of the HOPV15 runs in Fig.~2h, using the four statistics defined in Methods~4.8 and mean final regret.
 
 \begin{table}[p]
 \centering
@@ -512,7 +494,7 @@ TL-MMD & 0.15 & 0.55 & 22/40 & 1.00 & 1.47 \\
 
 \suppnote{Surrogate-free LF screen and screening regimes}{suppnote:screen}
 
-The surrogate-free screen in Fig.~4a,b ranks candidates by LF value and evaluates the top-ranked candidate at HF. Its screening regret is $f_H(\arg\min f_L) - \min f_H$ in the pool's objective units, with ties resolved by first index. This indicates whether the LF proxy alone identifies a good candidate, rather than serving as a budget-matched optimization baseline. We divide benchmarks at screening regret $0.3$, with Regime~A at or below this boundary and Regime~B above. This is not a common accuracy tolerance across tasks.
+The surrogate-free screen and its screening regret are defined in Methods~4.6, which also fixes the boundary between Regime~A and Regime~B at a screening regret of $0.3$. Here we place each benchmark (Fig.~4a,b).
 
 In Regime~A, represented by Park-Fav and Polarizability, LF--HF top-1\% overlap is approximately $1$ and screening regret is at most $0.09$. The screen therefore already identifies a near-optimal candidate. In Regime~B, high global correlation can conceal poor agreement among top-ranked candidates. COFs has a Spearman rank correlation of $0.998$ but screening regret $4.52$. Although both COFs and Polarizability have $R^2 \approx 0.96$ or higher, their screening outcomes differ. HOPV15 and Matbench-gap fall in Regime~B, with screening regrets of $3.90$ and $0.91$.
 
@@ -520,7 +502,7 @@ The four larger materials pools also fall in Regime~B. On ExptGap-PBE, the scree
 
 \suppnote{Computational cost: absolute FLOPs and compute ranking}{suppnote:computational_cost}
 
-Fig.~5 shows how surrogate compute scales with problem size. Here, we report the absolute costs underlying those laws. Each profile takes the median over seeds 42--43 at training-set fractions $0.1$, $0.3$, $0.5$, $0.7$ and $1.0$. Total loop floating-point operations (FLOPs) include one surrogate fit and one pool-wide prediction per iteration. Costs are interpolated from five profiled training-set sizes and summed over the loop. We profiled the surrogates of Figs.~1 and~2, including the BLR head. GP-SV and GP-DKL required up to $22$-fold and $15$-fold the cheapest TL surrogate, respectively, and GP-base up to $5.6$-fold. GP-base was the cheapest surrogate on Park-Unfav, Polarizability and HOPV15. TL-PtJ was the cheapest TL surrogate on every benchmark. Average compute ranks across the nine benchmarks, where lower is cheaper, are $1.3$ for TL-PtJ, $2.3$ for TL-SPS and $3.3$ for TL-MMD. TL-base and GP-base both rank $4.3$, followed by TL-E2E at $5.3$, GP-DKL at $7.0$ and GP-SV at $8.0$. FLOPs are accumulated over the budgets in Fig.~1, except FreeSolv at 50 and Matbench-gap at 20.
+Fig.~5 shows how surrogate compute scales with problem size. Here we report the absolute loop-integrated costs in floating-point operations (FLOPs) underlying those laws, profiled as described in Methods~4.9. GP-SV and GP-DKL required up to $22$-fold and $15$-fold the cheapest TL surrogate, respectively, and GP-base up to $5.6$-fold. GP-base was the cheapest surrogate on Park-Unfav, Polarizability and HOPV15. TL-PtJ was the cheapest TL surrogate on every benchmark. Average compute ranks across the nine benchmarks, where lower is cheaper, are $1.3$ for TL-PtJ, $2.3$ for TL-SPS and $3.3$ for TL-MMD. TL-base and GP-base both rank $4.3$, followed by TL-E2E at $5.3$, GP-DKL at $7.0$ and GP-SV at $8.0$.
 
 \begin{figure*}[t]
 \centering

@@ -166,16 +166,6 @@
   \bibinfo{howpublished}{\url{https://github.com/materialsvirtuallab/matcalc}}
   (\bibinfo{year}{2024}).
 
-\bibitem{shahriari2015taking}
-\bibinfo{author}{Shahriari, B.}, \bibinfo{author}{Swersky, K.},
-  \bibinfo{author}{Wang, Z.}, \bibinfo{author}{Adams, R.~P.} \&
-  \bibinfo{author}{De~Freitas, N.}
-\newblock \bibinfo{title}{Taking the human out of the loop: A review of
-  bayesian optimization}.
-\newblock \emph{\bibinfo{journal}{Proceedings of the IEEE}}
-  \textbf{\bibinfo{volume}{104}}, \bibinfo{pages}{148--175}
-  (\bibinfo{year}{2016}).
-
 \bibitem{jones1998efficient}
 \bibinfo{author}{Jones, D.~R.}, \bibinfo{author}{Schonlau, M.} \&
   \bibinfo{author}{Welch, W.~J.}
