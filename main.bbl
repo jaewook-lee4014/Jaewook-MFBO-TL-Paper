@@ -106,44 +106,6 @@
 \newblock \emph{\bibinfo{journal}{Nature Communications}}
   \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{1517} (\bibinfo{year}{2024}).
 
-\bibitem{li2020dnnmfbo}
-\bibinfo{author}{Li, S.}, \bibinfo{author}{Xing, W.}, \bibinfo{author}{Kirby,
-  R.~M.} \& \bibinfo{author}{Zhe, S.}
-\newblock \bibinfo{title}{Multi-fidelity {Bayesian} optimization via deep
-  neural networks}.
-\newblock \emph{\bibinfo{journal}{Advances in Neural Information Processing
-  Systems}} \textbf{\bibinfo{volume}{33}} (\bibinfo{year}{2020}).
-
-\bibitem{wilson2016deep}
-\bibinfo{author}{Wilson, A.~G.}, \bibinfo{author}{Hu, Z.},
-  \bibinfo{author}{Salakhutdinov, R.} \& \bibinfo{author}{Xing, E.~P.}
-\newblock \bibinfo{editor}{Gretton, A.} \& \bibinfo{editor}{Robert, C.~C.}
-  (eds) \emph{\bibinfo{title}{Deep kernel learning}}.
-\newblock (eds \bibinfo{editor}{Gretton, A.} \& \bibinfo{editor}{Robert,
-  C.~C.}) \emph{\bibinfo{booktitle}{Artificial intelligence and statistics}},
-  \bibinfo{pages}{370--378} (\bibinfo{organization}{PMLR},
-  \bibinfo{year}{2016}).
-
-\bibitem{titsias2009variational}
-\bibinfo{author}{Titsias, M.}
-\newblock \bibinfo{editor}{van Dyk, D.} \& \bibinfo{editor}{Welling, M.} (eds)
-  \emph{\bibinfo{title}{Variational learning of inducing variables in sparse
-  {Gaussian} processes}}.
-\newblock (eds \bibinfo{editor}{van Dyk, D.} \& \bibinfo{editor}{Welling, M.})
-  \emph{\bibinfo{booktitle}{Proceedings of the Twelfth International Conference
-  on Artificial Intelligence and Statistics}}, \bibinfo{pages}{567--574}
-  (\bibinfo{organization}{PMLR}, \bibinfo{year}{2009}).
-
-\bibitem{hensman2013gaussian}
-\bibinfo{author}{Hensman, J.}, \bibinfo{author}{Fusi, N.} \&
-  \bibinfo{author}{Lawrence, N.~D.}
-\newblock \bibinfo{editor}{Nicholson, A.} \& \bibinfo{editor}{Smyth, P.} (eds)
-  \emph{\bibinfo{title}{Gaussian processes for big data}}.
-\newblock (eds \bibinfo{editor}{Nicholson, A.} \& \bibinfo{editor}{Smyth, P.})
-  \emph{\bibinfo{booktitle}{Proceedings of the Twenty-Ninth Conference on
-  Uncertainty in Artificial Intelligence}}, \bibinfo{pages}{282--290}
-  (\bibinfo{year}{2013}).
-
 \bibitem{meng2020composite}
 \bibinfo{author}{Meng, X.} \& \bibinfo{author}{Karniadakis, G.~E.}
 \newblock \bibinfo{title}{A composite neural network that learns from
@@ -152,6 +114,14 @@
 \newblock \emph{\bibinfo{journal}{Journal of Computational Physics}}
   \textbf{\bibinfo{volume}{401}}, \bibinfo{pages}{109020}
   (\bibinfo{year}{2020}).
+
+\bibitem{li2020dnnmfbo}
+\bibinfo{author}{Li, S.}, \bibinfo{author}{Xing, W.}, \bibinfo{author}{Kirby,
+  R.~M.} \& \bibinfo{author}{Zhe, S.}
+\newblock \bibinfo{title}{Multi-fidelity {Bayesian} optimization via deep
+  neural networks}.
+\newblock \emph{\bibinfo{journal}{Advances in Neural Information Processing
+  Systems}} \textbf{\bibinfo{volume}{33}} (\bibinfo{year}{2020}).
 
 \bibitem{jones1998efficient}
 \bibinfo{author}{Jones, D.~R.}, \bibinfo{author}{Schonlau, M.} \&
@@ -212,6 +182,36 @@
 \newblock \emph{\bibinfo{journal}{Advances in neural information processing
   systems}} \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{21524--21538}
   (\bibinfo{year}{2020}).
+
+\bibitem{wilson2016deep}
+\bibinfo{author}{Wilson, A.~G.}, \bibinfo{author}{Hu, Z.},
+  \bibinfo{author}{Salakhutdinov, R.} \& \bibinfo{author}{Xing, E.~P.}
+\newblock \bibinfo{editor}{Gretton, A.} \& \bibinfo{editor}{Robert, C.~C.}
+  (eds) \emph{\bibinfo{title}{Deep kernel learning}}.
+\newblock (eds \bibinfo{editor}{Gretton, A.} \& \bibinfo{editor}{Robert,
+  C.~C.}) \emph{\bibinfo{booktitle}{Artificial intelligence and statistics}},
+  \bibinfo{pages}{370--378} (\bibinfo{organization}{PMLR},
+  \bibinfo{year}{2016}).
+
+\bibitem{titsias2009variational}
+\bibinfo{author}{Titsias, M.}
+\newblock \bibinfo{editor}{van Dyk, D.} \& \bibinfo{editor}{Welling, M.} (eds)
+  \emph{\bibinfo{title}{Variational learning of inducing variables in sparse
+  {Gaussian} processes}}.
+\newblock (eds \bibinfo{editor}{van Dyk, D.} \& \bibinfo{editor}{Welling, M.})
+  \emph{\bibinfo{booktitle}{Proceedings of the Twelfth International Conference
+  on Artificial Intelligence and Statistics}}, \bibinfo{pages}{567--574}
+  (\bibinfo{organization}{PMLR}, \bibinfo{year}{2009}).
+
+\bibitem{hensman2013gaussian}
+\bibinfo{author}{Hensman, J.}, \bibinfo{author}{Fusi, N.} \&
+  \bibinfo{author}{Lawrence, N.~D.}
+\newblock \bibinfo{editor}{Nicholson, A.} \& \bibinfo{editor}{Smyth, P.} (eds)
+  \emph{\bibinfo{title}{Gaussian processes for big data}}.
+\newblock (eds \bibinfo{editor}{Nicholson, A.} \& \bibinfo{editor}{Smyth, P.})
+  \emph{\bibinfo{booktitle}{Proceedings of the Twenty-Ninth Conference on
+  Uncertainty in Artificial Intelligence}}, \bibinfo{pages}{282--290}
+  (\bibinfo{year}{2013}).
 
 \bibitem{gawlikowski2023survey}
 \bibinfo{author}{Gawlikowski, J.} \emph{et~al.}
