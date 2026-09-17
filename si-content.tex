@@ -26,7 +26,7 @@
 
 \suppnote{Surrogate configurations}{suppnote:mfgp}
 
-Supplementary Table~\ref{supptab:surrogate_config} documents the configuration of each of the eight surrogates. It lists fitting procedures, training lengths, learning rates, weight decay, scaling, predictive representations, kernels and likelihoods or heads, inducing points and floating-point precision. The settings shared by all eight surrogates (candidate pool and standardized features, budget, cost ratio, fidelity schedule, farthest-point initial design, retraining from scratch at every refit, and seeds) are those of Methods~4.2 and~4.10, and the transfer-learning (TL) backbone and head are those of Methods~4.3 and Supplementary Note~\ref{suppnote:implementation}. The three Gaussian processes (GPs) use off-the-shelf configurations from BoTorch 0.10.0 and GPyTorch 1.11, whose fitting procedures, training lengths, scaling and precision differ both from TL and from one another, as documented in the table.
+Supplementary Table~\ref{supptab:surrogate_config} documents the configuration of each of the eight surrogates. It lists fitting procedures, training lengths, learning rates, weight decay, scaling, predictive representations, kernels and likelihoods or heads, inducing points and floating-point precision. The settings shared by all eight surrogates (candidate pool and standardized features, budget, cost ratio, fidelity schedule, farthest-point initial design, retraining from scratch at every refit, and seeds) are those of Methods~4.2 and~4.10, and the transfer-learning (TL) backbone and head are those of Methods~4.3, with the TL details that the table does not state given in the last subsection of this Note. The three Gaussian processes (GPs) use off-the-shelf configurations from BoTorch 0.10.0 and GPyTorch 1.11, whose fitting procedures, training lengths, scaling and precision differ both from TL and from one another, as documented in the table.
 
 \subsection{GP-base}
 
@@ -69,6 +69,11 @@ GP-DKL, the deep-kernel GP~\citep{wilson2016deep}, is a GPyTorch exact GP with a
 GP-SV, the sparse variational MFGP~\citep{titsias2009variational,hensman2013gaussian}, is a GPyTorch approximate GP with a Cholesky variational distribution. It uses $\min(100, N)$ inducing points, initialized as a random subset of the $N$ training inputs from both fidelities. Inducing locations are optimized with the hyperparameters. The covariance multiplies an RBF kernel with ARD over the $d$ inputs by the same two-level index kernel. The model uses a constant mean and Gaussian likelihood, without priors. All parameters are optimized on the variational evidence lower bound over the full training set, without mini-batching. Training uses 500 Adam steps at learning rate $10^{-2}$ in single precision, without weight decay. The inducing-point count equals the training-set size until it reaches 100 and stays at 100 thereafter. Inputs and targets enter as supplied, and the predictive distribution includes learned observation noise. Repeated fits with the same seed were not bit-identical (Methods~4.10).
 
 
+\subsection{TL surrogates}
+
+Supplementary Table~\ref{supptab:surrogate_config} gives the loss, training length, learning rates and weight decay of each TL surrogate, as summarized in Methods~4.4. Three details are not in the table. TL-base is the \texttt{DNGOJoint} configuration in the code release. In TL-SPS, the penalty is $\Omega = \bigl\|W^{(L)}_{1} - W^{(H)}_{1,\,\cdot\,,\,1:d}\bigr\|_F^2$, the squared Frobenius distance between the first-layer weight matrices over the $d$ shared input columns. The HF-network column receiving the LF prediction is not penalized, and neither are the biases, second layers or output layers. In TL-MMD, the RBF kernel of bandwidth 1 compares LF-network hidden features on the LF training inputs with HF-network features on the HF training inputs, with the LF set truncated to its first $n_{\text{HF}}$ points. The HF stage excludes the LF loss, so the LF network changes only through the alignment penalty. Footnote $b$ of the table states, for each configuration, whether HF data reach the representation used by the head.
+
+
 \suppnote{Uncertainty quantification via BLR}{suppnote:blr}
 The TL surrogates use BLR heads on the LF network's last-layer features. These heads provide the HF prediction and uncertainty, and the LF predictive distribution. The adaptive-basis construction follows the principle of DNGO~\citep{snoek2015scalable}. Here, however, the basis is learned from abundant LF data rather than target data. The residual network in Methods Eq.~(2) enters the training loss only. Acquisition functions use the closed-form head's predictive mean and variance. Let $\varphi(x) \in \mathbb{R}^D$ denote the penultimate-layer representation and $\tilde{\varphi}(x) = [\varphi(x), 1]$ the augmented features. The model has a Gaussian prior over weights $w$,
 \begin{equation}
@@ -83,65 +88,6 @@ where $(m_N, S_N)$ are the posterior mean and covariance. We use two such heads.
 
 The primary greedy policy queries both fidelities by the HF predictive mean $\mu^{(H)}$. The five-acquisition portfolio instead selects LF queries using this head's HF predictive mean, standard deviation and HF incumbent (Supplementary Note~\ref{suppnote:acquisition_variants}). The head treats the representation as a fixed basis. In TL-PtJ, TL-E2E and TL-SPS, however, the HF loss also reaches the LF network. Their representations have therefore already been trained on the HF values used to fit the head. Neither leave-one-out selection nor the head's posterior covariance accounts for this earlier fit. Their HF predictive standard deviations are consequently optimistic relative to configurations whose representations never receive HF values. In TL-MMD, the alignment penalty passes HF inputs, but not HF values, to the LF network. This limitation concerns only the acquisition portfolio of Supplementary Note~\ref{suppnote:acquisition_variants}. The primary greedy policy uses the HF mean alone, and the calibration analysis uses the LF head.
 
-
-\suppnote{Implementation details}{suppnote:implementation}
-
-All TL surrogates share the backbone and head of Methods~4.3. Supplementary Tables~\ref{supptab:common_hyperparams} and~\ref{supptab:model_hyperparams} list the shared and the method-specific training settings, and the last subsection gives the details that the tables and Methods~4.4 do not state.
-
-\subsection{Common settings}
-\label{suppsec:common_settings}
-Supplementary Table~\ref{supptab:common_hyperparams} summarizes the shared hyperparameters across all deep
-surrogates.
-
-\begin{table}[h]
-\centering
-\caption{Shared hyperparameters across all TL surrogates.}
-\label{supptab:common_hyperparams}
-\begin{tabular}{lp{8.5cm}}
-\toprule
-\textbf{Parameter} & \textbf{Value} \\
-\midrule
-Hidden dimension & 64 \\
-Number of layers & 2 (for each of LF and HF networks) \\
-Activation & Tanh \\
-Optimizer & Adam, full batch, on the mean squared error of the standardized targets \\
-Input and target scaling & \texttt{StandardScaler} fitted at every refit to the sampled LF and HF inputs together and to the sampled LF and HF targets together \\
-Re-initialization & networks and scalers re-initialized and retrained from scratch at every refit \\
-Precision & float32 (networks); float64 (BLR heads) \\
-Representation entering the heads & the 64 units of the second hidden layer of the LF network, $\varphi^{(L)}$; the HF head regresses on $[g^{(L)}, \varphi^{(L)}, 1]$ (66 coefficients) \\
-$\ell_2$ weight decay & 1e-4 for TL-base and TL-E2E; none otherwise \\
-LF BLR head (calibration) & $\alpha = \beta = 1$ \\
-HF BLR head (prediction) & For $n_H \ge 4$, prior-to-noise precision ratio of the representation block chosen by leave-one-out error over $\{10, 30, 100, 300, 1000\}$; $\beta = 1/\mathrm{MSE}_{\mathrm{LOO}}$, clipped to $[1, 100]$. For $n_H < 4$, fixed precisions as in Supplementary Note~\ref{suppnote:blr} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{Model-specific settings}
-\label{suppsec:model_settings}
-Supplementary Table~\ref{supptab:model_hyperparams} gives the training hyperparameters of each TL method.
-
-\begin{table}[h]
-\centering
-\caption{Training hyperparameters for each TL method. LR denotes learning rate. Weight decay ($\ell_2$, 1e-4) is used only where stated. The residual (HF) network enters the training loss only (Supplementary Note~\ref{suppnote:blr}).}
-\label{supptab:model_hyperparams}
-{\footnotesize%
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.3cm}cccc>{\raggedright\arraybackslash}p{5.0cm}@{}}
-\toprule
-\textbf{Model} & \textbf{LF LR} & \textbf{HF LR} & \textbf{LF Epochs} & \textbf{HF Epochs} & \textbf{Method-Specific Parameters} \\
-\midrule
-TL-base & 1e-3 & 1e-3 & 300 & (joint) & $\alpha_{\text{loss}}$=0.5; the LF prediction entering the HF network is detached, so no HF gradient reaches the LF network; weight decay 1e-4 \\
-TL-PtJ & 1e-3 & 1e-4 & 100 & 100 & Stage 1: LF only; Stage 2: joint training on $0.3\,\mathcal{L}_{\text{LF}} + 0.7\,\mathcal{L}_{\text{HF}}$ \\
-TL-E2E & 1e-3 & 5e-4 & 300 & (joint) & Full gradient flow; loss $\mathcal{L}_{\text{LF}} + \mathcal{L}_{\text{HF}}$; weight decay 1e-4 \\
-TL-SPS & 1e-3 & 1e-3 & 200 & (joint) & $\lambda_{\text{soft}}$=0.01, on the first-layer weights over the $d$ shared inputs; loss $0.5\,\mathcal{L}_{\text{LF}} + 0.5\,\mathcal{L}_{\text{HF}} + \lambda_{\text{soft}}\Omega$ \\
-TL-MMD & 1e-3 & 1e-4 & 200 & 100 & $\lambda_{\text{MMD}}$=0.1; RBF kernel, bandwidth 1; both networks updated in the HF stage \\
-\bottomrule
-\end{tabular}%
-}
-\end{table}
-
-\subsection{Method-specific details not given in the tables}
-\label{suppsec:training_procedures}
-TL-base is the \texttt{DNGOJoint} configuration in the code release. In TL-SPS, the penalty is $\Omega = \bigl\|W^{(L)}_{1} - W^{(H)}_{1,\,\cdot\,,\,1:d}\bigr\|_F^2$, the squared Frobenius distance between the first-layer weight matrices over the $d$ shared input columns. The HF-network column receiving the LF prediction is not penalized, and neither are the biases, second layers or output layers. In TL-MMD, the RBF kernel of bandwidth 1 compares LF-network hidden features on the LF training inputs with HF-network features on the HF training inputs, with the LF set truncated to its first $n_{\text{HF}}$ points. The HF stage excludes the LF loss, so the LF network changes only through the alignment penalty. Footnote $b$ of Supplementary Table~\ref{supptab:surrogate_config} states, for each configuration, whether HF data reach the representation used by the head.
 
 \suppnote{\texorpdfstring{Benchmark definitions}{Benchmark definitions}}{suppnote:synthetic_functions}
 

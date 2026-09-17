@@ -45,3 +45,20 @@ Build: bash build.sh clean, no undefined references or float warnings.
   (per-surrogate versus shared-slope fit) but worth one glance.
 - Terminology check found only "DNGOJoint" (deliberate code-name mapping) and "MFGP" as the expansion of
   "multi-fidelity GP" in Note 1; no other code names.
+
+## Addendum (2026-09-17, later): decisions applied
+
+- Supplementary Tables 2 and 3 (shared and per-method TL hyperparameters) deleted: every value was already in
+  Supplementary Table 1 (fitting procedure, training length, learning rates, weight decay, scaling, head) or in
+  Methods 4.4. Methods 4.10 now cites Supplementary Table 1; Methods 4.4 now points to Table 1 and Note 1.
+- Supplementary Note 3 (Implementation details) deleted; the three details that neither Table 1 nor Methods state
+  (DNGOJoint code name, exact TL-SPS penalty, TL-MMD truncation and HF-stage loss) moved into Note 1 as the
+  subsection "TL surrogates". Numbering after the change: Notes 1-7 (old 4-8 -> 3-7), Tables 1-9 (old 4-11 -> 2-9),
+  Figs 1-4 unchanged. All plain-number references in main.tex were remapped by script and re-checked (si_refs.py):
+  every Note, Table and Fig is cited. The SI title-page abstract lists the new counts.
+- SI references now continue the main-text numbering (Nature SI rule). build.sh writes si_refoffset.tex from the
+  number of bibitem entries in main.bbl (43 at this commit); si.tex reads it and offsets natbib's counter, so the SI
+  list starts at [44] and in-text SI citations use the same numbers. The heading is "Supplementary References".
+  If si_refoffset.tex is missing (for example on Overleaf before a build), the offset is 0 and numbering restarts at 1.
+- Fig. 4 caption exponent (k = 3.0 versus family slope 2.29): left as is, to be checked at submission.
+- The per-Note table above uses the numbering before this addendum.
