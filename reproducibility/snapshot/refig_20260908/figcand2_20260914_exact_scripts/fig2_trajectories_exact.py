@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Paper Fig. 2 a-m: regret trajectories (mean +/- s.e. over seeds) for the 13 benchmarks under the fixed rules
 (40 seeds where available, no NARGP, no reference policies, five TL surrogates, two hues: TL blues / GP oranges,
-no bold). Windows: Branin 50; Park x2, COFs, FreeSolv, Polarizability 30; HOPV15 45; Matbench-gap 100; the four large pools 20.
+no bold; GP-base and TL-base solid, the other six dashed or dotted). Windows: Branin 50; Park x2, COFs, FreeSolv, Polarizability 30; HOPV15 45; Matbench-gap 100; the four large pools 20.
 No reference lines (user rule).
 Input: figcand2_20260914_5tl/explorer_data.json (per-seed best-so-far change points). Output: fig2_trajectories.{pdf,png,svg} + values csv."""
 import json, os, sys, numpy as np, pandas as pd
@@ -27,13 +27,14 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "axes.linewid
 # Type sizes (2026-09-14 legibility pass): printed at \textwidth = 174 mm = 0.951 x the 7.2 in width, so 7.5 pt here = 7.1 pt in print
 # (legends, panel titles) and 6.5 pt here = 6.2 pt in print (tick labels, subtitles, footnotes); nothing below 6.5 pt.
 TITLE, TICK, LAB, SUB, LEG, FOOT = 7.5, 6.5, 7, 6.5, 7.5, 6.5
-# two hues: GP oranges (solid), TL blues (dashed variants)
+# two hues: GP oranges, TL blues. 2026-09-17: the base surrogate of each family (GP-base, TL-base) is drawn solid in the
+# darkest shade of its hue at lw 1.35; the six variants are dashed or dotted at lw 1.0 (before 2026-09-17: GP solid, TL dashed/dotted).
 # 2026-09-14: five TL surrogates. Frozen-representation transfer keeps the colour and dash of the former Stop-Gradient Joint.
 STYLE = {
-    "MFGP": ("#b5532e", "-", 1.35), "Sparse MFGP": ("#f2aa84", "-", 1.35), "DKL": ("#e07b4f", "-", 1.35),
-    "Frozen-representation transfer": ("#4e95d9", (0, (1.2, 1.2)), 1.0),
-    "Pretrain-then-Joint": ("#0b3d7a", (0, (4, 1.5)), 1.0),
-    "End-to-End Joint": ("#2467b3", (0, (4, 1.5)), 1.0),
+    "MFGP": ("#b5532e", "-", 1.35), "Sparse MFGP": ("#f2aa84", (0, (1.2, 1.2)), 1.0), "DKL": ("#e07b4f", (0, (4, 1.5)), 1.0),
+    "Frozen-representation transfer": ("#0b3d7a", "-", 1.35),
+    "Pretrain-then-Joint": ("#2467b3", (0, (4, 1.5)), 1.0),
+    "End-to-End Joint": ("#4e95d9", (0, (4, 1.5)), 1.0),
     "Soft Parameter Sharing": ("#8fc0ec", (0, (1.2, 1.2)), 1.0),
     "Domain Adaptation (MMD)": ("#8fc0ec", (0, (4, 1.5)), 1.0),
 }
@@ -84,15 +85,15 @@ ht = [Line2D([0], [0], color=STYLE[m][0], ls=STYLE[m][1], lw=STYLE[m][2], label=
 # both legends at 7.5 pt (7.1 pt in print): the GP legend in the first spare slot, the TL legend in a single column anchored next to it
 # (five TL rows fit one column, 2026-09-14)
 LEGKW = dict(fontsize=LEG, frameon=False, title_fontsize=LEG, labelspacing=0.4, borderaxespad=0, handlelength=2.2, handletextpad=0.6)
-ax[13].legend(handles=hg, loc="upper left", title="GP family (solid)", **LEGKW)
+ax[13].legend(handles=hg, loc="upper left", title="GP family", **LEGKW)
 ax[13].add_artist(ax[13].get_legend())
 ax[13].legend(handles=ht, loc="upper left", bbox_to_anchor=(0.98, 1.0), title="TL surrogates", ncol=1, columnspacing=1.2, **LEGKW)
 fig.subplots_adjust(left=0.065, right=0.982, top=0.935, bottom=0.15, wspace=0.55, hspace=0.55)
 # footnote at 6.5 pt (6.2 pt in print); the abbreviation key is wrapped over three lines so that it fits the 7.2 in width
-FOOTNOTE = ["Mean ± s.e. over seeds; budget in HF-equivalent cost.",
-            "TL: Frozen = Frozen-representation transfer · PtJ = Pretrain-then-Joint · E2E = End-to-End Joint",
-            "SPS = Soft Parameter Sharing · MMD = Domain Adaptation (MMD)",
-            "GP: MFGP = baseline MFGP · SV-MFGP = sparse variational MFGP · DKL = deep-kernel GP"]
+FOOTNOTE = ["Mean ± s.e. over seeds; budget in HF-equivalent cost. Solid lines: GP-base and TL-base; dashed or dotted: the other surrogates.",
+            "TL: TL-base = base transfer-learning surrogate · TL-PtJ = pretrain-then-joint · TL-E2E = end-to-end joint",
+            "TL-SPS = soft parameter sharing · TL-MMD = domain adaptation (MMD)",
+            "GP: GP-base = autoregressive multi-fidelity GP (MFGP) · GP-SV = sparse variational MFGP · GP-DKL = deep-kernel GP"]
 for k, line in enumerate(FOOTNOTE):
     fig.text(0.5, 0.069 - 0.0198 * k, line, ha="center", va="bottom", fontsize=FOOT, color="#333333")
 for ext in ("pdf", "png", "svg"): fig.savefig(f"{OUT}/fig2_trajectories.{ext}", dpi=400 if ext == "png" else None)

@@ -1,0 +1,322 @@
+[
+  {
+    "file": "main.tex",
+    "before": "GPs perform best on smooth Branin functions.",
+    "after": "GPs performed best on smooth Branin functions."
+  },
+  {
+    "file": "main.tex",
+    "before": "on every molecular and materials benchmark the base TL surrogate matches or exceeds",
+    "after": "on every molecular and materials benchmark the base TL surrogate matched or exceeded"
+  },
+  {
+    "file": "main.tex",
+    "before": "TL surrogates also require up to 22-fold fewer",
+    "after": "TL surrogates also required up to 22-fold fewer"
+  },
+  {
+    "file": "main.tex",
+    "before": "MFGPs fall to the level of optimization using HF data alone, whereas base TL still performs better",
+    "after": "MFGPs fell to the level of optimization using HF data alone, whereas base TL still performed better"
+  },
+  {
+    "file": "main.tex",
+    "before": "GPs perform best on the smooth Branin functions, whereas our baseline TL surrogate (TL-base) matches or exceeds",
+    "after": "GPs performed best on the smooth Branin functions, whereas our baseline TL surrogate (TL-base) matched or exceeded"
+  },
+  {
+    "file": "main.tex",
+    "before": "This pattern also holds against the best-performing GP",
+    "after": "This pattern also held against the best-performing GP"
+  },
+  {
+    "file": "main.tex",
+    "before": "Its advantage is greater where LF evaluations misrank",
+    "after": "Its advantage was greater where LF evaluations misrank"
+  },
+  {
+    "file": "main.tex",
+    "before": "TL surrogates also show more favourable computational scaling",
+    "after": "TL surrogates also showed more favourable computational scaling"
+  },
+  {
+    "file": "main.tex",
+    "before": "Attainment therefore separates them only by how early they converge.",
+    "after": "Attainment therefore separated them only by how early they converged."
+  },
+  {
+    "file": "main.tex",
+    "before": "the five TL surrogates have the five smallest mean deficits",
+    "after": "the five TL surrogates had the five smallest mean deficits"
+  },
+  {
+    "file": "main.tex",
+    "before": "Their deficits span",
+    "after": "Their deficits spanned"
+  },
+  {
+    "file": "main.tex",
+    "before": "the families' mean attainments separate completely",
+    "after": "the families' mean attainments separated completely"
+  },
+  {
+    "file": "main.tex",
+    "before": "Although the families also separate on Polarizability, the difference there is confined",
+    "after": "Although the families also separated on Polarizability, the difference there was confined"
+  },
+  {
+    "file": "main.tex",
+    "before": "the TL surrogates also lead the regret trajectories",
+    "after": "the TL surrogates also led the regret trajectories"
+  },
+  {
+    "file": "main.tex",
+    "before": "Both families attain more where the LF source agrees better",
+    "after": "Both families attained more where the LF source agrees better"
+  },
+  {
+    "file": "main.tex",
+    "before": "all surrogates start alike, but the GP family stops improving",
+    "after": "all surrogates started alike, but the GP family stopped improving"
+  },
+  {
+    "file": "main.tex",
+    "before": "TL-base and the TL variants continue to improve",
+    "after": "TL-base and the TL variants continued to improve"
+  },
+  {
+    "file": "main.tex",
+    "before": "the TL surrogates pull ahead after roughly 15 units",
+    "after": "the TL surrogates pulled ahead after roughly 15 units"
+  },
+  {
+    "file": "main.tex",
+    "before": "Promotion of LF-observed candidates does not separate the families",
+    "after": "Promotion of LF-observed candidates did not separate the families"
+  },
+  {
+    "file": "main.tex",
+    "before": "The TL family is never worse than GP-base anywhere on the plane. It wins",
+    "after": "The TL family was never worse than GP-base anywhere on the plane. It won"
+  },
+  {
+    "file": "main.tex",
+    "before": "conditions and ties in the remaining",
+    "after": "conditions and tied in the remaining"
+  },
+  {
+    "file": "main.tex",
+    "before": "its advantage narrows to $66$ conditions",
+    "after": "its advantage narrowed to $66$ conditions"
+  },
+  {
+    "file": "main.tex",
+    "before": "the variants themselves improve on GP-base",
+    "after": "the variants themselves improved on GP-base"
+  },
+  {
+    "file": "main.tex",
+    "before": "Its correlation with top-10 agreement is much stronger",
+    "after": "Its correlation with top-10 agreement was much stronger"
+  },
+  {
+    "file": "main.tex",
+    "before": "these correlations are $\\rho = -0.78$",
+    "after": "these correlations were $\\rho = -0.78$"
+  },
+  {
+    "file": "main.tex",
+    "before": "Where the LF proxy ranks the HF optimum near the top of its own ranking, every multi-fidelity surrogate performs well and the families tie.",
+    "after": "Where the LF proxy ranked the HF optimum near the top of its own ranking, every multi-fidelity surrogate performed well and the families tied."
+  },
+  {
+    "file": "main.tex",
+    "before": "Where the proxy misorders the optimum (HOPV15, Matbench-gap and ExptGap-PBE), the MFGPs fall to the level of HF-only controls. TL-base holds or exceeds that level",
+    "after": "Where the proxy misordered the optimum (HOPV15, Matbench-gap and ExptGap-PBE), the MFGPs fell to the level of HF-only controls. TL-base held or exceeded that level"
+  },
+  {
+    "file": "main.tex",
+    "before": "the best of the five TL surrogates is never worse in mean final regret",
+    "after": "the best of the five TL surrogates was never worse in mean final regret"
+  },
+  {
+    "file": "main.tex",
+    "before": "the final-regret gap narrows by about two thirds",
+    "after": "the final-regret gap narrowed by about two thirds"
+  },
+  {
+    "file": "main.tex",
+    "before": "Where the proxy misorders the optimum and GPs fall to the level of HF-only controls, it exceeded",
+    "after": "Where the proxy misordered the optimum and GPs fell to the level of HF-only controls, it exceeded"
+  },
+  {
+    "file": "main.tex",
+    "before": "The electrochemical gap replaces a missing optical gap",
+    "after": "The electrochemical gap replaced a missing optical gap"
+  },
+  {
+    "file": "main.tex",
+    "before": "The LUMO--HOMO difference is the final fallback",
+    "after": "The LUMO--HOMO difference was the final fallback"
+  },
+  {
+    "file": "main.tex",
+    "before": "SevenNet calculations cover",
+    "after": "SevenNet calculations covered"
+  },
+  {
+    "file": "main.tex",
+    "before": "Descriptor PCA is also fitted per pool.",
+    "after": "Descriptor PCA was also fitted per pool."
+  },
+  {
+    "file": "main.tex",
+    "before": "The ablations change only the BLR head's input.",
+    "after": "The ablations changed only the BLR head's input."
+  },
+  {
+    "file": "main.tex",
+    "before": "Their LF shear moduli are computed by matcalc",
+    "after": "Their LF shear moduli were computed by matcalc"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "Repeated fits with the same seed are not bit-identical",
+    "after": "Repeated fits with the same seed were not bit-identical"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "Gap selection uses the optical gap first",
+    "after": "Gap selection used the optical gap first"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "We apply the PC$_{61}$BM acceptor level to every donor.",
+    "after": "We applied the PC$_{61}$BM acceptor level to every donor."
+  },
+  {
+    "file": "si-content.tex",
+    "before": "The clamp at $V_{\\mathrm{OC}} = 0$ is never active",
+    "after": "The clamp at $V_{\\mathrm{OC}} = 0$ was never active"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "Both fidelities of the two band-gap pools are replaced by",
+    "after": "Both fidelities of the two band-gap pools were replaced by"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "The elastic-modulus pools are used on the linear GPa scale",
+    "after": "The elastic-modulus pools were used on the linear GPa scale"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "No acquisition raises mean attainment",
+    "after": "No acquisition raised mean attainment"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "The largest gain is $+0.069$",
+    "after": "The largest gain was $+0.069$"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "Next are probability of improvement",
+    "after": "Next were probability of improvement"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "Thompson sampling lowers attainment",
+    "after": "Thompson sampling lowered attainment"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "The lower confidence bound and max-value entropy search lower it",
+    "after": "The lower confidence bound and max-value entropy search lowered it"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "the sign of the EI effect on HOPV15 depends on the surrogate",
+    "after": "the sign of the EI effect on HOPV15 depended on the surrogate"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "the correlation between loop-mean held-out LF calibration error and attainment has no consistent sign",
+    "after": "the correlation between loop-mean held-out LF calibration error and attainment had no consistent sign"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "It exceeds $|r| = 0.5$",
+    "after": "It exceeded $|r| = 0.5$"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "There, the three GPs are both",
+    "after": "There, the three GPs were both"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "Their calibration errors span",
+    "after": "Their calibration errors spanned"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "On COFs, every surrogate attains",
+    "after": "On COFs, every surrogate attained"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "Good calibration also does not identify the best optimizers.",
+    "after": "Good calibration also did not identify the best optimizers."
+  },
+  {
+    "file": "si-content.tex",
+    "before": "GP-base has the lowest LF calibration error",
+    "after": "GP-base had the lowest LF calibration error"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "Yet it ranks in the lower half",
+    "after": "Yet it ranked in the lower half"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "GP-DKL is the worst-calibrated on eight benchmarks but among the best optimizers",
+    "after": "GP-DKL was the worst-calibrated on eight benchmarks but among the best optimizers"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "not every run records calibration error",
+    "after": "not every run recorded calibration error"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "The HF-only network uses the same architecture, training length and head, but fits HF observations alone. It starts from the same two HF points and spends the whole budget on HF evaluations.",
+    "after": "The HF-only network used the same architecture, training length and head, but was fitted to HF observations alone. It started from the same two HF points and spent the whole budget on HF evaluations."
+  },
+  {
+    "file": "si-content.tex",
+    "before": "The best TL surrogates reach similarly low regret where screening is near-optimal and improve on it where LF rankings are less useful.",
+    "after": "The best TL surrogates reached similarly low regret where screening was near-optimal and improved on it where LF rankings were less useful."
+  },
+  {
+    "file": "si-content.tex",
+    "before": "On COFs, every surrogate reaches zero regret within the budget",
+    "after": "On COFs, every surrogate reached zero regret within the budget"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "We profile the surrogates",
+    "after": "We profiled the surrogates"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "GP-SV and GP-DKL cost up to",
+    "after": "GP-SV and GP-DKL required up to"
+  },
+  {
+    "file": "si-content.tex",
+    "before": "GP-base is the cheapest surrogate on Park-Unfav, Polarizability and HOPV15. TL-PtJ is the cheapest TL surrogate on every benchmark.",
+    "after": "GP-base was the cheapest surrogate on Park-Unfav, Polarizability and HOPV15. TL-PtJ was the cheapest TL surrogate on every benchmark."
+  }
+]
