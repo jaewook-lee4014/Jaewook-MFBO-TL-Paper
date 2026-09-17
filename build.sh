@@ -8,9 +8,14 @@ set -e
 cd "$(dirname "$0")"
 PDFLATEX="pdflatex -interaction=nonstopmode -halt-on-error"
 build_pair () {   # $1 = main-text job, $2 = SI job
+  write_offset () {  # SI references continue the main-text numbering: offset = entries in $1.bbl
+    [ -f $1.bbl ] && printf '\\def\\SIrefoffset{%s}\n' "$(grep -c '\\bibitem' $1.bbl)" > si_refoffset.tex
+  }
+  write_offset $1
   $PDFLATEX $1.tex >/dev/null || true      # first pass: $1.aux for the SI
   $PDFLATEX $2.tex >/dev/null || true      # first pass: $2.aux for the main text
   bibtex $1 >/dev/null || true; bibtex $2 >/dev/null || true   # bibtex exits 1 on mere warnings
+  write_offset $1
   $PDFLATEX $1.tex >/dev/null; $PDFLATEX $2.tex >/dev/null
   $PDFLATEX $1.tex >/dev/null; $PDFLATEX $2.tex >/dev/null
   $PDFLATEX $1.tex >/dev/null

@@ -16,6 +16,16 @@
 \usepackage{microtype}%
 \usepackage[title]{appendix}%
 
+%% Supplementary References continue the numbering of the main-text reference list (Nature/NCS SI rule).
+%% build.sh writes si_refoffset.tex from the number of \bibitem entries in main.bbl; if the file is
+%% missing, the offset is 0 and the SI list restarts at 1.
+\usepackage{etoolbox}%
+\InputIfFileExists{si_refoffset.tex}{}{\def\SIrefoffset{0}}%
+\makeatletter
+\apptocmd{\thebibliography}{\global\c@NAT@ctr\SIrefoffset\relax}{}{\ClassWarning{si}{reference offset not applied}}%
+\makeatother
+\renewcommand\refname{Supplementary References}%
+
 %% Tighten Springer Nature's default page margins (the class leaves a very
 %% large bottom margin and ~24mm sides). This widens the two-column text block
 %% and reduces whitespace while keeping the two-column journal layout.
@@ -63,7 +73,7 @@ Materials Discovery''}
 \affil{\orgdiv{Department of Engineering}, \orgname{King's College London},
 \orgaddress{\city{London}, \postcode{WC2R 2LS}, \country{United Kingdom}}}
 
-\abstract{This file contains Supplementary Notes 1--8, Supplementary Figures 1--4 and Supplementary Tables 1--11, which are referred to from the main text. Figure and table
+\abstract{This file contains Supplementary Notes 1--7, Supplementary Figures 1--4 and Supplementary Tables 1--9, which are referred to from the main text. Figure and table
 numbers without the ``Supplementary'' prefix refer to the main text.}
 
 \maketitle
